@@ -8,7 +8,7 @@ export type Role = 'CASHIER' | 'KITCHEN' | 'ADMIN';
 export type OrderType = 'DINE_IN' | 'TAKE_AWAY';
 export type OrderStatus = 'PENDING' | 'PREPARING' | 'READY' | 'COMPLETED' | 'CANCELLED';
 export type TableStatus = 'AVAILABLE' | 'OCCUPIED' | 'NEED_CLEANING' | 'DIRTY';
-export type PaymentMethod = 'CASH' | 'BANK_TRANSFER' | 'CREDIT_CARD';
+export type PaymentMethod = 'CASH' | 'BANK_TRANSFER' | 'CREDIT_CARD' | 'E_WALLET';
 export type PaymentStatus = 'UNPAID' | 'PAID' | 'VOIDED';
 export type MenuType = 'FOOD' | 'DRINK' | 'SERVICE' | 'OTHER';
 export type MenuItemType = 'REGULAR' | 'TOPPING' | 'COMBO' | 'SERVICE';
@@ -489,7 +489,182 @@ export interface SalesReturnCreateInput {
 }
 
 // ==========================================
-// 7. REPORT DTOs
+// 7. CASHBOOK DTOs
+// ==========================================
+export type FinancialAccountType = 'CASH' | 'BANK' | 'E_WALLET';
+export type CashVoucherDirection = 'RECEIPT' | 'PAYMENT';
+export type CashVoucherStatus = 'POSTED' | 'CANCELLED';
+export type CashVoucherSourceType =
+  | 'MANUAL'
+  | 'ORDER_PAYMENT'
+  | 'SALES_RETURN'
+  | 'PURCHASE_RECEIPT'
+  | 'PURCHASE_RETURN'
+  | 'REVERSAL';
+
+export interface FinancialAccountDto {
+  id: number;
+  code: string;
+  name: string;
+  type: FinancialAccountType;
+  openingBalance: number;
+  openingAt: string | null;
+  bankName: string | null;
+  accountNumber: string | null;
+  walletProvider: string | null;
+  walletIdentifier: string | null;
+  isDefault: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CashFlowCategoryDto {
+  id: number;
+  code: string;
+  name: string;
+  direction: CashVoucherDirection;
+  affectsBusinessResultDefault: boolean;
+  isSystem: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CashVoucherDto {
+  id: number;
+  code: string;
+  direction: CashVoucherDirection;
+  status: CashVoucherStatus;
+  occurredAt: string;
+  amount: number;
+  accountId: number;
+  categoryId: number;
+  paymentMethod: PaymentMethod | null;
+  handlerUserId: number | null;
+  handlerName: string | null;
+  counterpartyType: string | null;
+  counterpartyId: number | null;
+  counterpartyName: string | null;
+  note: string | null;
+  affectsBusinessResult: boolean;
+  sourceType: CashVoucherSourceType;
+  sourceId: number | null;
+  sourceCode: string | null;
+  linkedPurchaseReceiptId: number | null;
+  sourceInvoiceNumber: string | null;
+  sourceInvoiceDate: string | null;
+  reversalOfId: number | null;
+  cancelledAt: string | null;
+  cancelledByUserId: number | null;
+  cancelReason: string | null;
+  createdByUserId: number | null;
+  createdAt: string;
+  updatedAt: string;
+  account?: FinancialAccountDto;
+  category?: CashFlowCategoryDto;
+  reversal?: CashVoucherDto | null;
+  reversalOf?: CashVoucherDto | null;
+}
+
+export interface CashbookListDto {
+  items: CashVoucherDto[];
+  summary: {
+    openingBalance: number;
+    totalReceipt: number;
+    totalPayment: number;
+    closingBalance: number;
+  };
+  pagination: {
+    page: number;
+    pageSize: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export interface CashbookSettingsDto {
+  activatedAt: string | null;
+  activatedByUserId: number | null;
+  accounts: FinancialAccountDto[];
+  categories: CashFlowCategoryDto[];
+}
+
+export interface CashbookCounterpartyDto {
+  type: 'SUPPLIER' | 'USER' | 'OTHER';
+  sourceId: number;
+  code: string | null;
+  name: string;
+  phone: string | null;
+}
+
+export interface CashbookPurchaseInvoiceDto {
+  id: number;
+  receiptCode: string;
+  invoiceNumber: string | null;
+  invoiceDate: string | null;
+  supplierId: number | null;
+  supplierName: string | null;
+  payableAmount: number;
+}
+
+export interface CashVoucherInput {
+  direction: CashVoucherDirection;
+  paymentMethod: PaymentMethod;
+  accountId?: number;
+  categoryId: number;
+  amount: number;
+  occurredAt: string;
+  counterpartyType?: string | null;
+  counterpartyId?: number | null;
+  counterpartyName?: string | null;
+  note?: string | null;
+  affectsBusinessResult?: boolean;
+  linkedPurchaseReceiptId?: number | null;
+}
+
+export interface CashbookFilter {
+  search?: string;
+  direction?: CashVoucherDirection;
+  status?: CashVoucherStatus;
+  accountId?: number;
+  accountType?: FinancialAccountType;
+  categoryId?: number;
+  affectsBusinessResult?: boolean;
+  from?: string;
+  to?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface CashbookActivationInput {
+  activatedAt: string;
+  accounts: Array<{ id: number; openingBalance: number }>;
+}
+
+export interface FinancialAccountInput {
+  code?: string;
+  name: string;
+  type: FinancialAccountType;
+  openingBalance?: number;
+  bankName?: string | null;
+  accountNumber?: string | null;
+  walletProvider?: string | null;
+  walletIdentifier?: string | null;
+  isDefault?: boolean;
+  isActive?: boolean;
+}
+
+export interface CashFlowCategoryInput {
+  code?: string;
+  name: string;
+  direction: CashVoucherDirection;
+  affectsBusinessResultDefault?: boolean;
+  isActive?: boolean;
+}
+
+// ==========================================
+// 8. REPORT DTOs
 // ==========================================
 export interface TopSellerItemDto {
   menuItemId: number;
