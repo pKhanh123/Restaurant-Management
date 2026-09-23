@@ -1,4 +1,4 @@
-import { PurchaseReceiptStatus } from '@prisma/client';
+import { PaymentMethod, PurchaseReceiptStatus } from '@prisma/client';
 
 export type PurchaseReceiptActor = {
   id: number;
@@ -38,6 +38,8 @@ export type PurchaseReceiptDto = {
   discountAmount: number;
   payableAmount: number;
   paidAmount: number;
+  paymentMethod: PaymentMethod;
+  financialAccountId: number | null;
   outstandingAmount: number;
   note: string | null;
   createdByUserId: number | null;

@@ -12,7 +12,8 @@ export const createPurchaseReturnSchema = z.object({
   sourceReceiptId: z.number().int().positive().nullable().default(null),
   returnedAt: z.coerce.date().optional(), lines: lines.default([]),
   discountAmount: returnMoney.default(0), vatAmount: returnMoney.default(0), refundAmount: returnMoney.default(0),
-  refundMethod: z.enum(['CASH', 'BANK_TRANSFER']).default('CASH'),
+  refundMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET']).default('CASH'),
+  financialAccountId: z.number().int().positive().nullable().optional(),
   note: z.string().trim().max(1000).nullable().optional()
 });
 export const returnVersionSchema = z.object({ expectedVersion: z.number().int().positive() });

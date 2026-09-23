@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Prisma } from '@prisma/client';
+import { CashVoucherSourceType, Prisma } from '@prisma/client';
 import { prisma } from '../../config/prisma';
 import { ApiError } from '../../lib/api-error';
 import { emitInventoryChanged } from './inventory.events';
@@ -8,6 +8,8 @@ import { serializePurchaseReturnCsv, serializePurchaseReturnWorkbook } from './p
 import { parsePurchaseReturnExcelBuffer } from './purchase-return.import';
 import type { PurchaseReturnImportPreviewDto } from './purchase-return.types';
 import type { PurchaseReturnInput, PurchaseReturnQuery } from './purchase-return.schemas';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 export const returnInclude = { lines: { orderBy: { id: 'asc' as const } }, supplier: { select: { id: true, code: true, name: true, isActive: true } }, sourceReceipt: { select: { id: true, receiptCode: true } } } satisfies Prisma.PurchaseReturnInclude;
 export type ReturnRecord = Prisma.PurchaseReturnGetPayload<{ include: typeof returnInclude }>;
@@ -137,7 +139,7 @@ export class PurchaseReturnService {
     notify(row); return returnDto(row);
   }
   static async complete(id: number, expectedVersion: number, actor: ReturnActor) {
-    const row = await prisma.$transaction(async tx => {
+    const outcome = await prisma.$transaction(async tx => {
       const current = await lockedDraft(tx, id, expectedVersion);
       if (!current.supplier?.isActive || !current.lines.length) throw ApiError.badRequest('Cần nhà cung cấp đang hoạt động và ít nhất một dòng hàng');
       purchaseReturnTotals(current.lines, current.discountAmount, current.vatAmount, current.refundAmount);
@@ -165,9 +167,27 @@ export class PurchaseReturnService {
         await tx.purchaseReturnLine.update({ where: { id: line.id }, data: { stockCostPerUnit: ingredient.costPerUnit, stockCostAmount: cost } });
         await tx.inventoryTransaction.create({ data: { ingredientId: ingredient.id, purchaseReturnId: id, type: 'PURCHASE_RETURN', quantity: -line.quantity, costAmount: -cost, note: 'Trả hàng nhập ' + current.returnCode, createdByUserId: actor.id } });
       }
-      const completed = await tx.purchaseReturn.update({ where: { id }, data: { status: 'COMPLETED', version: { increment: 1 }, completedAt: new Date(), completedByUserId: actor.id }, include: returnInclude });
-      await audit(tx, completed, actor, 'COMPLETED'); return completed;
+      const completedAt = new Date();
+      const completed = await tx.purchaseReturn.update({ where: { id }, data: { status: 'COMPLETED', version: { increment: 1 }, completedAt, completedByUserId: actor.id }, include: returnInclude });
+      const cashVoucher = completed.refundAmount > 0 ? await CashbookPostingService.post(tx, {
+        direction: 'RECEIPT',
+        paymentMethod: completed.refundMethod,
+        accountId: completed.refundMethod === 'CASH' ? undefined : (completed.financialAccountId ?? undefined),
+        categoryCode: 'SUPPLIER_REFUND',
+        amount: completed.refundAmount,
+        occurredAt: completedAt,
+        sourceType: CashVoucherSourceType.PURCHASE_RETURN,
+        sourceId: completed.id,
+        sourceCode: completed.returnCode,
+        counterpartyType: 'SUPPLIER',
+        counterpartyId: completed.supplierId,
+        counterpartyName: completed.supplier?.name,
+        affectsBusinessResult: false
+      }, { id: actor.id, name: actor.name ?? 'Hệ thống' }) : null;
+      await audit(tx, completed, actor, 'COMPLETED'); return { row: completed, cashVoucher };
     }, txOptions);
-    notify(row); return returnDto(row);
+    notify(outcome.row);
+    if (outcome.cashVoucher) emitCashbookChanged({ voucherIds: [outcome.cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
+    return returnDto(outcome.row);
   }
 }

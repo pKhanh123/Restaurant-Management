@@ -88,7 +88,9 @@ model FinancialAccount {
   createdAt        DateTime             @default(now())
   updatedAt        DateTime             @updatedAt
 
-  vouchers CashVoucher[]
+  vouchers         CashVoucher[]
+  purchaseReceipts PurchaseReceipt[] @relation("PurchaseReceiptFinancialAccount")
+  purchaseReturns  PurchaseReturn[]  @relation("PurchaseReturnFinancialAccount")
 
   @@index([type, isActive])
 }
@@ -713,6 +715,8 @@ model PurchaseReceipt {
   subtotalAmount    Int                   @default(0)
   discountAmount    Int                   @default(0)
   paidAmount        Int                   @default(0)
+  paymentMethod     PaymentMethod         @default(CASH)
+  financialAccountId Int?
   note              String?               @db.VarChar(1000)
   createdByUserId   Int?
   postedByUserId    Int?
@@ -727,9 +731,11 @@ model PurchaseReceipt {
   purchaseReturns       PurchaseReturn[]
   inventoryTransactions InventoryTransaction[]
   cashVouchers          CashVoucher[]
+  financialAccount      FinancialAccount?       @relation("PurchaseReceiptFinancialAccount", fields: [financialAccountId], references: [id], onDelete: Restrict)
 
   @@index([supplierId, receivedAt])
   @@index([status, receivedAt])
+  @@index([financialAccountId])
 }
 
 model PurchaseReceiptLine {
@@ -773,7 +779,8 @@ model PurchaseReturn {
   discountAmount    Int                  @default(0)
   vatAmount         Int                  @default(0)
   refundAmount      Int                  @default(0)
-  refundMethod      String               @default("CASH") @db.VarChar(20)
+  refundMethod      PaymentMethod        @default(CASH)
+  financialAccountId Int?
   note              String?              @db.VarChar(1000)
   createdByUserId   Int?
   createdByName     String?              @db.VarChar(120)
@@ -788,10 +795,12 @@ model PurchaseReturn {
   sourceReceipt         PurchaseReceipt?       @relation(fields: [sourceReceiptId], references: [id], onDelete: Restrict)
   lines                 PurchaseReturnLine[]
   inventoryTransactions InventoryTransaction[]
+  financialAccount      FinancialAccount?       @relation("PurchaseReturnFinancialAccount", fields: [financialAccountId], references: [id], onDelete: Restrict)
 
   @@index([status, returnedAt])
   @@index([supplierId, returnedAt])
   @@index([sourceReceiptId])
+  @@index([financialAccountId])
 }
 
 model PurchaseReturnLine {
