@@ -20,7 +20,8 @@ export const salesReturnCreateSchema = z.object({
   orderId: z.number().int().positive(),
   lines: z.array(z.object({ orderItemId: z.number().int().positive(), quantity: z.number().int().positive() })).min(1).max(100)
     .refine(lines => new Set(lines.map(line => line.orderItemId)).size === lines.length, 'Mỗi dòng món chỉ được xuất hiện một lần'),
-  refundMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD']).default('CASH'),
+  refundMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET']).default('CASH'),
+  financialAccountId: z.number().int().positive().optional(),
   refundedAmount: z.number().int().nonnegative().optional(),
   note: z.string().trim().max(1000).optional()
 });

@@ -23,9 +23,10 @@ export const createOrderSchema = z.object({
 });
 
 export const payOrderSchema = z.object({
-  paymentMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD'], {
-    required_error: 'Phương thức thanh toán là bắt buộc (CASH | BANK_TRANSFER | CREDIT_CARD)'
-  })
+  paymentMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET'], {
+    required_error: 'Phương thức thanh toán là bắt buộc (CASH | BANK_TRANSFER | CREDIT_CARD | E_WALLET)'
+  }),
+  financialAccountId: z.number().int().positive().optional()
 });
 
 export const updateOrderStatusSchema = z.object({

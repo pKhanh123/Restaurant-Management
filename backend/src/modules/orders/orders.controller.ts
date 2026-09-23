@@ -49,7 +49,7 @@ export class OrdersController {
       const orderId = parseInt(req.params.id, 10);
       const input = payOrderSchema.parse(req.body);
 
-      const result = await OrdersService.payOrder(orderId, input);
+      const result = await OrdersService.payOrder(orderId, input, req.user ? { id: req.user.id, name: req.user.name } : undefined);
 
       res.status(200).json({
         data: {

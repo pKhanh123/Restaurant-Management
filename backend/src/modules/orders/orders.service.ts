@@ -2,12 +2,14 @@ import { prisma } from '../../config/prisma';
 import { ApiError } from '../../lib/api-error';
 import { emitToAll, emitToRoom } from '../../lib/socket';
 import { CreateOrderInput, PayOrderInput, VoidOrderInput } from './orders.schemas';
-import { PaymentMethod } from '@prisma/client';
+import { CashVoucherSourceType, PaymentMethod } from '@prisma/client';
 import { AuditService } from '../audit/audit.service';
 import { InventoryService } from '../inventory/inventory.service';
 import { emitInventoryChanged } from '../inventory/inventory.events';
 import { PriceListService } from '../price-lists/price-list.service';
 import { createHash } from 'crypto';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 function canonicalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -432,7 +434,7 @@ export class OrdersService {
   /**
    * Thanh toan don hang va tu dong reset ban an ve AVAILABLE khi het don UNPAID
    */
-  static async payOrder(orderId: number, input: PayOrderInput) {
+  static async payOrder(orderId: number, input: PayOrderInput, actor?: { id: number; name: string }) {
     const existingOrder = await prisma.order.findUnique({
       where: { id: orderId },
       include: { items: true }
@@ -447,7 +449,7 @@ export class OrdersService {
       throw ApiError.conflict(`Đơn hàng ID ${orderId} đã được thanh toán từ trước`);
     }
 
-    const { order: updatedOrder, tableState, inventoryChange } = await prisma.$transaction(async (tx) => {
+    const { order: updatedOrder, tableState, inventoryChange, cashVoucher } = await prisma.$transaction(async (tx) => {
       if (existingOrder.tableId) {
         // Serialize create/pay operations on the same table before reading its unpaid orders.
         await tx.$queryRaw`SELECT id FROM DiningTable WHERE id = ${existingOrder.tableId} FOR UPDATE`;
@@ -470,12 +472,13 @@ export class OrdersService {
         throw ApiError.conflict(`Đơn hàng ID ${orderId} đã được thanh toán từ trước`);
       }
 
+      const paidAt = new Date();
       const order = await tx.order.update({
         where: { id: orderId },
         data: {
           paymentStatus: 'PAID',
           paymentMethod: input.paymentMethod as PaymentMethod,
-          paidAt: new Date(),
+          paidAt,
           status: 'COMPLETED',
           completedAt: new Date()
         },
@@ -484,6 +487,19 @@ export class OrdersService {
 
       // Tu dong tru kho nguyen lieu theo cong thuc dinh luong BOM (Atomic Transaction)
       const inventoryChange = await InventoryService.deductInventoryForOrder(tx, order.id, order.items);
+
+      const cashVoucher = await CashbookPostingService.post(tx, {
+        direction: 'RECEIPT',
+        paymentMethod: input.paymentMethod as PaymentMethod,
+        accountId: input.paymentMethod === 'CASH' ? undefined : input.financialAccountId,
+        categoryCode: 'CUSTOMER_PAYMENT',
+        amount: order.finalAmount,
+        occurredAt: paidAt,
+        sourceType: CashVoucherSourceType.ORDER_PAYMENT,
+        sourceId: order.id,
+        sourceCode: order.code,
+        affectsBusinessResult: false
+      }, actor ?? { id: null, name: 'Hệ thống' });
 
       let nextTableState: { tableId: number; tableNumber: number; status: 'AVAILABLE' | 'OCCUPIED'; currentOrderId: number | null } | null = null;
       if (order.tableId) {
@@ -515,8 +531,12 @@ export class OrdersService {
         }
       }
 
-      return { order, tableState: nextTableState, inventoryChange };
+      return { order, tableState: nextTableState, inventoryChange, cashVoucher };
     });
+
+    if (cashVoucher) {
+      emitCashbookChanged({ voucherIds: [cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
+    }
 
     emitInventoryChanged({
       sourceType: 'INGREDIENT',
@@ -658,15 +678,7 @@ export class OrdersService {
       throw ApiError.orderStateInvalid('Đơn hàng đã bị hủy trước đó');
     }
 
-    if (existingOrder.status === 'COMPLETED') {
-      throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã hoàn tất phục vụ');
-    }
-
-    if (existingOrder.paymentStatus === 'PAID') {
-      throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã thanh toán');
-    }
-
-    const { order, tableState, stockChanges } = await prisma.$transaction(async (tx) => {
+    const { order, tableState, stockChanges, cashbookReversal } = await prisma.$transaction(async (tx) => {
       if (existingOrder.tableId) {
         await tx.$queryRaw`SELECT id FROM DiningTable WHERE id = ${existingOrder.tableId} FOR UPDATE`;
       }
@@ -683,12 +695,14 @@ export class OrdersService {
       if (lockedOrder.status === 'CANCELLED') {
         throw ApiError.orderStateInvalid('Đơn hàng đã bị hủy trước đó');
       }
-      if (lockedOrder.status === 'COMPLETED') {
-        throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã hoàn tất phục vụ');
-      }
-      if (lockedOrder.paymentStatus === 'PAID') {
-        throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã thanh toán');
-      }
+      const cashbookReversal = lockedOrder.paymentStatus === 'PAID'
+        ? await CashbookPostingService.reverseSystemVoucher(
+            tx,
+            CashVoucherSourceType.ORDER_PAYMENT,
+            lockedOrder.id,
+            { id: voidedByUserId ?? null, name: actorName ?? 'Hệ thống' }
+          )
+        : null;
 
       const restoredStock = await restoreMenuStockForOrder(tx, lockedOrder.items);
       const now = new Date();
@@ -741,8 +755,12 @@ export class OrdersService {
         }
       }
 
-      return { order: updatedOrder, tableState: nextTableState, stockChanges: restoredStock };
+      return { order: updatedOrder, tableState: nextTableState, stockChanges: restoredStock, cashbookReversal };
     });
+
+    if (cashbookReversal) {
+      emitCashbookChanged({ voucherIds: [cashbookReversal.id], reason: 'SOURCE_REVERSED', updatedAt: new Date().toISOString() });
+    }
 
     emitInventoryChanged({
       sourceType: 'MENU_ITEM',

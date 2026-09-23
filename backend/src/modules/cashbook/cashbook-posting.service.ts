@@ -11,7 +11,7 @@ import { ApiError } from '../../lib/api-error';
 import { AuditService } from '../audit/audit.service';
 import { assertVndAmount, requiredAccountType, signedAmount, voucherSourceKey } from './cashbook.domain';
 
-export type CashbookActor = { id: number; name: string };
+export type CashbookActor = { id: number | null; name: string };
 
 export type CashbookPostingInput = {
   direction: CashVoucherDirection;
@@ -51,14 +51,13 @@ async function lockAndResolveAccount(
   input: Pick<CashbookPostingInput, 'accountId' | 'paymentMethod'>
 ): Promise<FinancialAccount> {
   const type = requiredAccountType(input.paymentMethod);
-  if (input.accountId) {
-    await tx.$queryRawUnsafe('SELECT id FROM FinancialAccount WHERE id = ? FOR UPDATE', input.accountId);
-  } else {
-    await tx.$queryRawUnsafe('SELECT id FROM FinancialAccount WHERE type = ? FOR UPDATE', type);
-  }
-  const account = input.accountId
-    ? await tx.financialAccount.findUnique({ where: { id: input.accountId } })
-    : await tx.financialAccount.findFirst({ where: { type, isDefault: true, isActive: true }, orderBy: { id: 'asc' } });
+  const rows = input.accountId
+    ? await tx.$queryRawUnsafe<FinancialAccount[]>('SELECT * FROM FinancialAccount WHERE id = ? FOR UPDATE', input.accountId)
+    : await tx.$queryRawUnsafe<FinancialAccount[]>(
+        'SELECT * FROM FinancialAccount WHERE type = ? AND isDefault = true AND isActive = true ORDER BY id LIMIT 1 FOR UPDATE',
+        type
+      );
+  const account = rows[0] ?? null;
   if (!account || !account.isActive) throw ApiError.badRequest('Tài khoản tiền không tồn tại hoặc đã ngừng hoạt động');
   if (account.type !== type) throw ApiError.badRequest('Tài khoản không phù hợp với phương thức thanh toán');
   if (type === 'CASH' && !account.isDefault) throw ApiError.badRequest('Phiếu tiền mặt phải dùng quỹ tiền mặt mặc định');
@@ -66,7 +65,10 @@ async function lockAndResolveAccount(
 }
 
 export async function accountLedgerBalance(tx: Prisma.TransactionClient, account: FinancialAccount): Promise<number> {
-  const rows = await tx.cashVoucher.findMany({ where: { accountId: account.id }, select: { direction: true, amount: true } });
+  const rows = await tx.$queryRawUnsafe<Array<{ direction: CashVoucherDirection; amount: number }>>(
+    'SELECT direction, amount FROM CashVoucher WHERE accountId = ? LOCK IN SHARE MODE',
+    account.id
+  );
   return rows.reduce((balance, row) => balance + signedAmount(row.direction, row.amount), account.openingBalance);
 }
 
@@ -85,7 +87,11 @@ export class CashbookPostingService {
       if (!activatedAt || input.occurredAt < activatedAt) return null;
 
       const account = await lockAndResolveAccount(tx, input);
-      const category = await tx.cashFlowCategory.findUnique({ where: { code: input.categoryCode } });
+      const categories = await tx.$queryRawUnsafe<Array<{ id: number; direction: CashVoucherDirection; isActive: boolean }>>(
+        'SELECT id, direction, isActive FROM CashFlowCategory WHERE code = ? LOCK IN SHARE MODE',
+        input.categoryCode
+      );
+      const category = categories[0] ?? null;
       if (!category || !category.isActive) throw ApiError.badRequest('Loại thu/chi không tồn tại hoặc đã ngừng hoạt động');
       if (category.direction !== input.direction) throw ApiError.badRequest('Loại thu/chi không cùng chiều với phiếu');
 
@@ -145,9 +151,23 @@ export class CashbookPostingService {
     sourceId: number,
     actor: CashbookActor
   ): Promise<CashVoucher | null> {
-    const original = await tx.cashVoucher.findUnique({ where: { sourceKey: voucherSourceKey(sourceType, sourceId) } });
+    const sourceKey = voucherSourceKey(sourceType, sourceId);
+    await tx.$queryRawUnsafe('SELECT id FROM CashVoucher WHERE sourceKey = ? FOR UPDATE', sourceKey);
+    const original = await tx.cashVoucher.findUnique({ where: { sourceKey } });
     if (!original) return null;
-    return this.reverseLocked(tx, original, actor, 'Chứng từ nguồn bị hủy');
+    if (original.status !== 'POSTED' || await tx.cashVoucher.findUnique({ where: { reversalOfId: original.id } })) {
+      throw ApiError.conflict('Phiếu nguồn đã được đảo trước đó');
+    }
+    const reversal = await this.reverseLocked(tx, original, actor, 'Chứng từ nguồn bị hủy');
+    await tx.cashVoucher.update({
+      where: { id: original.id },
+      data: { status: 'CANCELLED', cancelledAt: new Date(), cancelledByUserId: actor.id, cancelReason: 'Chứng từ nguồn bị hủy' }
+    });
+    await AuditService.logInTransaction(tx, {
+      action: 'CASH_VOUCHER_SOURCE_REVERSED', targetType: 'CashVoucher', targetId: original.id,
+      actorId: actor.id, actorName: actor.name, metadata: { sourceType, sourceId, reversalId: reversal.id }
+    });
+    return reversal;
   }
 
   static async reverseLocked(
