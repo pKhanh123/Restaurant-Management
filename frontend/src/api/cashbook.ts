@@ -90,9 +90,21 @@ export async function createCashFlowCategoryApi(token: string | null, input: Cas
   }), 'Lỗi tạo loại thu chi');
 }
 
+export async function updateCashFlowCategoryApi(token: string | null, id: number, input: Partial<Omit<CashFlowCategoryInput, 'code' | 'direction'>>): Promise<CashFlowCategoryDto> {
+  return unwrap(await fetch(`${getApiBaseUrl()}/api/cashbook/categories/${id}`, {
+    method: 'PATCH', headers: authHeaders(token, true), body: JSON.stringify(input)
+  }), 'Lỗi cập nhật loại thu chi');
+}
+
 export async function fetchCashbookCounterpartiesApi(token: string | null, search = ''): Promise<CashbookCounterpartyDto[]> {
   const query = search.trim() ? `?q=${encodeURIComponent(search.trim())}` : '';
   return unwrap(await fetch(`${getApiBaseUrl()}/api/cashbook/counterparties${query}`, { headers: authHeaders(token) }), 'Lỗi tìm người nộp/nhận');
+}
+
+export async function createFinancialPartyApi(token: string | null, input: { name: string; phone?: string | null; note?: string | null }): Promise<CashbookCounterpartyDto> {
+  return unwrap(await fetch(`${getApiBaseUrl()}/api/cashbook/parties`, {
+    method: 'POST', headers: authHeaders(token, true), body: JSON.stringify(input)
+  }), 'Lỗi tạo người nộp/nhận');
 }
 
 export async function fetchCashbookPurchaseInvoicesApi(token: string | null, search = ''): Promise<CashbookPurchaseInvoiceDto[]> {

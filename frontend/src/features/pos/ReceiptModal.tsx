@@ -32,7 +32,8 @@ export const ReceiptModal: React.FC<Props> = ({ visible, order, onClose }) => {
     ? {
       CASH: 'Tiền mặt',
       BANK_TRANSFER: 'Chuyển khoản',
-      CREDIT_CARD: 'Thẻ tín dụng'
+      CREDIT_CARD: 'Thẻ tín dụng',
+      E_WALLET: 'Ví điện tử'
     }[order.paymentMethod]
     : 'Chưa thanh toán';
 
