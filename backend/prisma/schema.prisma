@@ -38,12 +38,140 @@ enum PaymentMethod {
   CASH
   BANK_TRANSFER
   CREDIT_CARD
+  E_WALLET
 }
 
 enum PaymentStatus {
   UNPAID
   PAID
   VOIDED
+}
+
+enum FinancialAccountType {
+  CASH
+  BANK
+  E_WALLET
+}
+
+enum CashVoucherDirection {
+  RECEIPT
+  PAYMENT
+}
+
+enum CashVoucherStatus {
+  POSTED
+  CANCELLED
+}
+
+enum CashVoucherSourceType {
+  MANUAL
+  ORDER_PAYMENT
+  SALES_RETURN
+  PURCHASE_RECEIPT
+  PURCHASE_RETURN
+  REVERSAL
+}
+
+model FinancialAccount {
+  id               Int                  @id @default(autoincrement())
+  code             String               @unique @db.VarChar(50)
+  name             String               @db.VarChar(150)
+  type             FinancialAccountType
+  openingBalance   Int                  @default(0)
+  openingAt        DateTime?
+  bankName         String?              @db.VarChar(150)
+  accountNumber    String?              @db.VarChar(100)
+  walletProvider   String?              @db.VarChar(150)
+  walletIdentifier String?              @db.VarChar(100)
+  isDefault        Boolean              @default(false)
+  isActive         Boolean              @default(true)
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  vouchers CashVoucher[]
+
+  @@index([type, isActive])
+}
+
+model CashFlowCategory {
+  id                           Int                  @id @default(autoincrement())
+  code                         String               @unique @db.VarChar(60)
+  name                         String               @db.VarChar(150)
+  direction                    CashVoucherDirection
+  affectsBusinessResultDefault Boolean              @default(true)
+  isSystem                     Boolean              @default(false)
+  isActive                     Boolean              @default(true)
+  createdAt                    DateTime             @default(now())
+  updatedAt                    DateTime             @updatedAt
+
+  vouchers CashVoucher[]
+
+  @@index([direction, isActive])
+}
+
+model FinancialParty {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(150)
+  phone     String?  @db.VarChar(30)
+  note      String?  @db.VarChar(1000)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([isActive])
+}
+
+model CashbookSetting {
+  id                Int       @id @default(1)
+  activatedAt       DateTime?
+  activatedByUserId Int?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model CashVoucher {
+  id                      Int                   @id @default(autoincrement())
+  code                    String                @unique @db.VarChar(50)
+  direction               CashVoucherDirection
+  status                  CashVoucherStatus     @default(POSTED)
+  occurredAt              DateTime
+  amount                  Int
+  accountId               Int
+  categoryId              Int
+  paymentMethod           PaymentMethod?
+  handlerUserId           Int?
+  handlerName             String?               @db.VarChar(120)
+  counterpartyType        String?               @db.VarChar(50)
+  counterpartyId          Int?
+  counterpartyName        String?               @db.VarChar(200)
+  note                    String?               @db.VarChar(1000)
+  affectsBusinessResult   Boolean               @default(true)
+  sourceType              CashVoucherSourceType
+  sourceId                Int?
+  sourceCode              String?               @db.VarChar(100)
+  sourceKey               String                @unique @db.VarChar(191)
+  linkedPurchaseReceiptId Int?
+  sourceInvoiceNumber     String?               @db.VarChar(100)
+  sourceInvoiceDate       DateTime?
+  reversalOfId            Int?                  @unique
+  cancelledAt             DateTime?
+  cancelledByUserId       Int?
+  cancelReason            String?               @db.VarChar(500)
+  createdByUserId         Int?
+  createdAt               DateTime              @default(now())
+  updatedAt               DateTime              @updatedAt
+
+  account               FinancialAccount @relation(fields: [accountId], references: [id], onDelete: Restrict)
+  category              CashFlowCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  linkedPurchaseReceipt PurchaseReceipt? @relation(fields: [linkedPurchaseReceiptId], references: [id], onDelete: Restrict)
+  reversalOf            CashVoucher?     @relation("CashVoucherReversal", fields: [reversalOfId], references: [id], onDelete: Restrict)
+  reversal              CashVoucher?     @relation("CashVoucherReversal")
+
+  @@index([accountId, occurredAt])
+  @@index([direction, status, occurredAt])
+  @@index([categoryId])
+  @@index([linkedPurchaseReceiptId])
 }
 
 enum MenuType {
@@ -101,21 +229,21 @@ model Category {
 }
 
 model PriceList {
-  id              Int                 @id @default(autoincrement())
-  code            String              @unique
+  id              Int                @id @default(autoincrement())
+  code            String             @unique
   name            String
-  type            PriceListType       @default(GENERAL)
-  scopeType       PriceListScopeType  @default(GLOBAL)
+  type            PriceListType      @default(GENERAL)
+  scopeType       PriceListScopeType @default(GLOBAL)
   scopeKey        String?
-  isDefault       Boolean             @default(false)
-  isActive        Boolean             @default(true)
+  isDefault       Boolean            @default(false)
+  isActive        Boolean            @default(true)
   effectiveFrom   DateTime?
   effectiveTo     DateTime?
   createdByUserId Int?
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
 
-  items PriceListItem[]
+  items  PriceListItem[]
   orders Order[]
 
   @@index([scopeType, scopeKey])
@@ -141,10 +269,10 @@ model MenuItem {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  category       Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  modifierGroups ModifierGroup[]
-  orderItems     OrderItem[]
-  priceListItems PriceListItem[]
+  category            Category             @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  modifierGroups      ModifierGroup[]
+  orderItems          OrderItem[]
+  priceListItems      PriceListItem[]
   menuItemIngredients MenuItemIngredient[]
 }
 
@@ -213,12 +341,12 @@ model DiningTable {
 }
 
 model TableArea {
-  id           Int      @id @default(autoincrement())
-  name         String   @unique @db.VarChar(100)
-  displayOrder Int      @default(0)
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           Int           @id @default(autoincrement())
+  name         String        @unique @db.VarChar(100)
+  displayOrder Int           @default(0)
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   tables       DiningTable[]
 
   @@index([isActive, displayOrder])
@@ -260,13 +388,13 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  table         DiningTable? @relation(fields: [tableId], references: [id], onDelete: SetNull)
-  priceList     PriceList?   @relation(fields: [priceListId], references: [id], onDelete: SetNull)
-  createdByUser User?        @relation("CreatedOrders", fields: [createdByUserId], references: [id], onDelete: SetNull)
-  voidedByUser  User?        @relation("VoidedOrders", fields: [voidedByUserId], references: [id], onDelete: SetNull)
-  items         OrderItem[]
+  table                 DiningTable?           @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  priceList             PriceList?             @relation(fields: [priceListId], references: [id], onDelete: SetNull)
+  createdByUser         User?                  @relation("CreatedOrders", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  voidedByUser          User?                  @relation("VoidedOrders", fields: [voidedByUserId], references: [id], onDelete: SetNull)
+  items                 OrderItem[]
   inventoryTransactions InventoryTransaction[]
-  returns       OrderReturn[]
+  returns               OrderReturn[]
 
   @@unique([idempotencyScope, idempotencyKey])
 }
@@ -283,31 +411,31 @@ model OrderItem {
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
-  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+  order       Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem    MenuItem          @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
   returnLines OrderReturnLine[]
 }
 
 model OrderReturn {
-  id                Int              @id @default(autoincrement())
-  returnCode        String           @unique
+  id                Int               @id @default(autoincrement())
+  returnCode        String            @unique
   orderId           Int
   status            OrderReturnStatus @default(COMPLETED)
-  returnedAt        DateTime         @default(now())
-  totalRefundDue    Int              @default(0)
-  refundedAmount    Int              @default(0)
-  refundMethod      PaymentMethod    @default(CASH)
-  note              String?          @db.VarChar(1000)
+  returnedAt        DateTime          @default(now())
+  totalRefundDue    Int               @default(0)
+  refundedAmount    Int               @default(0)
+  refundMethod      PaymentMethod     @default(CASH)
+  note              String?           @db.VarChar(1000)
   createdByUserId   Int?
-  createdByName     String?          @db.VarChar(120)
+  createdByName     String?           @db.VarChar(120)
   completedAt       DateTime?
   cancelledByUserId Int?
   cancelledAt       DateTime?
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 
-  order Order @relation(fields: [orderId], references: [id], onDelete: Restrict)
-  lines OrderReturnLine[]
+  order                 Order                  @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  lines                 OrderReturnLine[]
   inventoryTransactions InventoryTransaction[]
 
   @@index([status, returnedAt])
@@ -315,7 +443,7 @@ model OrderReturn {
 }
 
 model OrderReturnLine {
-  id            Int @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   orderReturnId Int
   orderItemId   Int
   menuItemId    Int
@@ -327,7 +455,7 @@ model OrderReturnLine {
   createdAt     DateTime @default(now())
 
   orderReturn OrderReturn @relation(fields: [orderReturnId], references: [id], onDelete: Cascade)
-  orderItem OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Restrict)
+  orderItem   OrderItem   @relation(fields: [orderItemId], references: [id], onDelete: Restrict)
 
   @@unique([orderReturnId, orderItemId])
   @@index([orderItemId])
@@ -336,12 +464,12 @@ model OrderReturnLine {
 
 model AuditLog {
   id         Int      @id @default(autoincrement())
-  action     String   // MENU_ITEM_CREATED | MENU_ITEM_UPDATED | MENU_ITEM_AVAILABILITY_CHANGED | MENU_IMAGE_UPLOADED | ORDER_VOIDED
-  targetType String   // MenuItem | Order
+  action     String // MENU_ITEM_CREATED | MENU_ITEM_UPDATED | MENU_ITEM_AVAILABILITY_CHANGED | MENU_IMAGE_UPLOADED | ORDER_VOIDED
+  targetType String // MenuItem | Order
   targetId   Int?
   actorId    Int?
-  actorName  String?  // Snapshot ten user tai thoi diem log
-  metadata   Json?    // Chi tiet thay doi (ten cu, ten moi, gia cu, gia moi...)
+  actorName  String? // Snapshot ten user tai thoi diem log
+  metadata   Json? // Chi tiet thay doi (ten cu, ten moi, gia cu, gia moi...)
   createdAt  DateTime @default(now())
 
   actor User? @relation("AuditLogs", fields: [actorId], references: [id], onDelete: SetNull)
@@ -377,8 +505,8 @@ enum InventoryWasteStatus {
 model Ingredient {
   id           Int      @id @default(autoincrement())
   sku          String   @unique // Ma nguyen lieu (VD: ING-CHICKEN-01)
-  name         String   // Ten nguyen lieu
-  unit         String   // Don vi: gram, ml, piece, can...
+  name         String // Ten nguyen lieu
+  unit         String // Don vi: gram, ml, piece, can...
   currentStock Float    @default(0) // Ton kho thuc te
   minThreshold Float    @default(0) // Nguong canh bao do
   costPerUnit  Int      @default(0) // Gia von trung binh (VND / don vi tinh)
@@ -398,10 +526,10 @@ model Ingredient {
 }
 
 model MenuItemIngredient {
-  id               Int      @id @default(autoincrement())
+  id               Int   @id @default(autoincrement())
   menuItemId       Int
   ingredientId     Int
-  quantityRequired Float    // Dinh luong tieu hao cho 1 phan mon an
+  quantityRequired Float // Dinh luong tieu hao cho 1 phan mon an
 
   menuItem   MenuItem   @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
   ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
@@ -412,53 +540,53 @@ model MenuItemIngredient {
 }
 
 model InventoryTransaction {
-  id              Int                      @id @default(autoincrement())
-  ingredientId    Int
-  type            InventoryTransactionType
-  quantity        Float                    // + khi nhap kho, - khi xuat/hao hut
-  costAmount      Int                      @default(0) // Gia tri VND giao dich
-  orderId         Int?                     // Don hang lien quan (khi auto-deduct)
-  purchaseReceiptId Int?                   // Chung tu nhap; null cho ledger cu
-  inventoryCheckId Int?                    // Chung tu kiem kho; null cho ledger khac
-  inventoryWasteId Int?                    // Chung tu xuat huy; null cho ledger khac
-  purchaseReturnId Int?
-  orderReturnId Int?
-  note            String?                  // Ghi chu
-  createdByUserId Int?
-  createdAt       DateTime                 @default(now())
+  id                Int                      @id @default(autoincrement())
+  ingredientId      Int
+  type              InventoryTransactionType
+  quantity          Float // + khi nhap kho, - khi xuat/hao hut
+  costAmount        Int                      @default(0) // Gia tri VND giao dich
+  orderId           Int? // Don hang lien quan (khi auto-deduct)
+  purchaseReceiptId Int? // Chung tu nhap; null cho ledger cu
+  inventoryCheckId  Int? // Chung tu kiem kho; null cho ledger khac
+  inventoryWasteId  Int? // Chung tu xuat huy; null cho ledger khac
+  purchaseReturnId  Int?
+  orderReturnId     Int?
+  note              String? // Ghi chu
+  createdByUserId   Int?
+  createdAt         DateTime                 @default(now())
 
-  ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
-  order      Order?     @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  ingredient      Ingredient       @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
+  order           Order?           @relation(fields: [orderId], references: [id], onDelete: SetNull)
   purchaseReceipt PurchaseReceipt? @relation(fields: [purchaseReceiptId], references: [id], onDelete: Restrict)
-  inventoryCheck InventoryCheck? @relation(fields: [inventoryCheckId], references: [id], onDelete: Restrict)
-  inventoryWaste InventoryWaste? @relation(fields: [inventoryWasteId], references: [id], onDelete: Restrict)
-  purchaseReturn PurchaseReturn? @relation(fields: [purchaseReturnId], references: [id], onDelete: Restrict)
-  orderReturn OrderReturn? @relation(fields: [orderReturnId], references: [id], onDelete: Restrict)
+  inventoryCheck  InventoryCheck?  @relation(fields: [inventoryCheckId], references: [id], onDelete: Restrict)
+  inventoryWaste  InventoryWaste?  @relation(fields: [inventoryWasteId], references: [id], onDelete: Restrict)
+  purchaseReturn  PurchaseReturn?  @relation(fields: [purchaseReturnId], references: [id], onDelete: Restrict)
+  orderReturn     OrderReturn?     @relation(fields: [orderReturnId], references: [id], onDelete: Restrict)
 
+  @@unique([purchaseReturnId, ingredientId])
+  @@unique([orderReturnId, ingredientId])
   @@index([ingredientId])
   @@index([type])
   @@index([createdAt])
   @@index([purchaseReceiptId])
   @@index([inventoryCheckId])
   @@index([inventoryWasteId])
-  @@unique([purchaseReturnId, ingredientId])
-  @@unique([orderReturnId, ingredientId])
   @@index([orderReturnId])
 }
 
 model InventoryCheck {
-  id                  Int                  @id @default(autoincrement())
-  checkCode           String               @unique
-  status              InventoryCheckStatus @default(DRAFT)
-  countedAt           DateTime             @default(now())
-  balancedAt          DateTime?
-  note                String?              @db.VarChar(1000)
-  createdByUserId     Int?
-  balancedByUserId    Int?
-  cancelledByUserId   Int?
-  cancelledAt         DateTime?
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  id                Int                  @id @default(autoincrement())
+  checkCode         String               @unique
+  status            InventoryCheckStatus @default(DRAFT)
+  countedAt         DateTime             @default(now())
+  balancedAt        DateTime?
+  note              String?              @db.VarChar(1000)
+  createdByUserId   Int?
+  balancedByUserId  Int?
+  cancelledByUserId Int?
+  cancelledAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
 
   lines                 InventoryCheckLine[]
   inventoryTransactions InventoryTransaction[]
@@ -490,19 +618,19 @@ model InventoryCheckLine {
 }
 
 model InventoryWaste {
-  id                    Int                  @id @default(autoincrement())
-  wasteCode             String               @unique
-  status                InventoryWasteStatus @default(DRAFT)
-  wastedAt              DateTime             @default(now())
-  completedAt           DateTime?
-  note                  String?              @db.VarChar(1000)
-  totalValue            Int                  @default(0)
-  createdByUserId       Int?
-  completedByUserId     Int?
-  cancelledByUserId     Int?
-  cancelledAt           DateTime?
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
+  id                Int                  @id @default(autoincrement())
+  wasteCode         String               @unique
+  status            InventoryWasteStatus @default(DRAFT)
+  wastedAt          DateTime             @default(now())
+  completedAt       DateTime?
+  note              String?              @db.VarChar(1000)
+  totalValue        Int                  @default(0)
+  createdByUserId   Int?
+  completedByUserId Int?
+  cancelledByUserId Int?
+  cancelledAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
 
   lines                 InventoryWasteLine[]
   inventoryTransactions InventoryTransaction[]
@@ -539,27 +667,27 @@ enum PurchaseReceiptStatus {
 }
 
 model Supplier {
-  id        Int      @id @default(autoincrement())
-  code      String   @unique
-  name      String
-  phone     String?
-  email     String?
-  address   String?  @db.VarChar(255)
-  taxCode   String?
-  note      String?  @db.VarChar(1000)
-  identityNumber String? @db.VarChar(20)
-  province       String? @db.VarChar(100)
-  district       String? @db.VarChar(100)
-  ward           String? @db.VarChar(100)
-  companyName    String? @db.VarChar(200)
+  id             Int      @id @default(autoincrement())
+  code           String   @unique
+  name           String
+  phone          String?
+  email          String?
+  address        String?  @db.VarChar(255)
+  taxCode        String?
+  note           String?  @db.VarChar(1000)
+  identityNumber String?  @db.VarChar(20)
+  province       String?  @db.VarChar(100)
+  district       String?  @db.VarChar(100)
+  ward           String?  @db.VarChar(100)
+  companyName    String?  @db.VarChar(200)
   groupId        Int?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   purchaseReceipts PurchaseReceipt[]
-  purchaseReturns PurchaseReturn[]
-  group SupplierGroup? @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  purchaseReturns  PurchaseReturn[]
+  group            SupplierGroup?    @relation(fields: [groupId], references: [id], onDelete: Restrict)
 
   @@index([name])
   @@index([isActive])
@@ -567,10 +695,10 @@ model Supplier {
 }
 
 model SupplierGroup {
-  id        Int @id @default(autoincrement())
-  name      String @unique @db.VarChar(100)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int        @id @default(autoincrement())
+  name      String     @unique @db.VarChar(100)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   suppliers Supplier[]
 }
 
@@ -594,10 +722,11 @@ model PurchaseReceipt {
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
 
-  supplier              Supplier?            @relation(fields: [supplierId], references: [id], onDelete: Restrict)
+  supplier              Supplier?              @relation(fields: [supplierId], references: [id], onDelete: Restrict)
   lines                 PurchaseReceiptLine[]
   purchaseReturns       PurchaseReturn[]
   inventoryTransactions InventoryTransaction[]
+  cashVouchers          CashVoucher[]
 
   @@index([supplierId, receivedAt])
   @@index([status, receivedAt])
@@ -633,31 +762,31 @@ enum PurchaseReturnStatus {
 }
 
 model PurchaseReturn {
-  id                  Int @id @default(autoincrement())
-  returnCode          String @unique
-  supplierId          Int?
-  sourceReceiptId     Int?
-  returnedAt          DateTime @default(now())
-  status              PurchaseReturnStatus @default(DRAFT)
-  version             Int @default(1)
-  subtotalAmount      Int @default(0)
-  discountAmount      Int @default(0)
-  vatAmount           Int @default(0)
-  refundAmount        Int @default(0)
-  refundMethod        String @default("CASH") @db.VarChar(20)
-  note                String? @db.VarChar(1000)
-  createdByUserId     Int?
-  createdByName       String? @db.VarChar(120)
-  completedByUserId   Int?
-  completedAt         DateTime?
-  cancelledByUserId   Int?
-  cancelledAt         DateTime?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                Int                  @id @default(autoincrement())
+  returnCode        String               @unique
+  supplierId        Int?
+  sourceReceiptId   Int?
+  returnedAt        DateTime             @default(now())
+  status            PurchaseReturnStatus @default(DRAFT)
+  version           Int                  @default(1)
+  subtotalAmount    Int                  @default(0)
+  discountAmount    Int                  @default(0)
+  vatAmount         Int                  @default(0)
+  refundAmount      Int                  @default(0)
+  refundMethod      String               @default("CASH") @db.VarChar(20)
+  note              String?              @db.VarChar(1000)
+  createdByUserId   Int?
+  createdByName     String?              @db.VarChar(120)
+  completedByUserId Int?
+  completedAt       DateTime?
+  cancelledByUserId Int?
+  cancelledAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
 
-  supplier Supplier? @relation(fields: [supplierId], references: [id], onDelete: Restrict)
-  sourceReceipt PurchaseReceipt? @relation(fields: [sourceReceiptId], references: [id], onDelete: Restrict)
-  lines PurchaseReturnLine[]
+  supplier              Supplier?              @relation(fields: [supplierId], references: [id], onDelete: Restrict)
+  sourceReceipt         PurchaseReceipt?       @relation(fields: [sourceReceiptId], references: [id], onDelete: Restrict)
+  lines                 PurchaseReturnLine[]
   inventoryTransactions InventoryTransaction[]
 
   @@index([status, returnedAt])
@@ -666,7 +795,7 @@ model PurchaseReturn {
 }
 
 model PurchaseReturnLine {
-  id                  Int @id @default(autoincrement())
+  id                  Int                  @id @default(autoincrement())
   purchaseReturnId    Int
   ingredientId        Int
   sourceReceiptLineId Int?
@@ -677,14 +806,13 @@ model PurchaseReturnLine {
   purchaseUnitCost    Int
   returnUnitPrice     Int
   lineAmount          Int
-  stockCostPerUnit    Int @default(0)
-  stockCostAmount     Int @default(0)
-  purchaseReturn PurchaseReturn @relation(fields: [purchaseReturnId], references: [id], onDelete: Cascade)
-  ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
-  sourceReceiptLine PurchaseReceiptLine? @relation(fields: [sourceReceiptLineId], references: [id], onDelete: Restrict)
+  stockCostPerUnit    Int                  @default(0)
+  stockCostAmount     Int                  @default(0)
+  purchaseReturn      PurchaseReturn       @relation(fields: [purchaseReturnId], references: [id], onDelete: Cascade)
+  ingredient          Ingredient           @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
+  sourceReceiptLine   PurchaseReceiptLine? @relation(fields: [sourceReceiptLineId], references: [id], onDelete: Restrict)
 
   @@unique([purchaseReturnId, ingredientId])
   @@index([ingredientId])
   @@index([sourceReceiptLineId])
 }
-
