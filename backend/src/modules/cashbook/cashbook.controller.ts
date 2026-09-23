@@ -10,6 +10,9 @@ import {
   searchQuerySchema
 } from './cashbook.schemas';
 import { CashbookSettingsService } from './cashbook-settings.service';
+import { CashbookService } from './cashbook.service';
+import { serializeCashbookCsv, serializeCashbookWorkbook } from './cashbook.export';
+import { voucherCancelSchema, voucherCreateSchema, voucherListQuerySchema } from './cashbook.schemas';
 
 function actor(req: Request) {
   if (!req.user) throw ApiError.unauthorized();
@@ -35,4 +38,19 @@ export class CashbookController {
   static async createParty(req: Request, res: Response, next: NextFunction) { try { res.status(201).json({ data: await CashbookSettingsService.createParty(partySchema.parse(req.body), actor(req)) }); } catch (error) { next(error); } }
   static async counterparties(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookSettingsService.searchCounterparties(searchQuerySchema.parse(req.query).q) }); } catch (error) { next(error); } }
   static async purchaseInvoices(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookSettingsService.listPurchaseInvoices(searchQuerySchema.parse(req.query).q) }); } catch (error) { next(error); } }
+  static async vouchers(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookService.list(voucherListQuerySchema.parse(req.query)) }); } catch (error) { next(error); } }
+  static async createVoucher(req: Request, res: Response, next: NextFunction) { try { res.status(201).json({ data: await CashbookService.createManual(voucherCreateSchema.parse(req.body), actor(req)) }); } catch (error) { next(error); } }
+  static async voucherDetail(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookService.detail(id(req.params.id)) }); } catch (error) { next(error); } }
+  static async voucherPrint(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookService.detail(id(req.params.id)) }); } catch (error) { next(error); } }
+  static async cancelVoucher(req: Request, res: Response, next: NextFunction) { try { res.json({ data: await CashbookService.cancel(id(req.params.id), voucherCancelSchema.parse(req.body).reason, actor(req)) }); } catch (error) { next(error); } }
+  static async exportVouchers(req: Request, res: Response, next: NextFunction) {
+    try {
+      const query = voucherListQuerySchema.parse(req.query);
+      const rows = await CashbookService.exportRows(query);
+      const format = query.format ?? 'xlsx';
+      res.type(format === 'csv' ? 'text/csv; charset=utf-8' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .attachment(`So_quy.${format}`)
+        .send(format === 'csv' ? serializeCashbookCsv(rows) : serializeCashbookWorkbook(rows));
+    } catch (error) { next(error); }
+  }
 }

@@ -13,6 +13,12 @@ cashbookRouter.get('/parties', CashbookController.parties);
 cashbookRouter.post('/parties', CashbookController.createParty);
 cashbookRouter.get('/counterparties', CashbookController.counterparties);
 cashbookRouter.get('/purchase-invoices', CashbookController.purchaseInvoices);
+cashbookRouter.get('/vouchers/export', CashbookController.exportVouchers);
+cashbookRouter.get('/vouchers', CashbookController.vouchers);
+cashbookRouter.post('/vouchers', CashbookController.createVoucher);
+cashbookRouter.get('/vouchers/:id/print', CashbookController.voucherPrint);
+cashbookRouter.post('/vouchers/:id/cancel', CashbookController.cancelVoucher);
+cashbookRouter.get('/vouchers/:id', CashbookController.voucherDetail);
 
 cashbookRouter.post('/activate', authorize('ADMIN'), CashbookController.activate);
 cashbookRouter.post('/accounts', authorize('ADMIN'), CashbookController.createAccount);
