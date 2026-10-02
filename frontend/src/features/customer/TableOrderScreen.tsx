@@ -19,7 +19,7 @@ import { useRestaurant } from '../../contexts/RestaurantContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useToast } from '../../contexts/ToastContext';
 import { elevation, radii, spacing, statusColors, typography } from '../../theme';
-import { AppIcon, Button, InlineAlert, StatusBadge, Surface } from '../../ui';
+import { AppIcon, BrandMark, Button, InlineAlert, StatusBadge, Surface } from '../../ui';
 import type { StatusTone } from '../../ui';
 import { MenuCategoryPills } from '../pos/MenuCategoryPills';
 import { MenuItemCard } from '../pos/MenuItemCard';
@@ -419,9 +419,7 @@ export const TableOrderScreen: React.FC<Props> = ({ tableNumber = 4, qrCodeToken
               <AppIcon icon={ChevronLeft} color={theme.textPrimary} size={20} />
             </Pressable>
           ) : (
-            <View style={[styles.brandMark, { backgroundColor: theme.interactivePrimary }]}>
-              <Text style={[styles.brandMarkText, { color: theme.textInverse }]}>CB</Text>
-            </View>
+            <BrandMark compact size="small" />
           )}
           <View style={styles.tableIdentityCopy}>
             <Text style={[styles.headerHint, { color: theme.textSecondary }]}>
@@ -1129,14 +1127,6 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm
   },
   tableIdentity: { alignItems: 'center', flexDirection: 'row', gap: spacing.sm },
-  brandMark: {
-    alignItems: 'center',
-    borderRadius: radii.sm,
-    height: 36,
-    justifyContent: 'center',
-    width: 36
-  },
-  brandMarkText: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.md },
   tableIdentityCopy: { gap: 1 },
   headerHint: { fontFamily: typography.families.body, fontSize: typography.sizes.xs },
   tableIdentityNumber: {

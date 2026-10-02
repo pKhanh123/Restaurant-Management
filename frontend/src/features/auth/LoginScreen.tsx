@@ -74,7 +74,7 @@ export const LoginScreen: React.FC = () => {
               ]}
             >
               <View style={[styles.brandPlate, { backgroundColor: theme.surfaceBase }]}>
-                <BrandMark />
+                <BrandMark size="large" />
               </View>
               {isDesktop && <View style={styles.brandMessage}>
                 <Text style={[styles.brandHeading, { color: isDark ? theme.textPrimary : theme.textInverse }]}>Ca làm việc bắt đầu tại đây.</Text>

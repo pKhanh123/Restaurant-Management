@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Clock3, LockKeyhole, Trash2 } from 'lucide-react-native';
+import { LockKeyhole, Trash2 } from 'lucide-react-native';
 import {
   AttendanceKioskApiError,
   KioskPunchRetryState,
@@ -12,6 +12,7 @@ import {
 } from '../../api/employeeAttendanceKiosk';
 import { useTheme } from '../../contexts/ThemeContext';
 import { radii, spacing, typography } from '../../theme';
+import { BrandMark } from '../../ui/BrandMark';
 import { kioskCredentialStore } from './kioskCredentialStore';
 
 const retryState = () => new KioskPunchRetryState();
@@ -136,9 +137,7 @@ export const EmployeeAttendanceKioskScreen: React.FC = () => {
   return <ScrollView contentContainerStyle={[styles.screen, { backgroundColor: theme.surfaceCanvas }]} keyboardShouldPersistTaps="handled">
     <View style={[styles.card, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}>
       <View style={styles.brand}>
-        <View style={[styles.iconBadge, { backgroundColor: theme.interactiveSecondary }]}>
-          <Clock3 size={32} color={theme.primary} />
-        </View>
+        <BrandMark compact size="large" />
         <Text style={[styles.title, { color: theme.textPrimary }]}>Chấm công nhân viên</Text>
         <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Kiosk dùng chung · Thời gian được ghi nhận từ máy chủ</Text>
       </View>
@@ -210,7 +209,6 @@ const styles = StyleSheet.create({
   screen: { alignItems: 'center', flexGrow: 1, justifyContent: 'center', padding: spacing.lg },
   card: { borderRadius: radii.md, borderWidth: 1, gap: spacing.lg, maxWidth: 620, padding: spacing.xl, width: '100%' },
   brand: { alignItems: 'center', gap: spacing.sm },
-  iconBadge: { alignItems: 'center', borderRadius: radii.pill, height: 70, justifyContent: 'center', width: 70 },
   title: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.xl },
   subtitle: { fontFamily: typography.families.body, fontSize: typography.sizes.sm, textAlign: 'center' },
   setup: { alignItems: 'stretch', gap: spacing.md },

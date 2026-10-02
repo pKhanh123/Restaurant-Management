@@ -140,7 +140,7 @@ export const RoleTabs: React.FC = () => {
     <SafeAreaView style={[styles.container, { backgroundColor: theme.surfaceCanvas }]}>
       <View style={[styles.commandBar, { backgroundColor: theme.surfaceBase, borderBottomColor: theme.borderSubtle }]}>
         <View style={styles.identity}>
-          <BrandMark compact={isMobile} />
+          <BrandMark compact={isMobile} size={isMobile ? 'small' : 'medium'} />
           {!isMobile && <View style={[styles.separator, { backgroundColor: theme.borderSubtle }]} />}
           <View style={styles.userCopy}>
             <StatusBadge tone={user?.role === 'KITCHEN' ? 'warning' : user?.role === 'ADMIN' ? 'info' : 'neutral'} label={roleLabel} />

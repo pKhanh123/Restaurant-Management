@@ -4,7 +4,7 @@ import { Printer, X } from 'lucide-react-native';
 import { OrderDto } from '../../api/contracts';
 import { useTheme } from '../../contexts/ThemeContext';
 import { elevation, radii, spacing, typography } from '../../theme';
-import { AppIcon, Button, StatusBadge } from '../../ui';
+import { AppIcon, BrandMark, Button, StatusBadge } from '../../ui';
 import type { StatusTone } from '../../ui';
 
 interface Props {
@@ -67,7 +67,9 @@ export const ReceiptModal: React.FC<Props> = ({ visible, order, onClose }) => {
           <ScrollView contentContainerStyle={styles.receiptScroll} showsVerticalScrollIndicator={false}>
             <View style={[styles.receiptPaper, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}>
               <View style={styles.brandHeader}>
-                <Text style={[styles.brandTitle, { color: theme.textPrimary }]}>Crispy Bite QSR</Text>
+                <View style={styles.receiptLogo}>
+                  <BrandMark variant="monochrome" size="medium" />
+                </View>
                 <Text style={[styles.brandInfo, { color: theme.textSecondary }]}>123 Nguyễn Huệ, Quận 1, TP. HCM</Text>
                 <Text style={[styles.brandInfo, { color: theme.textSecondary }]}>Hotline 1900 8888</Text>
               </View>
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
   receiptScroll: { padding: spacing.md },
   receiptPaper: { borderRadius: radii.md, borderWidth: 1, padding: spacing.lg },
   brandHeader: { alignItems: 'center', gap: spacing.xs },
-  brandTitle: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.xxl },
+  receiptLogo: { backgroundColor: '#FFFFFF', padding: spacing.xs },
   brandInfo: { fontFamily: typography.families.body, fontSize: typography.sizes.xs },
   divider: { height: 1, marginVertical: spacing.lg },
   metaSection: { gap: spacing.sm },
