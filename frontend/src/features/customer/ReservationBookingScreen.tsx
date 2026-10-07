@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Check, Copy, Utensils, X } from 'lucide-react-native';
+import { Check, Copy, X } from 'lucide-react-native';
 import { useTheme } from '../../contexts/ThemeContext';
 import { PublicReservationResult, createPublicReservationApi, declarePublicReservationPaymentApi, fetchPublicReservationApi, requestReservationCancellationApi } from '../../api/reservations';
 import { radii, spacing, typography } from '../../theme';
-import { AppIcon, Button, Field, InlineAlert, ScreenHeader, StatusBadge, Surface } from '../../ui';
+import { AppIcon, BrandMark, Button, Field, InlineAlert, ScreenHeader, StatusBadge, Surface } from '../../ui';
 
 const money = (value: number) => `${new Intl.NumberFormat('vi-VN').format(value)} đ`;
 const tomorrow = () => { const value = new Date(); value.setDate(value.getDate() + 1); return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`; };
@@ -80,7 +80,12 @@ export const ReservationBookingScreen: React.FC<{ accessToken?: string }> = ({ a
   };
 
   return <ScrollView style={[styles.page, { backgroundColor: theme.surfaceCanvas }]} contentContainerStyle={styles.pageContent}>
-    <View style={styles.pageHeader}><View style={[styles.brandIcon, { backgroundColor: theme.interactiveSecondary }]}><AppIcon icon={Utensils} color={theme.primary} size={24} /></View><ScreenHeader title="Đặt bàn trước" description="Giữ chỗ bằng tiền cọc. Gọi món sau khi đến quán và được check-in." /></View>
+    <View style={styles.pageHeader}>
+      <BrandMark compact size="medium" />
+      <View style={styles.pageHeaderCopy}>
+        <ScreenHeader title="Đặt bàn trước" description="Giữ chỗ bằng tiền cọc. Gọi món sau khi đến quán và được check-in." />
+      </View>
+    </View>
     {error ? <InlineAlert title="Chưa thể hoàn tất" message={error} /> : null}
     {loading && !booking ? <ActivityIndicator color={theme.primary} style={{ padding: spacing.xl }} /> : !booking ? <Surface level="raised" style={styles.form}>
       <Text style={[styles.formTitle, { color: theme.textPrimary }]}>Thông tin lượt đặt</Text>
@@ -115,5 +120,5 @@ export const ReservationBookingScreen: React.FC<{ accessToken?: string }> = ({ a
 };
 
 const styles = StyleSheet.create({
-  page: { flex: 1 }, pageContent: { alignItems: 'center', gap: spacing.lg, padding: spacing.lg }, pageHeader: { alignItems: 'center', alignSelf: 'stretch', flexDirection: 'row', gap: spacing.md, maxWidth: 880, width: '100%' }, brandIcon: { alignItems: 'center', borderRadius: radii.md, height: 48, justifyContent: 'center', width: 48 }, form: { alignSelf: 'center', gap: spacing.md, maxWidth: 660, padding: spacing.lg, width: '100%' }, formTitle: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.xl }, formRow: { flexDirection: 'row', gap: spacing.md }, bookingLayout: { alignSelf: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md, maxWidth: 900, width: '100%' }, bookingSummary: { flex: 1, gap: spacing.md, minWidth: 320, padding: spacing.lg }, bookingTitle: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }, depositBanner: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: spacing.md }, depositAmount: { fontFamily: typography.families.bodyBold, fontSize: typography.sizes.xl }, paymentRow: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md }, qrImage: { height: 190, width: 190 }, paymentDetails: { flex: 1, gap: spacing.sm, minWidth: 180 }, setupNotice: { borderRadius: radii.md, padding: spacing.md }, fieldLabel: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm }, transferContent: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', minHeight: 48, paddingHorizontal: spacing.md }, transferText: { fontFamily: typography.families.bodyBold, letterSpacing: 0.5 }, waiting: { borderRadius: radii.md, borderWidth: 1, gap: spacing.xs, padding: spacing.md }, cancelArea: { borderTopColor: 'rgba(128,128,128,.2)', borderTopWidth: 1, gap: spacing.sm, paddingTop: spacing.md }, nextStep: { borderRadius: radii.md, borderWidth: 1, flex: 0.7, gap: spacing.sm, minWidth: 260, padding: spacing.lg }, footer: { lineHeight: 21, maxWidth: 880, width: '100%' }
+  page: { flex: 1 }, pageContent: { alignItems: 'center', gap: spacing.lg, padding: spacing.lg }, pageHeader: { alignItems: 'center', alignSelf: 'stretch', flexDirection: 'row', gap: spacing.md, maxWidth: 880, width: '100%' }, pageHeaderCopy: { flex: 1, minWidth: 0 }, form: { alignSelf: 'center', gap: spacing.md, maxWidth: 660, padding: spacing.lg, width: '100%' }, formTitle: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.xl }, formRow: { flexDirection: 'row', gap: spacing.md }, bookingLayout: { alignSelf: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md, maxWidth: 900, width: '100%' }, bookingSummary: { flex: 1, gap: spacing.md, minWidth: 320, padding: spacing.lg }, bookingTitle: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }, depositBanner: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: spacing.md }, depositAmount: { fontFamily: typography.families.bodyBold, fontSize: typography.sizes.xl }, paymentRow: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md }, qrImage: { height: 190, width: 190 }, paymentDetails: { flex: 1, gap: spacing.sm, minWidth: 180 }, setupNotice: { borderRadius: radii.md, padding: spacing.md }, fieldLabel: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm }, transferContent: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', minHeight: 48, paddingHorizontal: spacing.md }, transferText: { fontFamily: typography.families.bodyBold, letterSpacing: 0.5 }, waiting: { borderRadius: radii.md, borderWidth: 1, gap: spacing.xs, padding: spacing.md }, cancelArea: { borderTopColor: 'rgba(128,128,128,.2)', borderTopWidth: 1, gap: spacing.sm, paddingTop: spacing.md }, nextStep: { borderRadius: radii.md, borderWidth: 1, flex: 0.7, gap: spacing.sm, minWidth: 260, padding: spacing.lg }, footer: { lineHeight: 21, maxWidth: 880, width: '100%' }
 });

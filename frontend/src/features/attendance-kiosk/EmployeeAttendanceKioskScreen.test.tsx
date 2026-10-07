@@ -62,6 +62,7 @@ describe('EmployeeAttendanceKioskScreen', () => {
   it('provisions once, resumes from local storage, and keeps employee code out of the credential store', async () => {
     let screen: any;
     await act(async () => { screen = create(<EmployeeAttendanceKioskScreen />); await Promise.resolve(); });
+    expect(screen.root.findByProps({ testID: 'brand-logo-icon' })).toBeDefined();
     const setupInput = screen.root.findByProps({ testID: 'kiosk-credential-input' });
     await act(async () => { setupInput.props.onChangeText('opaque-session-secret'); });
     await act(async () => { screen.root.findByProps({ testID: 'kiosk-save-credential' }).props.onPress(); await Promise.resolve(); });
