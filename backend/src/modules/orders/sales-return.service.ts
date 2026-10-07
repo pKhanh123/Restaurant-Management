@@ -1,4 +1,4 @@
-import { Prisma, OrderReturnStatus, PaymentStatus, OrderStatus } from '@prisma/client';
+import { CashVoucherSourceType, PaymentMethod, Prisma, OrderReturnStatus, PaymentStatus, OrderStatus } from '@prisma/client';
 import type { PrismaClient } from '@prisma/client';
 import { createHash, randomUUID } from 'crypto';
 import { ApiError } from '../../lib/api-error';
@@ -6,9 +6,8 @@ import { emitToAll } from '../../lib/socket';
 import { emitInventoryChanged } from '../inventory/inventory.events';
 import type { SalesReturnCandidateQuery, SalesReturnCreateInput, SalesReturnQuery } from './sales-return.schemas';
 import type { SalesReturnExportRow } from './sales-return.export';
-import { CashbookPostingService, normalizeCashbookPersistenceError, resolveCashbookAccountForPayment } from '../cashbook/cashbook-posting.service';
-import { cashbookChangedEvent } from '../cashbook/cashbook.events';
-import { EmployeeCommissionRecognitionService } from '../employee-commissions/employee-commission.recognition.service';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 async function getPrisma(): Promise<PrismaClient> { return (await import('../../config/prisma')).prisma; }
 const returnInclude = { lines: { orderBy: { id: 'asc' as const } }, order: { select: { id: true, code: true, table: { select: { tableNumber: true } } } } } satisfies Prisma.OrderReturnInclude;
@@ -112,11 +111,8 @@ export class SalesReturnService {
       });
       const totalRefundDue = lines.reduce((sum, line) => sum + line.lineAmount, 0); const refundedAmount = input.refundedAmount ?? totalRefundDue;
       if (refundedAmount !== totalRefundDue) throw ApiError.badRequest('Số tiền đã trả phải bằng số tiền hệ thống tính trong MVP');
-      const completedAt = new Date();
-      const financialAccountId = refundedAmount > 0
-        ? await resolveCashbookAccountForPayment(tx, input.refundMethod, input.financialAccountId)
-        : null;
-      const created = await tx.orderReturn.create({ data: { returnCode: 'PENDING-' + randomUUID(), orderId: order.id, totalRefundDue, refundedAmount, refundMethod: input.refundMethod, financialAccountId, idempotencyKey, requestDigest, note: input.note ?? null, createdByUserId: actor.id, createdByName: actor.name ?? null, completedAt, lines: { create: lines } }, include: returnInclude });
+      const returnedAt = new Date();
+      const created = await tx.orderReturn.create({ data: { returnCode: 'PENDING-' + randomUUID(), orderId: order.id, returnedAt, totalRefundDue, refundedAmount, refundMethod: input.refundMethod, note: input.note ?? null, createdByUserId: actor.id, createdByName: actor.name ?? null, completedAt: returnedAt, lines: { create: lines } }, include: returnInclude });
       const saved = await tx.orderReturn.update({ where: { id: created.id }, data: { returnCode: 'THD' + String(created.id).padStart(6, '0') }, include: returnInclude });
       let voucher = null;
       if (financialAccountId !== null && refundedAmount > 0) {
@@ -137,27 +133,25 @@ export class SalesReturnService {
       for (const ingredientId of ingredientIds) { const change = bomByIngredient.get(ingredientId)!; const ingredient = await tx.ingredient.findUnique({ where: { id: ingredientId } }); if (!ingredient) continue; const cost = Math.round(change.quantity * ingredient.costPerUnit); await tx.ingredient.update({ where: { id: ingredientId }, data: { currentStock: { increment: change.quantity } } }); await tx.inventoryTransaction.create({ data: { ingredientId, orderReturnId: saved.id, type: 'SALES_RETURN', quantity: change.quantity, costAmount: cost, note: 'Trả hàng bán ' + saved.returnCode, createdByUserId: actor.id } }); }
       const menuChanges: Array<{ menuItemId: number; stockQuantity: number; trackStock: boolean; isAvailable: boolean }> = [];
       for (const line of lines) { const menu = await tx.menuItem.findUnique({ where: { id: line.menuItemId } }); if (menu?.trackStock) { const updated = await tx.menuItem.update({ where: { id: menu.id }, data: { stockQuantity: { increment: line.quantity } }, select: { id: true, stockQuantity: true, trackStock: true, isAvailable: true } }); menuChanges.push({ menuItemId: updated.id, stockQuantity: updated.stockQuantity, trackStock: updated.trackStock, isAvailable: updated.isAvailable }); } }
+      const cashVoucher = refundedAmount > 0 ? await CashbookPostingService.post(tx, {
+        direction: 'PAYMENT',
+        paymentMethod: input.refundMethod as PaymentMethod,
+        accountId: input.refundMethod === 'CASH' ? undefined : input.financialAccountId,
+        categoryCode: 'CUSTOMER_REFUND',
+        amount: refundedAmount,
+        occurredAt: returnedAt,
+        sourceType: CashVoucherSourceType.SALES_RETURN,
+        sourceId: saved.id,
+        sourceCode: saved.returnCode,
+        affectsBusinessResult: false
+      }, { id: actor.id, name: actor.name ?? 'Hệ thống' }) : null;
       await tx.auditLog.create({ data: { action: 'ORDER_RETURN_COMPLETED', targetType: 'OrderReturn', targetId: saved.id, actorId: actor.id, actorName: actor.name, metadata: { returnCode: saved.returnCode, orderId: order.id, totalRefundDue, lineCount: lines.length } } });
-      const commission = await EmployeeCommissionRecognitionService.reverseReturn(tx, saved.id, actor);
-      return { row: saved, ingredientIds, menuChanges, voucher, commission, replayed: false };
-    }, txOptions).catch(async error => {
-      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
-        const replay = await prisma.orderReturn.findFirst({ where: { createdByUserId: actor.id, idempotencyKey }, include: returnInclude });
-        if (replay) {
-          if (replay.requestDigest !== requestDigest) throw ApiError.conflict('Idempotency-Key đã được dùng cho yêu cầu trả hàng khác.', 'SALES_RETURN_IDEMPOTENCY_KEY_REUSED');
-          return { row: replay, ingredientIds: [] as number[], menuChanges: [] as Array<{ menuItemId: number; stockQuantity: number; trackStock: boolean; isAvailable: boolean }>, voucher: null, commission: null, replayed: true };
-        }
-      }
-      return normalizeCashbookPersistenceError(error);
-    });
-    if (!outcome.replayed && outcome.ingredientIds.length) emitInventoryChanged({ sourceType: 'INGREDIENT', sourceIds: outcome.ingredientIds, reason: 'SALES_RETURN', updatedAt: outcome.row.updatedAt.toISOString() });
-    if (!outcome.replayed && outcome.menuChanges.length) emitToAll('menu:stockChanged', { items: outcome.menuChanges });
-    if (!outcome.replayed) emitToAll('order:returnCompleted', { returnId: outcome.row.id, returnCode: outcome.row.returnCode, orderId: outcome.row.orderId });
-    if (!outcome.replayed && outcome.voucher) emitToAll('cashbook:changed', cashbookChangedEvent(outcome.voucher));
-    if (!outcome.replayed && outcome.commission?.changed) emitToAll('employee-commission:changed', {
-      revision: Date.now(), branchId: 1, reason: 'RETURN_REVERSED', affectedPlanIds: [], affectedEmployeeIds: [],
-      affectedOrderItemIds: outcome.commission.orderItemIds, updatedAt: new Date().toISOString()
-    });
+      return { row: saved, ingredientIds, menuChanges, cashVoucher };
+    }, txOptions);
+    if (outcome.ingredientIds.length) emitInventoryChanged({ sourceType: 'INGREDIENT', sourceIds: outcome.ingredientIds, reason: 'SALES_RETURN', updatedAt: outcome.row.updatedAt.toISOString() });
+    if (outcome.menuChanges.length) emitToAll('menu:stockChanged', { items: outcome.menuChanges });
+    if (outcome.cashVoucher) emitCashbookChanged({ voucherIds: [outcome.cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
+    emitToAll('order:returnCompleted', { returnId: outcome.row.id, returnCode: outcome.row.returnCode, orderId: outcome.row.orderId });
     return toDto(outcome.row);
   }
 }

@@ -1,0 +1,695 @@
+{
+  "sha256": "06482da0e2910a85502daa03673d2d7a4b3d930aab320843867ca4b806b8a6a1",
+  "paragraphs": 1535,
+  "tables": 184,
+  "pictures": 36,
+  "sections": [
+    {
+      "size": [
+        21.002625,
+        29.70388888888889
+      ],
+      "margins": [
+        2.00025,
+        2.00025,
+        3.000375,
+        1.5010694444444443
+      ]
+    }
+  ],
+  "styles": [
+    {
+      "name": "Normal",
+      "font": "Times New Roman",
+      "size": 13.0,
+      "bold": null,
+      "alignment": "None",
+      "spacing": "1.5",
+      "before": "None",
+      "after": "None"
+    },
+    {
+      "name": "Title",
+      "font": "Cambria",
+      "size": 26.0,
+      "bold": null,
+      "alignment": "JUSTIFY (3)",
+      "spacing": "1.0",
+      "before": "None",
+      "after": "190500"
+    },
+    {
+      "name": "Heading 1",
+      "font": null,
+      "size": 14.0,
+      "bold": true,
+      "alignment": "CENTER (1)",
+      "spacing": "None",
+      "before": "304800",
+      "after": "None"
+    },
+    {
+      "name": "Heading 2",
+      "font": "Cambria",
+      "size": null,
+      "bold": true,
+      "alignment": "None",
+      "spacing": "None",
+      "before": "127000",
+      "after": "None"
+    },
+    {
+      "name": "Heading 3",
+      "font": "Cambria",
+      "size": null,
+      "bold": true,
+      "alignment": "None",
+      "spacing": "None",
+      "before": "152400",
+      "after": "38100"
+    },
+    {
+      "name": "Caption",
+      "font": null,
+      "size": null,
+      "bold": null,
+      "alignment": "CENTER (1)",
+      "spacing": "None",
+      "before": "228600",
+      "after": "76200"
+    }
+  ],
+  "fields": [
+    " TOC \\h \\z \\t \"CH1,1,m1,1,m2,2,m3,3\" ",
+    " PAGEREF _Toc233571154 \\h ",
+    " PAGEREF _Toc233571155 \\h ",
+    " PAGEREF _Toc233571156 \\h ",
+    " PAGEREF _Toc233571157 \\h ",
+    " PAGEREF _Toc233571158 \\h ",
+    " PAGEREF _Toc233571159 \\h ",
+    " PAGEREF _Toc233571160 \\h ",
+    " PAGEREF _Toc233571161 \\h ",
+    " PAGEREF _Toc233571162 \\h ",
+    " PAGEREF _Toc233571163 \\h ",
+    " PAGEREF _Toc233571164 \\h ",
+    " PAGEREF _Toc233571165 \\h ",
+    " PAGEREF _Toc233571166 \\h ",
+    " PAGEREF _Toc233571167 \\h ",
+    " PAGEREF _Toc233571168 \\h ",
+    " PAGEREF _Toc233571169 \\h ",
+    " PAGEREF _Toc233571170 \\h ",
+    " PAGEREF _Toc233571171 \\h ",
+    " PAGEREF _Toc233571172 \\h ",
+    " PAGEREF _Toc233571173 \\h ",
+    " PAGEREF _Toc233571174 \\h ",
+    " PAGEREF _Toc233571175 \\h ",
+    " PAGEREF _Toc233571176 \\h ",
+    " PAGEREF _Toc233571177 \\h ",
+    " PAGEREF _Toc233571178 \\h ",
+    " PAGEREF _Toc233571179 \\h ",
+    " PAGEREF _Toc233571180 \\h ",
+    " PAGEREF _Toc233571181 \\h ",
+    " PAGEREF _Toc233571182 \\h ",
+    " PAGEREF _Toc233571183 \\h ",
+    " PAGEREF _Toc233571184 \\h ",
+    " PAGEREF _Toc233571185 \\h ",
+    " PAGEREF _Toc233571186 \\h ",
+    " PAGEREF _Toc233571187 \\h ",
+    " PAGEREF _Toc233571188 \\h ",
+    " PAGEREF _Toc233571189 \\h ",
+    " PAGEREF _Toc233571190 \\h ",
+    " PAGEREF _Toc233571191 \\h ",
+    " PAGEREF _Toc233571192 \\h ",
+    " PAGEREF _Toc233571193 \\h ",
+    " PAGEREF _Toc233571194 \\h ",
+    " PAGEREF _Toc233571195 \\h ",
+    " PAGEREF _Toc233571196 \\h ",
+    " PAGEREF _Toc233571197 \\h ",
+    " PAGEREF _Toc233571198 \\h ",
+    " PAGEREF _Toc233571199 \\h ",
+    " PAGEREF _Toc233571200 \\h ",
+    " PAGEREF _Toc233571201 \\h ",
+    " PAGEREF _Toc233571202 \\h ",
+    " PAGEREF _Toc233571203 \\h ",
+    " PAGEREF _Toc233571204 \\h ",
+    " PAGEREF _Toc233571205 \\h ",
+    " PAGEREF _Toc233571206 \\h ",
+    " PAGEREF _Toc233571207 \\h ",
+    " PAGEREF _Toc233571208 \\h ",
+    " PAGEREF _Toc233571209 \\h ",
+    " PAGEREF _Toc233571210 \\h ",
+    " PAGEREF _Toc233571211 \\h ",
+    " PAGEREF _Toc233571212 \\h ",
+    " PAGEREF _Toc233571213 \\h ",
+    " PAGEREF _Toc233571214 \\h ",
+    " PAGEREF _Toc233571215 \\h ",
+    " PAGEREF _Toc233571216 \\h ",
+    " PAGEREF _Toc233571217 \\h ",
+    " PAGEREF _Toc233571218 \\h ",
+    " PAGEREF _Toc233571219 \\h ",
+    " PAGEREF _Toc233571220 \\h ",
+    " PAGEREF _Toc233571221 \\h ",
+    " PAGEREF _Toc233571222 \\h ",
+    " PAGEREF _Toc233571223 \\h ",
+    " PAGEREF _Toc233571224 \\h ",
+    " PAGEREF _Toc233571225 \\h ",
+    " PAGEREF _Toc233571226 \\h ",
+    " PAGEREF _Toc233571227 \\h ",
+    " PAGEREF _Toc233571228 \\h ",
+    " PAGEREF _Toc233571229 \\h ",
+    " PAGEREF _Toc233571230 \\h ",
+    " PAGEREF _Toc233571231 \\h ",
+    " PAGEREF _Toc233571232 \\h ",
+    " PAGEREF _Toc233571233 \\h ",
+    " PAGEREF _Toc233571234 \\h ",
+    " PAGEREF _Toc233571235 \\h ",
+    " PAGEREF _Toc233571236 \\h ",
+    " PAGEREF _Toc233571237 \\h ",
+    " PAGEREF _Toc233571238 \\h ",
+    " PAGEREF _Toc233571239 \\h ",
+    " PAGEREF _Toc233571240 \\h ",
+    " PAGEREF _Toc233571241 \\h ",
+    " PAGEREF _Toc233571242 \\h ",
+    " PAGEREF _Toc233571243 \\h ",
+    " PAGEREF _Toc233571244 \\h ",
+    " PAGEREF _Toc233571245 \\h ",
+    " PAGEREF _Toc233571246 \\h ",
+    " PAGEREF _Toc233571247 \\h ",
+    " PAGEREF _Toc233571248 \\h ",
+    " TOC \\c \"Bảng 3.\" ",
+    " PAGEREF _Toc233571249 \\h ",
+    " PAGEREF _Toc233571250 \\h ",
+    " PAGEREF _Toc233571251 \\h ",
+    " PAGEREF _Toc233571252 \\h ",
+    " PAGEREF _Toc233571253 \\h ",
+    " PAGEREF _Toc233571254 \\h ",
+    " PAGEREF _Toc233571255 \\h ",
+    " PAGEREF _Toc233571256 \\h ",
+    " PAGEREF _Toc233571257 \\h ",
+    " PAGEREF _Toc233571258 \\h ",
+    " PAGEREF _Toc233571259 \\h ",
+    " PAGEREF _Toc233571260 \\h ",
+    " PAGEREF _Toc233571261 \\h ",
+    " PAGEREF _Toc233571262 \\h ",
+    " PAGEREF _Toc233571263 \\h ",
+    " PAGEREF _Toc233571264 \\h ",
+    " PAGEREF _Toc233571265 \\h ",
+    " PAGEREF _Toc233571266 \\h ",
+    " PAGEREF _Toc233571267 \\h ",
+    " PAGEREF _Toc233571268 \\h ",
+    " PAGEREF _Toc233571269 \\h ",
+    " PAGEREF _Toc233571270 \\h ",
+    " PAGEREF _Toc233571271 \\h ",
+    " PAGEREF _Toc233571272 \\h ",
+    " PAGEREF _Toc233571273 \\h ",
+    " PAGEREF _Toc233571274 \\h ",
+    " PAGEREF _Toc233571275 \\h ",
+    " PAGEREF _Toc233571276 \\h ",
+    " PAGEREF _Toc233571277 \\h ",
+    " PAGEREF _Toc233571278 \\h ",
+    " PAGEREF _Toc233571279 \\h ",
+    " PAGEREF _Toc233571280 \\h ",
+    " PAGEREF _Toc233571281 \\h ",
+    " PAGEREF _Toc233571282 \\h ",
+    " PAGEREF _Toc233571283 \\h ",
+    " PAGEREF _Toc233571284 \\h ",
+    " PAGEREF _Toc233571285 \\h ",
+    " PAGEREF _Toc233571286 \\h ",
+    " PAGEREF _Toc233571287 \\h ",
+    " PAGEREF _Toc233571288 \\h ",
+    " PAGEREF _Toc233571289 \\h ",
+    " PAGEREF _Toc233571290 \\h ",
+    " PAGEREF _Toc233571291 \\h ",
+    " PAGEREF _Toc233571292 \\h ",
+    " PAGEREF _Toc233571293 \\h ",
+    " PAGEREF _Toc233571294 \\h ",
+    " PAGEREF _Toc233571295 \\h ",
+    " PAGEREF _Toc233571296 \\h ",
+    " PAGEREF _Toc233571297 \\h ",
+    " PAGEREF _Toc233571298 \\h ",
+    " PAGEREF _Toc233571299 \\h ",
+    " PAGEREF _Toc233571300 \\h ",
+    " PAGEREF _Toc233571301 \\h ",
+    " PAGEREF _Toc233571302 \\h ",
+    " PAGEREF _Toc233571303 \\h ",
+    " PAGEREF _Toc233571304 \\h ",
+    " PAGEREF _Toc233571305 \\h ",
+    " PAGEREF _Toc233571306 \\h ",
+    " PAGEREF _Toc233571307 \\h ",
+    " PAGEREF _Toc233571308 \\h ",
+    " PAGEREF _Toc233571309 \\h ",
+    " PAGEREF _Toc233571310 \\h ",
+    " PAGEREF _Toc233571311 \\h ",
+    " PAGEREF _Toc233571312 \\h ",
+    " PAGEREF _Toc233571313 \\h ",
+    " PAGEREF _Toc233571314 \\h ",
+    " PAGEREF _Toc233571315 \\h ",
+    " PAGEREF _Toc233571316 \\h ",
+    " PAGEREF _Toc233571317 \\h ",
+    " PAGEREF _Toc233571318 \\h ",
+    " PAGEREF _Toc233571319 \\h ",
+    " PAGEREF _Toc233571320 \\h ",
+    " PAGEREF _Toc233571321 \\h ",
+    " PAGEREF _Toc233571322 \\h ",
+    " PAGEREF _Toc233571323 \\h ",
+    " PAGEREF _Toc233571324 \\h ",
+    " PAGEREF _Toc233571325 \\h ",
+    " PAGEREF _Toc233571326 \\h ",
+    " PAGEREF _Toc233571327 \\h ",
+    " PAGEREF _Toc233571328 \\h ",
+    " PAGEREF _Toc233571329 \\h ",
+    " PAGEREF _Toc233571330 \\h ",
+    " PAGEREF _Toc233571331 \\h ",
+    " PAGEREF _Toc233571332 \\h ",
+    " PAGEREF _Toc233571333 \\h ",
+    " PAGEREF _Toc233571334 \\h ",
+    " PAGEREF _Toc233571335 \\h ",
+    " PAGEREF _Toc233571336 \\h ",
+    " PAGEREF _Toc233571337 \\h ",
+    " PAGEREF _Toc233571338 \\h ",
+    " PAGEREF _Toc233571339 \\h ",
+    " PAGEREF _Toc233571340 \\h ",
+    " PAGEREF _Toc233571341 \\h ",
+    " PAGEREF _Toc233571342 \\h ",
+    " PAGEREF _Toc233571343 \\h ",
+    " PAGEREF _Toc233571344 \\h ",
+    " PAGEREF _Toc233571345 \\h ",
+    " PAGEREF _Toc233571346 \\h ",
+    " PAGEREF _Toc233571347 \\h ",
+    " PAGEREF _Toc233571348 \\h ",
+    " PAGEREF _Toc233571349 \\h ",
+    " PAGEREF _Toc233571350 \\h ",
+    " PAGEREF _Toc233571351 \\h ",
+    " PAGEREF _Toc233571352 \\h ",
+    " PAGEREF _Toc233571353 \\h ",
+    " PAGEREF _Toc233571354 \\h ",
+    " PAGEREF _Toc233571355 \\h ",
+    " PAGEREF _Toc233571356 \\h ",
+    " PAGEREF _Toc233571357 \\h ",
+    " PAGEREF _Toc233571358 \\h ",
+    " PAGEREF _Toc233571359 \\h ",
+    " PAGEREF _Toc233571360 \\h ",
+    " PAGEREF _Toc233571361 \\h ",
+    " PAGEREF _Toc233571362 \\h ",
+    " PAGEREF _Toc233571363 \\h ",
+    " PAGEREF _Toc233571364 \\h ",
+    " PAGEREF _Toc233571365 \\h ",
+    " PAGEREF _Toc233571366 \\h ",
+    " PAGEREF _Toc233571367 \\h ",
+    " PAGEREF _Toc233571368 \\h ",
+    " PAGEREF _Toc233571369 \\h ",
+    " PAGEREF _Toc233571370 \\h ",
+    " PAGEREF _Toc233571371 \\h ",
+    " PAGEREF _Toc233571372 \\h ",
+    " PAGEREF _Toc233571373 \\h ",
+    " PAGEREF _Toc233571374 \\h ",
+    " PAGEREF _Toc233571375 \\h ",
+    " PAGEREF _Toc233571376 \\h ",
+    " PAGEREF _Toc233571377 \\h ",
+    " PAGEREF _Toc233571378 \\h ",
+    " PAGEREF _Toc233571379 \\h ",
+    " PAGEREF _Toc233571380 \\h ",
+    " PAGEREF _Toc233571381 \\h ",
+    " PAGEREF _Toc233571382 \\h ",
+    " PAGEREF _Toc233571383 \\h ",
+    " PAGEREF _Toc233571384 \\h ",
+    " PAGEREF _Toc233571385 \\h ",
+    " PAGEREF _Toc233571386 \\h ",
+    " PAGEREF _Toc233571387 \\h ",
+    " PAGEREF _Toc233571388 \\h ",
+    " PAGEREF _Toc233571389 \\h ",
+    " PAGEREF _Toc233571390 \\h ",
+    " PAGEREF _Toc233571391 \\h ",
+    " PAGEREF _Toc233571392 \\h ",
+    " PAGEREF _Toc233571393 \\h ",
+    " PAGEREF _Toc233571394 \\h ",
+    " PAGEREF _Toc233571395 \\h ",
+    " PAGEREF _Toc233571396 \\h ",
+    " PAGEREF _Toc233571397 \\h ",
+    " PAGEREF _Toc233571398 \\h ",
+    " PAGEREF _Toc233571399 \\h ",
+    " PAGEREF _Toc233571400 \\h ",
+    " PAGEREF _Toc233571401 \\h ",
+    " TOC \\h \\z \\c \"Bảng 4.\" ",
+    " PAGEREF _Toc233571402 \\h ",
+    " PAGEREF _Toc233571403 \\h ",
+    " PAGEREF _Toc233571404 \\h ",
+    " PAGEREF _Toc233571405 \\h ",
+    " PAGEREF _Toc233571406 \\h ",
+    " PAGEREF _Toc233571407 \\h ",
+    " PAGEREF _Toc233571408 \\h ",
+    " PAGEREF _Toc233571409 \\h ",
+    " PAGEREF _Toc233571410 \\h ",
+    " PAGEREF _Toc233571411 \\h ",
+    " PAGEREF _Toc233571412 \\h ",
+    " PAGEREF _Toc233571413 \\h ",
+    " PAGEREF _Toc233571414 \\h ",
+    " PAGEREF _Toc233571415 \\h ",
+    " PAGEREF _Toc233571416 \\h ",
+    " PAGEREF _Toc233571417 \\h ",
+    " PAGEREF _Toc233571418 \\h ",
+    " PAGEREF _Toc233571419 \\h ",
+    " PAGEREF _Toc233571420 \\h ",
+    " PAGEREF _Toc233571421 \\h ",
+    " PAGEREF _Toc233571422 \\h ",
+    " PAGEREF _Toc233571423 \\h ",
+    " PAGEREF _Toc233571424 \\h ",
+    " PAGEREF _Toc233571425 \\h ",
+    " PAGEREF _Toc233571426 \\h ",
+    " PAGEREF _Toc233571427 \\h ",
+    " PAGEREF _Toc233571428 \\h ",
+    " TOC \\h \\z \\c \"Hình 3.\" ",
+    " PAGEREF _Toc233571433 \\h ",
+    " PAGEREF _Toc233571434 \\h ",
+    " PAGEREF _Toc233571435 \\h ",
+    " PAGEREF _Toc233571436 \\h ",
+    " PAGEREF _Toc233571437 \\h ",
+    " PAGEREF _Toc233571438 \\h ",
+    " PAGEREF _Toc233571439 \\h ",
+    " PAGEREF _Toc233571440 \\h ",
+    " PAGEREF _Toc233571441 \\h ",
+    " PAGEREF _Toc233571442 \\h ",
+    " TOC \\h \\z \\c \"Hình 4.\" ",
+    " PAGEREF _Toc233571443 \\h ",
+    " PAGEREF _Toc233571444 \\h ",
+    " PAGEREF _Toc233571445 \\h ",
+    " PAGEREF _Toc233571446 \\h ",
+    " PAGEREF _Toc233571447 \\h ",
+    " PAGEREF _Toc233571448 \\h ",
+    " PAGEREF _Toc233571449 \\h ",
+    " PAGEREF _Toc233571450 \\h ",
+    " PAGEREF _Toc233571451 \\h ",
+    " PAGEREF _Toc233571452 \\h ",
+    " PAGEREF _Toc233571453 \\h ",
+    " PAGEREF _Toc233571454 \\h ",
+    " PAGEREF _Toc233571455 \\h ",
+    " PAGEREF _Toc233571456 \\h ",
+    " PAGEREF _Toc233571457 \\h ",
+    " PAGEREF _Toc233571458 \\h ",
+    " PAGEREF _Toc233571459 \\h ",
+    " PAGEREF _Toc233571460 \\h ",
+    " PAGEREF _Toc233571461 \\h ",
+    " PAGEREF _Toc233571462 \\h ",
+    " PAGEREF _Toc233571463 \\h ",
+    " PAGEREF _Toc233571464 \\h ",
+    " PAGEREF _Toc233571465 \\h ",
+    " PAGEREF _Toc233571466 \\h ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Hình_3. \\* ARABIC ",
+    " SEQ Bảng_3. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC ",
+    " SEQ Bảng_4. \\* ARABIC "
+  ],
+  "parts": [
+    {
+      "name": "[Content_Types].xml",
+      "size": 2324,
+      "sha256": "e2a46673f1fbd2b1aeb598edae6b93f0dacf43e238981d13464c7a4067eeabd8"
+    },
+    {
+      "name": "_rels/.rels",
+      "size": 737,
+      "sha256": "c30fe099dbcfed4ecc4ae544ccf82f432c8d3bb665e2a301df283738b196d803"
+    },
+    {
+      "name": "word/document.xml",
+      "size": 3462778,
+      "sha256": "cf9e3128749edb56ad28c7a2e996727946ac060228b0c8f79658a0523482b17d"
+    },
+    {
+      "name": "word/_rels/document.xml.rels",
+      "size": 6296,
+      "sha256": "8ddfd7f44fc48d4d7b92a1f5bd29003371100a9fb51730fa266e87caf10a3f34"
+    },
+    {
+      "name": "word/endnotes.xml",
+      "size": 3128,
+      "sha256": "1fe6de7a0d18fb6a46734336080b516e904b7d907292d32cd5919058eada4ab5"
+    },
+    {
+      "name": "word/footer1.xml",
+      "size": 3263,
+      "sha256": "1c8eb0827bbbe569ac016fb5603fd7eb7d25805ed0eadb8d4ea76dc98152f666"
+    },
+    {
+      "name": "word/header1.xml",
+      "size": 7906,
+      "sha256": "990e4c05019c8eda3e95479e25f89504b570a8bafd290430c0510933c9408e25"
+    },
+    {
+      "name": "word/footnotes.xml",
+      "size": 3134,
+      "sha256": "4b56b3a48e68afb192c482b074302c57abe2bf6a3511ed7a2c6f418d74549d01"
+    },
+    {
+      "name": "word/media/image34.png",
+      "size": 209610,
+      "sha256": "ca5c7592b419f406d9ef4305af4132252c2c8bc0584b4131a992ce8008fae74d"
+    },
+    {
+      "name": "word/media/image4.png",
+      "size": 239812,
+      "sha256": "348bee07a7d3a41845dd80beee95f18430301a164c368e8c62d63ec5946cc6aa"
+    },
+    {
+      "name": "word/media/image1.png",
+      "size": 32582,
+      "sha256": "f3e77606dc6d9de508b5544c78efb4e4c09766a995214fa99da6178107de1f0c"
+    },
+    {
+      "name": "word/media/image2.png",
+      "size": 68297,
+      "sha256": "3415212062c4cd099a2b119054015928cbf218c3d9ffd07474417f3a46b56176"
+    },
+    {
+      "name": "word/media/image3.png",
+      "size": 248150,
+      "sha256": "eb23f78c17297f7c780091e76a92db5ac4eba1381ec0363e0a73e40c61684e59"
+    },
+    {
+      "name": "word/media/image5.png",
+      "size": 225961,
+      "sha256": "427e29d9f1d72ad50c223bd1e7e56c3da842a8cb1a7139bf08ec5dfb3925f446"
+    },
+    {
+      "name": "word/media/image6.png",
+      "size": 240996,
+      "sha256": "78c41d95250de3ec77b48c05d2552a5e37e2689c7771a1cd16fdf64ee246afeb"
+    },
+    {
+      "name": "word/media/image7.png",
+      "size": 207348,
+      "sha256": "7fbac7b8669e1febec92e70a43b09e968a1ac0feb3d1d5f70e843c19e104a3a1"
+    },
+    {
+      "name": "word/media/image8.png",
+      "size": 262285,
+      "sha256": "fb6717511cda88f3e8ff9df053a9b7768712bb224da71b67f3dc19085a60615f"
+    },
+    {
+      "name": "word/media/image9.png",
+      "size": 243939,
+      "sha256": "c00a9087f37e1c3b571ba28d1b52005ef48393f1c67fb1512777cba9b80e762b"
+    },
+    {
+      "name": "word/media/image10.png",
+      "size": 211080,
+      "sha256": "59d186b0c516093ad2240ac71294e2ea20f6532b11bb3c26acef47a14f5b429a"
+    },
+    {
+      "name": "word/media/image11.png",
+      "size": 231943,
+      "sha256": "2f0f6db74f9323a6fea02043c42c77e6346d096e0caeb35abbbe7083efd90ef7"
+    },
+    {
+      "name": "word/media/image12.jpeg",
+      "size": 407356,
+      "sha256": "516c986dd931d9792fff76660b6984ffb0bd2a2aecba6548cc73fd22f92af509"
+    },
+    {
+      "name": "word/media/image13.png",
+      "size": 254113,
+      "sha256": "4317e365313683cc6bff106a65e8dd7f462e1024dc211ba6a5b123b183009bbe"
+    },
+    {
+      "name": "word/media/image14.png",
+      "size": 227621,
+      "sha256": "afbbac669d31d0fd9e0903e9bebbd74080309007c447a8dcf7bb4ca131dc2e90"
+    },
+    {
+      "name": "word/media/image15.png",
+      "size": 243918,
+      "sha256": "8f2ff548ebb312d0f376850c7be5daf23fb2ee23276ddfa03c2baa8fd6422215"
+    },
+    {
+      "name": "word/media/image16.png",
+      "size": 221017,
+      "sha256": "a5090b459b288fb17d5bb70c55ce38da584747b76c2e7beec045c46c7db4e48b"
+    },
+    {
+      "name": "word/media/image17.png",
+      "size": 212345,
+      "sha256": "cf56b4e7219bd209135865bd73a1dad68a277f7edad050b31613a1f6cde64438"
+    },
+    {
+      "name": "word/media/image18.png",
+      "size": 222331,
+      "sha256": "e6f1c3db57f3e9e38ebc308b2cef871243ebd915e33d17a2f343cd1c24e994d9"
+    },
+    {
+      "name": "word/media/image19.png",
+      "size": 179427,
+      "sha256": "1653f01904a08b9355ebdd1e553badd5b5d4bb125ecb359a138d879347dad227"
+    },
+    {
+      "name": "word/media/image20.png",
+      "size": 247479,
+      "sha256": "c0ef65308a90716bf01e1f993df02fe8477b4b2fad3c0ea680513f292010306c"
+    },
+    {
+      "name": "word/media/image21.png",
+      "size": 215330,
+      "sha256": "d6f091d34db7ede7f7bec0e105a8eca801b4c2b7810034ae154d15d92cdeaab3"
+    },
+    {
+      "name": "word/media/image22.png",
+      "size": 232000,
+      "sha256": "29456682926b7d4189114cbd7390c1a1825180e567d1c71ab2e1ca95d40c2365"
+    },
+    {
+      "name": "word/media/image23.png",
+      "size": 219945,
+      "sha256": "c04be29696409280302eb967eb889a3e447f94724dd900fdb25d92cf33fb4bdb"
+    },
+    {
+      "name": "word/media/image24.png",
+      "size": 255838,
+      "sha256": "2b834914fb763f70809d368e29a7625eecd93428ff6db90f369ad3b8efe095f8"
+    },
+    {
+      "name": "word/media/image25.png",
+      "size": 223578,
+      "sha256": "37d1e8bf9ea312bd5e8c2b2feeb7a9b73017ebc3afed6b06ee20f2d1d7d738d3"
+    },
+    {
+      "name": "word/media/image26.png",
+      "size": 204600,
+      "sha256": "f57b15eb3c7b15ea0b87f07f8da07a62d73c95510623c2fbfd2984aff1d242a7"
+    },
+    {
+      "name": "word/media/image27.png",
+      "size": 214688,
+      "sha256": "e5a3975765c1b1cb5b039f85ed1a3fef991cacf5e19e2ecb15e6f85a0379d09a"
+    },
+    {
+      "name": "word/media/image28.png",
+      "size": 230592,
+      "sha256": "8c7a0958ac1ce8ca133ca428fc07d898103fc92fd52f379d5e11160a5cbff31a"
+    },
+    {
+      "name": "word/media/image29.png",
+      "size": 232169,
+      "sha256": "2726e4926ba20dd66d37c30d579ef3e7d7f2b8002ac447ab3a89cab5debb1c0a"
+    },
+    {
+      "name": "word/media/image30.png",
+      "size": 224496,
+      "sha256": "8594de991bac51594ad80d0dd79f9929f8f1ae577caae092c580a4f1f88107ba"
+    },
+    {
+      "name": "word/media/image31.png",
+      "size": 237822,
+      "sha256": "9e0f38357bbcc5429697418bfcf33c0f19880d862d8d797ea357cd04532a5038"
+    },
+    {
+      "name": "word/media/image32.png",
+      "size": 247546,
+      "sha256": "566202d5477666b7c4f92a544220e29dee27b620deb7768ca7a82428232fa60d"
+    },
+    {
+      "name": "word/media/image33.png",
+      "size": 196535,
+      "sha256": "12dcb6ad78e295622a7848489d0cc222f9a5f8f55c9de14d556bf99523778306"
+    },
+    {
+      "name": "word/media/image35.png",
+      "size": 269435,
+      "sha256": "acbc75e1b22c44ced8b59ae7eb0cee4c3edb00809839ca2be284ae30b20734bf"
+    },
+    {
+      "name": "word/theme/theme1.xml",
+      "size": 8717,
+      "sha256": "e7948e69d1ab51203d82e7e57d491987a16229547a1b6bfd124133a3a895c0ac"
+    },
+    {
+      "name": "word/settings.xml",
+      "size": 22732,
+      "sha256": "5194bb7a474c9a728e9bb6077dc8a7bce60cc83833f610b3b254156eb2417227"
+    },
+    {
+      "name": "customXml/item1.xml",
+      "size": 306,
+      "sha256": "64a56efd64d49e759fe8705700562e79a4792fc7885a1351e30e5f3651f7247c"
+    },
+    {
+      "name": "word/styles.xml",
+      "size": 67508,
+      "sha256": "1d27c7190b712dc54b1408d4999d7dc33fed65814e0879210e4c84668c04a39c"
+    },
+    {
+      "name": "word/fontTable.xml",
+      "size": 4530,
+      "sha256": "1fa5fdaa2b1480a4eabc786d54c5dfd9273e4313a52f338f4991f5609b40700e"
+    },
+    {
+      "name": "word/webSettings.xml",
+      "size": 22296,
+      "sha256": "f442646f2fe40169823e9632019f8f94e953c2ccb2eec0a674c10f9db9fbe473"
+    },
+    {
+      "name": "docProps/app.xml",
+      "size": 42966,
+      "sha256": "1e247c66b7754837e44cfaf8b64fee47b7350d8a31150f6ebf02682528d515ec"
+    },
+    {
+      "name": "docProps/custom.xml",
+      "size": 404,
+      "sha256": "6469fcc9f77be927843186a8d5f04d753ca41e6d2eb17db279703a3868f62118"
+    },
+    {
+      "name": "word/numbering.xml",
+      "size": 154840,
+      "sha256": "726f64f8751036d269a50d7884407984bec64ac48169650914e6ca4f761d0023"
+    },
+    {
+      "name": "customXml/itemProps1.xml",
+      "size": 341,
+      "sha256": "da81fd3ab1169826814a25c15b5ed5a9a3d0eda690cedf91aeeb4a12148572d2"
+    },
+    {
+      "name": "customXml/_rels/item1.xml.rels",
+      "size": 296,
+      "sha256": "80482f86e196171d66001e0e74d1900408a3aaf2463e54005d251b5f2db9a0b0"
+    },
+    {
+      "name": "docProps/core.xml",
+      "size": 798,
+      "sha256": "be8e19e278ff29be176b3a1fed635f3a0f0a5c3df6785360995059d525197c46"
+    }
+  ]
+}

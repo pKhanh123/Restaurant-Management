@@ -1,35 +1,74 @@
-import type { CashVoucherDto, CashbookListDto } from '../../api/cashbook';
+import type {
+  CashFlowCategoryDto,
+  CashVoucherDirection,
+  FinancialAccountDto,
+  FinancialAccountType,
+  PaymentMethod
+} from '../../api/contracts';
 
-export function formatVnd(amount: number): string {
-  return `${new Intl.NumberFormat('vi-VN').format(amount)}\u00a0₫`;
+export interface CashVoucherFormValue {
+  direction: CashVoucherDirection;
+  accountType: FinancialAccountType;
+  accountId?: number;
+  paymentMethod?: PaymentMethod;
+  categoryId?: number;
+  amount?: number;
+  occurredAt: string;
+  counterpartyName?: string;
 }
 
-export function getCashbookSummaryCards(balance: CashbookListDto['balanceSummary'], filtered: CashbookListDto['filteredSummary']) {
-  return [
-    { key: 'balance', label: 'Số dư thực của quỹ', amount: balance.closingBalance, detail: `Số dư đầu kỳ ${formatVnd(balance.openingBalance)}` },
-    { key: 'receipts', label: 'Tổng thu theo bộ lọc', amount: filtered.totalReceipts, detail: `Theo ${filtered.rowCount} chứng từ` },
-    { key: 'payments', label: 'Tổng chi theo bộ lọc', amount: filtered.totalPayments, detail: `Theo ${filtered.rowCount} chứng từ` },
-    { key: 'movement', label: 'Thuần theo bộ lọc', amount: filtered.netMovement, detail: 'Không phải số dư quỹ' }
-  ] as const;
+export interface CashVoucherFormErrors {
+  accountId?: string;
+  paymentMethod?: string;
+  categoryId?: string;
+  amount?: string;
+  occurredAt?: string;
+  counterpartyName?: string;
 }
 
-export function getVoucherRelationshipLabel(voucher: Pick<CashVoucherDto, 'id' | 'reversalOf' | 'reversal'>): string | null {
-  if (voucher.reversalOf) return `Bút toán đảo của ${voucher.reversalOf.code}`;
-  if (voucher.reversal) return `Đã được đảo bởi ${voucher.reversal.code}`;
-  return null;
+export function voucherFormFields(direction: CashVoucherDirection, accountType: FinancialAccountType) {
+  return {
+    invoice: direction === 'PAYMENT',
+    method: accountType === 'BANK',
+    account: accountType !== 'CASH'
+  };
 }
 
-export function getVoucherStatusLabel(status: CashVoucherDto['status']): string {
-  return status === 'POSTED' ? 'Đã ghi sổ' : 'Đã hủy';
+export function validateVoucherForm(
+  form: CashVoucherFormValue,
+  accounts: FinancialAccountDto[],
+  categories: CashFlowCategoryDto[]
+): { valid: boolean; errors: CashVoucherFormErrors; accountId?: number; paymentMethod: PaymentMethod } {
+  const errors: CashVoucherFormErrors = {};
+  const account = form.accountType === 'CASH'
+    ? accounts.find(item => item.type === 'CASH' && item.isDefault && item.isActive)
+    : accounts.find(item => item.id === form.accountId);
+
+  if (!account) errors.accountId = form.accountType === 'CASH' ? 'Chưa có tài khoản tiền mặt mặc định' : 'Vui lòng chọn tài khoản';
+  else if (!account.isActive) errors.accountId = 'Tài khoản đã ngừng hoạt động';
+  else if (account.type !== form.accountType) errors.accountId = 'Tài khoản không phù hợp';
+
+  let paymentMethod: PaymentMethod = 'CASH';
+  if (form.accountType === 'BANK') {
+    if (form.paymentMethod !== 'BANK_TRANSFER' && form.paymentMethod !== 'CREDIT_CARD') {
+      errors.paymentMethod = 'Vui lòng chọn phương thức thanh toán';
+    } else paymentMethod = form.paymentMethod;
+  } else if (form.accountType === 'E_WALLET') paymentMethod = 'E_WALLET';
+
+  const category = categories.find(item => item.id === form.categoryId);
+  if (!category) errors.categoryId = 'Vui lòng chọn loại thu/chi';
+  else if (!category.isActive || category.direction !== form.direction) errors.categoryId = 'Loại thu/chi không phù hợp';
+
+  if (!Number.isInteger(form.amount) || (form.amount ?? 0) < 1 || (form.amount ?? 0) > 2_000_000_000) {
+    errors.amount = 'Số tiền phải là số nguyên từ 1 đến 2.000.000.000';
+  }
+  if (!form.occurredAt?.trim()) errors.occurredAt = 'Vui lòng chọn thời gian';
+  if (!form.counterpartyName?.trim()) errors.counterpartyName = 'Vui lòng nhập người nộp/nhận';
+
+  return { valid: Object.keys(errors).length === 0, errors, accountId: account?.id, paymentMethod };
 }
 
-const sourceTypeLabels: Record<string, string> = {
-  MANUAL: 'Phiếu thủ công', RESERVATION_DEPOSIT: 'Thu cọc đặt bàn', RESERVATION_REFUND: 'Hoàn cọc đặt bàn',
-  ORDER_PAYMENT: 'Thanh toán đơn hàng', SALES_RETURN_REFUND: 'Hoàn tiền trả hàng',
-  PURCHASE_RECEIPT_PAYMENT: 'Thanh toán nhập hàng', SUPPLIER_PAYMENT: 'Thanh toán công nợ nhà cung cấp',
-  PURCHASE_RETURN_REFUND: 'Nhận hoàn tiền trả hàng', PAYROLL_PAYMENT: 'Chi lương', REVERSAL: 'Bút toán đảo'
-};
-
-export function getVoucherSourceTypeLabel(sourceType: string): string {
-  return sourceTypeLabels[sourceType] ?? sourceType;
+export function formatSignedVoucherAmount(item: Pick<{ direction: CashVoucherDirection; amount: number }, 'direction' | 'amount'>): string {
+  const sign = item.direction === 'RECEIPT' ? '+' : '-';
+  return `${sign}${new Intl.NumberFormat('vi-VN').format(item.amount)} ₫`;
 }

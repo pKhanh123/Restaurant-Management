@@ -1,31 +1,16 @@
 import { prisma } from '../../config/prisma';
 import { ApiError } from '../../lib/api-error';
 import { emitToAll, emitToRoom } from '../../lib/socket';
-import {
-  ConfirmOrderPaymentInput,
-  AuthorizeReservationOrderPayLaterInput,
-  CreateOrderInput,
-  PayOrderInput,
-  RejectOrderPaymentInput,
-  ReservationOrderPaymentDeclarationInput,
-  VoidOrderInput
-} from './orders.schemas';
-import { PaymentMethod, PriceListScopeType } from '@prisma/client';
+import { CreateOrderInput, PayOrderInput, VoidOrderInput } from './orders.schemas';
+import { CashVoucherSourceType, PaymentMethod } from '@prisma/client';
 import { AuditService } from '../audit/audit.service';
 import { InventoryService } from '../inventory/inventory.service';
 import { VouchersService } from '../vouchers/vouchers.service';
 import { emitInventoryChanged } from '../inventory/inventory.events';
 import { PriceListService } from '../price-lists/price-list.service';
 import { createHash } from 'crypto';
-import { ReservationsService } from '../reservations/reservations.service';
-import { getVietQrInstructions } from '../../lib/vietqr';
-import { CashbookPostingService, normalizeCashbookPersistenceError, resolveCashbookAccountForPayment } from '../cashbook/cashbook-posting.service';
-import { cashbookChangedEvent } from '../cashbook/cashbook.events';
-import { amountReceivedAfterCredit } from '../cashbook/cashbook.domain';
-import { EmployeeCommissionRecognitionService } from '../employee-commissions/employee-commission.recognition.service';
-import { assertCommissionEmployeeEligible } from '../employee-commissions/employee-commission.eligibility';
-import { claimInitialOrderReceiver, resolveEmployeeForUser } from './order-receiver.service';
-import { recordOrderVoidCancellations } from './order-cancellation.service';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 function canonicalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -769,7 +754,7 @@ export class OrdersService {
   /**
    * Thanh toan don hang va tu dong reset ban an ve AVAILABLE khi het don UNPAID
    */
-  static async payOrder(orderId: number, input: PayOrderInput, actorId?: number, actorName?: string, actorRole: 'ADMIN' | 'CASHIER' = 'CASHIER') {
+  static async payOrder(orderId: number, input: PayOrderInput, actor?: { id: number; name: string }) {
     const existingOrder = await prisma.order.findUnique({
       where: { id: orderId },
       include: { items: true }
@@ -788,7 +773,7 @@ export class OrdersService {
       throw ApiError.conflict(`Đơn hàng ID ${orderId} đã được thanh toán từ trước`);
     }
 
-    const { order: updatedOrder, tableState, inventoryChange, voucher, commissionChanged } = await prisma.$transaction(async (tx) => {
+    const { order: updatedOrder, tableState, inventoryChange, cashVoucher } = await prisma.$transaction(async (tx) => {
       if (existingOrder.tableId) {
         // Serialize create/pay operations on the same table before reading its unpaid orders.
         await tx.$queryRaw`SELECT id FROM DiningTable WHERE id = ${existingOrder.tableId} FOR UPDATE`;
@@ -811,53 +796,13 @@ export class OrdersService {
         throw ApiError.conflict(`Đơn hàng ID ${orderId} đã được thanh toán từ trước`);
       }
 
-      if (lockedOrder.reservationId && lockedOrder.createdByUserId === null && !lockedOrder.payLaterAuthorized) {
-        throw ApiError.conflict('Order QR của khách phải được xác nhận prepayment hoặc cấp quyền trả sau trước khi thu tiền');
-      }
-
-      let appliedDeposit = 0;
-      if (lockedOrder.reservationId) {
-        await tx.$queryRaw`SELECT id FROM Reservation WHERE id = ${lockedOrder.reservationId} FOR UPDATE`;
-        const availableDeposit = await this.availableReservationCredit(tx, lockedOrder.reservationId);
-        appliedDeposit = Math.min(lockedOrder.finalAmount, availableDeposit);
-        if (appliedDeposit > 0) {
-          await tx.reservationDepositTransaction.create({ data: {
-            reservationId: lockedOrder.reservationId, orderId, type: 'APPLY_TO_BILL', status: 'SUCCESS', amount: appliedDeposit,
-            reason: 'Dùng tiền cọc trả cho order trả sau', confirmedByUserId: actorId, confirmedAt: new Date()
-          } });
-          await tx.reservation.update({ where: { id: lockedOrder.reservationId }, data: { depositStatus: 'APPLIED_TO_BILL' } });
-          await AuditService.logInTransaction(tx, {
-            action: 'RESERVATION_DEPOSIT_APPLIED_TO_ORDER', targetType: 'Order', targetId: orderId,
-            actorId, actorName, metadata: { reservationId: lockedOrder.reservationId, appliedDeposit }
-          });
-        }
-      }
-
-      const now = new Date();
-      const amountReceived = amountReceivedAfterCredit(lockedOrder.finalAmount, appliedDeposit);
-      let voucher = null;
-      if (amountReceived > 0) {
-        const financialAccountId = await resolveCashbookAccountForPayment(tx, input.paymentMethod, input.financialAccountId);
-        const payment = await tx.orderPaymentTransaction.create({ data: {
-          orderId, status: 'SUCCESS', amount: amountReceived, paymentMethod: input.paymentMethod as PaymentMethod,
-          financialAccountId, confirmedByUserId: actorId ?? null, confirmedAt: now
-        } });
-        const category = await tx.cashFlowCategory.findUniqueOrThrow({ where: { code: 'CUSTOMER_PAYMENT' } });
-        if (financialAccountId !== null) voucher = await CashbookPostingService.post(tx, {
-          direction: 'RECEIPT', amount: payment.amount, accountId: financialAccountId, categoryId: category.id,
-          paymentMethod: input.paymentMethod, occurredAt: now, sourceType: 'ORDER_PAYMENT',
-          sourceTransactionId: payment.id, sourceCode: lockedOrder.code,
-          counterpartyType: lockedOrder.customerId ? 'CUSTOMER' : null, counterpartyId: lockedOrder.customerId,
-          note: 'Khách thanh toán order'
-        }, { id: actorId ?? 0, name: actorName ?? null, role: actorRole });
-      }
-
+      const paidAt = new Date();
       const order = await tx.order.update({
         where: { id: orderId },
         data: {
           paymentStatus: 'PAID',
           paymentMethod: input.paymentMethod as PaymentMethod,
-          paidAt: now,
+          paidAt,
           status: 'COMPLETED',
           completedAt: new Date()
         },
@@ -866,6 +811,19 @@ export class OrdersService {
 
       // Tu dong tru kho nguyen lieu theo cong thuc dinh luong BOM (Atomic Transaction)
       const inventoryChange = await InventoryService.deductInventoryForOrder(tx, order.id, order.items);
+
+      const cashVoucher = await CashbookPostingService.post(tx, {
+        direction: 'RECEIPT',
+        paymentMethod: input.paymentMethod as PaymentMethod,
+        accountId: input.paymentMethod === 'CASH' ? undefined : input.financialAccountId,
+        categoryCode: 'CUSTOMER_PAYMENT',
+        amount: order.finalAmount,
+        occurredAt: paidAt,
+        sourceType: CashVoucherSourceType.ORDER_PAYMENT,
+        sourceId: order.id,
+        sourceCode: order.code,
+        affectsBusinessResult: false
+      }, actor ?? { id: null, name: 'Hệ thống' });
 
       let nextTableState: { tableId: number; tableNumber: number; status: 'AVAILABLE' | 'OCCUPIED'; currentOrderId: number | null } | null = null;
       if (order.tableId) {
@@ -897,9 +855,12 @@ export class OrdersService {
         }
       }
 
-      const commission = await EmployeeCommissionRecognitionService.recognizePaidOrder(tx, order.id, order.paidAt!, { id: actorId, name: actorName });
-      return { order, tableState: nextTableState, inventoryChange, voucher, commissionChanged: commission.changed };
-    }).catch(normalizeCashbookPersistenceError);
+      return { order, tableState: nextTableState, inventoryChange, cashVoucher };
+    });
+
+    if (cashVoucher) {
+      emitCashbookChanged({ voucherIds: [cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
+    }
 
     emitInventoryChanged({
       sourceType: 'INGREDIENT',
@@ -1082,15 +1043,7 @@ export class OrdersService {
       throw ApiError.orderStateInvalid('Đơn hàng đã bị hủy trước đó');
     }
 
-    if (existingOrder.status === 'COMPLETED') {
-      throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã hoàn tất phục vụ');
-    }
-
-    if (existingOrder.paymentStatus === 'PAID') {
-      throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã thanh toán');
-    }
-
-    const { order, tableState, stockChanges } = await prisma.$transaction(async (tx) => {
+    const { order, tableState, stockChanges, cashbookReversal } = await prisma.$transaction(async (tx) => {
       if (existingOrder.tableId) {
         await tx.$queryRaw`SELECT id FROM DiningTable WHERE id = ${existingOrder.tableId} FOR UPDATE`;
       }
@@ -1107,12 +1060,14 @@ export class OrdersService {
       if (lockedOrder.status === 'CANCELLED') {
         throw ApiError.orderStateInvalid('Đơn hàng đã bị hủy trước đó');
       }
-      if (lockedOrder.status === 'COMPLETED') {
-        throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã hoàn tất phục vụ');
-      }
-      if (lockedOrder.paymentStatus === 'PAID') {
-        throw ApiError.orderStateInvalid('Không thể hủy đơn hàng đã thanh toán');
-      }
+      const cashbookReversal = lockedOrder.paymentStatus === 'PAID'
+        ? await CashbookPostingService.reverseSystemVoucher(
+            tx,
+            CashVoucherSourceType.ORDER_PAYMENT,
+            lockedOrder.id,
+            { id: voidedByUserId ?? null, name: actorName ?? 'Hệ thống' }
+          )
+        : null;
 
       const restoredStock = await restoreMenuStockForOrder(tx, lockedOrder.items);
       const now = new Date();
@@ -1165,39 +1120,12 @@ export class OrdersService {
         }
       }
 
-      if (existingOrder.voucherId) {
-        await tx.$executeRaw`
-          UPDATE Voucher 
-          SET usedCount = CASE WHEN usedCount > 0 THEN usedCount - 1 ELSE 0 END 
-          WHERE id = ${existingOrder.voucherId}
-        `;
-      }
-
-      await recordOrderVoidCancellations(tx, lockedOrder, {
-        reason: input.reason,
-        cancelledAt: now,
-        cancelledByUserId: voidedByUserId ?? null,
-        restoredMenuItemIds: restoredStock.map(change => change.menuItemId)
-      });
-      await AuditService.logInTransaction(tx, {
-        action: 'ORDER_VOIDED',
-        targetType: 'Order',
-        targetId: updatedOrder.id,
-        actorId: voidedByUserId,
-        actorName,
-        metadata: {
-          code: updatedOrder.code,
-          reason: input.reason,
-          totalAmount: updatedOrder.totalAmount,
-          tableNumber: updatedOrder.table?.tableNumber,
-          source: 'ORDER_VOID',
-          trigger: 'MANUAL'
-        }
-      });
-
-      // Only this committed result may be used to publish inventory/KDS/order/table notifications.
-      return { order: updatedOrder, tableState: nextTableState, stockChanges: restoredStock };
+      return { order: updatedOrder, tableState: nextTableState, stockChanges: restoredStock, cashbookReversal };
     });
+
+    if (cashbookReversal) {
+      emitCashbookChanged({ voucherIds: [cashbookReversal.id], reason: 'SOURCE_REVERSED', updatedAt: new Date().toISOString() });
+    }
 
     emitInventoryChanged({
       sourceType: 'MENU_ITEM',

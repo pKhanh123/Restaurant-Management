@@ -40,7 +40,6 @@ export const createPurchaseReceiptSchema = z.object({
   paidAmount: vndAmount('Số tiền đã trả').default(0),
   paymentMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET']).default('CASH'),
   financialAccountId: z.number().int().positive().nullable().optional(),
-  paymentExternalReference: nullableText(120),
   note: nullableText(1000),
   lines: receiptLinesSchema.default([])
 });
@@ -54,7 +53,6 @@ export const updatePurchaseReceiptSchema = z.object({
   paidAmount: vndAmount('Số tiền đã trả').optional(),
   paymentMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET']).optional(),
   financialAccountId: z.number().int().positive().nullable().optional(),
-  paymentExternalReference: nullableText(120),
   note: nullableText(1000),
   lines: receiptLinesSchema.optional()
 }).refine(value => Object.keys(value).length > 0, 'Cần cung cấp ít nhất một trường để cập nhật');

@@ -1,0 +1,455 @@
+<div id="eod-mockup" class="eod-preview">
+  <style>
+    #eod-mockup {
+      color-scheme: light dark;
+      --eod-ink: light-dark(#17324d, #e7f2fb);
+      --eod-muted: light-dark(#60758a, #9fb4c6);
+      --eod-primary: light-dark(#0b73ce, #61b2ff);
+      --eod-primary-deep: light-dark(#075aa4, #8ac6ff);
+      --eod-canvas: light-dark(#eef3f8, #111c26);
+      --eod-surface: light-dark(#ffffff, #1a2834);
+      --eod-surface-2: light-dark(#f7fafd, #223442);
+      --eod-border: light-dark(#d3dee8, #385061);
+      --eod-report: light-dark(#ffffff, #f8fbfd);
+      --eod-report-ink: #16202a;
+      --eod-sky: #d8f1ff;
+      --eod-sand: #fff5cf;
+      --eod-success: #087f5b;
+      --eod-danger: #c92a2a;
+      --eod-warning: #b35c00;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--eod-ink);
+    }
+    #eod-mockup * { box-sizing: border-box; }
+    #eod-mockup button,
+    #eod-mockup input,
+    #eod-mockup select { font: inherit; }
+    #eod-mockup button { color: inherit; }
+    #eod-mockup .eod-device-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    #eod-mockup .eod-device-controls,
+    #eod-mockup .eod-review-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    #eod-mockup .eod-device-button,
+    #eod-mockup .eod-review-button {
+      min-height: 40px;
+      border: 1px solid var(--eod-border);
+      border-radius: 8px;
+      background: var(--eod-surface);
+      padding: 0 14px;
+      font-weight: 600;
+    }
+    #eod-mockup .eod-device-button[aria-pressed="true"],
+    #eod-mockup .eod-review-button.is-selected {
+      border-color: var(--eod-primary);
+      background: var(--eod-primary);
+      color: #ffffff;
+    }
+    #eod-mockup .eod-shell {
+      overflow: hidden;
+      border: 1px solid var(--eod-border);
+      border-radius: 12px;
+      background: var(--eod-canvas);
+      box-shadow: 0 16px 46px rgba(17, 57, 91, 0.14);
+    }
+    #eod-mockup .eod-command-bar {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--eod-border);
+      background: var(--eod-surface);
+    }
+    #eod-mockup .eod-brand { display: flex; align-items: center; gap: 9px; font-weight: 800; white-space: nowrap; }
+    #eod-mockup .eod-brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--eod-primary); color: #fff; }
+    #eod-mockup .eod-command-meta { display: flex; align-items: center; gap: 8px; color: var(--eod-muted); font-size: 13px; }
+    #eod-mockup .eod-role { padding: 5px 9px; border-radius: 999px; background: var(--eod-surface-2); color: var(--eod-primary-deep); font-weight: 700; }
+    #eod-mockup .eod-main-tabs {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--eod-border);
+      background: var(--eod-surface);
+    }
+    #eod-mockup .eod-main-tab {
+      flex: 0 0 auto;
+      min-height: 43px;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      background: transparent;
+      padding: 0 12px;
+      color: var(--eod-muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+    #eod-mockup .eod-main-tab.is-active { color: var(--eod-primary); border-bottom-color: var(--eod-primary); }
+    #eod-mockup .eod-main-tab[disabled] { opacity: .46; }
+    #eod-mockup .eod-page { padding: 16px; }
+    #eod-mockup .eod-page-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+    #eod-mockup h2 { margin: 0 0 4px; font-family: "Arial Narrow", "Segoe UI", sans-serif; font-size: 23px; color: var(--eod-ink); }
+    #eod-mockup .eod-page-heading p { margin: 0; color: var(--eod-muted); font-size: 13px; }
+    #eod-mockup .eod-heading-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    #eod-mockup .eod-action {
+      min-height: 38px;
+      border: 1px solid var(--eod-border);
+      border-radius: 8px;
+      background: var(--eod-surface);
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    #eod-mockup .eod-action.is-primary { border-color: var(--eod-primary); background: var(--eod-primary); color: #fff; }
+    #eod-mockup .eod-filter-toggle { display: none; }
+    #eod-mockup .eod-workspace { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 14px; align-items: start; }
+    #eod-mockup .eod-filters {
+      padding: 14px;
+      border: 1px solid var(--eod-border);
+      border-radius: 10px;
+      background: var(--eod-surface);
+    }
+    #eod-mockup .eod-filter-section { padding: 0 0 14px; margin-bottom: 14px; border-bottom: 1px solid var(--eod-border); }
+    #eod-mockup .eod-filter-section:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+    #eod-mockup .eod-filter-label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 700; }
+    #eod-mockup .eod-segmented { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+    #eod-mockup .eod-concerns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #eod-mockup .eod-segment {
+      min-height: 38px;
+      border: 1px solid var(--eod-border);
+      border-radius: 7px;
+      background: var(--eod-surface-2);
+      padding: 4px 6px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    #eod-mockup .eod-segment[aria-pressed="true"] { border-color: var(--eod-primary); background: var(--eod-primary); color: #fff; }
+    #eod-mockup .eod-input,
+    #eod-mockup .eod-select {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--eod-border);
+      border-radius: 8px;
+      background: var(--eod-surface);
+      color: var(--eod-ink);
+      padding: 0 10px;
+    }
+    #eod-mockup .eod-time-row { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 7px; }
+    #eod-mockup .eod-branch-lock { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; padding: 0 10px; border: 1px solid var(--eod-border); border-radius: 8px; background: var(--eod-surface-2); font-size: 13px; }
+    #eod-mockup .eod-lock-note { margin: 6px 0 0; color: var(--eod-muted); font-size: 11px; }
+    #eod-mockup .eod-radio-row { display: flex; align-items: center; gap: 8px; min-height: 31px; font-size: 13px; }
+    #eod-mockup .eod-radio-row input { accent-color: var(--eod-primary); }
+    #eod-mockup .eod-report-stage {
+      min-width: 0;
+      padding: 12px;
+      border-radius: 10px;
+      background: light-dark(#93a0ab, #0c151d);
+    }
+    #eod-mockup .eod-report-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; color: #fff; }
+    #eod-mockup .eod-report-toolbar-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    #eod-mockup .eod-tool {
+      min-height: 32px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 6px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      padding: 0 9px;
+      font-size: 12px;
+    }
+    #eod-mockup .eod-paper {
+      width: min(100%, 930px);
+      min-height: 560px;
+      margin: 0 auto;
+      padding: 20px 18px 28px;
+      background: var(--eod-report);
+      color: var(--eod-report-ink);
+      box-shadow: 0 4px 18px rgba(0,0,0,.16);
+    }
+    #eod-mockup .eod-paper-meta { font-size: 10px; margin-bottom: 4px; }
+    #eod-mockup .eod-report-title { margin: 0; text-align: center; font-size: 22px; font-family: "Arial Narrow", Arial, sans-serif; }
+    #eod-mockup .eod-report-subtitle { margin: 5px 0 14px; text-align: center; font-size: 12px; line-height: 1.55; }
+    #eod-mockup .eod-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid #bdd5e4; margin-bottom: 14px; }
+    #eod-mockup .eod-kpi { min-height: 72px; padding: 10px; border-right: 1px solid #bdd5e4; }
+    #eod-mockup .eod-kpi:last-child { border-right: 0; }
+    #eod-mockup .eod-kpi-label { color: #526b7f; font-size: 10px; }
+    #eod-mockup .eod-kpi-value { margin-top: 5px; font-size: 17px; font-weight: 750; font-variant-numeric: tabular-nums; }
+    #eod-mockup .eod-kpi-note { margin-top: 3px; color: #60758a; font-size: 9px; }
+    #eod-mockup .eod-paper-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    #eod-mockup .eod-paper-table th { padding: 8px 7px; background: var(--eod-sky); text-align: left; font-weight: 700; }
+    #eod-mockup .eod-paper-table td { padding: 8px 7px; border-bottom: 1px solid #e2e8ee; }
+    #eod-mockup .eod-paper-table .is-money { text-align: right; font-variant-numeric: tabular-nums; }
+    #eod-mockup .eod-paper-table tfoot td { background: var(--eod-sand); font-weight: 750; }
+    #eod-mockup .eod-status { display: inline-block; padding: 3px 6px; border-radius: 999px; background: #e5f8f0; color: var(--eod-success); font-weight: 700; white-space: nowrap; }
+    #eod-mockup .eod-summary-blocks { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; margin-top: 14px; }
+    #eod-mockup .eod-summary-section { padding-top: 9px; border-top: 2px solid #bdd5e4; }
+    #eod-mockup .eod-summary-section h4 { margin: 0 0 7px; font-size: 11px; }
+    #eod-mockup .eod-summary-line { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; font-size: 10px; }
+    #eod-mockup .eod-detail-note { margin: 12px 0 0; color: #60758a; font-size: 9px; text-align: right; }
+    #eod-mockup .eod-review { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
+    #eod-mockup .eod-review-copy { color: var(--eod-muted); font-size: 13px; }
+    #eod-mockup .eod-review-button.is-approve { border-color: var(--eod-success); }
+    #eod-mockup .eod-review-button.is-approve.is-selected { background: var(--eod-success); }
+    #eod-mockup .eod-review-button.is-revise { border-color: var(--eod-warning); }
+    #eod-mockup .eod-review-button.is-revise.is-selected { background: var(--eod-warning); }
+    #eod-mockup .eod-shell.is-mobile { max-width: 390px; margin: 0 auto; }
+    #eod-mockup .eod-shell.is-mobile .eod-command-meta span:not(.eod-role) { display: none; }
+    #eod-mockup .eod-shell.is-mobile .eod-main-tabs { padding: 0 7px; }
+    #eod-mockup .eod-shell.is-mobile .eod-main-tab { padding: 0 10px; }
+    #eod-mockup .eod-shell.is-mobile .eod-page { padding: 11px; }
+    #eod-mockup .eod-shell.is-mobile .eod-page-heading { display: block; }
+    #eod-mockup .eod-shell.is-mobile .eod-heading-actions { justify-content: flex-start; margin-top: 10px; }
+    #eod-mockup .eod-shell.is-mobile .eod-workspace { display: block; }
+    #eod-mockup .eod-shell.is-mobile .eod-filter-toggle { display: inline-flex; }
+    #eod-mockup .eod-shell.is-mobile .eod-filters { margin-bottom: 10px; }
+    #eod-mockup .eod-shell.is-mobile .eod-filters.is-collapsed { display: none; }
+    #eod-mockup .eod-shell.is-mobile .eod-report-stage { padding: 8px; }
+    #eod-mockup .eod-shell.is-mobile .eod-report-toolbar { align-items: flex-start; flex-direction: column; }
+    #eod-mockup .eod-shell.is-mobile .eod-paper { min-height: 0; padding: 14px 11px 20px; }
+    #eod-mockup .eod-shell.is-mobile .eod-kpis { grid-template-columns: 1fr 1fr; }
+    #eod-mockup .eod-shell.is-mobile .eod-kpi:nth-child(2) { border-right: 0; }
+    #eod-mockup .eod-shell.is-mobile .eod-kpi:nth-child(-n+2) { border-bottom: 1px solid #bdd5e4; }
+    #eod-mockup .eod-shell.is-mobile .eod-summary-blocks { grid-template-columns: 1fr; }
+    #eod-mockup .eod-shell.is-mobile .eod-table-wrap { overflow-x: auto; }
+    #eod-mockup .eod-shell.is-mobile .eod-paper-table { min-width: 670px; }
+    @media (max-width: 740px) {
+      #eod-mockup .eod-device-bar,
+      #eod-mockup .eod-review { align-items: flex-start; flex-direction: column; }
+      #eod-mockup .eod-shell:not(.is-desktop) { max-width: 390px; margin: 0 auto; }
+    }
+  </style>
+
+  <div class="eod-device-bar">
+    <strong>Duyệt giao diện Báo cáo cuối ngày</strong>
+    <div class="eod-device-controls" aria-label="Chọn kích thước xem trước">
+      <button type="button" class="eod-device-button" data-device="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" class="eod-device-button" data-device="mobile" aria-pressed="false">Di động</button>
+    </div>
+  </div>
+
+  <section class="eod-shell is-desktop" aria-label="Giao diện đề xuất Báo cáo cuối ngày">
+    <header class="eod-command-bar">
+      <div class="eod-brand"><span class="eod-brand-mark">CB</span><span>Crispy Bite</span></div>
+      <div class="eod-command-meta"><span>Nhà hàng chính</span><span class="eod-role">Quản trị</span><span>Nguyễn An</span></div>
+    </header>
+
+    <nav class="eod-main-tabs" aria-label="Menu báo cáo">
+      <button type="button" class="eod-main-tab is-active">Cuối ngày</button>
+      <button type="button" class="eod-main-tab">Bán hàng</button>
+      <button type="button" class="eod-main-tab" disabled>Hàng hóa</button>
+      <button type="button" class="eod-main-tab" disabled>Khách hàng</button>
+      <button type="button" class="eod-main-tab" disabled>Nhà cung cấp</button>
+      <button type="button" class="eod-main-tab" disabled>Nhân viên</button>
+      <button type="button" class="eod-main-tab" disabled>Kênh bán hàng</button>
+      <button type="button" class="eod-main-tab" disabled>Tài chính</button>
+    </nav>
+
+    <main class="eod-page">
+      <div class="eod-page-heading">
+        <div><h2>Báo cáo cuối ngày</h2><p>Đối soát bán hàng, dòng tiền và biến động hàng hóa theo ngày nghiệp vụ.</p></div>
+        <div class="eod-heading-actions">
+          <button type="button" class="eod-action eod-filter-toggle">Bộ lọc</button>
+          <button type="button" class="eod-action">In báo cáo</button>
+          <button type="button" class="eod-action">Xuất XLSX</button>
+          <button type="button" class="eod-action is-primary">Làm mới</button>
+        </div>
+      </div>
+
+      <div class="eod-workspace">
+        <aside class="eod-filters" aria-label="Bộ lọc báo cáo">
+          <div class="eod-filter-section">
+            <span class="eod-filter-label">Mối quan tâm</span>
+            <div class="eod-segmented eod-concerns">
+              <button type="button" class="eod-segment" data-concern="sales" aria-pressed="true">Bán hàng</button>
+              <button type="button" class="eod-segment" data-concern="cashflow" aria-pressed="false">Thu chi</button>
+              <button type="button" class="eod-segment" data-concern="goods" aria-pressed="false">Hàng hóa</button>
+            </div>
+          </div>
+          <div class="eod-filter-section">
+            <span class="eod-filter-label">Kiểu hiển thị</span>
+            <div class="eod-segmented">
+              <button type="button" class="eod-segment" data-view="summary" aria-pressed="true">Báo cáo dọc</button>
+              <button type="button" class="eod-segment" data-view="detail" aria-pressed="false">Báo cáo ngang</button>
+            </div>
+          </div>
+          <div class="eod-filter-section">
+            <label class="eod-filter-label" for="eod-branch">Chi nhánh</label>
+            <div id="eod-branch" class="eod-branch-lock"><span>Nhà hàng chính</span><strong>Đã khóa</strong></div>
+            <p class="eod-lock-note">Dữ liệu bán hàng hiện vận hành theo một nhà hàng.</p>
+          </div>
+          <div class="eod-filter-section">
+            <label class="eod-filter-label" for="eod-date">Ngày nghiệp vụ</label>
+            <input id="eod-date" class="eod-input" type="date" value="2026-10-03">
+            <div class="eod-time-row">
+              <input class="eod-input" type="time" value="00:00" aria-label="Từ giờ">
+              <input class="eod-input" type="time" value="23:59" aria-label="Đến giờ">
+            </div>
+          </div>
+          <div class="eod-filter-section" data-filter-group="sales-common">
+            <label class="eod-filter-label" for="eod-customer">Khách hàng</label>
+            <input id="eod-customer" class="eod-input" type="search" placeholder="Mã, tên hoặc điện thoại">
+          </div>
+          <div class="eod-filter-section" data-filter-group="sales-common">
+            <label class="eod-filter-label" for="eod-receiver">Người nhận đơn</label>
+            <select id="eod-receiver" class="eod-select"><option>Tất cả nhân viên</option><option>Trần Minh</option><option>Chưa xác định</option></select>
+          </div>
+          <div class="eod-filter-section" data-filter-group="sales-common">
+            <label class="eod-filter-label" for="eod-creator">Người tạo</label>
+            <select id="eod-creator" class="eod-select"><option>Tất cả tài khoản</option><option>Thu ngân Lan</option><option>Khách tự đặt</option></select>
+          </div>
+          <div class="eod-filter-section" data-filter-group="payment">
+            <label class="eod-filter-label" for="eod-payment">Phương thức thanh toán</label>
+            <select id="eod-payment" class="eod-select"><option>Tất cả phương thức</option><option>Tiền mặt</option><option>Chuyển khoản</option><option>Ví điện tử</option></select>
+          </div>
+          <div class="eod-filter-section" data-filter-group="delivery">
+            <span class="eod-filter-label">Giao hàng</span>
+            <label class="eod-radio-row"><input type="radio" name="delivery" checked> Tất cả</label>
+            <label class="eod-radio-row"><input type="radio" name="delivery"> Có giao hàng</label>
+            <label class="eod-radio-row"><input type="radio" name="delivery"> Không giao hàng</label>
+          </div>
+          <div class="eod-filter-section" data-filter-group="table">
+            <label class="eod-filter-label" for="eod-area">Phòng/Bàn</label>
+            <select id="eod-area" class="eod-select"><option>Tất cả khu vực</option><option>Tầng trệt</option><option>Sân vườn</option></select>
+            <select class="eod-select" style="margin-top:7px" aria-label="Chọn phòng bàn"><option>Tất cả bàn</option><option>Bàn 01</option><option>Bàn 08</option></select>
+          </div>
+        </aside>
+
+        <section class="eod-report-stage" aria-label="Bản xem trước báo cáo">
+          <div class="eod-report-toolbar">
+            <span id="eod-view-label">Tổng quan · Bán hàng</span>
+            <div class="eod-report-toolbar-group">
+              <button type="button" class="eod-tool">Trang 1 / 1</button>
+              <button type="button" class="eod-tool">Thu nhỏ</button>
+              <button type="button" class="eod-tool">Phóng to</button>
+              <button type="button" class="eod-tool">Toàn màn hình</button>
+            </div>
+          </div>
+          <article class="eod-paper">
+            <div class="eod-paper-meta">Lập lúc 03/10/2026 23:59 · Múi giờ Asia/Ho_Chi_Minh</div>
+            <h3 class="eod-report-title">Báo cáo cuối ngày về bán hàng</h3>
+            <div class="eod-report-subtitle">Ngày nghiệp vụ 03/10/2026 · 00:00–23:59<br>Chi nhánh: Nhà hàng chính</div>
+            <div class="eod-kpis" aria-label="Chỉ số tổng quan">
+              <div class="eod-kpi"><div class="eod-kpi-label">Hóa đơn hoàn tất</div><div class="eod-kpi-value">42</div><div class="eod-kpi-note">Theo completedAt</div></div>
+              <div class="eod-kpi"><div class="eod-kpi-label">Doanh thu bán</div><div class="eod-kpi-value">18.460.000 ₫</div><div class="eod-kpi-note">Trước trả hàng</div></div>
+              <div class="eod-kpi"><div class="eod-kpi-label">Giá trị trả</div><div class="eod-kpi-value">620.000 ₫</div><div class="eod-kpi-note">Theo returnedAt</div></div>
+              <div class="eod-kpi"><div class="eod-kpi-label">Doanh thu thuần</div><div class="eod-kpi-value">17.840.000 ₫</div><div class="eod-kpi-note">Không trộn dòng tiền</div></div>
+            </div>
+            <div class="eod-table-wrap">
+              <table class="eod-paper-table">
+                <thead><tr id="eod-table-head"><th>Mã chứng từ</th><th>Thời gian</th><th>Khách hàng</th><th>Người nhận</th><th class="is-money">Doanh thu</th><th class="is-money">Thanh toán</th><th>Trạng thái</th></tr></thead>
+                <tbody id="eod-table-body">
+                  <tr><td>HD-20261003-0042</td><td>21:47</td><td>Nguyễn Minh Anh</td><td>Trần Minh</td><td class="is-money">486.000 ₫</td><td class="is-money">486.000 ₫</td><td><span class="eod-status">Hoàn tất</span></td></tr>
+                  <tr><td>HD-20261003-0041</td><td>21:31</td><td>Khách lẻ</td><td>Trần Minh</td><td class="is-money">325.000 ₫</td><td class="is-money">325.000 ₫</td><td><span class="eod-status">Hoàn tất</span></td></tr>
+                  <tr><td>TH-20261003-0002</td><td>20:54</td><td>Lê Ngọc</td><td>Chưa xác định</td><td class="is-money">−120.000 ₫</td><td class="is-money">−120.000 ₫</td><td><span class="eod-status">Đã trả</span></td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="4">Tổng theo bộ lọc</td><td class="is-money">17.840.000 ₫</td><td class="is-money">17.515.000 ₫</td><td>42 hóa đơn</td></tr></tfoot>
+              </table>
+            </div>
+            <div class="eod-summary-blocks">
+              <section class="eod-summary-section"><h4>Đối soát nghiệp vụ</h4><div class="eod-summary-line"><span>Đơn mở từ hôm trước, hoàn tất hôm nay</span><strong>3 hóa đơn</strong></div><div class="eod-summary-line"><span>Đơn hoàn tất chưa thu đủ</span><strong>325.000 ₫</strong></div><div class="eod-summary-line"><span>Trả hàng phát sinh trong ngày</span><strong>2 phiếu</strong></div></section>
+              <section class="eod-summary-section"><h4>Theo phương thức</h4><div class="eod-summary-line"><span>Tiền mặt</span><strong>7.340.000 ₫</strong></div><div class="eod-summary-line"><span>Chuyển khoản</span><strong>8.925.000 ₫</strong></div><div class="eod-summary-line"><span>Ví điện tử</span><strong>1.250.000 ₫</strong></div></section>
+            </div>
+            <p class="eod-detail-note">Số liệu bán hàng và thanh toán được trình bày riêng để tránh cộng trùng.</p>
+          </article>
+        </section>
+      </div>
+    </main>
+  </section>
+
+  <div class="eod-review">
+    <span class="eod-review-copy" aria-live="polite">Bạn có thể thử Desktop/Di động, ba mối quan tâm và hai kiểu hiển thị.</span>
+    <div class="eod-review-actions">
+      <button type="button" class="eod-review-button is-approve" data-choice="approve-ui">Duyệt hướng giao diện</button>
+      <button type="button" class="eod-review-button is-revise" data-choice="revise-ui">Cần chỉnh giao diện</button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('eod-mockup');
+      if (!root || root.dataset.ready === 'true') return;
+      root.dataset.ready = 'true';
+      const shell = root.querySelector('.eod-shell');
+      const filters = root.querySelector('.eod-filters');
+      const title = root.querySelector('.eod-report-title');
+      const viewLabel = root.querySelector('#eod-view-label');
+      const head = root.querySelector('#eod-table-head');
+      const body = root.querySelector('#eod-table-body');
+      const kpis = root.querySelector('.eod-kpis');
+      const summaries = root.querySelector('.eod-summary-blocks');
+      const detailNote = root.querySelector('.eod-detail-note');
+      const concerns = {
+        sales: {
+          name: 'Bán hàng', title: 'Báo cáo cuối ngày về bán hàng',
+          kpis: [['Hóa đơn hoàn tất','42','Theo completedAt'],['Doanh thu bán','18.460.000 ₫','Trước trả hàng'],['Giá trị trả','620.000 ₫','Theo returnedAt'],['Doanh thu thuần','17.840.000 ₫','Không trộn dòng tiền']],
+          head: ['Mã chứng từ','Thời gian','Khách hàng','Người nhận','Doanh thu','Thanh toán','Trạng thái'],
+          rows: [['HD-20261003-0042','21:47','Nguyễn Minh Anh','Trần Minh','486.000 ₫','486.000 ₫','Hoàn tất'],['HD-20261003-0041','21:31','Khách lẻ','Trần Minh','325.000 ₫','325.000 ₫','Hoàn tất'],['TH-20261003-0002','20:54','Lê Ngọc','Chưa xác định','−120.000 ₫','−120.000 ₫','Đã trả']]
+        },
+        cashflow: {
+          name: 'Thu chi', title: 'Báo cáo cuối ngày về thu chi',
+          kpis: [['Tổng thu','19.065.000 ₫','Phiếu POSTED'],['Tổng chi','3.780.000 ₫','Theo occurredAt'],['Thuần trong ngày','15.285.000 ₫','Thu trừ chi'],['Chưa đối soát','0 ₫','Không có chênh lệch']],
+          head: ['Mã phiếu','Thời gian','Loại','Nguồn','Phương thức','Giá trị','Người tạo'],
+          rows: [['PT-20261003-0088','21:48','Thu','Thanh toán HD-0042','Chuyển khoản','486.000 ₫','Thu ngân Lan'],['PC-20261003-0021','18:15','Chi','Nhập hàng NCC','Chuyển khoản','2.450.000 ₫','Quản trị'],['PC-20261003-0020','16:40','Chi','Hoàn tiền TH-0002','Tiền mặt','120.000 ₫','Thu ngân Lan']]
+        },
+        goods: {
+          name: 'Hàng hóa', title: 'Báo cáo cuối ngày về hàng hóa',
+          kpis: [['Món bán','186','Theo OrderItem'],['Giá vốn bán','6.240.000 ₫','AUTO_DEDUCT'],['Giá trị trả kho','185.000 ₫','SALES_RETURN'],['Xuất hủy','96.000 ₫','KITCHEN_WASTE']],
+          head: ['Thời gian','Mã hàng','Tên hàng','Nghiệp vụ','Số lượng','Giá trị vốn','Chứng từ'],
+          rows: [['21:47','MON-0012','Burger bò phô mai','Bán hàng','2','96.000 ₫','HD-0042'],['20:54','MON-0008','Cơm gà sốt tiêu','Trả kho','1','42.000 ₫','TH-0002'],['16:18','NL-0021','Khoai tây','Xuất hủy','2,5 kg','76.000 ₫','XH-0014']]
+        }
+      };
+      let concern = 'sales';
+      let view = 'summary';
+
+      const render = () => {
+        const data = concerns[concern];
+        title.textContent = data.title;
+        viewLabel.textContent = `${view === 'summary' ? 'Tổng quan' : 'Chi tiết'} · ${data.name}`;
+        kpis.innerHTML = data.kpis.map(item => `<div class="eod-kpi"><div class="eod-kpi-label">${item[0]}</div><div class="eod-kpi-value">${item[1]}</div><div class="eod-kpi-note">${item[2]}</div></div>`).join('');
+        head.innerHTML = data.head.map((item, index) => `<th class="${index >= 4 && index <= 5 ? 'is-money' : ''}">${item}</th>`).join('');
+        body.innerHTML = data.rows.map(row => `<tr>${row.map((item, index) => `<td class="${index >= 4 && index <= 5 ? 'is-money' : ''}">${index === 6 ? `<span class="eod-status">${item}</span>` : item}</td>`).join('')}</tr>`).join('');
+        kpis.style.display = view === 'summary' ? 'grid' : 'none';
+        summaries.style.display = view === 'summary' ? 'grid' : 'none';
+        detailNote.textContent = view === 'summary' ? 'Số liệu tổng quan dùng đúng thời điểm nghiệp vụ của từng nguồn.' : 'Danh sách chi tiết có phân trang, xuất XLSX và giữ nguyên dấu vết chứng từ nguồn.';
+        root.querySelectorAll('[data-filter-group="sales-common"], [data-filter-group="delivery"], [data-filter-group="table"]').forEach(el => { el.style.display = concern === 'cashflow' ? 'none' : 'block'; });
+        root.querySelectorAll('[data-filter-group="payment"]').forEach(el => { el.style.display = concern === 'goods' ? 'none' : 'block'; });
+      };
+
+      root.querySelectorAll('[data-device]').forEach(button => {
+        button.addEventListener('click', () => {
+          const mobile = button.dataset.device === 'mobile';
+          shell.classList.toggle('is-mobile', mobile);
+          shell.classList.toggle('is-desktop', !mobile);
+          root.querySelectorAll('[data-device]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          if (!mobile) filters.classList.remove('is-collapsed');
+        });
+      });
+      root.querySelectorAll('[data-concern]').forEach(button => {
+        button.addEventListener('click', () => {
+          concern = button.dataset.concern;
+          root.querySelectorAll('[data-concern]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          render();
+        });
+      });
+      root.querySelectorAll('[data-view]').forEach(button => {
+        button.addEventListener('click', () => {
+          view = button.dataset.view;
+          root.querySelectorAll('[data-view]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          render();
+        });
+      });
+      root.querySelector('.eod-filter-toggle').addEventListener('click', () => filters.classList.toggle('is-collapsed'));
+      root.querySelectorAll('.eod-review-button').forEach(button => {
+        button.addEventListener('click', () => {
+          root.querySelectorAll('.eod-review-button').forEach(item => item.classList.toggle('is-selected', item === button));
+          if (typeof window.toggleSelect === 'function') window.toggleSelect(button);
+        });
+      });
+      render();
+    })();
+  </script>
+</div>

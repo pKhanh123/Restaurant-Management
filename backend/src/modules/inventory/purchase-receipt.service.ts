@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { CashVoucher, CashVoucherSourceType, Prisma } from '@prisma/client';
 import { prisma } from '../../config/prisma';
 import { ApiError } from '../../lib/api-error';
 import { AuditService } from '../audit/audit.service';
@@ -25,6 +25,8 @@ import {
   PurchaseReceiptImportPreviewDto,
   PurchaseReceiptListDataDto
 } from './purchase-receipt.types';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 const RECEIPT_CODE_PREFIX = 'PN';
 const RECEIPT_CODE_RETRY_LIMIT = 2;
@@ -145,7 +147,6 @@ function toReceiptDto(receipt: ReceiptRecord): PurchaseReceiptDto {
     paidAmount: receipt.paidAmount,
     paymentMethod: receipt.paymentMethod,
     financialAccountId: receipt.financialAccountId,
-    paymentExternalReference: receipt.paymentExternalReference,
     outstandingAmount: totals.outstandingAmount,
     note: receipt.note,
     createdByUserId: receipt.createdByUserId,
@@ -346,8 +347,7 @@ export class PurchaseReceiptService {
               discountAmount: input.discountAmount,
               paidAmount: input.paidAmount,
               paymentMethod: input.paymentMethod,
-              financialAccountId: input.financialAccountId ?? null,
-              paymentExternalReference: input.paymentExternalReference ?? null,
+              financialAccountId: input.paymentMethod === 'CASH' ? null : (input.financialAccountId ?? null),
               note: input.note ?? null,
               createdByUserId: actor.id,
               lines: { create: lines }
@@ -408,9 +408,8 @@ export class PurchaseReceiptService {
           subtotalAmount: totals.subtotalAmount,
           discountAmount,
           paidAmount,
-          paymentMethod,
-          financialAccountId,
-          paymentExternalReference: input.paymentExternalReference,
+          paymentMethod: input.paymentMethod,
+          financialAccountId: input.paymentMethod === 'CASH' ? null : input.financialAccountId,
           note: input.note
         }
       });
@@ -456,7 +455,7 @@ export class PurchaseReceiptService {
   }
 
   static async postReceipt(id: number, actor: PurchaseReceiptActor): Promise<PurchaseReceiptDto> {
-    let outcome: { receipt: ReceiptRecord; ingredientIds: number[]; voucher: Awaited<ReturnType<typeof CashbookPostingService.post>> };
+    let outcome: { receipt: ReceiptRecord; ingredientIds: number[]; cashVoucher: CashVoucher | null };
     try {
       outcome = await prisma.$transaction(async tx => {
         const claimed = await tx.purchaseReceipt.updateMany({
@@ -545,8 +544,26 @@ export class PurchaseReceiptService {
           data: { subtotalAmount: totals.subtotalAmount },
           include: receiptInclude
         });
-        return { receipt: posted, ingredientIds, voucher };
-      }).catch(normalizeCashbookPersistenceError);
+        const cashVoucher = posted.paidAmount > 0 ? await CashbookPostingService.post(tx, {
+          direction: 'PAYMENT',
+          paymentMethod: posted.paymentMethod,
+          accountId: posted.paymentMethod === 'CASH' ? undefined : (posted.financialAccountId ?? undefined),
+          categoryCode: 'SUPPLIER_PAYMENT',
+          amount: posted.paidAmount,
+          occurredAt: posted.postedAt ?? new Date(),
+          sourceType: CashVoucherSourceType.PURCHASE_RECEIPT,
+          sourceId: posted.id,
+          sourceCode: posted.receiptCode,
+          counterpartyType: 'SUPPLIER',
+          counterpartyId: posted.supplierId,
+          counterpartyName: posted.supplier?.name,
+          affectsBusinessResult: false,
+          linkedPurchaseReceiptId: posted.id,
+          sourceInvoiceNumber: posted.invoiceNumber,
+          sourceInvoiceDate: posted.invoiceDate
+        }, actor) : null;
+        return { receipt: posted, ingredientIds, cashVoucher };
+      });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2034') {
         const current = await prisma.purchaseReceipt.findUnique({ where: { id }, select: { status: true } });
@@ -571,9 +588,8 @@ export class PurchaseReceiptService {
       reason: 'PURCHASE_RECEIPT_POSTED',
       updatedAt: dto.updatedAt.toISOString()
     });
-    if (outcome.voucher) {
-      const { emitToAll } = await import('../../lib/socket');
-      emitToAll('cashbook:changed', cashbookChangedEvent(outcome.voucher));
+    if (outcome.cashVoucher) {
+      emitCashbookChanged({ voucherIds: [outcome.cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
     }
     return dto;
   }

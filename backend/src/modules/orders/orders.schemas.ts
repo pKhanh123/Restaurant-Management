@@ -36,27 +36,9 @@ export const createOrderSchema = z.object({
 
 export const payOrderSchema = z.object({
   paymentMethod: z.enum(['CASH', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET'], {
-    required_error: 'Phương thức thanh toán là bắt buộc'
+    required_error: 'Phương thức thanh toán là bắt buộc (CASH | BANK_TRANSFER | CREDIT_CARD | E_WALLET)'
   }),
-  financialAccountId: z.number().int().positive().nullable().optional()
-});
-
-export const reservationOrderPaymentDeclarationSchema = z.object({
-  reservationAccessToken: z.string().trim().min(32).max(96)
-});
-
-export const confirmOrderPaymentSchema = z.object({
-  amount: z.number().int().positive(),
-  financialAccountId: z.number().int().positive().nullable().optional(),
-  externalReference: z.string().trim().min(1).max(120)
-});
-
-export const rejectOrderPaymentSchema = z.object({
-  reason: z.string().trim().min(3).max(500)
-});
-
-export const authorizeReservationOrderPayLaterSchema = z.object({
-  reason: z.string().trim().min(3).max(500)
+  financialAccountId: z.number().int().positive().optional()
 });
 
 export const updateOrderStatusSchema = z.object({

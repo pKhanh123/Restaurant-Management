@@ -1,21 +1,74 @@
 import { describe, expect, it } from 'vitest';
-import { getCashbookSummaryCards, getVoucherRelationshipLabel } from './cashbookViewModel';
+import type { CashFlowCategoryDto, FinancialAccountDto } from '../../api/contracts';
+import {
+  formatSignedVoucherAmount,
+  validateVoucherForm,
+  voucherFormFields
+} from './cashbookViewModel';
 
-describe('cashbook view model', () => {
-  it('keeps actual account balance separate from filtered movement totals', () => {
-    expect(getCashbookSummaryCards({ openingBalance: 500_000, closingBalance: 700_000, accountCount: 2, from: null, to: null }, {
-      rowCount: 3, totalReceipts: 400_000, totalPayments: 200_000, netMovement: 200_000
-    })).toEqual([
-      { key: 'balance', label: 'Số dư thực của quỹ', amount: 700_000, detail: 'Số dư đầu kỳ 500.000 ₫' },
-      { key: 'receipts', label: 'Tổng thu theo bộ lọc', amount: 400_000, detail: 'Theo 3 chứng từ' },
-      { key: 'payments', label: 'Tổng chi theo bộ lọc', amount: 200_000, detail: 'Theo 3 chứng từ' },
-      { key: 'movement', label: 'Thuần theo bộ lọc', amount: 200_000, detail: 'Không phải số dư quỹ' }
-    ]);
+const accounts: FinancialAccountDto[] = [
+  { id: 1, code: 'TM', name: 'Tiền mặt', type: 'CASH', openingBalance: 0, openingAt: null, bankName: null, accountNumber: null, walletProvider: null, walletIdentifier: null, isDefault: true, isActive: true, createdAt: '', updatedAt: '' },
+  { id: 2, code: 'BANK', name: 'VCB', type: 'BANK', openingBalance: 0, openingAt: null, bankName: 'VCB', accountNumber: '••••1234', walletProvider: null, walletIdentifier: null, isDefault: true, isActive: true, createdAt: '', updatedAt: '' },
+  { id: 3, code: 'WALLET', name: 'MoMo', type: 'E_WALLET', openingBalance: 0, openingAt: null, bankName: null, accountNumber: null, walletProvider: 'MoMo', walletIdentifier: '••••5678', isDefault: true, isActive: false, createdAt: '', updatedAt: '' }
+];
+
+const categories: CashFlowCategoryDto[] = [
+  { id: 10, code: 'OTHER_RECEIPT', name: 'Thu khác', direction: 'RECEIPT', affectsBusinessResultDefault: true, isSystem: false, isActive: true, createdAt: '', updatedAt: '' },
+  { id: 20, code: 'OTHER_PAYMENT', name: 'Chi khác', direction: 'PAYMENT', affectsBusinessResultDefault: true, isSystem: false, isActive: true, createdAt: '', updatedAt: '' }
+];
+
+describe('cashbook voucher view model', () => {
+  it('maps the six approved form variants to their conditional fields', () => {
+    expect(voucherFormFields('RECEIPT', 'CASH')).toEqual({ invoice: false, method: false, account: false });
+    expect(voucherFormFields('PAYMENT', 'BANK')).toEqual({ invoice: true, method: true, account: true });
+    expect(voucherFormFields('PAYMENT', 'E_WALLET')).toEqual({ invoice: true, method: false, account: true });
+    expect(voucherFormFields('RECEIPT', 'BANK')).toEqual({ invoice: false, method: true, account: true });
   });
 
-  it('labels both sides of a reversal so it can be reconciled', () => {
-    expect(getVoucherRelationshipLabel({ id: 2, reversalOf: { id: 1, code: 'PT-001', direction: 'RECEIPT', amount: 1 }, reversal: null })).toBe('Bút toán đảo của PT-001');
-    expect(getVoucherRelationshipLabel({ id: 1, reversalOf: null, reversal: { id: 2, code: 'PC-002', occurredAt: '2026-10-01T00:00:00.000Z', amount: 1 } })).toBe('Đã được đảo bởi PC-002');
-    expect(getVoucherRelationshipLabel({ id: 3, reversalOf: null, reversal: null })).toBeNull();
+  it('accepts a valid cash receipt and resolves the default cash account', () => {
+    expect(validateVoucherForm({
+      direction: 'RECEIPT', accountType: 'CASH', categoryId: 10, amount: 100_000,
+      occurredAt: '2026-09-23T11:23:00.000+07:00', counterpartyName: 'Anh Giang'
+    }, accounts, categories)).toEqual({ valid: true, errors: {}, accountId: 1, paymentMethod: 'CASH' });
+  });
+
+  it('rejects inactive or wrong-type accounts', () => {
+    expect(validateVoucherForm({
+      direction: 'PAYMENT', accountType: 'BANK', accountId: 1, paymentMethod: 'BANK_TRANSFER',
+      categoryId: 20, amount: 100_000, occurredAt: '2026-09-23T11:23:00.000+07:00', counterpartyName: 'NCC'
+    }, accounts, categories).errors.accountId).toBe('Tài khoản không phù hợp');
+    expect(validateVoucherForm({
+      direction: 'PAYMENT', accountType: 'E_WALLET', accountId: 3,
+      categoryId: 20, amount: 100_000, occurredAt: '2026-09-23T11:23:00.000+07:00', counterpartyName: 'NCC'
+    }, accounts, categories).errors.accountId).toBe('Tài khoản đã ngừng hoạt động');
+  });
+
+  it('requires a matching category, counterparty and whole-VND amount in bounds', () => {
+    const result = validateVoucherForm({
+      direction: 'PAYMENT', accountType: 'CASH', categoryId: 10, amount: 2_000_000_001.5,
+      occurredAt: '', counterpartyName: '   '
+    }, accounts, categories);
+    expect(result.errors).toEqual({
+      categoryId: 'Loại thu/chi không phù hợp',
+      amount: 'Số tiền phải là số nguyên từ 1 đến 2.000.000.000',
+      occurredAt: 'Vui lòng chọn thời gian',
+      counterpartyName: 'Vui lòng nhập người nộp/nhận'
+    });
+  });
+
+  it('requires bank payment method but derives wallet method', () => {
+    expect(validateVoucherForm({
+      direction: 'RECEIPT', accountType: 'BANK', accountId: 2, categoryId: 10,
+      amount: 50_000, occurredAt: '2026-09-23T11:23:00.000+07:00', counterpartyName: 'Khách'
+    }, accounts, categories).errors.paymentMethod).toBe('Vui lòng chọn phương thức thanh toán');
+    expect(validateVoucherForm({
+      direction: 'RECEIPT', accountType: 'E_WALLET', accountId: 3, categoryId: 10,
+      amount: 50_000, occurredAt: '2026-09-23T11:23:00.000+07:00', counterpartyName: 'Khách'
+    }, accounts, categories).paymentMethod).toBe('E_WALLET');
+  });
+
+  it('formats receipt positive and payment negative in VND', () => {
+    expect(formatSignedVoucherAmount({ direction: 'RECEIPT', amount: 1_615_000 })).toBe('+1.615.000 ₫');
+    expect(formatSignedVoucherAmount({ direction: 'PAYMENT', amount: 287_000 })).toBe('-287.000 ₫');
   });
 });

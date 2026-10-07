@@ -1,0 +1,1345 @@
+0000 [['Ba']] BỘ GIÁO DỤC VÀ ĐÀO TẠO
+0001 [['Ba']] TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT HƯNG YÊN
+0004 [['Ba']] 
+0007 [['Ba']] ĐỒ ÁN 3
+0008 [['Ba']] THIẾT KẾ WEBSITE QUẢN LÝ ĐÀO TẠO 
+0011 [['Ba']] NGÀNH: KỸ THUẬT PHẦN MỀM
+0012 [['Ba']] CHUYÊN NGÀNH: PHÁT TRIỂN ỨNG DỤNG PHẦN MỀM 
+0015 [['Ba']] SINH VIÊN: PHAN VĂN KHÁNH
+0016 [['Ba']] MÃ SV: 12523037
+0017 [['Ba']] MÃ LỚP: 12523W.4
+0018 [['Ba']] HƯỚNG DẪN: TS. HOÀNG QUỐC VIỆT
+0020 [['Ba']] HƯNG YÊN - 2026
+0022 [['CH1']] NHẬN XÉT
+0024 [[]] Nhận xét của giảng viên hướng dẫn:
+0025 [[]] .......................................................................................................................................
+0026 [[]] .......................................................................................................................................
+0027 [[]] .......................................................................................................................................
+0028 [[]] .......................................................................................................................................
+0029 [[]] .......................................................................................................................................
+0030 [[]] .......................................................................................................................................
+0031 [[]] .......................................................................................................................................
+0032 [[]] .......................................................................................................................................
+0033 [[]] .......................................................................................................................................
+0034 [[]] .......................................................................................................................................
+0035 [[]] .......................................................................................................................................
+0036 [[]] .......................................................................................................................................
+0037 [[]] .......................................................................................................................................
+0038 [[]] .......................................................................................................................................
+0039 [[]] .......................................................................................................................................
+0040 [[]] .......................................................................................................................................
+0041 [[]] .......................................................................................................................................
+0042 [[]] .......................................................................................................................................
+0043 [[]] .......................................................................................................................................
+0044 [[]] .......................................................................................................................................
+0045 [[]] .......................................................................................................................................
+0046 [[]] GIẢNG VIÊN HƯỚNG DẪN
+0047 [[]]                                                                                         (Ký và ghi rõ họ tên)    
+0050 [[]] LỜI CAM ĐOAN
+0052 [[]] Em xin cam đoan đồ án“Thiết kế website quản lý đào tạo” là kết quả thực hiện của bản thân em dưới sự hướng dẫn của TS. Hoàng Quốc Việt.
+0053 [[]] Những phần sử dụng tài liệu tham khảo trong đồ án đã được nêu rõ trong phần tài liệu tham khảo. Các kết quả trình bày trong đồ án và chương trình xây dựng được hoàn toàn là kết quả do bản thân em thực hiện.
+0054 [[]] Nếu vi phạm lời cam đoan này, em xin chịu hoàn toàn trách nhiệm trước khoa và nhà trường.
+0055 [[]] Hưng Yên, ngày 19 tháng 05 năm 2026
+0056 [[]] SINH VIÊN
+0057 [[]] (Ký, ghi rõ họ tên)
+0060 [[]] Phan Văn Khánh
+0065 [['CH1']] LỜI CẢM ƠN
+0067 [[]] Để có thể hoàn thành đồ án này, lời đầu tiên em xin phép gửi lời cảm ơn tới bộ môn Công nghệ phần mềm, Khoa Công nghệ thông tin – Trường Đại học Sư phạm Kỹ thuật Hưng Yên đã tạo điều kiện thuận lợi cho em thực hiện đồ án môn học này.
+0068 [[]] Đặc biệt em xin chân thành cảm ơn TS. Hoàng Quốc Việt đã rất tận tình hướng dẫn, chỉ bảo em trong suốt thời gian thực hiện đồ án vừa qua.
+0069 [[]] Em cũng xin chân thành cảm ơn tất cả các thầy/cô trong trường đã tận tình giảng dạy, trang bị cho em những kiến thức cần thiết, quý báu để giúp em thực hiện được đồ án này.
+0070 [[]] Mặc dù em đã có cố gắng, nhưng với trình độ còn hạn chế, trong quá trình thực hiện đề tài không tránh khỏi những thiếu sót. Em hi vọng sẽ nhận được những ý kiến nhận xét, góp ý của các thầy/cô về những kết quả triển khai trong đồ án.
+0071 [[]] Em xin trân trọng cảm ơn!
+0076 [['CH1']] MỤC LỤC
+0078 [['TOC1']] NHẬN XÉT2
+0079 [['TOC1']] LỜI CẢM ƠN4
+0080 [['TOC1']] MỤC LỤC5
+0081 [['TOC1']] DANH MỤC CÁC THUẬT NGỮ9
+0082 [['TOC1']] DANH MỤC CÁC BẢNG10
+0083 [['TOC1']] 1.1. Lý do chọn đề tài18
+0084 [['TOC1']] 1.2. Mục tiêu của đề tài19
+0085 [['TOC2']] 1.2.1 Mục tiêu tổng quát19
+0086 [['TOC2']] 1.2.2 Mục tiêu cụ thể19
+0087 [['TOC1']] 1.3. Giới hạn và phạm vi của đề tài20
+0088 [['TOC2']] 1.3.1 Đối tượng nghiên cứu20
+0089 [['TOC2']] 1.3.2 Phạm vi nghiên cứu20
+0090 [['TOC2']] 1.3.3 Ý nghĩa khoa học và thực tiễn của đề tài21
+0091 [['TOC1']] 1.4. Nội dung thực hiện21
+0092 [['TOC1']] 1.5. Phương pháp tiếp cận22
+0093 [['TOC1']] CHƯƠNG 2: CƠ SỞ LÝ THUYẾT24
+0094 [['TOC1']] 2.1. Quy trình phát triển phần mềm24
+0095 [['TOC1']] 2.2. Ngôn ngữ mô hình hoá thống nhất UML26
+0096 [['TOC1']] 2.3. Lập trình phía front-end28
+0097 [['TOC2']] 2.3.1. HTML và CSS28
+0098 [['TOC2']] 2.3.2. JavaScript và AngularJS29
+0099 [['TOC2']] 2.3.3. Kết nối Front-end với Back-end29
+0100 [['TOC2']] 2.3.4. Các chức năng giao diện chính29
+0101 [['TOC1']] CHƯƠNG 3: PHÂN TÍCH HỆ THỐNG31
+0102 [['TOC1']] 3.1. Phát biểu bài toán31
+0103 [['TOC1']] 3.2. Phân tích các chức năng của hệ thống32
+0104 [['TOC1']] 3.3. Biểu đồ Usecase35
+0105 [['TOC2']] 3.3.1. Use-case mức tổng quát35
+0106 [['TOC2']] 3.3.2. Các use-case phân rã của hệ thống35
+0107 [['TOC3']] 1.1. Chức năng quản lý danh mục học tập - (UC-01)35
+0108 [['TOC3']] 1.2. Chức năng báo cáo thống kê (UC-02)40
+0109 [['TOC3']] 1.3. Chức năng quản lý lịch học lịch thi (UC-03)46
+0110 [['TOC3']] 1.4 Chức năng cảnh báo học tập (UC-04)51
+0111 [['TOC3']] 1.5 Chức năng duyệt đơn phúc khảo (UC-05)56
+0112 [['TOC3']] 1.6 Chức năng quản lý điểm danh (UC-06)62
+0113 [['TOC3']] 1.7  Chức năng nhập điểm và tính toán (UC-07)68
+0114 [['TOC3']] 1.8  Hiển Thị Thông Tin (UC-08)76
+0115 [['TOC3']] 1.9  Chức năng đăng ký học phần (UC-09)82
+0116 [['TOC1']] 3.3. Biểu đồ lớp thực thể90
+0117 [['TOC2']] 3.3.1 Danh sách các lớp đối tượng90
+0118 [['TOC2']] 3.3.2. Chi tiết hóa các lớp đối tượng93
+0119 [['TOC3']] 3.3.2.1. Role93
+0120 [['TOC3']] 3.3.2.2. User93
+0121 [['TOC3']] 3.3.2.3. Faculty94
+0122 [['TOC3']] 3.3.2.4 Department95
+0123 [['TOC3']] 3.3.2.5. Major96
+0124 [['TOC3']] 3.3.2.6. AcademicYear96
+0125 [['TOC3']] 3.3.2.7. SchoolYear97
+0126 [['TOC3']] 3.3.2.8. Student98
+0127 [['TOC3']] 3.3.2.9. Lecturer100
+0128 [['TOC3']] 3.3.2.10. Subject101
+0129 [['TOC3']] 3.3.2.11. Class103
+0130 [['TOC3']] 3.3.2.12. ExamAssignment104
+0131 [['TOC3']] 3.3.2.13. LecturerSubject106
+0132 [['TOC3']] 3.3.2.13. Enrollment108
+0133 [['TOC3']] 3.3.2.14. Attendance108
+0134 [['TOC3']] 3.3.2.15. Lớp Grade109
+0135 [['TOC3']] 3.3.2.16. Lớp GPA110
+0136 [['TOC3']] 3.3.2.17. Lớp Notification111
+0137 [['TOC3']] Bảng 3. 124.Bảng thuộc tính lớp Notification111
+0138 [['TOC3']] 3.3.2.29. ExamAssignment123
+0139 [['TOC3']] 3.3.2.30. LecturerSubject126
+0140 [['TOC1']] CHƯƠNG 4: THIẾT KẾ HỆ THỐNG128
+0141 [['TOC1']] 4.1. Triển khai các chức năng cho phân hệ người dùng128
+0142 [['TOC2']] 4.1.1 Trang đăng nhập128
+0143 [['TOC2']] 4.1.2. Trang chủ130
+0144 [['TOC2']] 4.1.3 Trang quản lý sinh viên131
+0145 [['TOC2']] 4.1.4 Trang quản lý tổ chức132
+0146 [['TOC2']] 4.1.5 Trang quản lý giảng viên133
+0147 [['TOC2']] 4.1.6 Trang niên khoá134
+0148 [['TOC2']] 4.1.7 Trang năm học135
+0149 [['TOC2']] 4.1.8 Trang lớp học phần136
+0150 [['TOC2']] 4.1.9 Trang xếp lịch137
+0151 [['TOC2']] 4.1.10 Trang đăng ký lớp học138
+0152 [['TOC2']] 4.1.11 Trang quản lý tài khoản139
+0153 [['TOC2']] 4.1.12 Trang quản lý quyền140
+0154 [['TOC2']] 4.1.13 Trang Dashboard cố vấn học tập141
+0155 [['TOC2']] 4.1.14 Trang sinh viên được phân công143
+0156 [['TOC2']] 4.1.15 Trang cảnh báo học tập144
+0157 [['TOC2']] 4.1.15 Trang công thức tính điểm146
+0158 [['TOC2']] 4.1.16 Trang đăng ký học phần147
+0159 [['TOC2']] 4.1.17 Dashboard Giảng viên148
+0160 [['TOC2']] 4.1.18 Trang điểm danh lớp học150
+0161 [['TOC2']] 4.1.19 Trang nhập điểm152
+0162 [['TOC2']] 4.1.20 Trang Thời khoá biểu giảng viên153
+0163 [['TOC2']] 4.1.21 Trang Dashboard Sinh viên154
+0164 [['TOC2']] 4.1.22 Trang lịch học155
+0165 [['TOC2']] 4.1.23 Trang kết quả học tập155
+0166 [['TOC2']] 4.1.24 Trang thông tin cá nhân sinh viên157
+0167 [['TOC1']] 4.2 Kiểm thử và triển khai ứng dụng158
+0168 [['TOC2']] 4.3.1 Kiểm thử158
+0169 [['TOC2']] 4.3.2 Đóng gói ứng dụng160
+0170 [['TOC2']] 4.3.3 Triển khai ứng dụng162
+0171 [['TOC1']] KẾT LUẬN166
+0172 [['TOC1']] TÀI LIỆU THAM KHẢO167
+0174 [['m1']] DANH MỤC CÁC THUẬT NGỮ
+0176 [['Hngtiubng', 'Hngtiubng', 'Hngtiubng', 'Hngtiubng', 'Nidungtrongbng', 'Nidungtrongbng', 'Nidungtrongbng', 'Nidungtrongbng', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung']] STTTừ viết tắtCụm từ tiếng anhDiễn giải1HTMLHypertext Markup LanguageNgôn ngữ đánh dấu siêu văn bản, dùng để xây dựng cấu trúc và nội dung trang web (tiêu đề, đoạn văn, hình ảnh, liên kết…). HTML là nền tảng cơ bản để trình duyệt hiểu và hiển thị trang web.2JSJavaScriptNgôn ngữ kịch bản (scripting language) chạy chủ yếu trên trình duyệt và cũng có thể chạy ở server (Node.js); dùng để tạo tương tác, xử lý sự kiện, thao tác DOM và logic phía client3CSSCascading Style SheetsNgôn ngữ định kiểu dùng để mô tả cách trình bày tài liệu HTML — bố cục, màu sắc, font, khoảng cách, và responsive design (điều chỉnh giao diện theo kích thước màn hình)4APIApplication Programming InterfaceLà tập hợp các quy tắc, phương thức giúp các hệ thống phần mềm giao tiếp với nhau5JWTJSON Web TokenLà tập hợp các quy tắc, phương thức giúp các hệ thống phần mềm giao tiếp với nhau, JWT giúp xác thực nhanh, không cần lưu session trên server.
+0179 [['m1']] DANH MỤC CÁC BẢNG
+0181 [['TableofFigures']] Bảng 3. 1: Danh sách các chức năng33
+0182 [['TableofFigures']] Bảng 3. 2: Dòng phụ UC001-A137
+0183 [['TableofFigures']] Bảng 3. 3: Dòng phụ UC001-A238
+0184 [['TableofFigures']] Bảng 3. 4: Dòng phụ UC001-A339
+0185 [['TableofFigures']] Bảng 3. 5: Dòng phụ UC001-A439
+0186 [['TableofFigures']] Bảng 3. 6: Dòng phụ UC001-A540
+0187 [['TableofFigures']] Bảng 3. 7:Dòng phụ UC001-A640
+0188 [['TableofFigures']] Bảng 3. 8:Dòng phụ UC001-A740
+0189 [['TableofFigures']] Bảng 3. 9: Dòng sự kiện chính UC-0242
+0190 [['TableofFigures']] Bảng 3. 10: Dòng phụ UC002-A143
+0191 [['TableofFigures']] Bảng 3. 11: Dòng phụ UC002-A244
+0192 [['TableofFigures']] Bảng 3. 12: Dòng phụ UC002-A344
+0193 [['TableofFigures']] Bảng 3. 13: Dòng phụ UC002-A445
+0194 [['TableofFigures']] Bảng 3. 14: Dòng phụ UC002-A545
+0195 [['TableofFigures']] Bảng 3. 15: Dòng phụ UC002-A646
+0196 [['TableofFigures']] Bảng 3. 16: Dòng phụ UC002-A746
+0197 [['TableofFigures']] Bảng 3. 17: Dòng sự kiện chính UC-0347
+0198 [['TableofFigures']] Bảng 3. 18: Dòng phụ UC003-A148
+0199 [['TableofFigures']] Bảng 3. 19: Dòng phụ UC003-A249
+0200 [['TableofFigures']] Bảng 3. 20: Dòng phụ UC003-A349
+0201 [['TableofFigures']] Bảng 3. 21: Dòng phụ UC003-A450
+0202 [['TableofFigures']] Bảng 3. 22: Dòng phụ UC003-A550
+0203 [['TableofFigures']] Bảng 3. 23: Dòng phụ UC003-A651
+0204 [['TableofFigures']] Bảng 3. 24: Dòng phụ UC003-A751
+0205 [['TableofFigures']] Bảng 3. 25: Dòng sự kiện chính UC-0453
+0206 [['TableofFigures']] Bảng 3. 26: Dòng phụ UC004-A154
+0207 [['TableofFigures']] Bảng 3. 27: Dòng phụ UC004-A254
+0208 [['TableofFigures']] Bảng 3. 28: Dòng phụ UC004-A255
+0209 [['TableofFigures']] Bảng 3. 29: Dòng phụ UC004-A455
+0210 [['TableofFigures']] Bảng 3. 30: Dòng phụ UC004-A556
+0211 [['TableofFigures']] Bảng 3. 31: Dòng sự kiện chính UC-0557
+0212 [['TableofFigures']] Bảng 3. 32: Dòng phụ UC005-A158
+0213 [['TableofFigures']] Bảng 3. 33: Dòng phụ UC005-A258
+0214 [['TableofFigures']] Bảng 3. 34: Dòng phụ UC005-A359
+0215 [['TableofFigures']] Bảng 3. 35: Dòng phụ UC005-A459
+0216 [['TableofFigures']] Bảng 3. 36: Dòng phụ UC005-A560
+0217 [['TableofFigures']] Bảng 3. 37: Dòng phụ UC005-A660
+0218 [['TableofFigures']] Bảng 3. 38: Dòng phụ UC005-A761
+0219 [['TableofFigures']] Bảng 3. 39: Dòng phụ UC005-A861
+0220 [['TableofFigures']] Bảng 3. 40: Dòng phụ UC005-A962
+0221 [['TableofFigures']] Bảng 3. 41: Dòng sự kiện chính UC-0663
+0222 [['TableofFigures']] Bảng 3. 42: Dòng phụ UC006-A164
+0223 [['TableofFigures']] Bảng 3. 43: Dòng phụ UC006-A264
+0224 [['TableofFigures']] Bảng 3. 44: Dòng phụ UC006-A365
+0225 [['TableofFigures']] Bảng 3. 45: Dòng phụ UC006-A465
+0226 [['TableofFigures']] Bảng 3. 46: Dòng phụ UC006-A566
+0227 [['TableofFigures']] Bảng 3. 47: Dòng phụ UC006-A666
+0228 [['TableofFigures']] Bảng 3. 48: Dòng phụ UC006-A767
+0229 [['TableofFigures']] Bảng 3. 49: Dòng phụ UC006-A867
+0230 [['TableofFigures']] Bảng 3. 50: Dòng phụ UC006-A968
+0231 [['TableofFigures']] Bảng 3. 51: Dòng phụ UC006-A1068
+0232 [['TableofFigures']] Bảng 3. 52: Dòng sự kiện UC-0770
+0233 [['TableofFigures']] Bảng 3. 53: Dòng phụ UC007-A171
+0234 [['TableofFigures']] Bảng 3. 54: Dòng phụ UC007-A271
+0235 [['TableofFigures']] Bảng 3. 55: Dòng phụ UC007-A372
+0236 [['TableofFigures']] Bảng 3. 56: Dòng phụ UC007-A472
+0237 [['TableofFigures']] Bảng 3. 57: Dòng phụ UC007-A573
+0238 [['TableofFigures']] Bảng 3. 58: Dòng phụ UC007-A673
+0239 [['TableofFigures']] Bảng 3. 59: Dòng phụ UC007-A774
+0240 [['TableofFigures']] Bảng 3. 60: Dòng phụ UC007-A874
+0241 [['TableofFigures']] Bảng 3. 61: Dòng phụ UC007-A975
+0242 [['TableofFigures']] Bảng 3. 62: Dòng phụ UC007-A1075
+0243 [['TableofFigures']] Bảng 3. 63: Dòng phụ UC007-A1176
+0244 [['TableofFigures']] Bảng 3. 64: Dòng sự kiện chính UC-0877
+0245 [['TableofFigures']] Bảng 3. 65: Dòng phụ UC008-A178
+0246 [['TableofFigures']] Bảng 3. 66: Dòng phụ UC008-A278
+0247 [['TableofFigures']] Bảng 3. 67: Dòng phụ UC008-A379
+0248 [['TableofFigures']] Bảng 3. 68: Dòng phụ UC008-A479
+0249 [['TableofFigures']] Bảng 3. 69: Dòng phụ UC008-A580
+0250 [['TableofFigures']] Bảng 3. 70: Dòng phụ UC008-A680
+0251 [['TableofFigures']] Bảng 3. 71: Dòng phụ UC008-A780
+0252 [['TableofFigures']] Bảng 3. 72: Dòng phụ UC007-A881
+0253 [['TableofFigures']] Bảng 3. 73: Dòng phụ UC008-A981
+0254 [['TableofFigures']] Bảng 3. 74: Dòng phụ UC008-A1082
+0255 [['TableofFigures']] Bảng 3. 75: Dòng phụ UC008-A1182
+0256 [['TableofFigures']] Bảng 3. 76: Dòng sự kiện UC-0983
+0257 [['TableofFigures']] Bảng 3. 77: Dòng phụ UC009-A184
+0258 [['TableofFigures']] Bảng 3. 78: Dòng phụ UC009-A285
+0259 [['TableofFigures']] Bảng 3. 79: Dòng phụ UC009-A385
+0260 [['TableofFigures']] Bảng 3. 80: Dòng phụ UC009-A486
+0261 [['TableofFigures']] Bảng 3. 81: Dòng phụ UC007-A586
+0262 [['TableofFigures']] Bảng 3. 82: Dòng phụ UC009-A686
+0263 [['TableofFigures']] Bảng 3. 83: Dòng phụ UC009-A787
+0264 [['TableofFigures']] Bảng 3. 84: Dòng phụ UC009-A887
+0265 [['TableofFigures']] Bảng 3. 85: Dòng phụ UC009-A988
+0266 [['TableofFigures']] Bảng 3. 86: Dòng phụ UC009-A1088
+0267 [['TableofFigures']] Bảng 3. 87: Dòng phụ UC009-A1189
+0268 [['TableofFigures']] Bảng 3. 88: Dòng phụ UC009-A1289
+0269 [['TableofFigures']] Bảng 3. 89: Danh sách các lớp đối tượng90
+0270 [['TableofFigures']] Bảng 3. 90: Danh sách cá thuộc tính lớp Role93
+0271 [['TableofFigures']] Bảng 3. 91: Danh sách phương thức lớp Role93
+0272 [['TableofFigures']] Bảng 3. 92: Danh sách thuộc tính lớp User94
+0273 [['TableofFigures']] Bảng 3. 93: Danh sách phương thức lớp User94
+0274 [['TableofFigures']] Bảng 3. 94: Danh sách thuộc tính lớp Faculty95
+0275 [['TableofFigures']] Bảng 3. 95: Danh sách phương thức lớp Faculty95
+0276 [['TableofFigures']] Bảng 3. 96: Danh sách thuộc tính lớp Department95
+0277 [['TableofFigures']] Bảng 3. 97: Danh sách phương thức lớp Department96
+0278 [['TableofFigures']] Bảng 3. 98: Danh sách thuộc tính lớp Major96
+0279 [['TableofFigures']] Bảng 3. 99: Danh sách phương thức lớp Major96
+0280 [['TableofFigures']] Bảng 3. 100: Danh sách thuộc tính lớp AcademicYear97
+0281 [['TableofFigures']] Bảng 3. 101: Danh sách phương thức lớp AcademicYear97
+0282 [['TableofFigures']] Bảng 3. 102: Danh sách thuộc tính lớp SchoolYear98
+0283 [['TableofFigures']] Bảng 3. 103: Danh sách phương thức lớp SchoolYear98
+0284 [['TableofFigures']] Bảng 3. 104: Danh sách thuộc tính lớp Student98
+0285 [['TableofFigures']] Bảng 3. 105: Danh sách phương thức lớp Student100
+0286 [['TableofFigures']] Bảng 3. 106: Danh sách thuộc tính lớp Lecturer100
+0287 [['TableofFigures']] Bảng 3. 107: Danh sách phương thức lớp Lecturer101
+0288 [['TableofFigures']] Bảng 3. 108: Danh sách thuộc tính lớp Subject102
+0289 [['TableofFigures']] Bảng 3. 109: Danh sách phương thức lớp Subject102
+0290 [['TableofFigures']] Bảng 3. 110: Danh sách thuộc tính lớp Class103
+0291 [['TableofFigures']] Bảng 3. 111: Danh sách phương thức lớp Class104
+0292 [['TableofFigures']] Bảng 3. 112: Danh sách thuộc tính lớp ExamAssignment104
+0293 [['TableofFigures']] Bảng 3. 113: Danh sách phương thức lớp ExamAssignment106
+0294 [['TableofFigures']] Bảng 3. 114: Danh sách thuộc tính lớp LecturerSubject106
+0295 [['TableofFigures']] Bảng 3. 115: Danh sách phương thức lớp LecturerSubject107
+0296 [['TableofFigures']] Bảng 3. 116.Danh sách thuộc tính lớp Enrollment108
+0297 [['TableofFigures']] Bảng 3. 117.Danh sách phương thức lớp Enrollment108
+0298 [['TableofFigures']] Bảng 3. 118.Danh sách thuộc tính lớp Attendance109
+0299 [['TableofFigures']] Bảng 3. 119.Danh sách phương thức lớp Attendance109
+0300 [['TableofFigures']] Bảng 3. 120.Danh sách thuộc tính lớp Grade110
+0301 [['TableofFigures']] Bảng 3. 121.Danh sách phương thức lớp Grade110
+0302 [['TableofFigures']] Bảng 3. 122.Danh sách thuộc tính lớp GPA110
+0303 [['TableofFigures']] Bảng 3. 123.Danh sách phương thức lớp GPA111
+0304 [['TableofFigures']] Bảng 3. 124.Bảng thuộc tính lớp Notification111
+0305 [['TableofFigures']] Bảng 3. 125.Phương thức lớp Notification112
+0306 [['TableofFigures']] Bảng 3. 126.Bảng thuộc tính lớp Permission112
+0307 [['TableofFigures']] Bảng 3. 127.Phương thức lớp Permission113
+0308 [['TableofFigures']] Bảng 3. 128. Thuộc tính lớp RolePermission113
+0309 [['TableofFigures']] Bảng 3. 129. Phương thức lớp RolePermission113
+0310 [['TableofFigures']] Bảng 3. 130. Thuộc tính lớp RefreshToken114
+0311 [['TableofFigures']] Bảng 3. 131. Phương thức lớp RefreshToken114
+0312 [['TableofFigures']] Bảng 3. 132. Thuộc tính lớp AdministrativeClass115
+0313 [['TableofFigures']] Bảng 3. 133. Phương thức lớp AdministrativeClass115
+0314 [['TableofFigures']] Bảng 3. 134. Thuộc tính lớp RegistrationPeriod116
+0315 [['TableofFigures']] Bảng 3. 135. Phương thức lớp RegistrationPeriod116
+0316 [['TableofFigures']] Bảng 3. 136. Thuộc tính lớp SubjectPrerequisite117
+0317 [['TableofFigures']] Bảng 3. 137. Phương thức lớp SubjectPrerequisite117
+0318 [['TableofFigures']] Bảng 3. 138. Thuộc tính lớp Room117
+0319 [['TableofFigures']] Bảng 3. 139. Phương thức lớp Room118
+0320 [['TableofFigures']] Bảng 3. 140. Thuộc tính lớp Schedule118
+0321 [['TableofFigures']] Bảng 3. 141. Phương thức lớp Schedule119
+0322 [['TableofFigures']] Bảng 3. 142. Thuộc tính lớp GradeAppeal119
+0323 [['TableofFigures']] Bảng 3. 143. Phương thức lớp GradeAppeal120
+0324 [['TableofFigures']] Bảng 3. 144. Thuộc tính lớp GradeFormulaConfig120
+0325 [['TableofFigures']] Bảng 3. 145. Phương thức lớp GradeFormulaConfig121
+0326 [['TableofFigures']] Bảng 3. 146. Thuộc tính lớp RetakeRecord121
+0327 [['TableofFigures']] Bảng 3. 147. Phương thức lớp RetakeRecord122
+0328 [['TableofFigures']] Bảng 3. 148. Thuộc tính lớp ExamSchedule122
+0329 [['TableofFigures']] Bảng 3. 149. Phương thức lớp ExamSchedule123
+0330 [['TableofFigures']] Bảng 3. 150: Danh sách thuộc tính lớp ExamAssignment123
+0331 [['TableofFigures']] Bảng 3. 151: Danh sách phương thức lớp ExamAssignment125
+0332 [['TableofFigures']] Bảng 3. 152: Danh sách thuộc tính lớp LecturerSubject126
+0333 [['TableofFigures']] Bảng 3. 153: Danh sách phương thức lớp LecturerSubject127
+0335 [['TableofFigures']] Bảng 4. 1: Đặc tả giao diện đăng nhập129
+0336 [['TableofFigures']] Bảng 4. 2: Đặc tả giao diện trang chủ130
+0337 [['TableofFigures']] Bảng 4. 3: Đặc tả giao diện quản lý sinh viên131
+0338 [['TableofFigures']] Bảng 4. 4: Đặc tả giao diện quản lý tổ chức132
+0339 [['TableofFigures']] Bảng 4. 5: Đặc tả giao diện quản lý giảng viên133
+0340 [['TableofFigures']] Bảng 4. 6: Đặc tả giao diện niên khoá134
+0341 [['TableofFigures']] Bảng 4. 7: Đặc tả giao diện quản lý năm học135
+0342 [['TableofFigures']] Bảng 4. 8: Đặc tả giao diện quản lý lớp học phần136
+0343 [['TableofFigures']] Bảng 4. 9: Đặc tả giao diện quản lý xếp lịch137
+0344 [['TableofFigures']] Bảng 4. 10: Đặc tả giao diện đăng ký lớp học138
+0345 [['TableofFigures']] Bảng 4. 11: Đặc tả giao diện quản lý tài khoản139
+0346 [['TableofFigures']] Bảng 4. 12: Đặc tả giao diện quản lý tài khoản140
+0347 [['TableofFigures']] Bảng 4. 13.Đặc tả trang Dashboard cố vấn học tập142
+0348 [['TableofFigures']] Bảng 4. 14.Đặc tả trang sinh viên được phân công143
+0349 [['TableofFigures']] Bảng 4. 15.Đặc tả trang cảnh báo chuyên cần144
+0350 [['TableofFigures']] Bảng 4. 17: Đặc tả trang công thức tính điểm146
+0351 [['TableofFigures']] Bảng 4. 18. Đặc tả giao diện Trang đăng ký học phần147
+0352 [['TableofFigures']] Bảng 4. 19. Đặc tả giao diện Trang Dashboard Giảng viên149
+0353 [['TableofFigures']] Bảng 4. 20. Đặc tả giao diện Trang điểm danh lớp học150
+0354 [['TableofFigures']] Bảng 4. 21. Đặc tả giao diện Trang nhập điểm152
+0355 [['TableofFigures']] Bảng 4. 22. Đặc tả giao diện Trang thời khóa biểu giảng viên153
+0356 [['TableofFigures']] Bảng 4. 23. Đặc tả giao diện Dashboard Sinh viên154
+0357 [['TableofFigures']] Bảng 4. 24. Đặc tả giao diện Trang lịch học155
+0358 [['TableofFigures']] Bảng 4. 25. Đặc tả giao diện Trang kết quả học tập156
+0359 [['TableofFigures']] Bảng 4. 26. Đặc tả giao diện Trang thông tin cá nhân sinh viên157
+0360 [['TableofFigures']] Bảng 4. 27: Bảng kiểm thử các chức năng chính159
+0361 [['TableofFigures']] Bảng 4. 28: Yêu cầu phần cứng đề xuất163
+0362 [['TableofFigures']] ………………………………………………
+0364 [['MucLon']] DANH MỤC CÁC HÌNH VẼ, ĐỒ THỊ
+0367 [['TableofFigures']] Hình 3. 1: Biểu đồ use-case tổng quát35
+0368 [['TableofFigures']] Hình 3. 2: Biểu đồ use-case QuanLyDanhMucHocTap36
+0369 [['TableofFigures']] Hình 3. 3: Biểu đồ use-case BaoCao- ThongKe42
+0370 [['TableofFigures']] Hình 3. 4: Biểu đồ use-case QuanLyLichHocLichThi47
+0371 [['TableofFigures']] Hình 3. 5: Biểu đồ use-case CanhBaoHocTap52
+0372 [['TableofFigures']] Hình 3. 6: Biểu đồ use-case DuyetDonPhucKhao57
+0373 [['TableofFigures']] Hình 3. 7: Biểu đồ use-case QuanLyDiemDanh63
+0374 [['TableofFigures']] Hình 3. 8: Biểu đồ use-case NhapDiemVaTinhToan69
+0375 [['TableofFigures']] Hình 3. 9: Biểu đồ use-case HienThiThongTin77
+0376 [['TableofFigures']] Hình 3. 8: Biểu đồ use-case DangKyHocPhan83
+0378 [['TableofFigures']] Hình 4. 1: Trang đăng nhập128
+0379 [['TableofFigures']] Hình 4. 2: Trang chủ130
+0380 [['TableofFigures']] Hình 4. 3: Trang quản lý tổ chức132
+0381 [['TableofFigures']] Hình 4. 4: Trang quản lý giảng viên133
+0382 [['TableofFigures']] Hình 4. 5: Trang niên khoá134
+0383 [['TableofFigures']] Hình 4. 6: Trang quản lý năm học135
+0384 [['TableofFigures']] Hình 4. 7: Trang quản lý lớp học phần136
+0385 [['TableofFigures']] Hình 4. 8: Trang quản lý xếp lịch137
+0386 [['TableofFigures']] Hình 4. 9: Trang quản lý đăng ký lớp học138
+0387 [['TableofFigures']] Hình 4. 10: Trang quản lý tài khoản139
+0388 [['TableofFigures']] Hình 4. 11: Trang quản lý quyền140
+0389 [['TableofFigures']] Hình 4. 12. Trang Dashboard cố vấn học tập141
+0390 [['TableofFigures']] Hình 4. 13. Trang sinh viên được phân công143
+0391 [['TableofFigures']] Hình 4. 14.Trang cảnh báo chuyên cần144
+0392 [['TableofFigures']] Hình 4. 15.Trang công thức tính điểm146
+0393 [['TableofFigures']] Hình 4. 16. Trang đăng ký học phần147
+0394 [['TableofFigures']] Hình 4. 17.Dashboard giảng viên149
+0395 [['TableofFigures']] Hình 4. 18.Trang điểm danh lớp học150
+0396 [['TableofFigures']] Hình 4. 19.Trang nhập điểm152
+0397 [['TableofFigures']] Hình 4. 20.Trang thời khoá biểu giảng viên153
+0398 [['TableofFigures']] Hình 4. 21.Trang Dashboard Sinh Viên154
+0399 [['TableofFigures']] Hình 4. 22.Trang lịch học155
+0400 [['TableofFigures']] Hình 4. 23.Trang kết quả học tập156
+0401 [['TableofFigures']] Hình 4. 24.Trang thông tin cá nhân sinh viên157
+0405 [['Heading1']] CHƯƠNG 1: TỔNG QUAN VỀ ĐỀ TÀI
+0407 [['m1']] 1.1. Lý do chọn đề tài
+0408 [[]] Trong hoạt động đào tạo tại trường đại học, việc theo dõi chuyên cần của sinh viên có ảnh hưởng trực tiếp đến công tác quản lý lớp học, đánh giá ý thức học tập và tổng hợp kết quả cuối kỳ. Tuy nhiên, ở nhiều lớp học phần, giảng viên vẫn thực hiện điểm danh bằng giấy, gọi tên trực tiếp hoặc ghi nhận qua các tệp Excel riêng lẻ. Cách làm này có thể phù hợp với lớp ít sinh viên, nhưng sẽ gây nhiều khó khăn khi số lượng lớp học phần, sinh viên và buổi học tăng lên
+0409 [[]] Một buổi điểm danh thủ công thường mất khá nhiều thời gian, nhất là với các lớp đông. Sau khi điểm danh, dữ liệu phải được nhập lại hoặc tổng hợp theo từng tuần, từng môn học. Trong quá trình đó có thể xảy ra tình trạng thiếu thông tin, nhập sai mã sinh viên, nhầm trạng thái có mặt hoặc vắng mặt. Sinh viên cũng khó chủ động kiểm tra số buổi vắng của bản thân nếu thông tin không được cập nhật kịp thời.
+0410 [[]] Bên cạnh yêu cầu điểm danh, công tác quản lý đào tạo còn liên quan đến nhiều dữ liệu khác như môn học, lớp học phần, lịch học, danh sách sinh viên đăng ký, điểm thành phần và thông báo học vụ. Khi các dữ liệu này được lưu ở nhiều nơi khác nhau, cán bộ quản lý và giảng viên sẽ mất thêm thời gian để đối chiếu.
+0411 [[]] Từ những vấn đề trên, đề tài “Xây dựng website quản lý đào tạo” được lựa chọn. Hệ thống hướng tới việc đưa các nghiệp vụ cơ bản lên một nền tảng chung, trong đó dữ liệu được quản lý tập trung và các chức năng được cung cấp thông qua API. Cách tiếp cận này giúp giao diện web hoặc ứng dụng khác có thể sử dụng cùng nguồn dữ liệu mà không phải xây dựng lại toàn bộ nghiệp vụ từ đầu.
+0412 [[]] Đề tài cũng tạo điều kiện để áp dụng kiến trúc hướng dịch vụ ở mức phù hợp với đồ án. Các chức năng như đăng nhập, quản lý lớp học phần, ghi nhận điểm danh, theo dõi chuyên cần và xem báo cáo được tách thành các nhóm API rõ ràng. Về sau, hệ thống có thể mở rộng thêm điểm danh QR, ứng dụng di động hoặc kết nối với hệ thống quản lý đào tạo của nhà trường.
+0413 [['m1']] 1.2. Mục tiêu của đề tài
+0414 [['m2']] 1.2.1 Mục tiêu tổng quát 
+0415 [[]] Mục tiêu của đề tài là phân tích, thiết kế và xây dựng hệ thống hỗ trợ quản lý đào tạo và điểm danh sinh viên thông qua API. Hệ thống cần giúp giảng viên ghi nhận chuyên cần thuận tiện hơn, giúp sinh viên theo dõi thông tin học tập của mình, đồng thời hỗ trợ cán bộ quản lý tra cứu và tổng hợp dữ liệu khi cần thiết.
+0416 [[]] Hệ thống được định hướng theo các tiêu chí cơ bản gồm: dữ liệu được lưu trữ nhất quán, người dùng được phân quyền theo vai trò, thao tác chính có thể thực hiện trên giao diện web và các chức năng có khả năng mở rộng trong giai đoạn sau.
+0417 [['m2']] 1.2.2 Mục tiêu cụ thể 
+0418 [[]] Đề tài tập trung thực hiện các mục tiêu sau:
+0419 [[]] Xây dựng API phục vụ các nghiệp vụ quản lý sinh viên, giảng viên, môn học, lớp học phần, lịch học và điểm danh.
+0420 [[]] Thiết kế cơ sở dữ liệu lưu trữ thông tin đào tạo, danh sách đăng ký học phần, các buổi học và trạng thái điểm danh của sinh viên.
+0421 [[]] Xây dựng giao diện dành cho các nhóm người dùng chính như quản trị viên, giảng viên và sinh viên.
+0422 [[]] Hỗ trợ giảng viên điểm danh theo từng buổi học, xem danh sách sinh viên thuộc lớp học phần và theo dõi các trường hợp vắng học nhiều.
+0423 [[]] Cho phép sinh viên xem lịch học, tình trạng chuyên cần và các thông báo liên quan đến học tập.
+0424 [[]] Áp dụng xác thực đăng nhập và phân quyền theo vai trò nhằm hạn chế việc truy cập không phù hợp.
+0425 [[]] Thiết kế báo cáo cơ bản về tình hình chuyên cần, số lượng sinh viên vắng mặt và danh sách sinh viên cần được lưu ý.
+0426 [[]] Áp dụng các công nghệ web phù hợp để xây dựng giao diện và kết nối với API.
+0427 [['m1']] 1.3. Giới hạn và phạm vi của đề tài
+0428 [['m2']] 1.3.1 Đối tượng nghiên cứu 
+0429 [['normal0']] Đề tài nghiên cứu quy trình quản lý đào tạo và điểm danh sinh viên trong môi trường đại học. Các đối tượng liên quan gồm sinh viên, giảng viên, cố vấn học tập, cán bộ phòng Đào tạo và quản trị viên hệ thống.
+0430 [['normal0']] Về mặt kỹ thuật, đề tài tập trung vào việc xây dựng hệ thống theo mô hình web API. Các nội dung được nghiên cứu gồm thiết kế cơ sở dữ liệu quan hệ, xây dựng RESTful API, xác thực người dùng, phân quyền theo vai trò và phát triển giao diện web.
+0431 [['normal0']] .
+0432 [['m2']] 1.3.2 Phạm vi nghiên cứu 
+0433 [[]] Về không gian, đề tài được xây dựng với bối cảnh áp dụng cho hoạt động quản lý đào tạo và điểm danh tại Trường Đại học Sư phạm Kỹ thuật Hưng Yên.
+0434 [[]] Về thời gian, nội dung nghiệp vụ được tham khảo từ quy trình quản lý đào tạo, lịch học, điểm danh và theo dõi chuyên cần trong giai đoạn từ năm 2022 đến năm 2024. Các yêu cầu hệ thống được đánh giá theo nhu cầu sử dụng trong năm học 2024–2025. Các mốc thời gian này cần được điều chỉnh lại theo đúng nguồn dữ liệu thực tế mà nhóm đã khảo sát.
+0435 [[]] Về chức năng, hệ thống tập trung vào các nghiệp vụ sau:
+0436 [[]] Quản lý tài khoản và phân quyền người dùng.
+0437 [[]] Quản lý sinh viên, giảng viên, môn học, lớp học phần và phòng học.
+0438 [[]] Quản lý lịch học theo học kỳ hoặc tuần học.
+0439 [[]] Quản lý danh sách sinh viên đăng ký trong từng lớp học phần.
+0440 [[]] Điểm danh theo từng buổi học với các trạng thái như có mặt, vắng mặt, đi muộn hoặc có phép.
+0441 [[]] Theo dõi tỷ lệ chuyên cần và cảnh báo khi số buổi vắng vượt ngưỡng quy định.
+0442 [[]] Tra cứu thông tin học tập và chuyên cần của sinh viên.
+0443 [[]] Tổng hợp báo cáo chuyên cần theo lớp học phần, môn học hoặc sinh viên.
+0444 [[]] Trong phạm vi đồ án, các chức năng như nhận diện khuôn mặt, tích hợp cổng thanh toán, đồng bộ trực tiếp với hệ thống đào tạo chính thức của nhà trường hoặc phân tích dữ liệu học tập bằng AI chưa được triển khai đầy đủ. Những nội dung này được xem là hướng phát triển sau khi hệ thống cơ bản hoạt động ổn định.
+0445 [['m2']] 1.3.3 Ý nghĩa khoa học và thực tiễn của đề tài
+0446 [[]] Về mặt học thuật, đề tài giúp vận dụng kiến thức phân tích và thiết kế hệ thống thông tin vào một bài toán cụ thể trong lĩnh vực giáo dục. Quá trình thực hiện có sử dụng các mô hình như Use Case Diagram, Activity Diagram, Class Diagram, Sequence Diagram và mô hình dữ liệu ERD. Những mô hình này giúp xác định rõ người dùng, nghiệp vụ, dữ liệu cần quản lý và luồng xử lý của hệ thống.
+0447 [[]] Về mặt thực tiễn, hệ thống có thể giảm bớt công việc ghi chép và tổng hợp điểm danh thủ công. Giảng viên có thể xem danh sách lớp, thực hiện điểm danh trong giờ học và kiểm tra nhanh tình trạng vắng mặt của sinh viên. Sinh viên có thể chủ động theo dõi chuyên cần thay vì chờ thông báo vào cuối kỳ. Đối với phòng Đào tạo, dữ liệu tập trung sẽ hỗ trợ việc tra cứu và tổng hợp báo cáo thuận tiện hơn.
+0448 [['m1']] 1.4. Nội dung thực hiện
+0449 [[]] Để hoàn thành đề tài, nhóm thực hiện các nội dung chính sau:
+0450 [[]] -Thứ nhất, khảo sát nghiệp vụ quản lý đào tạo và điểm danh. Nội dung khảo sát tập trung vào cách lập lớp học phần, quản lý danh sách sinh viên, thực hiện điểm danh, tổng hợp chuyên cần và gửi thông báo cho sinh viên.
+0451 [[]] -Thứ hai, phân tích các khó khăn của quy trình hiện tại. Ví dụ, giảng viên có thể mất thời gian gọi tên từng sinh viên; dữ liệu điểm danh có thể được lưu rời rạc; sinh viên khó biết mình đã vắng bao nhiêu buổi; việc tổng hợp báo cáo cuối kỳ phải thực hiện thủ công.
+0452 [[]] -Thứ ba, xác định yêu cầu của hệ thống mới. Các yêu cầu được chia thành yêu cầu chức năng và yêu cầu phi chức năng. Yêu cầu chức năng bao gồm quản lý lớp học, sinh viên, giảng viên, lịch học, điểm danh, cảnh báo chuyên cần và báo cáo. Yêu cầu phi chức năng bao gồm bảo mật đăng nhập, phân quyền người dùng, khả năng sử dụng trên nhiều kích thước màn hình và thời gian phản hồi phù hợp.
+0453 [[]] -Thứ tư, xây dựng các mô hình phân tích và thiết kế. Nhóm sử dụng Use Case Diagram để mô tả các chức năng theo từng vai trò; Activity Diagram để thể hiện quy trình xử lý; Class Diagram và ERD để thiết kế dữ liệu; Sequence Diagram để mô tả sự trao đổi giữa giao diện, API và cơ sở dữ liệu.
+0454 [[]] -Thứ năm, thiết kế và xây dựng hệ thống. Phần backend cung cấp API để xử lý nghiệp vụ và truy xuất dữ liệu. Phần front-end hiển thị giao diện cho từng nhóm người dùng. Hệ thống cần có cơ chế xác thực đăng nhập, kiểm tra quyền truy cập và ghi nhận dữ liệu điểm danh theo từng buổi học.
+0455 [[]] Cuối cùng, hệ thống được kiểm thử với các chức năng chính như đăng nhập, thêm lớp học phần, ghi nhận điểm danh, xem lịch học và tra cứu chuyên cần. Kết quả kiểm thử được dùng để đánh giá mức độ đáp ứng của hệ thống trước khi đề xuất hướng phát triển tiếp theo.
+0456 [['m1']] 1.5. Phương pháp tiếp cận
+0457 [[]] Đề tài sử dụng phương pháp tiếp cận dựa trên nhu cầu sử dụng thực tế. Nhóm tìm hiểu cách giảng viên, sinh viên và cán bộ quản lý tham gia vào quy trình đào tạo, từ đó xác định thông tin nào cần được lưu trữ và những thao tác nào cần được hệ thống hỗ trợ.
+0458 [[]] Tài liệu liên quan đến quy chế chuyên cần, lịch học, danh sách lớp và biểu mẫu điểm danh được xem xét để làm rõ nghiệp vụ. Bên cạnh đó, việc trao đổi với người dùng hoặc quan sát quy trình hiện hành giúp nhóm nhận ra các tình huống dễ phát sinh sai sót, chẳng hạn như sinh viên đi muộn, nghỉ có phép, thay đổi lịch học hoặc chuyển lớp.
+0459 [[]] Sau khi thu thập yêu cầu, nhóm áp dụng phương pháp phân tích và thiết kế hệ thống thông tin. Các nghiệp vụ được mô hình hóa bằng UML; dữ liệu được thiết kế bằng ERD; các API được xác định theo từng nhóm chức năng. Cách làm này giúp hạn chế tình trạng xây dựng giao diện trước khi hiểu rõ dữ liệu và quy trình xử lý sau đó.
+0460 [[]] Trong quá trình phát triển, nhóm thực hiện theo các vòng điều chỉnh nhỏ. Sau khi có bản thiết kế hoặc giao diện mẫu, nhóm kiểm tra lại với yêu cầu ban đầu, phát hiện những điểm chưa hợp lý và cập nhật trước khi chuyển sang bước tiếp theo. Việc kiểm thử cũng được thực hiện với các luồng chính để bảo đảm thao tác điểm danh, tra cứu và phân quyền hoạt động đúng như dự kiến.
+0461 [['CH1']] CHƯƠNG 2: CƠ SỞ LÝ THUYẾT
+0463 [['m1']] 2.1. Quy trình phát triển phần mềm
+0464 [[]] Quy trình phát triển phần mềm là tập hợp các bước được sử dụng để xây dựng một hệ thống từ khi xác định nhu cầu đến khi kiểm thử và đưa vào sử dụng. Với đề tài quản lý đào tạo và điểm danh sinh viên, quy trình này cần bảo đảm rằng các yêu cầu nghiệp vụ được hiểu đúng trước khi tiến hành lập trình.
+0465 [[]] Nhóm lựa chọn mô hình Waterfall làm định hướng triển khai chính. Waterfall là mô hình phát triển theo từng giai đoạn nối tiếp nhau. Mỗi giai đoạn tạo ra một kết quả cụ thể, sau đó mới chuyển sang giai đoạn tiếp theo. Mô hình này phù hợp với đồ án có phạm vi chức năng tương đối rõ ràng, có yêu cầu về tài liệu phân tích, thiết kế và kiểm thử.
+0466 [[]] Khảo sát và thu thập yêu cầu
+0467 [[]] Ở giai đoạn đầu, nhóm xác định các đối tượng sử dụng hệ thống gồm quản trị viên, giảng viên, cố vấn học tập và sinh viên. Mỗi vai trò có nhu cầu sử dụng khác nhau. Giảng viên cần điểm danh và xem danh sách lớp; sinh viên cần xem lịch học và chuyên cần; quản trị viên cần quản lý dữ liệu dùng chung.
+0468 [[]] Ngoài các chức năng chính, nhóm cũng xác định một số yêu cầu phi chức năng như đăng nhập an toàn, phân quyền người dùng, kiểm tra dữ liệu đầu vào và khả năng tra cứu nhanh. Kết quả của giai đoạn này là danh sách yêu cầu hệ thống, mô tả các chức năng cần có và các ràng buộc liên quan.
+0469 [[]] Phân tích hệ thống
+0470 [[]] Sau khi nhận yêu cầu, nhóm phân tích các nghiệp vụ để xác định dữ liệu đầu vào, dữ liệu đầu ra và các quy tắc xử lý. Ví dụ, một bản ghi điểm danh cần xác định rõ sinh viên nào được điểm danh, thuộc buổi học nào, do giảng viên nào thực hiện và đang ở trạng thái nào.
+0471 [[]] Giai đoạn này cũng giúp xác định các nhóm chức năng chính của hệ thống, bao gồm quản lý tài khoản, quản lý đào tạo, quản lý lớp học phần, quản lý điểm danh và báo cáo chuyên cần. Các nhóm chức năng này được thể hiện thông qua Use Case Diagram, Activity Diagram và mô hình dữ liệu.
+0472 [[]] Thiết kế hệ thống
+0473 [[]] Trong giai đoạn thiết kế, nhóm xây dựng cấu trúc cơ sở dữ liệu, các API và các giao diện dự kiến. Cơ sở dữ liệu cần có các bảng cơ bản như sinh viên, giảng viên, môn học, lớp học phần, lịch học, đăng ký học phần, buổi học và điểm danh.
+0474 [[]] Các API được thiết kế theo phong cách RESTful. Mỗi API có nhiệm vụ rõ ràng, chẳng hạn API lấy danh sách lớp học phần, API tạo buổi học, API ghi nhận điểm danh hoặc API lấy báo cáo chuyên cần. Dữ liệu trao đổi giữa front-end và back-end được biểu diễn dưới dạng JSON.
+0475 [[]] Giao diện được thiết kế theo từng vai trò. Giảng viên cần thao tác nhanh trong giờ học, nên màn hình điểm danh phải hiển thị rõ danh sách sinh viên và trạng thái chuyên cần. Sinh viên cần một giao diện đơn giản để kiểm tra lịch học, số buổi vắng và các thông báo liên quan.
+0476 [[]] Cài đặt hệ thống
+0477 [[]] Ở giai đoạn cài đặt, các thành phần được lập trình dựa trên thiết kế đã được thống nhất. Backend có thể được xây dựng bằng .NET 8.0, được tổ chức theo các lớp như Controller, Service, Repository và Data Access. Cách tổ chức này giúp tách phần xử lý nghiệp vụ khỏi phần truy xuất cơ sở dữ liệu.
+0478 [[]] Front-end sử dụng HTML, CSS, JavaScript và AngularJS 1.x để hiển thị giao diện, gọi API và xử lý các thao tác của người dùng. Khi người dùng đăng nhập thành công, hệ thống nhận token xác thực và sử dụng token này trong các yêu cầu tiếp theo.
+0479 [[]] Kiểm thử
+0480 [[]] Kiểm thử được thực hiện sau khi các chức năng chính đã hoàn thành. Một số luồng cần kiểm tra gồm đăng nhập, phân quyền, thêm lớp học phần, tạo buổi học, điểm danh sinh viên, tính tỷ lệ chuyên cần và tra cứu báo cáo.
+0481 [[]] Ngoài việc kiểm tra chức năng, hệ thống cũng cần kiểm tra các trường hợp dữ liệu không hợp lệ. Chẳng hạn, sinh viên không được điểm danh vào lớp mà mình không đăng ký; giảng viên không được sửa dữ liệu của lớp học phần do người khác phụ trách; người dùng chưa đăng nhập không được truy cập vào chức năng quản trị.
+0482 [[]] Triển khai và bảo trì
+0483 [[]] Sau khi kiểm thử, hệ thống có thể được triển khai trong môi trường thử nghiệm. Dữ liệu mẫu được sử dụng để kiểm tra tốc độ tải danh sách lớp, tìm kiếm sinh viên và tổng hợp báo cáo. Trong quá trình vận hành, các lỗi phát sinh hoặc yêu cầu mới sẽ được ghi nhận để điều chỉnh trong phiên bản tiếp theo.
+0484 [[]] Mô hình Waterfall được chọn vì đồ án cần có tài liệu rõ ràng ở từng giai đoạn. Việc xác định yêu cầu, thiết kế dữ liệu và lập trình theo thứ tự giúp nhóm dễ theo dõi tiến độ. Tuy nhiên, nhóm vẫn cần kiểm tra lại thiết kế khi phát hiện yêu cầu chưa hợp lý, tránh việc triển khai sai ngay từ đầu.
+0485 [['m1']] 2.2. Ngôn ngữ mô hình hoá thống nhất UML
+0486 [[]] UML là viết tắt của Unified Modeling Language, được sử dụng để mô tả cấu trúc và hành vi của hệ thống phần mềm bằng các sơ đồ. UML không phải là ngôn ngữ lập trình. Mục đích của UML là giúp người phân tích, người lập trình và người sử dụng có cùng cách nhìn về hệ thống trước khi bắt đầu xây dựng.
+0487 [[]] Trong đề tài quản lý đào tạo và điểm danh sinh viên, UML được sử dụng để mô tả các chức năng, dữ liệu và luồng xử lý quan trọng.
+0488 [[]] Use Case Diagram
+0489 [[]] Use Case Diagram thể hiện mối quan hệ giữa người dùng và các chức năng của hệ thống. Các tác nhân chính gồm Admin, Giảng viên, Cố vấn học tập và Sinh viên.
+0490 [[]] Ví dụ, giảng viên có thể đăng nhập, xem danh sách lớp học phần, tạo buổi học và thực hiện điểm danh. Sinh viên có thể đăng nhập, xem lịch học, kiểm tra chuyên cần và nhận thông báo. Admin quản lý tài khoản, danh mục môn học, lớp học phần và phân quyền cho người dùng.
+0491 [[]] Biểu đồ Use Case giúp xác định rõ phạm vi chức năng trước khi lập trình.
+0492 [[]] Activity Diagram
+0493 [[]] Activity Diagram mô tả trình tự xử lý của một nghiệp vụ. Trong hệ thống này, biểu đồ hoạt động có thể được dùng để thể hiện quy trình điểm danh.
+0494 [[]] Quy trình có thể bắt đầu khi giảng viên đăng nhập, chọn lớp học phần, chọn buổi học và mở danh sách sinh viên. Sau đó, giảng viên cập nhật trạng thái có mặt, vắng mặt, đi muộn hoặc đi phép. Khi thao tác được xác nhận, hệ thống kiểm tra dữ liệu và lưu kết quả vào cơ sở dữ liệu. Cuối cùng, hệ thống cập nhật tỷ lệ chuyên cần của từng sinh viên.
+0495 [[]] Class Diagram
+0496 [[]] Class Diagram mô tả các lớp hoặc thực thể chính trong hệ thống và mối quan hệ giữa chúng. Một số thực thể quan trọng gồm SinhVien, GiangVien, MonHoc, LopHocPhan, BuoiHoc, DangKyHocPhan và DiemDanh.
+0497 [[]] Ví dụ, một lớp học phần có thể có nhiều sinh viên đăng ký. Mỗi lớp học phần có nhiều buổi học. Mỗi buổi học có nhiều bản ghi điểm danh, trong đó mỗi bản ghi gắn với một sinh viên cụ thể.
+0498 [[]] Biểu đồ lớp giúp nhóm xác định các thuộc tính cần lưu, khóa chính, khóa ngoại và quan hệ một – nhiều giữa các bảng dữ liệu.
+0499 [[]] Sequence Diagram
+0500 [[]] Sequence Diagram mô tả sự trao đổi giữa các thành phần trong một tình huống cụ thể. Chẳng hạn, khi giảng viên thực hiện điểm danh, giao diện sẽ gửi yêu cầu đến API. API kiểm tra token đăng nhập và quyền truy cập. Sau đó, Service xử lý nghiệp vụ, Repository lưu dữ liệu vào cơ sở dữ liệu và API trả kết quả về giao diện.
+0501 [[]] Biểu đồ này giúp làm rõ trách nhiệm của từng thành phần, nhất là khi hệ thống được xây dựng theo mô hình front-end gọi API từ back-end.
+0502 [[]] Việc sử dụng UML giúp hạn chế việc hiểu sai yêu cầu. Các sơ đồ cũng là tài liệu quan trọng để nhóm đối chiếu trong quá trình lập trình, kiểm thử và bảo trì hệ thống.
+0503 [['m1']] 2.3. Lập trình phía front-end
+0504 [[]] Front-end là phần giao diện mà người dùng nhìn thấy và thao tác trực tiếp. Trong hệ thống quản lý đào tạo và điểm danh sinh viên, front-end có nhiệm vụ hiển thị dữ liệu từ API, nhận thông tin người dùng nhập vào và gửi yêu cầu đến backend.
+0505 [[]] Giao diện được xây dựng bằng HTML, CSS, JavaScript và AngularJS 1.x. Các công nghệ này được sử dụng kết hợp để tạo trang đăng nhập, bảng danh sách lớp, màn hình điểm danh, lịch học và trang theo dõi chuyên cần.
+0506 [['m2']] 2.3.1. HTML và CSS
+0507 [[]] HTML được dùng để xây dựng cấu trúc của trang web. Các thành phần như thanh điều hướng, biểu mẫu đăng nhập, bảng danh sách sinh viên, nút điểm danh và khu vực hiển thị thông báo đều được tạo bằng HTML.
+0508 [[]] Trong hệ thống, HTML được sử dụng để xây dựng các màn hình chính như:
+0509 [[]] Trang đăng nhập và quên mật khẩu.
+0510 [[]] Trang danh sách lớp học phần.
+0511 [[]] Màn hình điểm danh theo từng buổi học.
+0512 [[]] Trang xem lịch học và tình trạng chuyên cần.
+0513 [[]] Trang quản lý sinh viên, giảng viên và môn học.
+0514 [[]] Trang báo cáo chuyên cần.
+0515 [[]] CSS được dùng để định dạng giao diện, bao gồm màu sắc, kích thước chữ, khoảng cách, bố cục và trạng thái hiển thị. Ví dụ, sinh viên vắng mặt có thể được đánh dấu bằng màu khác với sinh viên có mặt; các cảnh báo chuyên cần cần được hiển thị rõ ràng để giảng viên dễ nhận biết.
+0516 [[]] Giao diện được thiết kế theo hướng dễ thao tác trên máy tính xách tay và có thể hiển thị phù hợp trên màn hình máy tính bảng. Các bảng dữ liệu có thể hỗ trợ cuộn ngang khi số lượng cột lớn, tránh làm mất thông tin trên màn hình nhỏ.
+0517 [['m2']] 2.3.2. JavaScript và AngularJS
+0518 [[]] - JavaScript xử lý các thao tác ở phía trình duyệt như nhận sự kiện khi người dùng nhấn nút, kiểm tra dữ liệu nhập vào hoặc thay đổi nội dung hiển thị trên trang.
+0519 [[]] - AngularJS 1.x được sử dụng để tổ chức giao diện theo các module, controller và service. Nhờ cơ chế data binding, khi dữ liệu thay đổi từ API, giao diện có thể cập nhật mà không cần tải lại toàn bộ trang.
+0520 [[]] Ví dụ, khi giảng viên chọn một lớp học phần, AngularJS gửi yêu cầu lấy danh sách sinh viên từ API. Sau khi API trả về dữ liệu, danh sách sẽ được hiển thị trên bảng điểm danh. Khi giảng viên thay đổi trạng thái của một sinh viên, dữ liệu tương ứng được gửi về backend để lưu lại.
+0521 [[]] Các service phía front-end được sử dụng để gọi API và tái sử dụng logic chung. Một service có thể phụ trách đăng nhập, một service khác xử lý dữ liệu lớp học phần hoặc điểm danh. Cách tổ chức này giúp mã nguồn dễ quản lý hơn so với việc viết toàn bộ xử lý trong một trang.
+0522 [['m2']] 2.3.3. Kết nối Front-end với Back-end
+0523 [[]] Front-end giao tiếp với backend thông qua các API. Mỗi yêu cầu gửi đi bao gồm địa chỉ API, phương thức HTTP phù hợp và dữ liệu cần truyền. Các phương thức thường dùng gồm GET để lấy dữ liệu, POST để thêm dữ liệu, PUT hoặc PATCH để cập nhật và DELETE để xóa dữ liệu.
+0524 [[]] Sau khi đăng nhập, hệ thống nhận JWT từ backend. Token này được gửi kèm trong các yêu cầu tiếp theo để backend xác định người dùng hiện tại và kiểm tra quyền truy cập. Ví dụ, tài khoản sinh viên chỉ được phép xem thông tin của chính mình, trong khi giảng viên chỉ được điểm danh các lớp học phần mà mình phụ trách.
+0525 [[]] Khi API trả về lỗi, giao diện cần hiển thị thông báo dễ hiểu. Chẳng hạn, nếu người dùng nhập sai mật khẩu thì hệ thống thông báo đăng nhập không thành công; nếu giảng viên chưa chọn buổi học thì hệ thống yêu cầu chọn buổi trước khi lưu điểm danh.
+0526 [['m2']] 2.3.4. Các chức năng giao diện chính
+0527 [['ListParagraph']] Đối với giảng viên, giao diện hỗ trợ xem danh sách lớp học phần, tạo buổi học, điểm danh và theo dõi sinh viên có nguy cơ thiếu chuyên cần.
+0528 [['ListParagraph']] Đối với sinh viên, giao diện cung cấp lịch học, danh sách môn đã đăng ký, số buổi có mặt, số buổi vắng và các thông báo liên quan đến học tập.
+0529 [['ListParagraph']] Đối với quản trị viên, giao diện hỗ trợ quản lý tài khoản, phân quyền, môn học, lớp học phần và các dữ liệu dùng chung của hệ thống.
+0530 [['ListParagraph']] Nhờ có front-end, các API không chỉ được kiểm tra bằng công cụ kỹ thuật mà còn được sử dụng trong các tình huống gần với thực tế. Điều này giúp nhóm đánh giá được sự phù hợp của chức năng trước khi hoàn thiện hệ thống.
+0531 [[]] Tóm lại, chương này trình bày các cơ sở lý thuyết được sử dụng trong quá trình xây dựng hệ thống. Mô hình Waterfall giúp định hướng quy trình phát triển; UML hỗ trợ phân tích và thiết kế; các công nghệ front-end tạo giao diện để người dùng thao tác với hệ thống thông qua API.
+0534 [['CH1']] CHƯƠNG 3: PHÂN TÍCH HỆ THỐNG
+0536 [['m1']] 3.1. Phát biểu bài toán 
+0537 [[]] Mục tiêu của hệ thống là quản lý lớp học, lịch học, điểm danh, điểm số và cảnh báo chuyên cần cho sinh viên tại trường Đại học Sư phạm Kỹ thuật Hưng Yên. Hệ thống cung cấp giao diện trực quan và nghiệp vụ tự động để hỗ trợ các vai trò: Admin, Giảng viên, Cố vấn và Sinh viên.
+0538 [[]] Vai trò
+0539 [[]] • Admin: Quản lý người dùng, phân quyền, cấu hình niên khóa/năm học, theo dõi audit log.• Giảng viên: Điểm danh theo buổi, nhập điểm thành phần, theo dõi chuyên cần lớp chủ nhiệm.• Cố vấn: Duyệt đăng ký học phần, xử lý phúc khảo, theo dõi cảnh báo vắng/GPA.• Sinh viên: Xem thời khóa biểu, đăng ký học phần, theo dõi điểm, nhận thông báo.
+0540 [[]] Chức năng chính
+0541 [[]] • Quản lý danh mục và học phần:
+0542 [[]] Danh mục môn học, lớp, niên khóa, đăng ký học phần.
+0543 [[]] Quản lý lớp học phần, giảng viên phụ trách, phòng học, số lượng tối đa.
+0544 [[]] • Điểm danh và lịch học:
+0545 [[]] Lịch học/thi; điểm danh theo buổi (web/mobile).
+0546 [[]] Quản lý trạng thái điểm danh: có mặt / vắng / muộn / ghi chú.
+0547 [[]] • Quản lý điểm và phúc khảo:
+0548 [[]] Nhập điểm thành phần, công thức tính điểm cuối kỳ.
+0549 [[]] Cảnh báo vắng > x%, học lại; gửi email thông báo.
+0550 [[]] Bảng điểm cá nhân; phúc khảo theo workflow duyệt.
+0551 [[]] • Báo cáo và thống kê:
+0552 [[]] Phân phối điểm, tỷ lệ qua môn, chuyên cần.
+0553 [[]] Thống kê GPA theo học kỳ, năm học hoặc toàn khóa.
+0554 [[]] • Bảng dữ liệu liên quan
+0555 [[]] Subjects: môn học
+0556 [[]] Classes: lớp học phần
+0557 [[]] Schedules: lịch học/thi
+0558 [[]] Enrollments: đăng ký học phần
+0559 [[]] Attendances: điểm danh sinh viên
+0560 [[]] Grades: điểm số
+0561 [[]] Appeals: phúc khảo điểm
+0562 [[]] Notifications: thông báo
+0563 [[]] Các bảng phụ trợ khác: Roles, Users, Permissions, Faculties, Departments, Majors, Academic Years, School Years, Rooms, GPAs, Audit Logs, JWT Refresh Tokens
+0564 [[]] • Yêu cầu phi chức năng (NFR)
+0565 [[]] • Kiểm soát quyền sửa điểm (audit log bắt buộc).• Import danh sách sinh viên từ Excel để thuận tiện quản lý số lượng lớn.• Giao diện thân thiện, responsive, phù hợp với từng vai trò.• Bảo mật dữ liệu: JWT/OAuth2, RBAC, kiểm tra hành vi bất thường, nhật ký thao tác.
+0569 [['m1']] 3.2. Phân tích các chức năng của hệ thống
+0570 [[]] Hệ thống quản lý đào tạo và điểm danh sinh viên cung cấp các chức năng chính sau:
+0574 [['Caption']] Bảng 3. 1: Danh sách các chức năng
+0575 [['ColumnName', 'ColumnName', 'ColumnName']] STTTên chức năngMô tả1Quản lý vai trò (Roles)Tạo, sửa, xoá và kích hoạt/khóa vai trò người dùng trong hệ thống.2Quản lý người dùng (Users)Tạo tài khoản, phân quyền, quản lý thông tin cá nhân, trạng thái hoạt động, avatar, đăng nhập/đăng xuất.3Quản lý quyền hạn (Permissions)Tạo và thiết lập quyền, phân loại theo menu, gán quyền cho vai trò.4Gán quyền cho vai trò (Role Permissions)Gán, cập nhật hoặc thu hồi quyền của từng vai trò cụ thể.5Quản lý khoa (Faculties)Thêm, sửa, xoá, kích hoạt khoa; lưu thông tin mã khoa – tên khoa – mô tả.6Quản lý bộ môn (Departments)Quản lý bộ môn thuộc khoa; gán khoa, cập nhật mô tả và trạng thái.7Quản lý ngành học (Majors)Thêm ngành học, gán khoa, quản lý mã ngành, mô tả ngành.8Quản lý niên khóa (Academic Years)Thiết lập niên khóa, thời gian đào tạo, trạng thái niên khóa hiện tại.9Quản lý năm học (School Years)Tạo năm học, quản lý ngày bắt đầu/kết thúc, học kỳ 1–2, trạng thái năm học.10Quản lý sinh viên (Students)Thêm sinh viên, truyền dữ liệu, cập nhật thông tin cá nhân, quản lý ngành, niên khóa, lớp hành chính.11Quản lý giảng viên (Lecturers)Thêm giảng viên, cập nhật học vị, chức danh, chuyên môn, bộ môn, thông tin tài khoản.12Quản lý lớp hành chính (Administrative Classes)Quản lý mã lớp, cố vấn học tập, sĩ số tối đa, sinh viên trong lớp.13Quản lý học phần (Subjects)Quản lý môn học, số tín chỉ, bộ môn phụ trách, mô tả môn.14Quản lý lớp học phần (Classes)Mở lớp học phần, gán giảng viên, thiết lập niên khóa, năm học, phòng học, số lượng sinh viên tối đa.15Đăng ký học phần (Enrollments)Sinh viên đăng ký, hủy đăng ký học phần, quản lý trạng thái (PENDING, APPROVED, DROPPED, WITHDRAWN).16Tự động cập nhật sĩ số lớp học phầnHệ thống tự tăng/giảm số lượng sinh viên dựa trên bảng enrollments.17Quản lý điều kiện tiên quyết môn học (Subject Prerequisites)Đặt môn học trước, điểm tối thiểu cần đạt, kiểm tra chống vòng lặp tiên quyết.18Quản lý phòng học (Rooms)Thêm phòng học, tòa nhà, sức chứa, quản lý trạng thái hoạt động.19Quản lý thời khóa biểu (Timetable Sessions)Lên lịch cho lớp học phần (ngày, tiết, tuần, giảng viên, phòng học), quản lý trạng thái buổi học.20Điểm danh sinh viên (Attendances)Lưu điểm danh theo từng buổi học: có mặt / vắng / muộn / ghi chú.21Quản lý điểm số (Grades)Lưu điểm giữa kỳ, cuối kỳ, điểm tổng, thang điểm, điểm chữ.22Quản lý GPA theo năm – học kỳ (GPAs)Tính và lưu GPA theo học kỳ, năm học hoặc cả khóa; thống kê tín chỉ tích lũy.23Phúc khảo điểm (Grade Appeals)Sinh viên gửi yêu cầu phúc khảo; giảng viên/cố vấn xem xét, cập nhật kết quả phúc khảo.24Cấu hình công thức tính điểm (Grade Formula Config)Cài đặt trọng số tính điểm (giữa kỳ, cuối kỳ, bài tập, quiz…), tùy chỉnh công thức.25Quản lý kỳ đăng ký học (Registration Periods)Tạo các đợt đăng ký học phần theo học kỳ, mở – đóng đăng ký tự động theo thời gian.26Gửi thông báo (Notifications)Hệ thống gửi thông báo đến sinh viên/giảng viên: điểm danh, điểm số, lịch học, xét duyệt phúc khảo.27Đọc và đánh dấu thông báoNgười dùng xem thông báo, đánh dấu đã đọc/ chưa đọc.28Nhật ký hệ thống (Audit Logs)Ghi lại mọi thao tác: thêm/xóa/sửa dữ liệu, đăng nhập, thay đổi thông tin, phục vụ kiểm tra bảo mật.29Quản lý Refresh Token (JWT Refresh Tokens)Hỗ trợ đăng nhập bảo mật, lưu token, thu hồi token khi đăng xuất hoặc bị lộ.30Import sinh viên (StudentImportType)Cho phép import danh sách sinh viên từ file Excel thông qua table-valued parameter.
+0577 [['m1']] 3.3. Biểu đồ Usecase
+0578 [['m2']] 3.3.1. Use-case mức tổng quát
+0579 [['Nidung']] 
+0580 [['HinhVe']] Hình 3. 1: Biểu đồ use-case tổng quát
+0581 [['m2']] 3.3.2. Các use-case phân rã của hệ thống
+0585 [['m3']] 1.1. Chức năng quản lý danh mục học tập - (UC-01)
+0586 [['m4']] 1.1.1 Mục đích
+0587 [['m4']] Cho phép quản trị viên (Admin) thực hiện các thao tác quản lý danh mục học tập trong hệ thống, bao gồm: thêm mới, sửa, xóa, tìm kiếm và hiển thị danh mục học tập. Qua đó, đảm bảo dữ liệu danh mục được tổ chức rõ ràng và thuận tiện cho việc sử dụng.
+0593 [['m4']] 1.1.2 Tác nhân liên quan
+0594 [[]] Admin: Người quản trị hệ thống, chịu trách nhiệm quản lý danh mục học tập.
+0595 [['m4']] 1.1.3 Điều kiện sau
+0596 [[]] Danh mục học tập được cập nhật thành công theo yêu cầu (thêm, sửa, xóa).
+0597 [[]] Danh mục học tập hiển thị đúng thông tin trong hệ thống sau khi quản lý.
+0598 [[]] Kết quả tìm kiếm danh mục được trả về cho Admin (nếu có thực hiện tìm kiếm).
+0599 [['m4']] 1.1.4 Biểu đồ use-case
+0600 [[]] 
+0601 [['HinhVe']] Hình 3. 2: Biểu đồ use-case QuanLyDanhMucHocTap
+0603 [['m4']] 1.1.5 Dòng sự kiện chính
+0607 [['Caption']] Bảng 3.4: Dòng sự kiện chính UC-001
+0608 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn chức năng Quản lý danh mục học tậpHiển thị giao diện quản lý danh mục học tập2. Yêu cầu Hiện danh mục học tậpHiển thị toàn bộ danh mục học tập hiện có3. Nhập thông tin tìm kiếm và chọn Tìm kiếm danh mụcTrả về kết quả tìm kiếm phù hợp4. Chọn Thêm danh mục học tập, nhập thông tin danh mục mớiKiểm tra dữ liệu hợp lệ và lưu vào cơ sở dữ liệu5. Chọn một danh mục, thực hiện Sửa danh mục học tậpCập nhật lại thông tin danh mục trong cơ sở dữ liệu6. Chọn một danh mục, thực hiện Xóa danh mục học tập, xác nhận thao tácXóa danh mục khỏi cơ sở dữ liệu7. Hoàn tất thao tácThông báo kết quả (thành công hoặc lỗi)1. Chọn chức năng Quản lý danh mục học tậpHiển thị giao diện quản lý danh mục học tập
+0610 [['m4']] 1.1.7 Dòng sự kiện phụ
+0611 [['m5']] 1.1.7.1 Dòng phụ UC001-A1: Dữ liệu không hợp lệ (thêm/sửa danh mục bị thiếu tên, trùng mã).
+0612 [['Caption']] Bảng 3. 2: Dòng phụ UC001-A1
+0613 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn chức năng “Thêm danh mục học tập” và nhập thông tin thiếu tên hoặc mã trùng với danh mục đã có.1. Hệ thống kiểm tra dữ liệu, phát hiện tên bị bỏ trống hoặc mã trùng lặp.2. Nhấn nút “Lưu danh mục”.2. Hệ thống từ chối lưu, hiển thị thông báo lỗi cụ thể (VD: “Tên danh mục không được để trống” hoặc “Mã danh mục đã tồn tại”).3. Admin xem thông báo và quay lại giao diện nhập.3. Hệ thống giữ nguyên dữ liệu đã nhập (trừ trường lỗi), cho phép Admin chỉnh sửa và nhập lại.4. Admin chỉnh sửa thông tin cho hợp lệ và nhấn “Lưu” lần nữa.4. Hệ thống kiểm tra lại dữ liệu, nếu hợp lệ thì lưu vào cơ sở dữ liệu và thông báo thành công.
+0614 [['m5']] 1.1.7.2 Dòng phụ UC001-A2: Xóa danh mục có ràng buộc (danh mục đang được gắn với môn học).
+0615 [['Caption']] Bảng 3. 3: Dòng phụ UC001-A2
+0616 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn một danh mục trong danh sách để thực hiện thao tác Xóa.1. Hệ thống kiểm tra ràng buộc dữ liệu của danh mục với các môn học hiện có.2. Admin nhấn Xác nhận xóa trong hộp thoại cảnh báo.2. Hệ thống phát hiện danh mục đang được gắn với một hoặc nhiều môn học.3. Admin chờ kết quả xóa.3. Hệ thống từ chối thao tác, hiển thị thông báo lỗi: “Không thể xóa vì danh mục đang được sử dụng trong môn học”.4. Admin đọc thông báo và quyết định thao tác khác (ví dụ: sửa thông tin danh mục hoặc xóa các môn học liên quan trước).4. Hệ thống giữ nguyên dữ liệu ban đầu, không có thay đổi trong cơ sở dữ liệu.
+0617 [['m5']] 1.1.7.3 Dòng phụ UC001-A3: Không tìm thấy kết quả tìm kiếm.
+0619 [['Caption']] Bảng 3. 4: Dòng phụ UC001-A3
+0620 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Admin nhập từ khóa tìm kiếm danh mục học tập (ví dụ: tên hoặc mã danh mục).1. Hệ thống tiếp nhận yêu cầu và thực hiện truy vấn dữ liệu trong cơ sở dữ liệu.2. Admin nhấn nút Tìm kiếm để hiển thị kết quả.2. Hệ thống thực hiện tìm kiếm nhưng không có bản ghi nào khớp với từ khóa đã nhập.3. Admin chờ kết quả tìm kiếm hiển thị.3. Hệ thống hiển thị thông báo: “Không tìm thấy kết quả phù hợp với từ khóa tìm kiếm.”4. Admin xem thông báo và có thể nhập lại từ khóa khác hoặc quay lại danh sách danh mục đầy đủ.4. Hệ thống chờ yêu cầu mới hoặc hiển thị danh sách rỗng cho tới khi có thao tác tiếp theo.
+0621 [['m5']] 1.1.7.4 Dòng phụ UC001-A4: Truy cập chức năng khi chưa đăng nhập
+0622 [['Caption']] Bảng 3. 5: Dòng phụ UC001-A4
+0623 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Admin mở chức năng Quản lý danh mục học tập trực tiếp qua đường dẫn mà chưa đăng nhập.1. Hệ thống kiểm tra phiên đăng nhập.2. Thao tác chọn thêm/sửa/xóa danh mục.2. Hệ thống từ chối, chuyển hướng đến màn hình đăng nhập kèm thông báo: “Vui lòng đăng nhập để thực hiện chức năng này.”
+0624 [['m5']] 1.1.7.5 Dòng phụ UC001-A5: Sửa danh mục nhưng không có quyền
+0625 [['Caption']] Bảng 3. 6: Dòng phụ UC001-A5
+0626 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Người dùng đăng nhập bằng tài khoản giảng viên hoặc sinh viên.1. Hệ thống kiểm tra quyền hạn.2. Cố gắng truy cập chức năng Sửa danh mục học tập.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Bạn không có quyền chỉnh sửa danh mục học tập.”
+0627 [['m5']] 1.1.7.6 Dòng phụ UC001-A6: Lỗi kết nối khi lưu danh mục
+0628 [['Caption']] Bảng 3. 7:Dòng phụ UC001-A6
+0629 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Admin nhập thông tin danh mục và nhấn Lưu.1. Hệ thống thực hiện ghi dữ liệu vào CSDL.2. Trong quá trình lưu, kết nối bị gián đoạn.2. Hệ thống hiển thị thông báo lỗi: “Không thể lưu danh mục do lỗi hệ thống. Vui lòng thử lại.”
+0630 [['m5']] 1.1.7.7 Dòng phụ UC001-A7: Tìm kiếm với ký tự đặc biệt / không hợp lệ
+0631 [['Caption']] Bảng 3. 8:Dòng phụ UC001-A7
+0632 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Admin nhập chuỗi tìm kiếm chứa ký tự đặc biệt (VD: #@!).1. Hệ thống kiểm tra dữ liệu đầu vào.2. Nhấn Tìm kiếm.2. Hệ thống từ chối, hiển thị thông báo: “Từ khóa tìm kiếm không hợp lệ.”
+0634 [['m3']] 1.2. Chức năng báo cáo thống kê (UC-02)
+0635 [['m4']] 1.2.1. Mục đích
+0636 [[]] Cung cấp cho Admin khả năng quản lý báo cáo thống kê, bao gồm: thêm mới, chỉnh sửa, xóa báo cáo và hiển thị biểu đồ/bảng thống kê để phục vụ công tác quản trị, giám sát hệ thống.
+0637 [['m4']] 1.2.2Tác nhân liên quan
+0638 [[]]  Admin: Người quản trị hệ thống, có quyền thực hiện các thao tác thêm, sửa, xóa và xem báo cáo.
+0639 [[]] Hệ thống: Đáp ứng yêu cầu của Admin, xử lý và lưu trữ dữ liệu báo cáo.: Theo dõi, kiểm soát việc nhập điểm, tổng hợp báo cáo điểm.
+0640 [['m4']] 1.2.3Điều kiện trước
+0641 [[]] Người dùng phải đăng nhập vào hệ thống với quyền tương ứng.
+0642 [[]] Hệ thống đã có danh sách lớp học và danh sách môn học.
+0643 [[]] Hệ thống đã có thông tin học sinh cần nhập điểm..
+0644 [['m4']] 1.2.4Điều kiện sau
+0645 [['m4']] Báo cáo thống kê được thêm, sửa, hoặc xóa thành công.
+0646 [['m4']] Hệ thống lưu lại dữ liệu thay đổi vào cơ sở dữ liệu.
+0647 [['m4']] Admin có thể xem biểu đồ, bảng thống kê cập nhật mới nhất.
+0648 [['m4']] 1.2.5Biểu đồ use-case
+0649 [['m5']] 
+0650 [['Caption']] Hình 3. 3: Biểu đồ use-case BaoCao- ThongKe
+0651 [['m4']] 1.2.6Dòng sự kiện chính
+0652 [['Caption']] Bảng 3. 9: Dòng sự kiện chính UC-02
+0653 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Đăng nhập hệ thốngKiểm tra thông tin đăng nhập và cho phép truy cập nếu hợp lệ2. Chọn chức năng Báo Cáo Thống KêHiển thị giao diện quản lý báo cáo thống kê3. Chọn thao tác Thêm báo cáoHiển thị form nhập báo cáo mới, kiểm tra dữ liệu → lưu CSDL → thông báo thành công4. Chọn thao tác Sửa báo cáoHiển thị dữ liệu báo cáo đã chọn, cho phép chỉnh sửa → cập nhật vào CSDL → thông báo thành công5. Chọn thao tác Xóa báo cáoHiển thị hộp thoại xác nhận → nếu đồng ý thì xóa báo cáo khỏi CSDL → thông báo thành công6. Yêu cầu hiển thị biểu đồ/bảng thống kêSinh biểu đồ và bảng thống kê từ dữ liệu báo cáo hiện có và hiển thị cho Admin7. Thoát khỏi chức năngHệ thống đóng giao diện quản lý báo cáo, quay về màn hình chính
+0654 [['m4']] 1.2.7Dòng sự kiện phụ
+0655 [['m5']] 1.2.7.1 Dòng phụ UC002-A1: Không có dữ liệu để thống kê (báo cáo rỗng).
+0656 [['Caption']] Bảng 3. 10: Dòng phụ UC002-A1
+0657 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin đăng nhập vào hệ thống và chọn chức năng Báo cáo thống kê.1. Hệ thống mở giao diện quản lý báo cáo thống kê.2. Admin yêu cầu hiển thị báo cáo (chọn biểu đồ hoặc bảng thống kê).2. Hệ thống thực hiện truy vấn dữ liệu trong cơ sở dữ liệu.3. Admin chờ kết quả hiển thị.3. Hệ thống phát hiện không có dữ liệu phù hợp (CSDL trống hoặc chưa có báo cáo nào).4. Admin xem phản hồi từ hệ thống.4. Hệ thống hiển thị thông báo: “Không có dữ liệu để thống kê” và không vẽ biểu đồ/bảng.5. Admin có thể chọn nhập dữ liệu mới hoặc thoát chức năng.5. Hệ thống chờ thao tác tiếp theo từ Admin.1. Admin đăng nhập vào hệ thống và chọn chức năng Báo cáo thống kê.1. Hệ thống mở giao diện quản lý báo cáo thống kê.
+0658 [['m5']] 1.2.7.2 Dòng phụ UC002-A2: Upload dữ liệu báo cáo lỗi định dạng
+0660 [['Caption']] Bảng 3. 11: Dòng phụ UC002-A2
+0661 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn chức năng Thêm báo cáo và bấm Upload file để tải dữ liệu.1. Hệ thống mở hộp thoại cho phép Admin chọn file từ máy tính.2. Admin chọn một file nhưng không đúng định dạng yêu cầu (ví dụ: .txt thay vì .xlsx hoặc .csv).2. Hệ thống đọc file, kiểm tra định dạng và phát hiện file không hợp lệ.3. Admin nhấn Xác nhận tải file lên.3. Hệ thống từ chối thao tác, hiển thị thông báo lỗi: “Định dạng file không hợp lệ, vui lòng chọn file đúng định dạng (.xlsx/.csv).”4. Admin xem thông báo lỗi.4. Hệ thống hủy quá trình upload, không lưu bất kỳ dữ liệu nào vào CSDL.5. Admin chọn lại một file hợp lệ và upload lần nữa.5. Hệ thống kiểm tra lại, nếu đúng định dạng thì chấp nhận và tiến hành lưu dữ liệu.
+0662 [[]] 1.2.7.3 Dòng phụ UC002-A3: Không đủ quyền chỉnh sửa báo cáo.
+0663 [['Caption']] Bảng 3. 12: Dòng phụ UC002-A3
+0664 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Người dùng đăng nhập vào hệ thống với tài khoản không có quyền Admin.1. Hệ thống xác thực vai trò và phân quyền truy cập.2. Người dùng chọn chức năng Báo cáo thống kê.2. Hệ thống hiển thị giao diện báo cáo nhưng hạn chế quyền (chỉ cho phép xem).3. Người dùng chọn một báo cáo cụ thể và bấm Sửa báo cáo.3. Hệ thống kiểm tra quyền hạn, phát hiện tài khoản hiện tại không có quyền chỉnh sửa.4. Người dùng chờ phản hồi.4. Hệ thống từ chối thao tác và hiển thị thông báo lỗi: “Bạn không có quyền chỉnh sửa báo cáo. Vui lòng liên hệ Admin.”5. Người dùng chỉ có thể thoát hoặc tiếp tục ở chế độ xem.5. Hệ thống giữ nguyên trạng thái báo cáo, không thay đổi dữ liệu.
+0665 [['m5']] 1.2.7.4 Dòng phụ UC002-A4: Chỉnh sửa báo cáo nhưng nhập thiếu dữ liệu bắt buộc
+0666 [['Caption']] Bảng 3. 13: Dòng phụ UC002-A4
+0667 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn chức năng Sửa báo cáo.1. Hệ thống hiển thị form chỉnh sửa.2. Admin xóa hoặc bỏ trống trường bắt buộc (ví dụ: tiêu đề, thời gian).2. Hệ thống kiểm tra dữ liệu.3. Nhấn Lưu báo cáo.3. Hệ thống từ chối và hiển thị thông báo: “Thiếu thông tin bắt buộc, vui lòng nhập đầy đủ.”
+0668 [['m5']] 1.2.7.5 Dòng phụ UC002-A5: Xem báo cáo với khoảng thời gian không hợp lệ
+0669 [['Caption']] Bảng 3. 14: Dòng phụ UC002-A5
+0670 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn chức năng Xem báo cáo.1. Hệ thống yêu cầu nhập khoảng thời gian.2. Nhập thời gian bắt đầu > thời gian kết thúc.2. Hệ thống kiểm tra và phát hiện sai.3. Nhấn Xem báo cáo.3. Hệ thống từ chối, hiển thị thông báo: “Khoảng thời gian không hợp lệ.”
+0671 [['m5']] 1.2.7.6 Dòng phụ UC002-A6: Tạo báo cáo với dữ liệu quá lớn gây chậm hệ thống
+0674 [['Caption']] Bảng 3. 15: Dòng phụ UC002-A6
+0675 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn chức năng Thêm báo cáo với phạm vi dữ liệu rất lớn.1. Hệ thống bắt đầu xử lý và truy vấn dữ liệu.2. Admin chờ hiển thị kết quả.2. Hệ thống cảnh báo: “Dữ liệu lớn, quá trình xử lý có thể mất nhiều thời gian.”
+0676 [['m5']] 1.2.7.7 Dòng phụ UC002-A7: Xóa báo cáo nhưng không xác nhận
+0677 [['Caption']] Bảng 3. 16: Dòng phụ UC002-A7
+0678 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Admin chọn một báo cáo để xóa.1. Hệ thống hiển thị hộp thoại xác nhận.2. Admin nhấn Hủy trong hộp thoại.2. Hệ thống hủy thao tác, báo cáo vẫn giữ nguyên.
+0680 [['m3']] 1.3. Chức năng quản lý lịch học lịch thi (UC-03)
+0681 [['m4']] 1.3.1 Mục đích
+0682 [['m4']] Cho phép Admin và Giảng viên quản lý lịch học, lịch thi bao gồm: thêm mới, chỉnh sửa, xóa lịch. Đảm bảo lịch được cập nhật chính xác để phục vụ giảng dạy và thi cử.1.3.2 Tác nhân liên quan
+0683 [[]] Admin: Quản lý hệ thống, có toàn quyền thêm, sửa, xóa lịch.
+0684 [[]] Giảng viên: Có thể xem và chỉnh sửa lịch học/lịch thi của lớp mà mình phụ trách.
+0685 [[]] Hệ thống: Lưu trữ, cập nhật, hiển thị thông tin lịch học/lịch thi.
+0686 [['m4']] 1.3.3 Điều kiện trước
+0687 [[]] Người dùng phải đăng nhập vào hệ thống với quyền phù hợp.
+0688 [[]] Hệ thống đã có danh sách môn học và lớp học.
+0689 [[]] Hệ thống đã có thông tin giáo viên cần quản lý.
+0690 [['m4']] 1.3.4 Điều kiện sau
+0691 [[]] Lịch học/lịch thi được thêm, sửa, hoặc xóa thành công.
+0692 [[]] Dữ liệu lịch được lưu trữ và cập nhật trong hệ thống.
+0693 [[]] Giảng viên và Admin có thể xem lịch mới nhất.
+0694 [['m4']] 1.3.5 Biểu đồ use-case
+0695 [['m4']] 
+0696 [['HinhVe']] Hình 3. 4: Biểu đồ use-case QuanLyLichHocLichThi
+0697 [['m4']] 1.3.6 Dòng sự kiện chính
+0698 [['Caption']] Bảng 3. 17: Dòng sự kiện chính UC-03
+0699 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Đăng nhập hệ thốngKiểm tra thông tin đăng nhập và cho phép truy cập nếu hợp lệ2. Chọn chức năng Quản Lý Lịch Học Lịch ThiHiển thị giao diện quản lý lịch3. Chọn thao tác Thêm lịchHiển thị form nhập lịch mới, kiểm tra dữ liệu → lưu CSDL → thông báo thành công4. Chọn thao tác Sửa lịchHiển thị lịch đã chọn, cho phép chỉnh sửa → cập nhật vào CSDL → thông báo thành công5. Chọn thao tác Xóa lịchHiển thị hộp thoại xác nhận → nếu đồng ý thì xóa lịch khỏi CSDL → thông báo thành công6. Giảng viên/Admin yêu cầu xem lịchHệ thống hiển thị danh sách lịch học/lịch thi đã cập nhật7. Thoát khỏi chức năngHệ thống đóng giao diện quản lý lịch, quay về màn hình chính
+0700 [['m4']] 1.3.7 Dòng sự kiện phụ
+0701 [['m5']] 1.3.7.1 Dòng phụ UC003-A1: Trùng lịch (giờ học/thi bị chồng chéo)
+0702 [['Caption']] Bảng 3. 18: Dòng phụ UC003-A1
+0703 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn chức năng Thêm lịch và nhập thông tin buổi học/thi.1. Hệ thống tiếp nhận dữ liệu và kiểm tra thời gian.2. Nhấn Lưu lịch.2. Hệ thống phát hiện lịch mới trùng với một lịch đã tồn tại của giảng viên/lớp học.3. Chờ kết quả xử lý.3. Hệ thống từ chối lưu, hiển thị thông báo lỗi: “Lịch bị trùng, vui lòng chọn thời gian khác.”4. Người dùng nhập lại thông tin lịch hợp lệ.4. Hệ thống cho phép lưu nếu không còn trùng.
+0705 [['m5']] 1.3.7.2 Dòng phụ UC003-A2: Kiểm tra phân công giảng dạy hợp lệ
+0706 [['Caption']] Bảng 3. 19: Dòng phụ UC003-A2
+0707 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn một lịch đã qua thời gian quy định để sửa/xóa.1. Hệ thống kiểm tra trạng thái lịch.2. Nhấn Sửa hoặc Xóa lịch.2. Hệ thống phát hiện lịch đã bị khóa chỉnh sửa.3. Chờ kết quả thao tác.3. Hệ thống từ chối thao tác và hiển thị thông báo: “Lịch đã khóa, không thể chỉnh sửa hoặc xóa.”4. Người dùng quay lại danh sách lịch.4. Hệ thống giữ nguyên dữ liệu, không thay đổi.
+0708 [['m5']] 1.3.7.3 Dòng phụ UC003-A3: Xóa lịch có ràng buộc (lớp đã đăng ký)
+0709 [['Caption']] Bảng 3. 20: Dòng phụ UC003-A3
+0710 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn một lớp học phần đã có sinh viên đăng ký để xóa.1. Hệ thống kiểm tra ràng buộc: số sinh viên đang đăng ký trong bảng Enrollments.2. Nhấn nút Xóa lớp học phần.2. Hệ thống phát hiện lớp có sinh viên đăng ký → không thể xóa.3. Chờ kết quả thao tác.3. Hệ thống từ chối thao tác và hiển thị thông báo: “Không thể xóa lớp học phần vì đã có sinh viên đăng ký.”4. Người dùng quay lại danh sách lớp học phần.4. Hệ thống giữ nguyên dữ liệu lớp, không thay đổi sĩ số, không xóa bất kỳ bản ghi nào.
+0711 [['m5']] 1.3.7.4 Dòng phụ UC003-A4: Nhập sai định dạng dữ liệu lịch
+0713 [['Caption']] Bảng 3. 21: Dòng phụ UC003-A4
+0714 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Nhập thời gian lịch bằng chuỗi không hợp lệ (VD: “31/02/2025” hoặc ký tự chữ).1. Hệ thống kiểm tra dữ liệu, phát hiện định dạng sai.2. Nhấn Lưu lịch.2. Hệ thống từ chối lưu, hiển thị thông báo: “Ngày/giờ không hợp lệ, vui lòng nhập lại.”3. Người dùng chỉnh sửa lại đúng định dạng.3. Hệ thống cho phép lưu khi dữ liệu hợp lệ.
+0716 [['m5']] 1.3.7.5 Dòng phụ UC003-A5: Người dùng không có quyền sửa/xóa lịch
+0717 [['Caption']] Bảng 3. 22: Dòng phụ UC003-A5
+0718 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên truy cập lịch của lớp mà mình không phụ trách.1. Hệ thống kiểm tra quyền hạn.2. Giảng viên chọn Sửa hoặc Xóa lịch.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Bạn không có quyền chỉnh sửa lịch này.”3. Giảng viên thoát khỏi giao diện.3. Hệ thống giữ nguyên dữ liệu lịch.
+0720 [['m5']] 1.3.7.6 Dòng phụ UC003-A6: Hệ thống lỗi kết nối khi lưu lịch
+0722 [['Caption']] Bảng 3. 23: Dòng phụ UC003-A6
+0723 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Nhập đầy đủ thông tin lịch và nhấn Lưu.1. Hệ thống cố gắng ghi dữ liệu vào CSDL nhưng bị lỗi kết nối.2. Chờ phản hồi từ hệ thống.2. Hệ thống hiển thị thông báo: “Không thể lưu dữ liệu do lỗi hệ thống. Vui lòng thử lại sau.”3. Người dùng thực hiện lại thao tác sau một khoảng thời gian.3. Hệ thống cho phép lưu nếu kết nối được khôi phục.
+0725 [['m5']] 1.3.7.7 Dòng phụ UC003-A7: Xem lịch khi chưa có dữ liệu
+0726 [['Caption']] Bảng 3. 24: Dòng phụ UC003-A7
+0727 [['ColumnName', 'ColumnName', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case', 'Use-case']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn chức năng Xem lịch học/lịch thi.1. Hệ thống thực hiện truy vấn dữ liệu.2. Chờ kết quả hiển thị.2. Hệ thống phát hiện chưa có lịch nào trong CSDL.3. Người dùng chờ thông tin hiển thị.3. Hệ thống hiển thị thông báo: “Hiện chưa có lịch học/lịch thi.”
+0730 [['m3']] 1.4 Chức năng cảnh báo học tập (UC-04)
+0731 [['m4']] 1.4.1 Mục đích
+0732 [['m4']] Cho phép Cố vấn học tập quản lý việc cảnh báo học tập cho sinh viên. Hệ thống hỗ trợ lọc sinh viên theo các mức cảnh báo, thêm cảnh báo mới, sửa hoặc xóa cảnh báo để theo dõi và hỗ trợ sinh viên kịp thời.
+0733 [['m4']] 1.4.2 Tác nhân liên quan
+0734 [[]] Cố vấn học tập: Người trực tiếp sử dụng hệ thống để quản lý cảnh báo cho sinh viên.
+0735 [[]] Hệ thống: Hỗ trợ lọc sinh viên, hiển thị danh sách sinh viên thiếu tín chỉ, thêm/sửa/xóa cảnh báo.
+0736 [['m4']] 1.4.3 Điều kiện trước
+0737 [[]] Hệ thống đã có danh sách học sinh.
+0738 [[]] Hệ thống đã có danh sách giáo viên chủ nhiệm (nếu có).
+0739 [[]] Người dùng phải đăng nhập với quyền phù hợp.
+0740 [['m4']] 1.4.4 Điều kiện sau
+0741 [[]] Cảnh báo học tập của sinh viên được thêm, sửa, hoặc xóa thành công.
+0742 [[]] Hệ thống lưu trữ dữ liệu cảnh báo để cố vấn học tập và sinh viên có thể tra cứu.
+0743 [[]] Danh sách sinh viên thiếu tín chỉ và các mức cảnh báo được cập nhật chính xác.
+0744 [['m4']] 1.4.5 Biểu đồ use-case
+0745 [[]] 
+0746 [['HinhVe']] Hình 3. 5: Biểu đồ use-case CanhBaoHocTap
+0747 [['m4']] 1.4.6 Dòng sự kiện chính
+0749 [['Caption']] Bảng 3. 25: Dòng sự kiện chính UC-04
+0750 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Đăng nhập hệ thốngKiểm tra thông tin đăng nhập và cho phép truy cập nếu hợp lệ2. Chọn chức năng Cảnh Báo Học TậpHiển thị giao diện quản lý cảnh báo học tập3. Yêu cầu hiển thị sinh viên thiếu tín chỉHệ thống tìm và hiển thị danh sách sinh viên thiếu tín chỉ4. Yêu cầu lọc sinh viên theo các mức cảnh báoHệ thống lọc danh sách sinh viên theo tiêu chí được chọn (mức cảnh báo)5. Chọn thao tác Thêm cảnh báoHiển thị form nhập thông tin cảnh báo → kiểm tra dữ liệu → lưu vào CSDL → thông báo thành công6. Chọn thao tác Sửa cảnh báoHiển thị cảnh báo cần chỉnh sửa → cho phép cập nhật → ghi thay đổi vào CSDL → thông báo thành công7. Chọn thao tác Xóa cảnh báoHiển thị hộp thoại xác nhận → nếu đồng ý thì xóa khỏi CSDL → thông báo thành công8. Thoát khỏi chức năngHệ thống đóng giao diện quản lý cảnh báo, quay về màn hình chính
+0752 [['m4']] 1.4.7.1 Dòng sự kiện phụ
+0753 [['m5']] 1.4.7.1 Dòng phụ UC004-A1: Sinh viên không tồn tại / mã sinh viên không hợp lệ
+0756 [['Caption']] Bảng 3. 26: Dòng phụ UC004-A1
+0757 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Nhập mã sinh viên để tìm kiếm hoặc thêm cảnh báo.1. Hệ thống kiểm tra trong CSDL và phát hiện mã sinh viên không tồn tại.2. Nhấn xác nhận.2. Hệ thống hiển thị thông báo lỗi: “Mã sinh viên không tồn tại. Vui lòng kiểm tra lại.”3. Người dùng nhập lại thông tin đúng.3. Hệ thống cho phép tiếp tục thao tác.
+0759 [['m5']] 1.4.7.2 Dòng phụ UC004-A2: Lọc dữ liệu không ra kết quả
+0760 [['Caption']] Bảng 3. 27: Dòng phụ UC004-A2
+0761 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Chọn tiêu chí lọc sinh viên theo mức cảnh báo.1. Hệ thống thực hiện truy vấn dữ liệu.2. Chờ kết quả hiển thị.2. Hệ thống phát hiện không có sinh viên nào thỏa mãn điều kiện.3. Xem giao diện kết quả.3. Hệ thống hiển thị thông báo: “Không tìm thấy sinh viên nào theo tiêu chí lọc.”
+0763 [['m5']] 1.4.7.3 Dòng phụ UC004-A3: Thêm cảnh báo trùng lặp
+0764 [['Caption']] Bảng 3. 28: Dòng phụ UC004-A2
+0765 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Chọn một sinh viên đã có cảnh báo và thực hiện thao tác Thêm cảnh báo mới cùng loại.1. Hệ thống kiểm tra dữ liệu và phát hiện cảnh báo đã tồn tại.2. Nhấn lưu cảnh báo.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Sinh viên này đã có cảnh báo ở mức này.”
+0767 [['m5']] 1.4.7.4 Dòng phụ UC004-A4: Sửa cảnh báo nhưng không có quyền
+0768 [['Caption']] Bảng 3. 29: Dòng phụ UC004-A4
+0769 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Truy cập cảnh báo do một cố vấn khác tạo.1. Hệ thống kiểm tra quyền sở hữu dữ liệu.2. Nhấn Sửa cảnh báo.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Bạn không có quyền chỉnh sửa cảnh báo này.”
+0771 [['m5']] 1.4.7.5 Dòng phụ UC004-A5: Xóa cảnh báo không được phép (đã có quyết định kỷ luật)
+0775 [['Caption']] Bảng 3. 30: Dòng phụ UC004-A5
+0776 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Chọn một cảnh báo đã được sử dụng làm căn cứ ra quyết định kỷ luật.1. Hệ thống kiểm tra ràng buộc dữ liệu.2. Nhấn Xóa cảnh báo và xác nhận.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Cảnh báo đã gắn với quyết định kỷ luật, không thể xóa.”
+0779 [['m3']] 1.5 Chức năng duyệt đơn phúc khảo (UC-05)
+0780 [['m4']] 1.5.1 Mục đích
+0781 [[]] Hỗ trợ sinh viên gửi đơn phúc khảo điểm, và cố vấn học tập xem xét – xác nhận – duyệt đơn để đảm bảo công bằng, minh bạch trong quá trình đánh giá kết quả học tập.
+0782 [['m4']] 1.5.2 Tác nhân liên quan
+0783 [[]] Sinh viên: Người gửi yêu cầu phúc khảo điểm.
+0784 [[]] Cố vấn học tập: Người có quyền tiếp nhận, xác nhận và duyệt đơn phúc khảo.
+0785 [[]] Hệ thống: Lưu trữ, xử lý và phản hồi trạng thái phúc khảo.
+0786 [['m4']] 1.5.3 Điều kiện trước
+0787 [[]] Người dùng phải đăng nhập vào hệ thống với quyền tương ứng.
+0788 [[]] Học sinh phải có hồ sơ trong hệ thống trước khi được ghi nhận khen thưởng/kỷ luật.
+0789 [[]] Các học kỳ và năm học phải được thiết lập trước.
+0790 [['m4']] 1.5.4 Điều kiện sau
+0791 [[]] Đơn phúc khảo được xử lý (chấp nhận hoặc từ chối).
+0792 [[]] Sinh viên nhận được thông báo kết quả phúc khảo.
+0793 [[]] Dữ liệu phúc khảo được lưu lại trong hệ thống để tra cứu sau này.
+0794 [['m4']] 1.5.5 Biểu đồ use-case
+0795 [[]] 
+0796 [['HinhVe']] Hình 3. 6: Biểu đồ use-case DuyetDonPhucKhao
+0797 [['m4']] 1.5.6 Dòng sự kiện chính
+0798 [['Caption']] Bảng 3. 31: Dòng sự kiện chính UC-05
+0799 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Phúc khảo điểm và tạo đơn phúc khảoGhi nhận thông tin đơn phúc khảo và lưu vào hệ thống2. Cố vấn học tập truy cập chức năng Duyệt đơn phúc khảoHiển thị danh sách đơn phúc khảo của sinh viên3. Cố vấn học tập chọn một đơn cụ thể để xem chi tiếtHiển thị đầy đủ thông tin đơn phúc khảo (môn học, lý do, điểm cần xem xét…)4. Cố vấn học tập thực hiện thao tác Xác nhận (chấp nhận hoặc từ chối đơn)Hệ thống cập nhật trạng thái đơn phúc khảo và lưu kết quả vào CSDL5. Sinh viên kiểm tra kết quả phúc khảoHệ thống hiển thị trạng thái đơn phúc khảo (được chấp nhận hoặc bị từ chối)
+0802 [['m4']] 1.5.7 Dòng sự kiện phụ
+0803 [['m5']] 1.5.7.1 Dòng phụ UC005-A1: Sinh viên gửi đơn phúc khảo ngoài thời hạn
+0804 [['Caption']] Bảng 3. 32: Dòng phụ UC005-A1
+0805 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Phúc khảo điểm và tạo đơn sau khi thời hạn đã hết.1. Hệ thống kiểm tra thời gian nộp đơn.2. Nhấn Gửi đơn phúc khảo.2. Hệ thống từ chối, hiển thị thông báo: “Hết hạn nộp đơn phúc khảo.”3. Sinh viên thoát chức năng.3. Hệ thống giữ nguyên dữ liệu, không ghi nhận đơn mới.
+0807 [['m5']] 1.5.7.2 Dòng phụ UC005-A2: Sinh viên gửi đơn phúc khảo trùng lặp
+0808 [['Caption']] Bảng 3. 33: Dòng phụ UC005-A2
+0809 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đã nộp đơn phúc khảo cho môn X.1. Hệ thống lưu đơn trước đó.2. Sinh viên tiếp tục tạo đơn phúc khảo mới cho cùng môn X.2. Hệ thống kiểm tra và phát hiện trùng lặp.3. Nhấn Gửi đơn.3. Hệ thống từ chối, hiển thị thông báo: “Bạn đã gửi đơn phúc khảo cho môn này rồi.”
+0811 [['m4']] 1.5.7.3 Dòng phụ UC005-A3: Cố vấn học tập chưa xử lý đơn phúc khảo
+0812 [['Caption']] Bảng 3. 34: Dòng phụ UC005-A3
+0813 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đăng nhập và kiểm tra trạng thái đơn phúc khảo.1. Hệ thống truy vấn dữ liệu đơn.2. Sinh viên chọn đơn chưa được xử lý.2. Hệ thống hiển thị trạng thái: “Đang chờ duyệt”.3. Sinh viên chờ kết quả.3. Hệ thống giữ nguyên trạng thái, chưa có phản hồi chính thức.
+0815 [['m5']] 1.5.7.4 Dòng phụ UC005-A4: Cố vấn học tập từ chối đơn nhưng không ghi lý do
+0816 [['Caption']] Bảng 3. 35: Dòng phụ UC005-A4
+0817 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Chọn một đơn phúc khảo và bấm Từ chối mà không nhập lý do.1. Hệ thống kiểm tra dữ liệu.2. Nhấn Xác nhận.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Vui lòng nhập lý do từ chối đơn phúc khảo.”
+0819 [['m5']] 1.5.7.5 Dòng phụ UC005-A5: Lỗi hệ thống khi cập nhật kết quả phúc khảo
+0824 [['Caption']] Bảng 3. 36: Dòng phụ UC005-A5
+0825 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Cố vấn chọn Chấp nhận đơn phúc khảo.1. Hệ thống cố gắng cập nhật dữ liệu trong CSDL.2. Nhấn Lưu kết quả.2. Lỗi kết nối hoặc ghi dữ liệu thất bại.3. Chờ phản hồi.3. Hệ thống hiển thị thông báo lỗi: “Không thể cập nhật kết quả. Vui lòng thử lại sau.”
+0826 [['m5']] 1.5.7.6 Dòng phụ UC005-A6: Sinh viên chỉnh sửa hoặc hủy đơn phúc khảo sau khi đã gửi
+0827 [['Caption']] Bảng 3. 37: Dòng phụ UC005-A6
+0828 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên truy cập danh sách đơn phúc khảo đã gửi.1. Hệ thống hiển thị trạng thái các đơn phúc khảo.2. Sinh viên chọn đơn và bấm Chỉnh sửa/Hủy.2. Hệ thống kiểm tra trạng thái đơn. Nếu đơn chưa được duyệt → cho phép chỉnh sửa/hủy.3. Sinh viên nhập lại thông tin hoặc xác nhận hủy.3. Hệ thống cập nhật đơn phúc khảo trong CSDL và thông báo thành công.4. Nếu đơn đã được duyệt.4. Hệ thống từ chối thao tác và thông báo: “Đơn đã được xử lý, không thể chỉnh sửa/hủy.”
+0833 [['m5']] 1.5.7.7 Dòng phụ UC005-A7: Cố vấn học tập duyệt nhầm đơn phúc khảo
+0834 [['Caption']] Bảng 3. 38: Dòng phụ UC005-A7
+0835 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Cố vấn chọn nhầm đơn phúc khảo và bấm Chấp nhận.1. Hệ thống cập nhật trạng thái đơn thành “Đã chấp nhận”.2. Cố vấn phát hiện sai sót và muốn thu hồi.2. Hệ thống cho phép thao tác Hoàn tác (nếu trong giới hạn thời gian) hoặc thông báo: “Không thể thay đổi trạng thái sau khi đã lưu chính thức.”
+0836 [['m5']] 1.5.7.8 Dòng phụ UC005-A8: Sinh viên khiếu nại lại sau khi bị từ chối
+0837 [['Caption']] Bảng 3. 39: Dòng phụ UC005-A8
+0838 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên xem kết quả đơn phúc khảo bị từ chối.1. Hệ thống hiển thị trạng thái “Từ chối” và lý do.2. Sinh viên tạo lại đơn phúc khảo cho cùng môn với lý do bổ sung.2. Hệ thống kiểm tra và cho phép tạo đơn mới nếu trong thời hạn.3. Sinh viên gửi đơn mới.3. Hệ thống lưu đơn như một bản ghi mới trong CSDL.
+0840 [['m5']] 1.5.7.9 Dòng phụ UC005-A9: Cố vấn học tập từ chối đơn nhưng không ghi lý do
+0843 [['Caption']] Bảng 3. 40: Dòng phụ UC005-A9
+0844 [['m4']] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên nhập đơn phúc khảo nhưng bỏ trống trường bắt buộc (VD: lý do phúc khảo).1. Hệ thống kiểm tra dữ liệu.2. Nhấn Gửi đơn.2. Hệ thống từ chối lưu và hiển thị thông báo: “Vui lòng nhập đầy đủ thông tin phúc khảo.”
+0846 [['m3']] 1.6 Chức năng quản lý điểm danh (UC-06)
+0847 [['m4']] 1.6.1 Mục đích
+0848 [[]] Cho phép Giáo viên thực hiện điểm danh học sinh trong ngày, chỉnh sửa hoặc xóa điểm danh nếu có sai sót. Hệ thống tự động cảnh báo khi học sinh nghỉ quá số tiết quy định và khóa thao tác điểm danh sau khi hết ngày.
+0849 [['m4']] 1.6.2 Tác nhân liên quan
+0850 [[]] Giáo viên: Người trực tiếp sử dụng hệ thống để quản lý điểm danh trong lớp học.
+0851 [[]] Hệ thống: Quản lý, lưu trữ dữ liệu điểm danh, đưa ra cảnh báo và khóa thao tác đúng quy định.
+0852 [['m4']] 1.6.3 Điều kiện trước
+0853 [[]] Người dùng phải đăng nhập vào hệ thống với quyền hợp lệ.
+0854 [[]] Hệ thống đã có danh sách tài khoản người dùng.
+0855 [['m4']] 1.6.4 Điều kiện sau
+0856 [[]] Điểm danh của học sinh trong ngày được thêm, sửa, hoặc xóa thành công.
+0857 [[]] Dữ liệu được lưu trong hệ thống.
+0858 [[]] Nếu học sinh nghỉ quá số tiết quy định, hệ thống đưa ra cảnh báo.
+0859 [[]] Sau khi hết ngày, hệ thống khóa các thao tác điểm danh để đảm bảo tính chính xác.
+0860 [['m4']] 1.6.5 Biểu đồ use-case
+0861 [[]] 
+0862 [['HinhVe']] Hình 3. 7: Biểu đồ use-case QuanLyDiemDanh
+0863 [['m4']] 1.6.6 Dòng sự kiện chính
+0864 [['Caption']] Bảng 3. 41: Dòng sự kiện chính UC-06
+0865 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Đăng nhập vào hệ thốngKiểm tra thông tin đăng nhập và cho phép truy cập nếu hợp lệ2. Chọn chức năng Điểm danhHiển thị giao diện quản lý điểm danh trong ngày3. Thực hiện Thêm điểm danh trong ngàyGhi nhận thông tin điểm danh và lưu vào CSDL4. Thực hiện Sửa điểm danh trong ngàyHiển thị danh sách điểm danh đã nhập → cho phép chỉnh sửa → cập nhật vào CSDL5. Thực hiện Xóa điểm danh trong ngàyHiển thị xác nhận xóa → nếu đồng ý thì xóa khỏi CSDL6. Khi học sinh vắng quá số tiết quy địnhHệ thống sinh cảnh báo cho giáo viên7. Khi hết ngày họcHệ thống khóa thao tác điểm danh để tránh chỉnh sửa sau thời hạn8. Giáo viên thoát khỏi chức năngHệ thống đóng giao diện và quay lại màn hình chính
+0867 [['m4']] 1.6.7 Dòng sự kiện phụ
+0868 [['m5']] 1.6.7.1 Dòng phụ UC006-A1: Điểm danh trùng lặp trong cùng một buổi
+0869 [['Caption']] Bảng 3. 42: Dòng phụ UC006-A1
+0870 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên mở danh sách lớp và thực hiện điểm danh một sinh viên đã được ghi nhận trước đó trong cùng buổi học.1. Hệ thống kiểm tra dữ liệu, phát hiện trùng lặp.2. Giáo viên nhấn Lưu.2. Hệ thống từ chối lưu bản ghi mới, hiển thị thông báo: “Sinh viên này đã được điểm danh trong buổi học.”
+0872 [['m5']] 1.6.7.2 Dòng phụ UC006-A2: Điểm danh sau thời gian cho phép (hệ thống đã khóa)
+0873 [['Caption']] Bảng 3. 43: Dòng phụ UC006-A2
+0874 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên truy cập chức năng điểm danh sau khi buổi học đã kết thúc.1. Hệ thống kiểm tra thời gian và phát hiện buổi học đã qua hạn chỉnh sửa.2. Giáo viên chọn nhập thêm điểm danh.2. Hệ thống từ chối, hiển thị thông báo: “Điểm danh đã khóa, không thể thêm hoặc sửa.”
+0879 [['m5']] 1.6.7.3 Dòng phụ UC006-A3: Nhập sai dữ liệu điểm danh
+0880 [['Caption']] Bảng 3. 44: Dòng phụ UC006-A3
+0881 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên nhập trạng thái không hợp lệ (VD: “?” thay vì Có mặt/Vắng mặt).1. Hệ thống kiểm tra dữ liệu đầu vào.2. Giáo viên nhấn Lưu.2. Hệ thống từ chối, hiển thị thông báo: “Trạng thái điểm danh không hợp lệ.”
+0883 [['m5']] 1.6.7.4 Dòng phụ UC006-A4: Xóa nhầm dữ liệu điểm danh
+0884 [['Caption']] Bảng 3. 45: Dòng phụ UC006-A4
+0885 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên chọn một bản ghi điểm danh và bấm Xóa nhầm.1. Hệ thống hiển thị hộp thoại xác nhận.2. Giáo viên nhấn Đồng ý.2. Hệ thống xóa dữ liệu khỏi CSDL.3. Giáo viên phát hiện thao tác nhầm.3. Hệ thống không cho khôi phục trực tiếp, hiển thị gợi ý: “Liên hệ quản trị viên để phục hồi dữ liệu.”
+0892 [['m5']] 1.6.7.5 Dòng phụ UC006-A5: Lỗi kết nối khi lưu điểm danh
+0893 [['Caption']] Bảng 3. 46: Dòng phụ UC006-A5
+0894 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên nhập đầy đủ dữ liệu điểm danh.1. Hệ thống nhận dữ liệu và cố gắng lưu vào CSDL.2. Nhấn Lưu.2. Lỗi kết nối xảy ra, hệ thống không thể ghi dữ liệu.3. Giáo viên chờ phản hồi.3. Hệ thống hiển thị thông báo: “Không thể lưu dữ liệu. Vui lòng thử lại.”
+0896 [['m5']] 1.6.7.6 Dòng phụ UC006-A6: Sinh viên nghỉ vượt số buổi quy định
+0897 [['Caption']] Bảng 3. 47: Dòng phụ UC006-A6
+0898 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên nhập trạng thái Vắng mặt cho một sinh viên.1. Hệ thống kiểm tra tổng số buổi vắng.2. Nhấn Lưu.2. Hệ thống phát hiện sinh viên đã vượt số buổi vắng cho phép.3. Giáo viên chờ kết quả.3. Hệ thống lưu dữ liệu và đồng thời hiển thị cảnh báo: “Sinh viên này đã nghỉ quá số buổi quy định.”
+0903 [['m5']] 1.6.7.7 Dòng phụ UC006-A7: Giáo viên quên lưu dữ liệu điểm danh
+0904 [['Caption']] Bảng 3. 48: Dòng phụ UC006-A7
+0905 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên nhập trạng thái điểm danh cho sinh viên.1. Hệ thống hiển thị dữ liệu tạm trên giao diện.2. Giáo viên thoát khỏi chức năng mà không nhấn Lưu.2. Hệ thống hiển thị cảnh báo: “Dữ liệu điểm danh chưa được lưu. Bạn có muốn lưu trước khi thoát không?”3. Giáo viên chọn Thoát không lưu.3. Hệ thống hủy dữ liệu tạm, không ghi vào CSDL.
+0906 [['m5']] 1.6.7.8 Dòng phụ UC006-A8: Sinh viên không có trong danh sách lớp
+0907 [['Caption']] Bảng 3. 49: Dòng phụ UC006-A8
+0908 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên cố gắng điểm danh một sinh viên nhập tay (mã sinh viên không thuộc lớp).1. Hệ thống kiểm tra mã sinh viên.2. Nhấn Lưu.2. Hệ thống từ chối lưu, hiển thị thông báo: “Sinh viên không thuộc danh sách lớp này.”
+0914 [['m5']] 1.6.7.8 Dòng phụ UC006-A9: Điểm danh cho buổi học chưa được tạo trong lịch
+0915 [['Caption']] Bảng 3. 50: Dòng phụ UC006-A9
+0916 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên chọn ngày để điểm danh, nhưng ngày đó chưa có lịch học chính thức.1. Hệ thống kiểm tra lịch học.2. Nhấn Bắt đầu điểm danh.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Không có buổi học trong ngày này để điểm danh.”
+0918 [['m5']] 1.6.7.8 Dòng phụ UC006-A9: Truy cập chức năng điểm danh khi chưa đăng nhập
+0919 [['Caption']] Bảng 3. 51: Dòng phụ UC006-A10
+0920 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giáo viên mở trực tiếp đường dẫn điểm danh mà chưa đăng nhập.1. Hệ thống kiểm tra phiên đăng nhập.2. Thao tác điểm danh.2. Hệ thống từ chối, chuyển hướng đến màn hình đăng nhập với thông báo: “Vui lòng đăng nhập để sử dụng chức năng.”
+0922 [['m3']] 1.7  Chức năng nhập điểm và tính toán (UC-07)
+0923 [['m4']] 1.7.1 Mục đích
+0924 [[]] Cho phép giảng viên nhập điểm, chỉnh sửa điểm, thêm mới điểm, hoặc upload file điểm cho sinh viên.
+0925 [[]] Hệ thống tự động tính toán điểm tổng kết dựa trên dữ liệu đã nhập để phục vụ cho việc quản lý kết quả học tập.
+0926 [['m4']] 1.7.2 Tác nhân liên quan
+0927 [[]] Giảng viên: là người trực tiếp thực hiện thao tác nhập điểm, chỉnh sửa, upload file và yêu cầu tính toán điểm.
+0928 [[]] Hệ thống quản lý điểm: tiếp nhận yêu cầu từ giảng viên, xử lý dữ liệu điểm, tính toán và lưu trữ kết quả.
+0929 [['m4']] 1.7.3 Điều kiện trước
+0930 [[]] Người dùng đã đăng nhập vào hệ thống.
+0931 [[]] Hệ thống đã có dữ liệu về lịch học, điểm danh, điểm số.
+0932 [[]] Địa chỉ email hoặc thông tin liên lạc của người dùng đã được cập nhật.
+0933 [['m4']] 1.7.4 Điều kiện sau
+0934 [[]] Điểm của sinh viên trong lớp đã được nhập và lưu vào hệ thống.
+0935 [[]] Kết quả điểm tổng kết của sinh viên được hệ thống tính toán và hiển thị.
+0936 [[]] Dữ liệu được cập nhật chính xác trong cơ sở dữ liệu.
+0937 [['m4']] 1.7.5 Biểu đồ use-case
+0938 [['m4']] 
+0939 [['HinhVe']] Hình 3. 8: Biểu đồ use-case NhapDiemVaTinhToan
+0941 [['m4']] 1.7.6 Dòng sự kiện chính
+0943 [['Caption']] Bảng 3. 52: Dòng sự kiện UC-07
+0944 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên chọn chức năng “Nhập điểm và Tính điểm”.Hệ thống hiển thị giao diện nhập điểm cùng các tùy chọn (chọn lớp, nhập điểm, thêm điểm, sửa điểm, upload file điểm).2. Giảng viên chọn lớp cần nhập điểm.Hệ thống hiển thị danh sách sinh viên trong lớp.3. Giảng viên nhập điểm cho sinh viên (nhập trực tiếp, thêm mới điểm hoặc sửa điểm cũ).Hệ thống ghi nhận điểm đã nhập và cập nhật dữ liệu tạm thời.4. Giảng viên có thể upload file điểm.Hệ thống kiểm tra file, đọc dữ liệu và hiển thị kết quả upload.5. Giảng viên nhấn “Lưu điểm”.Hệ thống lưu dữ liệu điểm vào cơ sở dữ liệu.6. Giảng viên chọn chức năng “Tính toán điểm”.Hệ thống tự động tính điểm tổng kết theo quy định (ví dụ: hệ số điểm quá trình, điểm thi…).7. Giảng viên xác nhận kết quả.Hệ thống hiển thị danh sách kết quả điểm cuối cùng cho toàn bộ sinh viên trong lớp.
+0946 [['m4']] 1.7.7 Dòng sự kiện phụ
+0947 [['m5']] 1.7.7.1 Dòng phụ UC007-A1: Nhập điểm vượt thang điểm quy định
+0952 [['Caption']] Bảng 3. 53: Dòng phụ UC007-A1
+0953 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên nhập điểm cho sinh viên nhưng vượt thang (ví dụ: 12/10).1. Hệ thống kiểm tra giá trị điểm.2. Nhấn Lưu điểm.2. Hệ thống từ chối lưu, hiển thị thông báo: “Điểm không hợp lệ, vui lòng nhập trong thang quy định (0–10).”
+0954 [['m5']] 1.7.7.2 Dòng phụ UC007-A2: Nhập điểm thiếu thông tin thành phần
+0955 [['Caption']] Bảng 3. 54: Dòng phụ UC007-A2
+0956 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên nhập điểm quá trình nhưng bỏ trống điểm thi cuối kỳ.1. Hệ thống lưu dữ liệu tạm thời.2. Giảng viên chọn chức năng Tính toán điểm.2. Hệ thống phát hiện thiếu thành phần, từ chối tính toán và thông báo: “Không đủ dữ liệu để tính điểm tổng kết.”
+0958 [['m5']] 1.7.7.3 Dòng phụ UC007-A3: Upload file điểm sai định dạng
+0963 [['Caption']] Bảng 3. 55: Dòng phụ UC007-A3
+0964 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên chọn chức năng Upload file điểm.1. Hệ thống mở hộp thoại chọn file.2. Giảng viên chọn file không đúng định dạng (VD: .txt thay vì .xlsx).2. Hệ thống kiểm tra định dạng, phát hiện lỗi.3. Nhấn Xác nhận tải file lên.3. Hệ thống từ chối upload, hiển thị thông báo: “Định dạng file không hợp lệ. Vui lòng chọn file .xlsx hoặc .csv.”
+0966 [['m5']] 1.7.7.4 Dòng phụ UC007-A4: Sửa điểm sau khi đã khóa
+0967 [['Caption']] Bảng 3. 56: Dòng phụ UC007-A4
+0968 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên chọn chức năng Sửa điểm cho lớp đã chốt điểm.1. Hệ thống kiểm tra trạng thái lớp.2. Nhập điểm mới và nhấn Lưu.2. Hệ thống từ chối thao tác, hiển thị thông báo: “Điểm đã khóa, không thể chỉnh sửa.”
+0969 [['m5']] 1.7.7.5 Dòng phụ UC007-A5: Lỗi kết nối khi lưu điểm
+0973 [['Caption']] Bảng 3. 57: Dòng phụ UC007-A5
+0974 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên nhập điểm và nhấn Lưu.1. Hệ thống cố gắng ghi dữ liệu vào CSDL.2. Đang trong quá trình lưu, hệ thống bị mất kết nối.2. Hệ thống hiển thị thông báo lỗi: “Không thể lưu dữ liệu, vui lòng thử lại.”3. Giảng viên thao tác lại sau khi kết nối ổn định.3. Hệ thống cho phép lưu bình thường.
+0976 [['m5']] 1.7.7.6 Dòng phụ UC007-A6: Truy cập nhập điểm khi chưa đăng nhập
+0977 [['Caption']] Bảng 3. 58: Dòng phụ UC007-A6
+0978 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên mở chức năng nhập điểm trực tiếp qua đường dẫn mà chưa đăng nhập.1. Hệ thống kiểm tra phiên đăng nhập.2. Thao tác nhập dữ liệu.2. Hệ thống từ chối, tự động chuyển về màn hình đăng nhập kèm thông báo: “Vui lòng đăng nhập để sử dụng chức năng.”
+0980 [['m5']] 1.7.7.7 Dòng phụ UC007-A7: Giảng viên nhập điểm cho sinh viên không có trong danh sách lớp
+0982 [['Caption']] Bảng 3. 59: Dòng phụ UC007-A7
+0983 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên cố gắng thêm điểm bằng cách nhập tay mã sinh viên ngoài danh sách lớp.1. Hệ thống kiểm tra dữ liệu và phát hiện sinh viên không thuộc lớp.2. Nhấn Lưu điểm.2. Hệ thống từ chối, hiển thị thông báo: “Sinh viên không thuộc lớp này, không thể nhập điểm.”
+0985 [['m5']] 1.7.7.8 Dòng phụ UC007-A8: Nhập điểm nhưng thoát mà quên lưu
+0986 [['Caption']] Bảng 3. 60: Dòng phụ UC007-A8
+0987 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên nhập điểm cho sinh viên.1. Hệ thống hiển thị dữ liệu tạm thời.2. Giảng viên thoát chức năng mà không nhấn Lưu điểm.2. Hệ thống hiển thị cảnh báo: “Dữ liệu chưa được lưu. Bạn có muốn lưu trước khi thoát không?”
+0989 [['m5']] 1.7.7.9 Dòng phụ UC007-A9: Upload file điểm có lỗi dữ liệu bên trong
+0993 [['Caption']] Bảng 3. 61: Dòng phụ UC007-A9
+0994 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên upload file điểm đúng định dạng .xlsx nhưng chứa lỗi (ví dụ: cột thiếu điểm, ký tự chữ trong ô điểm).1. Hệ thống đọc dữ liệu và kiểm tra từng bản ghi.2. Nhấn Xác nhận tải file lên.2. Hệ thống hiển thị thông báo chi tiết lỗi: “Hàng 15: Điểm không hợp lệ. Hàng 23: Thiếu điểm thi cuối kỳ.”3. Giảng viên chỉnh sửa file và upload lại.3. Hệ thống cho phép xử lý nếu dữ liệu hợp lệ.
+0996 [['m5']] 1.7.7.10 Dòng phụ UC007-A10: Giảng viên tính toán điểm khi chưa lưu
+0997 [['Caption']] Bảng 3. 62: Dòng phụ UC007-A10
+0998 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên nhập điểm cho sinh viên nhưng chưa nhấn Lưu điểm.1. Hệ thống giữ dữ liệu tạm.2. Giảng viên bấm Tính toán điểm.2. Hệ thống từ chối, hiển thị cảnh báo: “Vui lòng lưu dữ liệu điểm trước khi tính toán.”
+1000 [['m5']] 1.7.7.11 Dòng phụ UC007-A11: Giảng viên không có quyền chỉnh sửa điểm lớp khác
+1004 [['Caption']] Bảng 3. 63: Dòng phụ UC007-A11
+1005 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Giảng viên đăng nhập và chọn lớp không thuộc quyền giảng dạy của mình.1. Hệ thống kiểm tra quyền truy cập.2. Chọn chức năng Nhập điểm.2. Hệ thống từ chối, hiển thị thông báo: “Bạn không có quyền nhập điểm cho lớp này.”
+1007 [['m3']] 1.8  Hiển Thị Thông Tin (UC-08)
+1008 [['m4']] 1.8.1 Mục đích
+1009 [[]] Cho phép sinh viên xem thông tin cá nhân liên quan đến học tập, bao gồm:
+1010 [[]] Thời khóa biểu (lịch học).
+1011 [[]] Bảng điểm.
+1012 [[]] Lịch thi.
+1013 [['m4']] 1.8.2 Tác nhân liên quan
+1014 [[]] Sinh viên: người sử dụng hệ thống để xem thông tin học tập của mình.
+1015 [[]] Hệ thống quản lý đào tạo: cung cấp dữ liệu lịch học, bảng điểm, lịch thi cho sinh viên.
+1016 [['m4']] 1.8.3 Điều kiện trước
+1017 [[]] Người dùng phải đăng nhập vào hệ thống và có quyền xem tương ứng.
+1018 [[]] Hệ thống đã có dữ liệu.
+1019 [['m4']] 1.8.4 Điều kiện sau
+1020 [[]] Sinh viên có thể xem được thông tin học tập cần thiết (lịch học, lịch thi, bảng điểm).
+1021 [[]] Dữ liệu được hiển thị chính xác, cập nhật từ cơ sở dữ liệu của hệ thống.
+1022 [['m4']] 1.8.5 Biểu đồ use-case
+1023 [[]] 
+1024 [['HinhVe']] Hình 3. 9: Biểu đồ use-case HienThiThongTin
+1025 [['m4']] 1.8.6 Dòng sự kiện chính
+1026 [['Caption']] Bảng 3. 64: Dòng sự kiện chính UC-08
+1027 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đăng nhập vào hệ thống.Hệ thống xác thực thông tin và cho phép truy cập chức năng.2. Sinh viên chọn chức năng “Hiển thị thông tin”.Hệ thống hiển thị các tùy chọn: Xem lịch học, Xem bảng điểm, Xem lịch thi.3. Sinh viên chọn “Xem lịch học”.Hệ thống lấy dữ liệu thời khóa biểu và hiển thị cho sinh viên.4. Sinh viên chọn “Xem bảng điểm”.Hệ thống truy xuất dữ liệu điểm và hiển thị bảng điểm chi tiết.5. Sinh viên chọn “Xem lịch thi”.Hệ thống lấy thông tin lịch thi và hiển thị cho sinh viên.6. Sinh viên thoát khỏi chức năng.Hệ thống đóng giao diện hiển thị thông tin.
+1029 [['m4']] 1.8.7 Dòng sự kiện phụ
+1030 [[]] 1.8.7.1 Dòng phụ UC008-A1: Sinh viên chưa có dữ liệu điểm
+1031 [['Caption']] Bảng 3. 65: Dòng phụ UC008-A1
+1032 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Xem bảng điểm.1. Hệ thống kiểm tra CSDL và phát hiện chưa có dữ liệu điểm.2. Sinh viên chờ phản hồi.2. Hệ thống hiển thị thông báo: “Chưa có dữ liệu điểm để hiển thị.”
+1034 [['m5']] 1.8.7.2 Dòng phụ UC008-A2: Sinh viên chưa có lịch học
+1035 [['Caption']] Bảng 3. 66: Dòng phụ UC008-A2
+1036 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Xem lịch học.1. Hệ thống kiểm tra dữ liệu thời khóa biểu.2. Không có dữ liệu lịch học trong học kỳ.2. Hệ thống hiển thị thông báo: “Chưa có lịch học cho học kỳ này.”
+1037 [['m5']] 1.8.7.3 Dòng phụ UC008-A3: Sinh viên chưa có lịch thi
+1043 [['Caption']] Bảng 3. 67: Dòng phụ UC008-A3
+1044 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Xem lịch thi.1. Hệ thống kiểm tra dữ liệu lịch thi.2. Hệ thống phát hiện không có thông tin lịch thi.2. Hệ thống hiển thị thông báo: “Chưa có lịch thi được công bố.”
+1046 [['m5']] 1.8.7.4 Dòng phụ UC008-A4: Truy cập khi chưa đăng nhập
+1047 [['Caption']] Bảng 3. 68: Dòng phụ UC008-A4
+1048 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên mở trực tiếp đường dẫn Hiển thị thông tin mà chưa đăng nhập.1. Hệ thống kiểm tra phiên đăng nhập.2. Thao tác xem thông tin.2. Hệ thống từ chối và chuyển hướng về màn hình đăng nhập kèm thông báo: “Vui lòng đăng nhập để xem thông tin học tập.”
+1050 [['m5']] 1.8.7.5 Dòng phụ UC008-A5: Truy cập dữ liệu của sinh viên khác
+1056 [['Caption']] Bảng 3. 69: Dòng phụ UC008-A5
+1057 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên cố tình thay đổi ID hoặc URL để xem dữ liệu của bạn học khác.1. Hệ thống kiểm tra quyền truy cập.2. Gửi yêu cầu xem thông tin.2. Hệ thống từ chối, hiển thị thông báo: “Bạn không có quyền truy cập thông tin này.”
+1058 [['m5']] 1.8.7.6 Dòng phụ UC008-A6: Lỗi kết nối khi truy vấn dữ liệu
+1059 [['Caption']] Bảng 3. 70: Dòng phụ UC008-A6
+1060 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Xem bảng điểm.1. Hệ thống thực hiện truy vấn dữ liệu.2. Đang trong quá trình truy vấn thì lỗi kết nối xảy ra.2. Hệ thống hiển thị thông báo: “Không thể tải dữ liệu. Vui lòng thử lại sau.”
+1061 [['m5']] 1.8.7.7 Dòng phụ UC008-A7: Sinh viên chưa có lịch thi
+1062 [['Caption']] Bảng 3. 71: Dòng phụ UC008-A7
+1063 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn Xem bảng điểm vào thời điểm nhiều người truy cập.1. Hệ thống xử lý truy vấn nhưng tốc độ chậm.2. Sinh viên chờ lâu.2. Hệ thống hiển thị thông báo: “Hệ thống đang bận, vui lòng chờ hoặc thử lại sau.”
+1064 [['m5']] 1.8.7.8 Dòng phụ UC008-A8: Dữ liệu lịch học bị thiếu sót
+1066 [['Caption']] Bảng 3. 72: Dòng phụ UC007-A8
+1067 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn Xem lịch học.1. Hệ thống tải dữ liệu từ CSDL.2. Một số môn học chưa được cập nhật vào lịch.2. Hệ thống hiển thị lịch học hiện có và cảnh báo: “Một số môn học chưa được cập nhật vào lịch.”
+1069 [['m5']] 1.8.7.9 Dòng phụ UC008-A9: Sinh viên chọn nhầm học kỳ cần xem
+1070 [['Caption']] Bảng 3. 73: Dòng phụ UC008-A9
+1071 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn Xem bảng điểm nhưng nhập sai học kỳ (ví dụ: học kỳ chưa học).1. Hệ thống kiểm tra dữ liệu.2. Nhấn Xem kết quả.2. Hệ thống hiển thị thông báo: “Không có dữ liệu cho học kỳ đã chọn.”
+1073 [['m5']] 1.8.7.10 Dòng phụ UC008-A10: Sinh viên chọn nhầm học kỳ cần xem
+1074 [['Caption']] Bảng 3. 74: Dòng phụ UC008-A10
+1075 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đăng nhập, đang xem thông tin học tập.1. Phiên đăng nhập hết hạn do không hoạt động lâu.2. Sinh viên tiếp tục thao tác (chuyển từ xem lịch học sang xem bảng điểm).2. Hệ thống yêu cầu đăng nhập lại với thông báo: “Phiên làm việc đã hết hạn, vui lòng đăng nhập lại.”
+1077 [['m5']] 1.8.7.11 Dòng phụ UC008-A11: Sinh viên bị mất quyền truy cập giữa chừng (hết phiên đăng nhập)
+1078 [['Caption']] Bảng 3. 75: Dòng phụ UC008-A11
+1079 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đăng nhập, đang xem thông tin học tập.1. Phiên đăng nhập hết hạn do không hoạt động lâu.2. Sinh viên tiếp tục thao tác (chuyển từ xem lịch học sang xem bảng điểm).2. Hệ thống yêu cầu đăng nhập lại với thông báo: “Phiên làm việc đã hết hạn, vui lòng đăng nhập lại.”
+1081 [['m3']] 1.9  Chức năng đăng ký học phần (UC-09)
+1082 [['m4']] 1.9.1 Mục đích
+1083 [[]] Cho phép sinh viên thực hiện đăng ký, xác nhận hoặc hủy đăng ký các học phần trong học kỳ theo quy định.
+1084 [['m4']] 1.9.2 Tác nhân liên quan
+1085 [[]] Sinh viên: người trực tiếp đăng ký hoặc hủy đăng ký học phần.
+1086 [[]] Hệ thống quản lý đào tạo: cung cấp danh sách học phần, kiểm tra điều kiện và lưu kết quả đăng ký.
+1087 [['m4']] 1.9.3 Điều kiện trước
+1088 [[]] Người dùng đã đăng nhập vào hệ thống.
+1089 [[]] Hệ thống đã có dữ liệu về lịch học, điểm danh, điểm số.
+1090 [[]] Địa chỉ email hoặc thông tin liên lạc của người dùng đã được cập nhật.
+1091 [['m4']] 1.9.4 Điều kiện sau
+1092 [[]] Học phần được đăng ký thành công sẽ được lưu vào cơ sở dữ liệu và hiển thị trong danh sách học phần của sinh viên.
+1093 [[]] Nếu sinh viên hủy học phần, học phần đó sẽ bị loại khỏi danh sách đăng ký.
+1094 [['m4']] 1.9.5 Biểu đồ use-case
+1095 [['m4']] 
+1096 [['HinhVe']] Hình 3. 8: Biểu đồ use-case DangKyHocPhan
+1098 [['m4']] 1.9.6 Dòng sự kiện chính
+1099 [['Caption']] Bảng 3. 76: Dòng sự kiện UC-09
+1100 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đăng nhập vào hệ thống quản lý đào tạo.Hệ thống xác thực thông tin đăng nhập.2. Sinh viên chọn chức năng “Đăng ký học phần”.Hệ thống hiển thị danh sách các học phần mở trong học kỳ.3. Sinh viên chọn học phần muốn đăng ký.Hệ thống kiểm tra điều kiện tiên quyết (số tín chỉ, học phần tiên quyết, số lượng chỗ trống).4. Sinh viên xác nhận đăng ký học phần.Hệ thống ghi nhận đăng ký, lưu vào cơ sở dữ liệu và thông báo kết quả thành công.5. Sinh viên có thể chọn hủy đăng ký học phần (nếu cần).Hệ thống loại bỏ học phần đó khỏi danh sách đăng ký và cập nhật dữ liệu.6. Sinh viên kết thúc thao tác.Hệ thống lưu trạng thái đăng ký cuối cùng.
+1102 [['m4']] 1.9.7 Dòng sự kiện phụ
+1103 [['m5']] 1.9.7.1 Dòng phụ UC009-A1: Đăng ký học phần đã hết chỗ
+1104 [['Caption']] Bảng 3. 77: Dòng phụ UC009-A1
+1105 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn một học phần muốn đăng ký.1. Hệ thống kiểm tra số lượng chỗ trống.2. Nhấn Xác nhận đăng ký.2. Hệ thống phát hiện học phần đã đầy.3. Sinh viên chờ kết quả.3. Hệ thống từ chối và hiển thị thông báo: “Học phần đã hết chỗ, vui lòng chọn học phần khác.”
+1107 [['m5']] 1.9.7.2 Dòng phụ UC009-A2: Không đủ điều kiện tiên quyết
+1108 [['Caption']] Bảng 3. 78: Dòng phụ UC009-A2
+1109 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn học phần cần môn tiên quyết.1. Hệ thống kiểm tra lịch sử học tập.2. Nhấn Xác nhận đăng ký.2. Hệ thống phát hiện sinh viên chưa hoàn thành môn tiên quyết.3. Sinh viên chờ kết quả.3. Hệ thống từ chối, hiển thị thông báo: “Bạn chưa đạt điều kiện tiên quyết để đăng ký học phần này.”
+1112 [['m5']] 1.9.7.3 Dòng phụ UC009-A3: Đăng ký trùng lịch
+1113 [['Caption']] Bảng 3. 79: Dòng phụ UC009-A3
+1114 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn một học phần có thời gian trùng với môn đã đăng ký trước đó.1. Hệ thống kiểm tra lịch học.2. Nhấn Xác nhận đăng ký.2. Hệ thống phát hiện trùng lịch.3. Sinh viên chờ phản hồi.3. Hệ thống từ chối và hiển thị thông báo: “Lịch học phần này bị trùng với môn đã đăng ký.”
+1116 [['m5']] 1.9.7.4 Dòng phụ UC009-A4: Hủy học phần sau hạn cho phép
+1117 [['Caption']] Bảng 3. 80: Dòng phụ UC009-A4
+1118 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn chức năng Hủy học phần sau thời hạn quy định.1. Hệ thống kiểm tra thời gian cho phép hủy.2. Nhấn Xác nhận hủy.2. Hệ thống từ chối và hiển thị thông báo: “Đã hết hạn hủy học phần.”
+1119 [['m5']] 1.9.7.5 Dòng phụ UC009-A5: Sinh viên đăng ký vượt số tín chỉ tối đa
+1120 [['Caption']] Bảng 3. 81: Dòng phụ UC007-A5
+1121 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn thêm học phần mới khi đã đạt giới hạn tín chỉ cho phép.1. Hệ thống kiểm tra tổng số tín chỉ đã đăng ký.2. Nhấn Xác nhận đăng ký.2. Hệ thống từ chối và hiển thị thông báo: “Bạn đã vượt số tín chỉ tối đa cho học kỳ này.”
+1123 [['m5']] 1.9.7.6 Dòng phụ UC009-A6: Lỗi kết nối khi lưu đăng ký
+1124 [['Caption']] Bảng 3. 82: Dòng phụ UC009-A6
+1125 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn học phần và nhấn Xác nhận đăng ký.1. Hệ thống cố gắng lưu dữ liệu vào CSDL.2. Xảy ra lỗi kết nối trong quá trình lưu.2. Hệ thống hiển thị thông báo: “Không thể lưu đăng ký, vui lòng thử lại sau.”
+1127 [['m5']] 1.9.7.7 Dòng phụ UC009-A7: Sinh viên chưa đăng nhập nhưng truy cập chức năng đăng ký
+1128 [['Caption']] Bảng 3. 83: Dòng phụ UC009-A7
+1129 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên mở chức năng Đăng ký học phần trực tiếp qua đường dẫn mà chưa đăng nhập.1. Hệ thống kiểm tra phiên đăng nhập.2. Thao tác chọn học phần.2. Hệ thống từ chối, chuyển hướng về màn hình đăng nhập với thông báo: “Vui lòng đăng nhập để thực hiện đăng ký học phần.”
+1131 [['m5']] 1.9.7.8 Dòng phụ UC009-A8: Đăng ký trùng môn đã học và đạt
+1132 [['Caption']] Bảng 3. 84: Dòng phụ UC009-A8
+1133 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn đăng ký lại một học phần mà mình đã học và đạt điểm trước đó.1. Hệ thống kiểm tra lịch sử học tập.2. Nhấn Xác nhận đăng ký.2. Hệ thống từ chối và hiển thị thông báo: “Bạn đã hoàn thành học phần này, không thể đăng ký lại.”
+1140 [['m5']] 1.9.7.9 Dòng phụ UC009-A9: Đăng ký lại môn đã trượt nhưng chưa mở trong kỳ
+1141 [['Caption']] Bảng 3. 85: Dòng phụ UC009-A9
+1142 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên muốn đăng ký lại học phần đã trượt ở kỳ trước.1. Hệ thống kiểm tra danh sách học phần mở trong kỳ.2. Nhập thông tin môn cần đăng ký.2. Hệ thống phát hiện học phần chưa được mở trong học kỳ hiện tại và hiển thị thông báo: “Học phần này chưa mở trong kỳ này.”
+1144 [['m5']] 1.9.7.10 Dòng phụ UC009-A10: Học phần bị hủy do không đủ số lượng sinh viên đăng ký
+1145 [['Caption']] Bảng 3. 86: Dòng phụ UC009-A10
+1146 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên đã đăng ký một học phần.1. Hệ thống theo dõi số lượng đăng ký.2. Sau đó, học phần bị hủy do ít người đăng ký.2. Hệ thống tự động cập nhật trạng thái học phần, gửi thông báo: “Học phần đã bị hủy do không đủ số lượng sinh viên.”
+1153 [['m5']] 1.9.7.11 Dòng phụ UC009-A11: Đăng ký môn song hành nhưng chưa đăng ký môn đi kèm
+1154 [['Caption']] Bảng 3. 87: Dòng phụ UC009-A11
+1155 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên chọn đăng ký môn song hành (cần học kèm với môn khác).1. Hệ thống kiểm tra ràng buộc môn song hành.2. Nhấn Xác nhận đăng ký.2. Hệ thống từ chối và hiển thị thông báo: “Bạn cần đăng ký học phần đi kèm trước khi chọn môn này.”
+1157 [['m5']] 1.9.7.12 Dòng phụ UC009-A12: Cố gắng đăng ký cùng một học phần nhiều lần
+1158 [['Caption']] Bảng 3. 88: Dòng phụ UC009-A12
+1159 [[]] Hành động của tác nhânPhản ứng của hệ thống1. Sinh viên bấm đăng ký cùng một học phần hai lần liên tiếp.1. Hệ thống kiểm tra dữ liệu đăng ký.2. Nhấn Xác nhận đăng ký.2. Hệ thống từ chối và hiển thị thông báo: “Học phần đã được đăng ký, không thể đăng ký trùng.”
+1163 [['m1']] 3.3. Biểu đồ lớp thực thể
+1164 [['m2']] 3.3.1 Danh sách các lớp đối tượng
+1165 [['Caption']] Bảng 3. 89: Danh sách các lớp đối tượng
+1166 [['ColumnName', 'ColumnName', 'ColumnName']] STTTên lớpMô tả1RoleQuản lý vai trò người dùng, dùng cho RBAC; liên kết 1-n nhiều với User.2UserQuản lý tài khoản: thông tin đăng nhập, avatar, vai trò; liên kết với Student/Lecturer.3FacultyQuản lý khoa; có số lượng bộ môn/ngành (NotMapped); liên kết Department, Major.4DepartmentQuản lý bộ môn; liên kết Faculty, Lecturer, Subject.5MajorQuản lý ngành học; liên kết Faculty, Student, AdministrativeClass.6AcademicYearQuản lý khóa học 4 năm; có tên hiển thị, năm hiện tại, trạng thái.7SchoolYearQuản lý năm học; có học kỳ, trạng thái tiến trình; liên kết AcademicYear, Class, Exam.8StudentQuản lý sinh viên; có thông tin khoa/ngành/lớp (NotMapped); liên kết Enrollment, GPA, Attendance.9LecturerQuản lý giảng viên; có thông tin tài khoản và bộ môn; liên kết Class, AdminClass, Exam.10SubjectQuản lý môn học; liên kết Department, Class, Prerequisite, LecturerSubject.11ClassLớp học phần; liên kết Subject, Lecturer, Enrollment, Attendance, Exam.12EnrollmentĐăng ký học phần; theo dõi trạng thái, hủy đăng ký; liên kết Student, Class.13AttendanceĐiểm danh sinh viên theo buổi học; liên kết Student và Schedule/Session.14GradeQuản lý điểm số (midterm, final...); liên kết Enrollment; dùng để tính GPA.15GPAĐiểm trung bình từng năm học/học kỳ; unique theo student + schoolyear + term.16NotificationThông báo cho người dùng: điểm danh, điểm số, hệ thống.17PermissionQuản lý quyền (menu + action); dùng trong RBAC; liên kết RolePermission.18RolePermissionBảng trung gian vai trò – quyền; liên kết nhiều-nhiều.19RefreshTokenLưu token refresh cho JWT; theo dõi hết hạn và trạng thái.20AdministrativeClassLớp hành chính; có cố vấn, ngành, khóa; có chỉ số sĩ số và trạng thái.21RegistrationPeriodĐợt đăng ký học phần: ngày mở/đóng, trạng thái, loại đợt.22SubjectPrerequisiteMôn học tiên quyết; tránh self-reference và vòng lặp; liên kết Subject.23RoomPhòng học: tòa, sức chứa; liên kết Timetable và Exam.24ScheduleLịch học (deprecated); liên kết Class, Attendance.25GradeAppealPhúc khảo điểm: lý do, quyết định của giảng viên/cố vấn; liên kết Grade & Enrollment.26GradeFormulaConfigCông thức tính điểm của môn/lớp; cho phép trọng số khác nhau.27RetakeRecordTheo dõi học lại: lý do, trạng thái; liên kết Student, Class, Enrollment.28ExamScheduleLịch thi: ngày giờ, phòng, giám thị; liên kết Class, Room, Lecturer.29ExamAssignmentPhân công thi: ghế, trạng thái; liên kết Exam, Student.30LecturerSubjectLiên kết giảng viên–môn giảng dạy; có môn chính và kinh nghiệm.
+1168 [['m2']] 3.3.2. Chi tiết hóa các lớp đối tượng
+1169 [['m3']] 3.3.2.1. Role
+1170 [['Caption']] Bảng 3. 90: Danh sách cá thuộc tính lớp Role
+1171 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1RoleIdintPKMã vai trò2RoleNamestringNOT NULLTên vai trò3DescriptionstringMô tả4UsersList1–nDanh sách người dùng thuộc vai trò
+1173 [['Caption']] Bảng 3. 91: Danh sách phương thức lớp Role
+1174 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1AddRole(User user)voidpublicThêm người dùng vào vai trò2RemoveRoleUser user)voidpublicXóa người dùng khỏi vai trò3UpdateRole()voidpublicCập nhật thông tin vai trò
+1176 [['m3']]  3.3.2.2. User
+1180 [['Caption']] Bảng 3. 92: Danh sách thuộc tính lớp User
+1181 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1UserIdintPKMã người dùng2UsernamestringUNIQUE, NOT NULLTên đăng nhập3PasswordHashstringNOT NULLMật khẩu đã mã hóa4AvatarstringẢnh đại diện5RoleIdintFK → RoleVai trò6StudentIdint?FK (nullable)Liên kết sinh viên7LecturerIdint?FK (nullable)Liên kết giảng viên
+1183 [['Caption']] Bảng 3. 93: Danh sách phương thức lớp User
+1184 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1Authenticate()boolpublicXác thực đăng nhập2UpdateProfile()voidpublicCập nhật thông tin người dùng3ChangePassword()voidpublicĐổi mật khẩu
+1186 [['m3']] 3.3.2.3. Faculty
+1188 [['Caption']] Bảng 3. 94: Danh sách thuộc tính lớp Faculty
+1189 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1FacultyIdintPKMã khoa2FacultyNamestringNOT NULLTên khoa3DescriptionstringMô tả4DepartmentCountintNotMappedSố lượng bộ môn
+1191 [['Caption']] Bảng 3. 95: Danh sách phương thức lớp Faculty
+1192 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1AddDepartment()voidpublicThêm bộ môn2RemoveDepartment()voidpublicXóa bộ môn3UpdateFaculty()voidpublicCập nhật thông tin khoa
+1194 [['m3']] 3.3.2.4 Department
+1195 [['Caption']] Bảng 3. 96: Danh sách thuộc tính lớp Department
+1196 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1DepartmentIdintPKMã bộ môn2DepartmentNamestringNOT NULLTên bộ môn3FacultyIdintFKThuộc khoa4DescriptionstringMô tả
+1198 [['Caption']] Bảng 3. 97: Danh sách phương thức lớp Department
+1199 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1AddLecturer()voidpublicThêm giảng viên2UpdateDepartment()voidpublicCập nhật bộ môn3RemoveDepartment()voidpublicXóa bộ môn
+1202 [['m3']] 3.3.2.5. Major
+1203 [['Caption']] Bảng 3. 98: Danh sách thuộc tính lớp Major
+1204 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1MajorIdintPKMã ngành2MajorNamestringNOT NULLTên ngành3FacultyIdintFKThuộc khoa4DescriptionstringMô tả
+1206 [['Caption']] Bảng 3. 99: Danh sách phương thức lớp Major
+1207 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1UpdateMajor()voidpublicCập nhật thông tin ngành2AssignStudent()voidpublicGán sinh viên vào ngành
+1209 [['m3']] 3.3.2.6. AcademicYear
+1212 [['Caption']] Bảng 3. 100: Danh sách thuộc tính lớp AcademicYear
+1213 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AcademicYearIdintPKMã khóa học2YearNamestringNOT NULLTên hiển thị3CurrentYearintNOT NULLNăm hiện tại4StatusstringCHECK (‘Active’, ‘Completed’)Trạng thái khóa
+1215 [['Caption']] Bảng 3. 101: Danh sách phương thức lớp AcademicYear
+1216 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1UpdateStatus()voidpublicCập nhật trạng thái khóa2GetDisplayName()stringpublicLấy tên dạng hiển thị
+1218 [['m3']] 3.3.2.7. SchoolYear
+1223 [['Caption']] Bảng 3. 102: Danh sách thuộc tính lớp SchoolYear
+1224 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1SchoolYearIdintPKMã năm học2YearNamestringNOT NULLTên năm học (vd: 2024–2025)3TermintCHECK(1–3)Học kỳ4StatusstringCHECK(‘Pending’, ‘Open’, ‘Closed’)Trạng thái năm học5AcademicYearIdintFK → AcademicYearThuộc khóa học
+1226 [['Caption']] Bảng 3. 103: Danh sách phương thức lớp SchoolYear
+1227 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1OpenRegistration()voidpublicMở năm học cho đăng ký2CloseYear()voidpublicĐóng năm học3UpdateStatus()voidpublicCập nhật trạng thái
+1229 [['m3']] 3.3.2.8. Student
+1230 [['Caption']] Bảng 3. 104: Danh sách thuộc tính lớp Student
+1231 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1MaHSIntegerPK, FK -> HocSinh.MaHSMã định danh lớp học1StudentIdintPKKhoá chính2UserIdintFK → User, UNIQUETài khoản liên kết3StudentCodestringNOT NULL, UNIQUEMã sinh viên4FullNamestringNOT NULLHọ tên5GenderstringCHECK ('Male','Female','Other')Giới tính6DobDateTimeNOT NULLNgày sinh7EmailstringNOT NULLEmail8PhonestringNULLSố điện thoại9FacultyIdintFK → FacultyKhoa10MajorIdintFK → MajorNgành11AcademicYearIdintFK → AcademicYearNiên khóa12CohortYearintNOT NULLNăm nhập học13AdminClassIdintFK → AdministrativeClassLớp hành chính14IsActiveboolDEFAULT trueTrạng thái15FacultyNamestringTên khoa1516MajorNamestringTên ngành1617YearCodestringMã niên khóa1718AdminClassNamestringTên lớp1819AdminClassCodestringMã lớp hành chính1920AdvisorNamestringCố vấn học tập2021CreatedAtDateTimeNOT NULLThời gian tạo22UpdatedAtDateTimeNULLCập nhật23CreatedBystringNULLNgười tạo24UpdatedBystringNULLNgười cập nhật
+1235 [['Caption']] Bảng 3. 105: Danh sách phương thức lớp Student
+1236 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1GetAllStudents()List<Student>publicLấy DS sinh viên2GetStudentById(id)StudentpublicLấy sinh viên theo ID3CreateStudent()boolpublicTạo mới sinh viên4UpdateStudent()boolpublicCập nhật thông tin5DeleteStudent()boolpublicXóa sinh viên6GetEnrollments()List<Enrollment>publicLấy các lớp đã đăng ký7GetGPA()GPApublicTính điểm trung bình8GetAttendanceRecords()List<Attendance>publicLấy lịch sử điểm danh9CheckAttendanceWarning()boolpublicKiểm tra cảnh báo vắng học
+1239 [['m3']] 3.3.2.9. Lecturer
+1240 [['Caption']] Bảng 3. 106: Danh sách thuộc tính lớp Lecturer
+1241 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1LecturerIdintPKMã giảng viên2UserIdintFK → User, UNIQUETài khoản3DepartmentIdintFK → DepartmentBộ môn4AcademicTitlestringNULLHọc hàm5DegreestringNULLHọc vị6SpecializationstringNULLChuyên môn7PositionstringNULLChức vụ8JoinDateDateTimeNULLNgày vào làm9IsActiveboolDEFAULT trueTrạng thái14CreatedAtDateTimeNOT NULLTạo15UpdatedAtDateTimeNULLCập nhật16CreatedBystringNULLNgười tạo17UpdatedBystringNULLNgười cập nhật
+1243 [['Caption']] Bảng 3. 107: Danh sách phương thức lớp Lecturer
+1244 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cập1GetAllLecturers()List<Lecturer>Lấy DS giảng viên2GetLecturerById(id)LecturerLấy theo ID3CreateLecturer()boolTạo giảng viên4UpdateLecturer()boolCập nhật5DeleteLecturer()boolXóa6GetTeachingClasses()List<Class>Lấy lớp đang dạy7GetAdvisedClasses()List<AdministrativeClass>Lớp cố vấn8GetTeachingSubjects()List<Subject>Các môn có thể dạy9GetSchedule()List<Schedule>Lịch giảng dạy
+1246 [['m3']] 3.3.2.10. Subject
+1248 [['Caption']] Bảng 3. 108: Danh sách thuộc tính lớp Subject
+1249 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1SubjectIdintPKMã môn2SubjectCodestringNOT NULL, UNIQUEMã học phần3SubjectNamestringNOT NULLTên môn4CreditsintCHECK > 0Số tín chỉ5DepartmentIdintFKBộ môn6DescriptionstringNULLMô tả7IsActiveboolDEFAULT trueTrạng thái8CreatedAtDateTimeNOT NULLTạo9UpdatedAtDateTimeNULLCập nhật10CreatedBystringNULLNgười tạo11UpdatedBystringNULLNgười cập nhật
+1252 [['Caption']] Bảng 3. 109: Danh sách phương thức lớp Subject
+1253 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMô tả1GetAllSubjects()List<Subject>Lấy tất cả môn2GetSubjectById(id)SubjectLấy theo ID3CreateSubject()boolThêm môn4UpdateSubject()boolCập nhật5DeleteSubject()boolXóa6GetPrerequisites()List<SubjectPrerequisite>Lấy môn tiên quyết7GetClasses()List<Class>Lấy lớp học phần8GetGradeFormula()GradeFormulaConfigLấy công thức tính điểm
+1254 [['m3']] 3.3.2.11. Class
+1256 [['Caption']] Bảng 3. 110: Danh sách thuộc tính lớp Class
+1257 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1ClassIdintPKMã lớp học phần2ClassCodestringNOT NULL, UNIQUEMã lớp3ClassNamestringNOT NULLTên lớp4SubjectIdintFK → SubjectMôn5LecturerIdintFK → LecturerGiảng viên6SemesterintCHECK 1–3Học kỳ7AcademicYearIdintFKNiên khóa8SchoolYearIdintFKNăm học9MaxStudentsintNOT NULLGiới hạn10CurrentEnrollmentintDEFAULT 0Đã đăng ký11IsActiveboolDEFAULT trueTrạng thái 12CreatedAtDateTimeNOT NULL13UpdatedAtDateTimeNULL14CreatedBystringNULL15UpdatedBystringNULL
+1260 [['Caption']] Bảng 3. 111: Danh sách phương thức lớp Class
+1261 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMô tả1GetAllClasses()List<Class>Lấy DS lớp HP2GetClassById(id)ClassLấy theo ID3CreateClass()boolTạo lớpUpdateClass()boolCập nhậtDeleteClass()boolXóaGetEnrollments()List<Enrollment>Sinh viên trong lớpGetSchedule()List<Schedule>Lịch họcCheckAvailability()boolKiểm tra còn chỗUpdateEnrollmentCount()voidCập nhật số lượng
+1262 [['m3']] 3.3.2.12. ExamAssignment
+1263 [['Caption']] Bảng 3. 112: Danh sách thuộc tính lớp ExamAssignment
+1264 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AssignmentIdintPKMã phân công thi2ExamIdintFK → ExamScheduleLịch thi3EnrollmentIdintFK → EnrollmentĐăng ký học phần4StudentIdintFK → StudentSinh viên5SeatNumberstringNULLSố báo danh6StatusstringCHECK('ASSIGNED','NOT_QUALIFIED','ATTENDED','ABSENT','EXCUSED')Trạng thái7NotesstringNULLGhi chú8StudentCodestringNotMappedMã sinh viên9StudentNamestringNotMappedTên sinh viên10ExamDateDateTimeNotMappedNgày thi11ExamTypestringNotMappedLoại kỳ thi12SubjectNamestringNotMappedTên môn học13RoomCodestringNotMappedMã phòng thi14StatusNamestringNotMappedTên trạng thái15IsQualifiedboolNotMappedĐủ điều kiện dự thi16CreatedAtDateTimeNOT NULLThời gian tạo17UpdatedAtDateTimeNULLThời gian cập nhật18CreatedBystringNULLNgười tạo19UpdatedBystringNULLNgười cập nhật
+1267 [['Caption']] Bảng 3. 113: Danh sách phương thức lớp ExamAssignment
+1268 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1GetAllExamAssignments()List<ExamAssignment>publicLấy danh sách tất cả phân công thi2GetExamAssignmentById(int id)ExamAssignmentpublicLấy thông tin phân công thi theo ID3CreateExamAssignment()boolpublicTạo phân công thi mới4UpdateExamAssignment()boolpublicCập nhật phân công thi5DeleteExamAssignment()boolpublicXóa phân công thi6CheckExamEligibility()boolpublicKiểm tra điều kiện dự thi7MarkAttendance()boolpublicĐiểm danh thi8AssignSeatNumber()stringpublicPhân số báo danh9DisqualifyStudent()boolpublicHủy tư cách dự thi
+1269 [['m3']] 3.3.2.13. LecturerSubject
+1270 [['Caption']] Bảng 3. 114: Danh sách thuộc tính lớp LecturerSubject
+1271 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1LecturerSubjectIdintPKMã liên kết2LecturerIdintFK → LecturerGiảng viên3SubjectIdintFK → SubjectMôn học4IsPrimaryboolNOT NULL, DEFAULT falseMôn học chính5ExperienceYearsintNULLSố năm kinh nghiệm6NotesstringNULLGhi chú7CertifiedDateDateTimeNULLNgày chứng nhận8IsActiveboolNOT NULL, DEFAULT trueTrạng thái hoạt động9CreatedAtDateTimeNOT NULLThời gian tạo10UpdatedAtDateTimeNULLThời gian cập nhật11CreatedBystringNULLNgười tạo12UpdatedBystringNULLNgười cập nhật
+1274 [['Caption']] Bảng 3. 115: Danh sách phương thức lớp LecturerSubject
+1275 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1GetAllLecturerSubjects()List<LecturerSubject>publicLấy danh sách tất cả liên kết2GetLecturerSubjectById(int id)LecturerSubjectpublicLấy thông tin liên kết theo ID3CreateLecturerSubject()boolpublicTạo liên kết mới4UpdateLecturerSubject()boolpublicCập nhật liên kết5DeleteLecturerSubject()boolpublicXóa liên kết6GetSubjectsByLecturer(int lecturerId)List<Subject>publicLấy danh sách môn học của giảng viên7GetLecturersBySubject(int subjectId)List<Lecturer>publicLấy danh sách giảng viên dạy môn8SetPrimarySubject()boolpublicĐặt môn học chính
+1276 [['m3']] 3.3.2.13. Enrollment
+1277 [['Caption']] Bảng 3. 116.Danh sách thuộc tính lớp Enrollment
+1278 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1EnrollmentIdintPKMã đăng ký2StudentIdintFKSinh viên3ClassIdintFKLớp học phần4StatusstringCHECK(‘Active’, ‘Cancelled’)Trạng thái đăng ký5RegisteredDateDateTimeNOT NULLNgày đăng ký
+1280 [['Caption']] Bảng 3. 117.Danh sách phương thức lớp Enrollment
+1281 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1CancelEnrollment()voidpublicHủy đăng ký2ConfirmEnrollment()voidpublicXác nhận đăng ký3UpdateStatus()voidpublicCập nhật trạng thái
+1282 [['m3']] 3.3.2.14. Attendance
+1283 [['Caption']] Bảng 3. 118.Danh sách thuộc tính lớp Attendance
+1284 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AttendanceIdintPKMã điểm danh2StudentIdintFKSinh viên3ClassIdintFKLớp học phần4SessionDateDateTimeNOT NULLNgày học5StatusstringCHECK('Present','Absent','Late')Trạng thái điểm danh6NotestringGhi chú bổ sung
+1286 [['Caption']] Bảng 3. 119.Danh sách phương thức lớp Attendance
+1287 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1MarkAttendance()voidpublicGhi nhận điểm danh2UpdateStatus()voidpublicCập nhật trạng thái3GetAttendanceInfo()AttendancepublicTrả về thông tin điểm danh
+1289 [['m3']] 3.3.2.15. Lớp Grade
+1290 [['Caption']] Bảng 3. 120.Danh sách thuộc tính lớp Grade
+1291 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AttendanceIdintPKMã điểm danh2StudentIdintFKSinh viên3ClassIdintFKLớp học phần4SessionDateDateTimeNOT NULLNgày học5StatusstringCHECK('Present','Absent','Late')Trạng thái điểm danh6NotestringGhi chú bổ sung
+1293 [['Caption']] Bảng 3. 121.Danh sách phương thức lớp Grade
+1294 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1CalculateTotal()doublepublicTính điểm tổng kết2UpdateGrade()voidpublicCập nhật điểm3ValidateGrade()boolpublicKiểm tra điểm hợp lệ
+1296 [['m3']] 3.3.2.16. Lớp GPA
+1297 [['Caption']] Bảng 3. 122.Danh sách thuộc tính lớp GPA
+1298 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1GPAIdintPKMã GPA2StudentIdintFKSinh viên3SchoolYearIdintFKNăm học4TermintCHECK(1–3)Học kỳ5Valuedouble0–4Điểm GPA
+1300 [['Caption']] Bảng 3. 123.Danh sách phương thức lớp GPA
+1301 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1CalculateGPA()doublepublicTính GPA từ bảng điểm2UpdateGPA()voidpublicCập nhật GPA3Validate()boolpublicKiểm tra hợp lệ
+1303 [['m3']] 3.3.2.17. Lớp Notification
+1304 [['m3']] Bảng 3. 124.Bảng thuộc tính lớp Notification
+1305 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1NotificationIdintPKMã thông báo2UserIdintFKNgười nhận3TitlestringNOT NULLTiêu đề4MessagestringNOT NULLNội dung5CreatedAtDateTimeDEFAULT NOWThời gian tạo6TypestringCHECK('System','Attendance','Grade')Loại thông báo7IsReadboolDEFAULT falseTrạng thái đọc
+1307 [['Caption']] Bảng 3. 125.Phương thức lớp Notification
+1308 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1MarkAsRead()voidpublicĐánh dấu đã đọc2Send()voidpublicGửi thông báo3GetUserNotifications()ListpublicLấy danh sách thông báo người dùng
+1310 [['m4']] 3.3.2.18. Lớp Permission
+1311 [['Caption']] Bảng 3. 126.Bảng thuộc tính lớp Permission
+1312 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1PermissionIdintPKMã quyền2PermissionNamestringNOT NULLTên quyền3DescriptionstringMô tả4GroupstringNhóm menu
+1315 [['Caption']] Bảng 3. 127.Phương thức lớp Permission
+1316 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1PermissionIdintPKMã quyền2PermissionNamestringNOT NULLTên quyền3DescriptionstringMô tả
+1318 [[]] 3.3.2.19. Lớp RolePermission
+1319 [['Caption']] Bảng 3. 128. Thuộc tính lớp RolePermission
+1320 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1RoleIdintPK, FKMã vai trò2PermissionIdintPK, FKMã quyền3CreatedAtDateTimeDEFAULT NOWThời gian gán4CreatedByintFK → UserNgười thực hiện
+1322 [['Caption']] Bảng 3. 129. Phương thức lớp RolePermission
+1323 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1Assign()voidpublicGán quyền cho vai trò2Remove()voidpublicGỡ quyền khỏi vai trò3CheckAssigned()boolpublicKiểm tra xem đã gán chưa
+1325 [[]] 3.3.2.20.Lớp RefreshToken
+1326 [['Caption']] Bảng 3. 130. Thuộc tính lớp RefreshToken
+1327 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1TokenIdintPKMã token2UserIdintFKNgười dùng sở hữu3TokenstringNOT NULLMã token4ExpiresAtDateTimeNOT NULLThời gian hết hạn5CreatedAtDateTimeDEFAULT NOWThời gian tạo6IsRevokedboolDEFAULT falseTrạng thái thu hồi
+1329 [['Caption']] Bảng 3. 131. Phương thức lớp RefreshToken
+1330 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1Revoke()voidpublicThu hồi token2IsExpired()boolpublicKiểm tra token hết hạn3Refresh()RefreshTokenpublicTạo token mới
+1332 [[]] 3.3.2.21. Lớp AdministrativeClass
+1334 [['Caption']] Bảng 3. 132. Thuộc tính lớp AdministrativeClass
+1335 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AdminClassIdintPKMã lớp hành chính2ClassNamestringNOT NULLTên lớp3AdvisorIdintFKCố vấn học tập4MajorIdintFKNgành học5AcademicYearIdintFKKhóa học (khóa Kxx)6CapacityintCHECK > 0Sĩ số tối đa7StatusstringCHECK('Active','Inactive')Trạng thái lớp
+1337 [['Caption']] Bảng 3. 133. Phương thức lớp AdministrativeClass
+1338 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1AssignAdvisor()voidpublicGán cố vấn học tập2UpdateClassInfo()voidpublicCập nhật thông tin lớp3GetStudentCount()intpublicTrả về số sinh viên
+1340 [[]] 3.3.2.22. Lớp RegistrationPeriod
+1341 [['Caption']] Bảng 3. 134. Thuộc tính lớp RegistrationPeriod
+1342 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1PeriodIdintPKMã đợt đăng ký2StartDateDateTimeNOT NULLNgày mở3EndDateDateTimeNOT NULLNgày đóng4StatusstringCHECK('Upcoming','Open','Closed')Trạng thái đợt5PeriodTypestringCHECK('Regular','Retake')Loại đợt
+1344 [['Caption']] Bảng 3. 135. Phương thức lớp RegistrationPeriod
+1345 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1Open()voidpublicMở đợt đăng ký2Close()voidpublicĐóng đợt đăng ký3IsOpen()boolpublicKiểm tra đang mở
+1347 [[]] 3.3.2.23. Lớp SubjectPrerequisite
+1348 [['Caption']] Bảng 3. 136. Thuộc tính lớp SubjectPrerequisite
+1349 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1IdintPKMã liên kết2SubjectIdintFKMôn học chính3PrerequisiteIdintFKMôn học tiên quyết4NotestringGhi chú
+1351 [['Caption']] Bảng 3. 137. Phương thức lớp SubjectPrerequisite
+1352 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1Open()voidpublicMở đợt đăng ký2Close()voidpublicĐóng đợt đăng ký3IsOpen()boolpublicKiểm tra đang mở
+1354 [[]] 3.3.2.24. Lớp Room
+1355 [['Caption']] Bảng 3. 138. Thuộc tính lớp Room
+1356 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1RoomIdintPKMã phòng2RoomNamestringNOT NULLTên phòng (D101…)3BuildingstringNOT NULLTòa nhà4CapacityintCHECK > 0Sức chứa
+1358 [['Caption']] Bảng 3. 139. Phương thức lớp Room
+1359 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1UpdateRoom()voidpublicCập nhật phòng2CheckCapacity()intpublicLấy sức chứa3IsSuitable(int size)boolpublicKiểm tra phù hợp sĩ số
+1361 [[]] 3.3.2.25.Lớp Schedule
+1362 [['Caption']] Bảng 3. 140. Thuộc tính lớp Schedule
+1363 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1ScheduleIdintPKMã lịch2ClassIdintFKLớp học phần3RoomIdintFKPhòng học4DayOfWeekintCHECK(1–7)Thứ trong tuần5StartTimeTimeNOT NULLGiờ bắt đầu6EndTimeTimeNOT NULLGiờ kết thúc
+1369 [['Caption']] Bảng 3. 141. Phương thức lớp Schedule
+1370 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1UpdateSchedule()voidpublicCập nhật lịch học2CheckConflict()boolpublicKiểm tra trùng lịch3GetDuration()intpublicTính thời lượng buổi học (phút)
+1372 [[]] 3.3.2.26.Lớp GradeAppeal
+1373 [['Caption']] Bảng 3. 142. Thuộc tính lớp GradeAppeal
+1374 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AppealIdintPKMã phúc khảo2EnrollmentIdintFKSinh viên – lớp học phần3ReasonstringNOT NULLLý do phúc khảo4SubmittedDateDateTimeDEFAULT NOWNgày nộp5LecturerDecisionstringQuyết định của giảng viên6AdvisorDecisionstringQuyết định của cố vấn7StatusstringCHECK('Pending','Approved','Rejected')Trạng thái
+1376 [['Caption']] Bảng 3. 143. Phương thức lớp GradeAppeal
+1377 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1SubmitAppeal()voidpublicSinh viên gửi phúc khảo2Approve()voidpublicDuyệt phúc khảo3Reject()voidpublicTừ chối phúc khảo4UpdateStatus()voidpublicCập nhật trạng thái
+1379 [[]] 3.3.2.27. Lớp GradeFormulaConfig
+1380 [['Caption']] Bảng 3. 144. Thuộc tính lớp GradeFormulaConfig
+1381 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1ConfigIdintPKMã cấu hình2SubjectIdintFKMôn học3MidtermWeightdoubleCHECK 0–1Trọng số giữa kỳ4FinalWeightdoubleCHECK 0–1Trọng số cuối kỳ5OtherWeightdoubleCHECK 0–1Trọng số thành phần6IsDefaultboolDEFAULT falseCấu hình mặc định
+1383 [['Caption']] Bảng 3. 145. Phương thức lớp GradeFormulaConfig
+1384 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1ApplyFormula()doublepublicÁp dụng công thức tính điểm2ValidateWeights()boolpublicTổng trọng số = 13SetAsDefault()voidpublicĐặt làm cấu hình mặc định
+1386 [[]] 3.3.2.28. Lớp RetakeRecord
+1387 [['Caption']] Bảng 3. 146. Thuộc tính lớp RetakeRecord
+1388 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1RetakeIdintPKMã học lại2StudentIdintFKSinh viên3ClassIdintFKLớp học phần đang học lại4OriginalClassIdintFKLớp học phần cũ5ReasonstringLý do học lại6StatusstringCHECK('Registered','Completed','Failed')Trạng thái
+1390 [['Caption']] Bảng 3. 147. Phương thức lớp RetakeRecord
+1391 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1ApplyFormula()doublepublicÁp dụng công thức tính điểm2ValidateWeights()boolpublicTổng trọng số = 13SetAsDefault()voidpublicĐặt làm cấu hình mặc định
+1393 [[]] 3.3.2.28. Lớp ExamSchedule
+1394 [['Caption']] Bảng 3. 148. Thuộc tính lớp ExamSchedule
+1395 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1ExamScheduleIdintPKMã lịch thi2ClassIdintFKLớp thi của môn3RoomIdintFKPhòng thi4LecturerIdintFKGiám thị5ExamDateDateTimeNOT NULLNgày thi6DurationintCHECK > 0Thời lượng (phút)
+1399 [['Caption']] Bảng 3. 149. Phương thức lớp ExamSchedule
+1400 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1UpdateSchedule()voidpublicCập nhật lịch thi2CheckRoomConflict()boolpublicKiểm tra trùng phòng3AssignProctor()voidpublicGán giám thị cho phòng thi
+1402 [['m3']] 3.3.2.29. ExamAssignment
+1403 [['Caption']] Bảng 3. 150: Danh sách thuộc tính lớp ExamAssignment
+1404 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1AssignmentIdintPKMã phân công thi2ExamIdintFK → ExamScheduleLịch thi3EnrollmentIdintFK → EnrollmentĐăng ký học phần4StudentIdintFK → StudentSinh viên5SeatNumberstringNULLSố báo danh6StatusstringCHECK('ASSIGNED','NOT_QUALIFIED','ATTENDED','ABSENT','EXCUSED')Trạng thái7NotesstringNULLGhi chú8StudentCodestringNotMappedMã sinh viên9StudentNamestringNotMappedTên sinh viên10ExamDateDateTimeNotMappedNgày thi11ExamTypestringNotMappedLoại kỳ thi12SubjectNamestringNotMappedTên môn học13RoomCodestringNotMappedMã phòng thi14StatusNamestringNotMappedTên trạng thái15IsQualifiedboolNotMappedĐủ điều kiện dự thi16CreatedAtDateTimeNOT NULLThời gian tạo17UpdatedAtDateTimeNULLThời gian cập nhật18CreatedBystringNULLNgười tạo19UpdatedBystringNULLNgười cập nhật
+1409 [['Caption']] Bảng 3. 151: Danh sách phương thức lớp ExamAssignment
+1410 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1GetAllExamAssignments()List<ExamAssignment>publicLấy danh sách tất cả phân công thi2GetExamAssignmentById(int id)ExamAssignmentpublicLấy thông tin phân công thi theo ID3CreateExamAssignment()boolpublicTạo phân công thi mới4UpdateExamAssignment()boolpublicCập nhật phân công thi5DeleteExamAssignment()boolpublicXóa phân công thi6CheckExamEligibility()boolpublicKiểm tra điều kiện dự thi7MarkAttendance()boolpublicĐiểm danh thi8AssignSeatNumber()stringpublicPhân số báo danh9DisqualifyStudent()boolpublicHủy tư cách dự thi
+1411 [['m3']] 3.3.2.30. LecturerSubject
+1415 [['Caption']] Bảng 3. 152: Danh sách thuộc tính lớp LecturerSubject
+1416 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên thuộc tínhKiểu dữ liệuRàng buộcMô tả1LecturerSubjectIdintPKMã liên kết2LecturerIdintFK → LecturerGiảng viên3SubjectIdintFK → SubjectMôn học4IsPrimaryboolNOT NULL, DEFAULT falseMôn học chính5ExperienceYearsintNULLSố năm kinh nghiệm6NotesstringNULLGhi chú7CertifiedDateDateTimeNULLNgày chứng nhận8IsActiveboolNOT NULL, DEFAULT trueTrạng thái hoạt động9CreatedAtDateTimeNOT NULLThời gian tạo10UpdatedAtDateTimeNULLThời gian cập nhật11CreatedBystringNULLNgười tạo12UpdatedBystringNULLNgười cập nhật
+1425 [['Caption']] Bảng 3. 153: Danh sách phương thức lớp LecturerSubject
+1426 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTTên phương thứcKiểu dữ liệuMức truy cậpMô tả1GetAllLecturerSubjects()List<LecturerSubject>publicLấy danh sách tất cả liên kết2GetLecturerSubjectById(int id)LecturerSubjectpublicLấy thông tin liên kết theo ID3CreateLecturerSubject()boolpublicTạo liên kết mới4UpdateLecturerSubject()boolpublicCập nhật liên kết5DeleteLecturerSubject()boolpublicXóa liên kết6GetSubjectsByLecturer(int lecturerId)List<Subject>publicLấy danh sách môn học của giảng viên7GetLecturersBySubject(int subjectId)List<Lecturer>publicLấy danh sách giảng viên dạy môn8SetPrimarySubject()boolpublicĐặt môn học chính
+1428 [['CH1']] CHƯƠNG 4: THIẾT KẾ HỆ THỐNG
+1431 [['m1']] 4.1. Triển khai các chức năng cho phân hệ người dùng
+1432 [[]] Để xây dựng được các chức năng của trang người dùng theo thiết kế đã được trình bày ở chương 3, đồ án đã sử dụng HTML, CSS, và JavaScript, Jquery, AngularJS để thiết kế giao diện và thao tác dữ liệu các trang theo yêu cầu. Tiếp theo, đồ án sẽ trình bày các kỹ thuật được sử dụng để xây dựng các trang.
+1433 [['m2']] Trang đăng nhập
+1435 [[]] 
+1436 [['Caption']] Hình 4. 1: Trang đăng nhập
+1441 [['Caption']] Bảng 4. 1: Đặc tả giao diện đăng nhập
+1442 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Logo hệ thốngHiển thị logo hoặc tên hệ thốngNằm ở đầu trang2Ô nhập UsernameNgười dùng nhập tên đăng nhậpBắt buộc, kiểm tra rỗng3Ô nhập PasswordNhập mật khẩuCó icon ẩn/hiện mật khẩu4Nút “Đăng nhập”Gửi thông tin username/password đến API để xác thựcNếu sai sẽ hiện lỗi5Thông báo lỗiThông báo sai tài khoản, sai mật khẩu, tài khoản bị khóaMàu đỏ, dạng popup hoặc text6Checkbox “Nhớ đăng nhập”Lưu phiên đăng nhậpKhông bắt buộc7Link “Quên mật khẩu”Điều hướng đến trang khôi phục mật khẩu (nếu có)Có thể ẩn nếu hệ thống không hỗ trợ8FooterCopyright, tên dự ánKhông bắt buộc
+1446 [['m2']] 4.1.2. Trang chủ
+1447 [['Caption']] 
+1448 [['Caption']] Hình 4. 2: Trang chủ
+1449 [['Caption']] Bảng 4. 2: Đặc tả giao diện trang chủ
+1450 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1HeaderChứa logo, tên hệ thống, avatar người dùngCố định đầu trang2Menu điều hướngLiên kết đến các trang: Sinh viên, Giảng viên, Lớp HP…Bên trái hoặc trên3Khối thống kê nhanhHiển thị số lượng sinh viên, giảng viên, lớp học, môn học…Tùy hệ thống4Khu vực nội dung chínhHiển thị thông tin tổng quát, thông báo, tin tức5Sidebar (nếu có)Menu phụ hoặc thông tin người dùngKhông bắt buộc6FooterThông tin bản quyềnCó thể cố định cuối trang
+1452 [['m2']] 4.1.3 Trang quản lý sinh viên
+1453 [[]] 
+1454 [['Caption']] Hình 4. 3: Trang quản lý sinh viên
+1455 [['Caption']] Bảng 4. 3: Đặc tả giao diện quản lý sinh viên
+1456 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Thanh tìm kiếmTìm theo MSSV, tênHỗ trợ lọc2Bảng danh sách SVHiển thị: MSSV, Họ tên, Lớp, Ngành, Trạng tháiCó phân trang3Nút Thêm sinh viênMở form nhập thông tinDạng popup hoặc trang riêng4Nút SửaMở form chỉnh sửa sinh viên5Nút XóaXóa sinh viên, hiển thị xác nhậnCó kiểm tra ràng buộc6Bộ lọcTheo ngành, khóa, lớpKhông bắt buộc
+1457 [['m2']] 4.1.4 Trang quản lý tổ chức
+1458 [[]] 
+1459 [['Caption']] Hình 4. 3: Trang quản lý tổ chức
+1460 [['Caption']] Bảng 4. 4: Đặc tả giao diện quản lý tổ chức
+1461 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách KhoaHiển thị mã khoa, tên khoa, mô tả, trạng thái2Danh sách Bộ mônThuộc khoa nào, tên bộ môn, mô tả3Nút Thêm khoa/bộ mônTạo mới một khoa hoặc bộ môn4Nút SửaChỉnh sửa khoa/bộ môn5Nút XóaXóa mục đã chọnKiểm tra ràng buộc (đang có sinh viên/giảng viên)6Bộ lọcLọc theo khoa, trạng tháiKhông bắt buộcForm nhập liệuTên khoa/bộ môn, mô tả, trạng tháiKiểm tra rỗngThông báo lỗiTrùng tên khoa/bộ môn
+1462 [['m2']] 4.1.5 Trang quản lý giảng viên
+1463 [[]] 
+1464 [['Caption']] Hình 4. 4: Trang quản lý giảng viên
+1465 [['Caption']] Bảng 4. 5: Đặc tả giao diện quản lý giảng viên
+1466 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Tìm kiếmTheo mã GV, tên, bộ môn2Danh sách giảng viênHọc vị, chức vụ, bộ môn, trạng thái3Thêm giảng viênForm nhập thông tin4Sửa giảng viênCập nhật thông tin5Xóa giảng viênXóa khỏi hệ thốngKiểm tra ràng buộc lớp học phần
+1467 [['m2']] 4.1.6 Trang niên khoá
+1468 [[]] 
+1469 [['Caption']] Hình 4. 5: Trang niên khoá
+1470 [['Caption']] Bảng 4. 6: Đặc tả giao diện niên khoá
+1471 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách niên khóaTên niên khóa, năm bắt đầu – kết thúc, trạng thái2Nút thêmTạo niên khóa mới3Nút sửaChỉnh sửa4Trạng tháiĐang hoạt động / Không hoạt độngChỉ có một niên khóa hoạt động
+1472 [['m2']] 4.1.7 Trang năm học
+1473 [[]] 
+1474 [['Caption']] Hình 4. 6: Trang quản lý năm học
+1475 [['Caption']] Bảng 4. 7: Đặc tả giao diện quản lý năm học
+1476 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách năm họcNăm học, học kỳ 1–2, ngày bắt đầu/kết thúc2Thêm năm họcTạo mới3Sửa năm họcChỉnh sửa thông tin
+1477 [['m2']] 4.1.8 Trang lớp học phần
+1478 [[]] 
+1479 [['Caption']] Hình 4. 7: Trang quản lý lớp học phần
+1480 [['Caption']] Bảng 4. 8: Đặc tả giao diện quản lý lớp học phần
+1481 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Tìm kiếm môn họcTheo mã môn, tên môn2Danh sách lớp HPMã lớp, môn học, giảng viên, phòng, tối đa SV3Nút mở lớp học phầnTạo mớiGán GV+Phòng+Niên khóa4Nút sửaChỉnh sửa thông tin5Nút xóaXóa lớp HPCần kiểm tra đã có SV đăng ký chưa
+1483 [['m2']] 4.1.9 Trang xếp lịch
+1484 [[]] 
+1485 [['Caption']] Hình 4. 8: Trang quản lý xếp lịch
+1486 [['Caption']] Bảng 4. 9: Đặc tả giao diện quản lý xếp lịch
+1487 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Lịch dạng bảngHiển thị theo tuần hoặc tháng2Bộ lọcTheo giảng viên, lớp học phần3Form thêm lịchChọn ngày, tiết, phòngKiểm tra trùng lịch4Sửa lịchChỉnh sửa các thông tin lịch5Xóa lịchXóa buổi học
+1489 [['m2']] 4.1.10 Trang đăng ký lớp học
+1490 [[]] 
+1491 [['Caption']] Hình 4. 9: Trang quản lý đăng ký lớp học
+1492 [['Caption']] Bảng 4. 10: Đặc tả giao diện đăng ký lớp học
+1493 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách lớp được mởMã lớp HP, môn, phòng, giờ học2Nút Đăng kýSV đăng ký lớp học phầnKiểm tra trùng lịch3Bộ lọcTheo môn, giảng viên, học kỳ4Danh sách lớp đã đăng kýHiển thị bên dướiCó nút hủy đăng ký
+1495 [['m2']] 4.1.11 Trang quản lý tài khoản
+1496 [[]] 
+1497 [['Caption']] Hình 4. 10: Trang quản lý tài khoản
+1498 [['Caption']] Bảng 4. 11: Đặc tả giao diện quản lý tài khoản
+1499 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách tài khoảnUsername, email, vai trò, trạng thái2Thêm tài khoảnTạo tài khoản mới3Sửa tài khoảnCập nhật vai trò, trạng thái4Khóa/Mở khóaKhóa người dùng5Đặt lại mật khẩuReset passwordChỉ Admin
+1501 [['m2']] 4.1.12 Trang quản lý quyền
+1502 [[]] 
+1503 [['Caption']] Hình 4. 11: Trang quản lý quyền
+1504 [['Caption']] Bảng 4. 12: Đặc tả giao diện quản lý tài khoản
+1505 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTThành phần giao diệnMô tả chức năngGhi chú1Thanh tìm kiếm quyềnTìm theo tên quyền, mã quyền, menuHỗ trợ lọc realtime2Bảng danh sách quyềnHiển thị các quyền hiện có trong hệ thống: • Mã quyền • Tên quyền • Menu/Module • Mô tả • Trạng tháiHỗ trợ phân trang3Nút “Thêm quyền”Mở form nhập thông tin quyền: – Tên quyền – Mã quyền – Menu/Module – Mô tảKiểm tra trùng mã quyền4Nút “Sửa”Chỉnh sửa thông tin quyền được chọnKhông cho sửa mã quyền nếu đã được gán5Nút “Xóa”Xóa quyền khỏi hệ thốngKiểm tra ràng buộc với vai trò6Bộ lọc nâng caoLọc theo Menu, nhóm quyền, trạng tháiKhông bắt buộc7Thông báo hệ thốngHiển thị thông báo lỗi, thành công: 8Popup xác nhận khi xóaXác nhận: “Bạn có chắc chắn muốn xóa quyền này?”Có kiểm tra ràng buộc9BreadcrumbVí dụ: Trang chủ → Quản lý quyềnĐiều hướng nhanh
+1507 [['m2']] 4.1.13 Trang Dashboard cố vấn học tập
+1508 [[]] 
+1509 [['Caption']] Hình 4. 12. Trang Dashboard cố vấn học tập
+1515 [['Caption']] Bảng 4. 13.Đặc tả trang Dashboard cố vấn học tập
+1516 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1HeaderHiển thị tên hệ thống, avatar cố vấn, nút đăng xuấtCố định đầu trang2Thống kê nhanhSố sinh viên được phân công, số sinh viên cảnh báo, số đơn cần xử lýHiển thị dưới dạng thẻ (card)3Danh sách sinh viên cảnh báoLiệt kê sinh viên có điểm thấp, nợ môn, cảnh báo học vụCó liên kết xem chi tiết4Lịch cố vấnLịch họp, lịch hướng dẫn sinh viênDạng lịch tuần5Danh sách việc cần làm (To-do)Hiển thị các công việc: duyệt đơn, liên hệ sinh viên…Cố vấn có thể đánh dấu hoàn thành6Bộ lọcLọc theo lớp, khóa, ngànhKhông bắt buộc7Thông báo hệ thốngHiển thị thông báo mới cho cố vấnPopup hoặc khu vực riêng8FooterBản quyền, thông tin trườngKhông bắt buộc
+1518 [['m2']] 4.1.14 Trang sinh viên được phân công
+1519 [[]] 
+1520 [['Caption']] Hình 4. 13. Trang sinh viên được phân công
+1521 [['HinhVe']] Bảng 4. 14.Đặc tả trang sinh viên được phân công
+1522 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1HeaderHiển thị tên hệ thống, avatar cố vấn, nút đăng xuấtCố định đầu trang2Thống kê nhanhSố sinh viên được phân công, số sinh viên cảnh báo, số đơn cần xử lýHiển thị dưới dạng thẻ (card)3Danh sách sinh viên cảnh báoLiệt kê sinh viên có điểm thấp, nợ môn, cảnh báo học vụCó liên kết xem chi tiết4Lịch cố vấnLịch họp, lịch hướng dẫn sinh viênDạng lịch tuần5Danh sách việc cần làm (To-do)Hiển thị các công việc: duyệt đơn, liên hệ sinh viên…Cố vấn có thể đánh dấu hoàn thành6Bộ lọcLọc theo lớp, khóa, ngànhKhông bắt buộc7Thông báo hệ thốngHiển thị thông báo mới cho cố vấnPopup hoặc khu vực riêng8FooterBản quyền, thông tin trườngKhông bắt buộc
+1524 [['m2']] 4.1.15 Trang cảnh báo học tập
+1526 [['HinhVe']] 
+1527 [['Caption']] Hình 4. 14.Trang cảnh báo chuyên cần
+1528 [['Caption']] Bảng 4. 15.Đặc tả trang cảnh báo chuyên cần
+1529 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Thanh tìm kiếmTìm theo MSSV, tên sinh viênHỗ trợ lọc realtime2Bộ lọc nâng caoLọc theo lớp, ngành, khóa, mức độ cảnh báoKhông bắt buộc3Danh sách sinh viên cảnh báoHiển thị: MSSV, họ tên, lớp, điểm trung bình, số tín chỉ nợ, mức cảnh báoCó phân trang4Mức độ cảnh báo• Cảnh báo 1: Điểm TB thấp• Cảnh báo 2: Nợ tín chỉ• Cảnh báo 3: Nguy cơ thôi học5Nút xem chi tiếtXem bảng điểm, lịch sử học tập, môn nợMở popup/trang mới6Nút gửi thông báoGửi email/tin nhắn nhắc nhở sinh viênHệ thống thông báo7Biểu đồ thống kêThống kê số lượng sinh viên theo cấp độ cảnh báoKhông bắt buộc8Xuất danh sáchXuất Excel/PDFPhụ thuộc hệ thống9Thông báo lỗi/hệ thốngHiển thị khi không tải được dữ liệuMàu đỏ
+1532 [['m2']] 4.1.15 Trang công thức tính điểm
+1533 [[]] 
+1534 [['Caption']] Hình 4. 15.Trang công thức tính điểm
+1537 [['Caption']] Bảng 4. 17: Đặc tả trang công thức tính điểm
+1538 [['Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung', 'Nidung']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách môn họcHiển thị danh sách môn và công thức tính điểm của từng môn—2Công thức tính điểmHiển thị các thành phần:• Điểm chuyên cần• Điểm giữa kỳ• Điểm cuối kỳ3Bộ lọcLọc theo khoa, bộ mônKhông bắt buộc4Nút chỉnh sửaĐiều chỉnh công thức điểm của môn họcChỉ Admin/Quản lý5Nút thêm công thức mớiTạo công thức cho môn chưa cấu hình—6Công thức tổngĐiểm tổng = Σ(điểm * trọng số)Hiển thị rõ7Kiểm tra hợp lệ• Tổng trọng số = 100%8Lưu thay đổiLưu công thức mới/đã chỉnh sửaKiểm tra quyền9Thông báo hệ thốngLỗi, thành công—
+1540 [['m2']] 4.1.16 Trang đăng ký học phần
+1542 [[]] 
+1543 [['Caption']] Hình 4. 16. Trang đăng ký học phần
+1545 [['HinhVe']] Bảng 4. 18. Đặc tả giao diện Trang đăng ký học phần
+1546 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Bộ lọc môn họcLọc theo học kỳ, năm học, khoa, bộ môn—2Danh sách môn mở đăng kýHiển thị mã môn, tên môn, số tín chỉ, giảng viên, thời khóa biểuCó phân trang3Danh sách lớp học phầnHiển thị các lớp HP của môn đã chọn, kèm: phòng, thời gian, số lượng còn lại—4Nút “Đăng ký”Đăng ký lớp HP đã chọnKiểm tra trùng lịch + trùng môn5Nút “Hủy đăng ký”Hủy lớp đã đăng kýCó xác nhận6Danh sách học phần đã đăng kýHiển thị bên dưới theo dạng bảng—7Cảnh báo trùng lịchHiển thị khi đăng ký bị xung đột thời khóa biểuMàu đỏ8Tổng số tín chỉ đăng kýTự động tính—9Thông báo hệ thốngHiển thị lỗi, thành côngPopup hoặc text
+1548 [['m2']] 4.1.17 Dashboard Giảng viên
+1550 [['HinhVe']] 
+1551 [['Caption']] Hình 4. 17.Dashboard giảng viên
+1552 [['HinhVe']] Bảng 4. 19. Đặc tả giao diện Trang Dashboard Giảng viên
+1553 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1HeaderAvatar GV, tên GV, thông báo—2Thống kê nhanhSố lớp đang dạy, số buổi dạy hôm nay, số bài cần chấmTheo học kỳ3Lịch dạy trong ngàyLiệt kê các tiết dạy trong ngày—4Danh sách lớp đang phụ tráchHiển thị mã lớp HP, môn, số SVLiên kết đến điểm danh/nhập điểm5Thông báo từ nhà trườngTin mới, lịch họp, thông báo học vụ—6Công việc cần làmNhập điểm, điểm danh, xử lý yêu cầu sinh viên—7Lịch giảng dạy dạng tuầnPreview dạng bảngKhông bắt buộc8FooterBản quyền, thông tin trường—
+1555 [['m2']] 4.1.18 Trang điểm danh lớp học
+1556 [['Caption']] 
+1557 [['Caption']] Hình 4. 18.Trang điểm danh lớp học
+1559 [['HinhVe']] Bảng 4. 20. Đặc tả giao diện Trang điểm danh lớp học
+1560 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách buổi họcHiển thị ngày học, tiết, phòng—2Danh sách sinh viênHọ tên, MSSV, trạng thái điểm danhCó phân trang3Trạng thái điểm danhCó mặt / Vắng / Có phépDưới dạng checkbox hoặc dropdown4Ghi chú buổi họcGhi chú giảng viên cho từng SVKhông bắt buộc5Nút “Điểm danh nhanh”Đánh dấu toàn bộ là “Có mặt”Tiện ích6Nút “Lưu điểm danh”Lưu trạng thái điểm danh—7Lịch sử điểm danhXem lại điểm danh các buổi trướcPopup8Thông báo lỗi/hệ thốngLỗi quyền truy cập, lỗi lưu dữ liệu—
+1562 [['m2']] 4.1.19 Trang nhập điểm
+1563 [[]] 
+1564 [['Caption']] Hình 4. 19.Trang nhập điểm
+1565 [['HinhVe']] Bảng 4. 21. Đặc tả giao diện Trang nhập điểm
+1566 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Danh sách lớp học phầnLiệt kê các lớp GV đang phụ trách—2Bảng nhập điểmNhập chuyên cần, giữa kỳ, cuối kỳKiểm tra hợp lệ3Tự động tính điểm tổngDựa trên công thức trọng sốKhông chỉnh sửa4Import điểm từ ExcelTải file .xlsxKiểm tra format5Xuất danh sách điểmXuất Excel/PDF—6Nút lưuLưu điểm sinh viên—7Nhật ký chỉnh sửa điểmLịch sử thay đổi điểmKhông bắt buộc8Thông báo hệ thốngThành công, lỗi, cảnh báo—
+1570 [['m2']] 4.1.20 Trang Thời khoá biểu giảng viên
+1572 [['HinhVe']] 
+1573 [['Caption']] Hình 4. 20.Trang thời khoá biểu giảng viên
+1574 [['HinhVe']] Bảng 4. 22. Đặc tả giao diện Trang thời khóa biểu giảng viên
+1575 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Lịch dạng bảngHiển thị theo tuần—2Bộ lọcTheo tuần, tháng, học kỳ—3Chi tiết buổi họcPhòng, môn, lớp HP, sĩ sốPopup4Lịch thiHiển thị ngày thi các môn phụ tráchKhông bắt buộc5Xuất TKBXuất PDF/Excel—6Gợi ý lịch rảnhDùng cho sắp xếp lịch họp hoặc dạy thayTùy hệ thống
+1577 [['m2']] 4.1.21 Trang Dashboard Sinh viên
+1578 [['HinhVe']] 
+1579 [['Caption']] Hình 4. 21.Trang Dashboard Sinh Viên
+1581 [['HinhVe']] Bảng 4. 23. Đặc tả giao diện Dashboard Sinh viên
+1582 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Thông tin nhanhTên sinh viên, MSSV, lớp—2Thống kê kết quả học tậpĐiểm trung bình, số tín chỉ tích lũy—3Cảnh báo học tậpHiển thị cấp độ cảnh báoMàu đỏ/vàng4Thời khóa biểu hôm nayTiết học hiện tại, phòng, giảng viên—5Môn học đang đăng kýDanh sách lớp HP—6Thông báoTin quan trọng từ nhà trường—7Tiến độ học tậpSố tín chỉ hoàn thành vs bắt buộcBiểu đồ
+1584 [['m2']] 4.1.22 Trang lịch học
+1585 [['HinhVe']] 
+1586 [['Caption']] Hình 4. 22.Trang lịch học
+1587 [['HinhVe']] Bảng 4. 24. Đặc tả giao diện Trang lịch học
+1588 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Lịch dạng tuầnHiển thị các môn theo tiếtMặc định2Chế độ xem thángXem toàn bộ lịch học/thời gian thiKhông bắt buộc3Chi tiết buổi họcPhòng, giảng viên, mã lớp HPPopup4Bộ lọcTheo tuần/học kỳ—5Lịch thiHiển thị riêng—6Xuất lịchPDF/Excel—
+1590 [['m2']] 4.1.23 Trang kết quả học tập
+1592 [['HinhVe']] 
+1593 [['Caption']] Hình 4. 23.Trang kết quả học tập
+1594 [['HinhVe']] Bảng 4. 25. Đặc tả giao diện Trang kết quả học tập
+1595 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Bộ lọc học kỳChọn năm học – học kỳ—2Bảng điểmMôn, tín chỉ, điểm chuyên cần, giữa kỳ, cuối kỳ, điểm tổng—3Xếp loại mônĐạt / Không đạtTự tính4Điểm trung bình HKGPA theo học kỳ—5GPA tích lũyTính theo toàn khóa—6Cảnh báo học vụNếu có—7Xuất bảng điểmPDF—
+1600 [['m2']] 4.1.24 Trang thông tin cá nhân sinh viên
+1601 [['HinhVe']] 
+1602 [['Caption']] Hình 4. 24.Trang thông tin cá nhân sinh viên
+1603 [['HinhVe']] Bảng 4. 26. Đặc tả giao diện Trang thông tin cá nhân sinh viên
+1604 [['HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe', 'HinhVe']] STTThành phần giao diệnMô tả chức năngGhi chú1Thông tin cá nhânMSSV, họ tên, ngày sinh, giới tính, ngành, lớp—2Thông tin liên hệEmail, số điện thoại—3Hồ sơ học tậpSố tín chỉ tích lũy, GPA, tiến độ—4Hồ sơ rèn luyệnĐiểm rèn luyện, minh chứngKhông bắt buộc5Cảnh báo học tậpMức cảnh báo hiện tại—6Nút chỉnh sửa thông tinSV cập nhật thông tin cá nhân (nếu được phép)Có kiểm duyệt7Ảnh đại diệnCập nhật ảnh—
+1607 [['m1']] 4.2 Kiểm thử và triển khai ứng dụng
+1608 [['m2']] 4.3.1 Kiểm thử
+1609 [[]] Sau khi hoàn thành các chức năng chính, nhóm tiến hành chạy thử hệ thống quản lý đào tạo trên các nghiệp vụ thường được sử dụng. Phạm vi kiểm thử gồm đăng nhập, quản lý tài khoản, quản lý sinh viên và giảng viên, tạo lớp học phần, đăng ký học phần, điểm danh, nhập điểm, lập lịch thi và xử lý yêu cầu phúc khảo.
+1610 [[]] Việc kiểm thử không chỉ nhằm kiểm tra từng màn hình riêng lẻ mà còn xem dữ liệu có được chuyển đúng giữa giao diện, API và cơ sở dữ liệu hay không. Chẳng hạn, khi giảng viên điểm danh một buổi học, kết quả phải được lưu vào bảng điểm danh, đồng thời phản ánh đúng khi sinh viên tra cứu chuyên cần.
+1611 [[]] Các hình thức kiểm thử được áp dụng gồm:
+1612 [[]] Kiểm thử chức năng: kiểm tra từng chức năng có hoạt động đúng theo yêu cầu hay không.
+1613 [[]] Kiểm thử tích hợp: kiểm tra sự kết nối giữa giao diện AngularJS, API ASP.NET Core và cơ sở dữ liệu SQL Server.
+1614 [[]] Kiểm thử giao diện: rà soát cách hiển thị biểu mẫu, bảng dữ liệu, thông báo lỗi và khả năng thao tác trên các kích thước màn hình khác nhau.
+1615 [[]] Kiểm thử hồi quy: chạy lại các chức năng đã hoàn thành sau khi chỉnh sửa mã nguồn để phát hiện lỗi phát sinh.
+1616 [[]] Kiểm thử chấp nhận người dùng: thử nghiệm các luồng nghiệp vụ theo góc nhìn của Admin, Giảng viên, Cố vấn học tập và Sinh viên.
+1617 [['Caption']] Bảng 4. 27: Bảng kiểm thử các chức năng chính
+1618 [['ColumnName', 'ColumnName', 'ColumnName', 'ColumnName', 'ColumnName']] STTChức năngHành độngMong muốnKết quả1Đăng nhậpNhập đúng email + mật khẩuHệ thống cho phép đăng nhập, chuyển vào DashboardĐạt2Đăng nhập lỗiEmail đúng, mật khẩu saiHiển thị thông báo "Sai thông tin đăng nhập"Đạt3Quản lý người dùngTạo mới User (email, role, thông tin)User lưu vào DB, hiển thị trong danh sáchĐạt4Quản lý sinh viênNhập đầy đủ thông tin SV, chọn ngành, lớpSinh viên được thêm thành côngĐạt5Quản lý lớp học phầnTạo lớp học phần, chọn giảng viên, phòng, môn họcLớp được thêm, tránh trùng giờ/ phòngĐạt6Đăng ký học phầnSV chọn lớp học phần trong thời gian đăng kýTạo bản ghi Enrollment, số lượng tăngĐạt7Điểm danhGiảng viên đánh dấu trạng thái Present/AbsentLưu thành công vào bảng AttendanceĐạt8Nhập điểmNhập điểm GK/CK, tính điểm tổngCập nhật vào Grades, GPA tự tính lạiĐạt9Lịch thiThêm lịch thi (phòng, ngày, ca, giảng viên coi thi)Lịch được tạo, không trùng phòng hoặc ca thiĐạt10Phúc khảoSV gửi yêu cầu phúc khảoGiảng viên xem, cập nhật quyết địnhĐạt
+1620 [[]] Qua các lần chạy thử, những chức năng quan trọng của hệ thống hoạt động đúng với các luồng nghiệp vụ đã xây dựng. Một số vấn đề nhỏ liên quan đến khoảng cách hiển thị, cỡ chữ và bố cục khi thu nhỏ màn hình đã được điều chỉnh trong quá trình kiểm thử giao diện.
+1621 [[]] Trong phạm vi dữ liệu và môi trường thử nghiệm của đề tài, chưa ghi nhận lỗi làm gián đoạn các chức năng chính như đăng nhập, điểm danh, nhập điểm hoặc đăng ký học phần. Tuy vậy, khi triển khai với số lượng người dùng lớn hơn, hệ thống vẫn cần được kiểm thử tải và kiểm thử bảo mật kỹ hơn.
+1622 [['m2']] 4.3.2 Đóng gói ứng dụng
+1623 [[]] Hệ thống được tổ chức thành các thành phần chính gồm backend, frontend và cơ sở dữ liệu. Backend được xây dựng bằng ASP.NET Core 8.0 Web API; frontend sử dụng AngularJS 1.x; dữ liệu được lưu trữ trên Microsoft SQL Server 2019 hoặc phiên bản mới hơn.
+1624 [[]] Trong kiến trúc hiện tại, API Gateway tiếp nhận yêu cầu từ phía giao diện và chuyển tiếp đến các dịch vụ cần thiết. Dịch vụ quản trị xử lý những nghiệp vụ như quản lý tài khoản, lớp học phần, sinh viên, giảng viên và dữ liệu đào tạo.
+1625 [[]] 1. Đóng gói Backend ASP.NET Core
+1626 [[]] Trước khi triển khai, mỗi dịch vụ được publish ở chế độ Release bằng lệnh:
+1627 [[]] dotnet publish -c Release -o ./publish
+1628 [[]] Ví dụ, thư mục publish của Admin Service và API Gateway sẽ chứa các tệp DLL đã biên dịch, các tệp cấu hình, thư viện phụ thuộc và các tài nguyên tĩnh nếu dự án có sử dụng.
+1629 [[]] Các tệp cần kiểm tra trước khi đưa lên môi trường triển khai gồm:
+1630 [[]] appsettings.json
+1631 [[]] appsettings.Production.json
+1632 [[]] ocelot.json đối với API Gateway
+1633 [[]] các tệp DLL và thư viện phụ thuộc
+1634 [[]] thư mục wwwroot nếu dịch vụ có chứa tài nguyên tĩnh
+1635 [[]] Tại môi trường Production, các thông số không nên dùng giống môi trường phát triển. Chuỗi kết nối SQL Server, khóa JWT, cấu hình SMTP và thông tin Redis cần được đặt lại theo máy chủ triển khai. Những thông tin nhạy cảm như mật khẩu cơ sở dữ liệu hoặc JWT SecretKey không nên ghi trực tiếp trong mã nguồn.
+1636 [[]] 2. Đóng gói Frontend AngularJS
+1637 [[]] Với AngularJS 1.x, frontend có thể được triển khai dưới dạng các tệp tĩnh. Thư mục triển khai thường bao gồm:
+1638 [[]] index.html
+1639 [[]] thư mục controllers
+1640 [[]] thư mục services
+1641 [[]] thư mục views
+1642 [[]] thư mục css
+1643 [[]] thư mục js
+1644 [[]] thư mục images
+1645 [[]] Trước khi triển khai, cần kiểm tra lại file cấu hình như app.js hoặc config.js. Trong đó, các biến như BASE_URL và GATEWAY_URL phải trỏ đến địa chỉ API Gateway trên môi trường thật, thay vì dùng địa chỉ localhost khi lập trình.
+1646 [[]] Frontend có thể được đưa lên IIS hoặc một web server tĩnh có hỗ trợ HTTPS.
+1647 [[]] 3. Đóng gói cơ sở dữ liệu
+1648 [[]] Cơ sở dữ liệu có thể được chuyển sang môi trường mới bằng file backup hoặc bằng các script SQL. Với phương án backup, có thể sử dụng lệnh:
+1649 [[]] BACKUP DATABASE EducationManagement 
+1650 [[]] TO DISK = 'EducationManagement.bak'
+1651 [[]] Nếu triển khai bằng script, nên chia thành các tệp theo thứ tự để dễ kiểm soát:
+1652 [[]] 01_CreateTables.sql
+1653 [[]] 02_StoredProcedures.sql
+1654 [[]] 03_Indexes.sql
+1655 [[]] 04_Views.sql
+1656 [[]] 05_SeedData_FullTest.sql
+1657 [[]] Việc tách script giúp thuận tiện khi cần cài đặt lại hệ thống hoặc kiểm tra lỗi ở từng phần của cơ sở dữ liệu.
+1658 [[]] 4. Tài liệu đi kèm
+1659 [[]] Bản triển khai nên có thêm tài liệu để người dùng hoặc người quản trị có thể cài đặt và vận hành hệ thống. Các tài liệu cần chuẩn bị gồm:
+1660 [[]] Hướng dẫn cài đặt hệ thống.
+1661 [[]] Hướng dẫn sử dụng theo vai trò: Admin, Giảng viên, Cố vấn học tập và Sinh viên.
+1662 [[]] Hướng dẫn cấu hình appsettings, JWT, SMTP và chuỗi kết nối cơ sở dữ liệu.
+1663 [[]] Tài liệu API được cung cấp qua Swagger UI tại đường dẫn /swagger.
+1664 [['m2']] 4.3.3 Triển khai ứng dụng
+1665 [[]] Việc triển khai được thực hiện trên môi trường Windows có cài đặt IIS, .NET Runtime và SQL Server. Cấu hình máy chủ có thể thay đổi tùy theo số lượng người dùng và quy mô dữ liệu thực tế.
+1669 [['Caption']] Bảng 4. 28: Yêu cầu phần cứng đề xuất
+1670 [['ColumnName', 'ColumnName']] Thành phần giao diệnMô tả chức năngCPUIntel Core i5 hoặc cao hơnRAM8GB trở lên (khuyến nghị 16GB cho production)Ổ cứng≥ 50GB trốngGPUKhông yêu cầu (trừ khi dùng dashboard real-time)MạngBăng thông ổn định, hỗ trợ HTTPS
+1672 [['Caption']] Bảng 4. 15: Yêu cầu phần mềm
+1673 [['ColumnName', 'ColumnName']] Thành phần giao diệnMô tả chức năngHệ điều hànhWindows 10/11 hoặc Windows Server 2019/2022.NET Runtime.NET 8.0 Runtime hoặc ASP.NET Core 8 Hosting BundleSQL ServerSQL Server 2019 trở lênIISIIS 10+
+1675 [[]] Triển khai Backend
+1676 [[]] Trước hết, máy chủ cần được cài ASP.NET Core 8 Hosting Bundle để IIS có thể chạy ứng dụng .NET. Sau khi cài đặt, nên khởi động lại máy chủ hoặc IIS để cấu hình có hiệu lực.
+1677 [[]] Thư mục publish của Admin Service được sao chép lên máy chủ, ví dụ tại:
+1678 [[]] C:\inetpub\api-admin
+1679 [[]] Sau đó tạo một website hoặc application trong IIS, cấu hình port phù hợp và cập nhật file appsettings.Production.json theo môi trường triển khai.
+1680 [[]] API Gateway được triển khai tương tự, ví dụ tại:
+1681 [[]] C:\inetpub\api-gateway
+1682 [[]] Gateway nên dùng HTTPS khi triển khai thực tế. File ocelot.json cần được kiểm tra để bảo đảm các route chuyển tiếp đến đúng dịch vụ. Nếu hệ thống sử dụng JWT, cấu hình xác thực giữa Gateway và các API phía sau cũng phải thống nhất.
+1683 [[]] Với Application Pool trên IIS, có thể sử dụng các thiết lập sau:
+1684 [[]] .NET CLR Version: No Managed Code
+1685 [[]] Start Mode: AlwaysRunning
+1686 [[]] Idle Timeout: 0
+1687 [[]] Các thiết lập này giúp hạn chế việc ứng dụng bị dừng sau một thời gian không có yêu cầu truy cập.
+1688 [[]] Triển khai Database
+1689 [[]] Cơ sở dữ liệu được khôi phục từ file .bak hoặc chạy bằng các script SQL đã chuẩn bị. Nếu dùng script, nên chạy theo thứ tự: tạo bảng, stored procedure, index, view rồi mới thêm dữ liệu mẫu.
+1690 [[]] Sau khi tạo cơ sở dữ liệu, cần tạo tài khoản SQL Server cho ứng dụng. Tài khoản này chỉ nên được cấp quyền cần thiết như đọc, ghi dữ liệu và chạy stored procedure. Chuỗi kết nối trong appsettings.Production.json phải sử dụng đúng tên máy chủ, tên database và thông tin tài khoản đã tạo.
+1691 [[]] Triển khai Frontend
+1692 [[]] Thư mục frontend được sao chép lên IIS, ví dụ:
+1693 [[]] C:\inetpub\wwwroot\frontend
+1694 [[]] Website frontend cần được cấu hình để truy cập được đến API Gateway. Các biến URL trong file cấu hình phải dùng domain hoặc địa chỉ IP của môi trường triển khai.
+1695 [[]] Khi frontend và backend đặt ở hai domain hoặc hai port khác nhau, API Gateway cần cấu hình CORS để cho phép domain frontend gửi yêu cầu. Nếu cấu hình này thiếu, trình duyệt có thể chặn lời gọi API dù backend vẫn hoạt động bình thường.
+1696 [[]] Kiểm tra sau triển khai
+1697 [[]] Sau khi đưa hệ thống lên môi trường triển khai, nhóm kiểm tra API bằng Postman để xác nhận các endpoint chính phản hồi đúng. Các nội dung cần kiểm tra gồm đăng nhập, token JWT, lấy danh sách lớp học phần, điểm danh, nhập điểm và tra cứu báo cáo.
+1698 [[]] Trên giao diện, cần đăng nhập thử bằng các tài khoản thuộc nhiều vai trò khác nhau. Mỗi vai trò chỉ được nhìn thấy menu và chức năng phù hợp với quyền của mình.
+1699 [[]] Ngoài chức năng nghiệp vụ, cần kiểm tra audit log, phân quyền RBAC, gửi email, SignalR và chức năng import/export nếu các thành phần này đã được tích hợp trong bản triển khai. Với hiệu năng, có thể theo dõi thời gian phản hồi của các API thường dùng và kiểm tra log để phát hiện lỗi lặp lại hoặc truy vấn chậm.
+1700 [[]] Trong môi trường thử nghiệm, mục tiêu là các API thông dụng phản hồi trong thời gian phù hợp, tránh gây gián đoạn thao tác của người dùng. Khi triển khai chính thức với lượng dữ liệu lớn, hệ thống cần được kiểm thử tải riêng để có số liệu đánh giá chính xác hơn.
+1710 [['m1']] KẾT LUẬN
+1711 [[]] Đề tài đã giúp nhóm tiếp cận quy trình xây dựng một hệ thống quản lý đào tạo theo hướng dịch vụ web API. Từ việc khảo sát nghiệp vụ, nhóm xác định các dữ liệu cần quản lý như sinh viên, giảng viên, lớp học phần, lịch học, điểm danh, điểm số và yêu cầu phúc khảo. Các nội dung này sau đó được chuyển thành mô hình dữ liệu, API và giao diện sử dụng.
+1712 [[]] Trong quá trình thực hiện, nhóm hiểu rõ hơn cách tổ chức một dự án ASP.NET Core theo các lớp Controller, Service và Repository. Việc tách các phần này giúp mã nguồn dễ theo dõi hơn: Controller tiếp nhận yêu cầu từ client, Service xử lý nghiệp vụ, còn Repository thực hiện thao tác với cơ sở dữ liệu.
+1713 [[]] Nhóm cũng có cơ hội sử dụng các kiến thức liên quan đến RESTful API, JSON, HTTP Status Code, JWT, Swagger và Entity Framework. Những công cụ này hỗ trợ việc kiểm tra API, mô tả endpoint và xử lý dữ liệu giữa frontend với backend. Thông qua chức năng điểm danh, quản lý lớp học phần và theo dõi chuyên cần, nhóm nhận thấy việc chuyển quy trình thủ công sang hệ thống có thể giúp giảm thao tác nhập liệu lặp lại. Tuy nhiên, hiệu quả thực tế vẫn phụ thuộc vào việc dữ liệu đầu vào có được cập nhật đầy đủ và người dùng có sử dụng hệ thống đúng quy trình hay không.
+1714 [[]] Bên cạnh các kết quả đạt được, sản phẩm vẫn còn một số hạn chế. Phần báo cáo thống kê chưa phát triển sâu, chẳng hạn biểu đồ học lực, tỷ lệ chuyên cần theo học kỳ hoặc so sánh kết quả giữa các lớp học phần. Một số tính năng như phân quyền chi tiết theo từng thao tác, logging tập trung, theo dõi trạng thái hệ thống và kiểm thử tự động mới dừng ở mức cơ bản hoặc chưa được triển khai đầy đủ.
+1715 [[]] Về mặt kỹ thuật, nhóm cần tiếp tục tìm hiểu thêm về versioning API, rate limiting, tối ưu truy vấn, mã hóa dữ liệu nhạy cảm và kiểm thử bảo mật. Kinh nghiệm triển khai CI/CD, kiểm thử hiệu năng và vận hành hệ thống trên môi trường thực tế cũng là những nội dung cần được bổ sung trong thời gian tới.
+1716 [[]] Nếu tiếp tục phát triển, hệ thống có thể bổ sung điểm danh bằng mã QR, thông báo thời gian thực, dashboard thống kê chuyên cần, phân tích dữ liệu học tập và ứng dụng di động cho sinh viên. Các chức năng này nên được xây dựng dựa trên nhu cầu thực tế của nhà trường để tránh làm hệ thống phức tạp nhưng ít được sử dụng.
+1718 [['m1']] TÀI LIỆU THAM KHẢO
+1719 [['Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography', 'Bibliography']] [1]Thomas Erl (2005), Service-Oriented Architecture: Concepts, Technology, and Design, Prentice Hall.[2]Leonard Richardson, Mike Amundsen, Sam Ruby (2013), RESTful Web APIs, O’Reilly Media.[3]Sam Newman (2015), Building Microservices: Designing Fine-Grained Systems, O’Reilly Media.[4]Subbu Allamaraju (2010), RESTful Web Services Cookbook, O’Reilly Media.[5]Nguyễn Thanh Hùng (2020), Giáo trình Phát triển ứng dụng Web services, NXB Thông Tin và Truyền Thông.[6]Trần Ngọc Tú (2019), Lập trình Web API với ASP.NET Core, NXB Khoa học và Kỹ thuật.[7]Phạm Minh Chuẩn (chủ biên), Trịnh Thị Nhị, Nguyễn Văn Quyết (2017), *Giáo trình cơ sở dữ liệu quan hệ: Lý thuyết và áp dụng*, NXB Khoa học và Kỹ thuật, Hà Nội.[8]Chu Thị Minh Huệ (chủ biên), Nguyễn Minh Tiến, Nguyễn Minh Quý (2019), *Giáo trình phân tích và thiết kế hướng đối tượng với UML*, NXB Khoa học và Kỹ thuật, Hà Nội.[9]Phạm Văn Trung (2021), Microservices và Kiến trúc Hướng dịch vụ, Giáo trình nội bộ, Đại học Bách Khoa TP.HCM.[10]Martin Fowler (2020), Patterns of Enterprise Application Architecture (phần SOA & Service Layer), Addison-Wesley.
+1720 [['Bibliography']] x

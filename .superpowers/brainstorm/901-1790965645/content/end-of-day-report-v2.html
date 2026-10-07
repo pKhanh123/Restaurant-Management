@@ -1,0 +1,312 @@
+<div id="crispy-eod-v2" class="crispy-eod-preview">
+  <style>
+    #crispy-eod-v2 {
+      color-scheme: light dark;
+      --cb-primary: light-dark(#B42318, #F28B82);
+      --cb-primary-pressed: light-dark(#8F1C13, #B42318);
+      --cb-secondary: #C66A15;
+      --cb-canvas: light-dark(#F4F3F0, #24211F);
+      --cb-base: light-dark(#FFFFFF, #2D2926);
+      --cb-raised: light-dark(#FFFFFF, #35312E);
+      --cb-sunken: light-dark(#ECEAE6, #1C1A18);
+      --cb-quiet: light-dark(#F4F3F0, #403B37);
+      --cb-highlight: light-dark(#FFF1DD, #4A3520);
+      --cb-highlight-pressed: light-dark(#F8D9B2, #604527);
+      --cb-ink: light-dark(#24211F, #F7F5F2);
+      --cb-muted: light-dark(#6B6560, #C8C2BB);
+      --cb-border: light-dark(#D8D4CE, #514C47);
+      --cb-border-strong: light-dark(#BDB7AF, #6B6560);
+      --cb-success: light-dark(#15803D, #73C88F);
+      --cb-danger: light-dark(#B42318, #F28B82);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--cb-ink);
+    }
+    #crispy-eod-v2 * { box-sizing: border-box; }
+    #crispy-eod-v2 button,
+    #crispy-eod-v2 input,
+    #crispy-eod-v2 select { font: inherit; color: inherit; }
+    #crispy-eod-v2 .cb-preview-tools,
+    #crispy-eod-v2 .cb-device-options,
+    #crispy-eod-v2 .cb-review-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    #crispy-eod-v2 .cb-preview-tools { justify-content: space-between; margin-bottom: 12px; }
+    #crispy-eod-v2 .cb-device,
+    #crispy-eod-v2 .cb-review-button {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--cb-border);
+      border-radius: 8px;
+      background: var(--cb-base);
+      font-weight: 600;
+    }
+    #crispy-eod-v2 .cb-device[aria-pressed="true"],
+    #crispy-eod-v2 .cb-review-button.is-selected { border-color: var(--cb-primary); background: var(--cb-primary); color: #fff; }
+    #crispy-eod-v2 .cb-app {
+      overflow: hidden;
+      border: 1px solid var(--cb-border);
+      border-radius: 12px;
+      background: var(--cb-canvas);
+      box-shadow: 0 12px 28px rgba(36,33,31,.16);
+    }
+    #crispy-eod-v2 .cb-commandbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 12px;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--cb-border);
+      background: var(--cb-base);
+    }
+    #crispy-eod-v2 .cb-identity,
+    #crispy-eod-v2 .cb-command-actions { display: flex; align-items: center; gap: 12px; }
+    #crispy-eod-v2 .cb-brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 8px; background: var(--cb-primary); color: #fff; font-weight: 800; }
+    #crispy-eod-v2 .cb-brand-name { font-weight: 750; }
+    #crispy-eod-v2 .cb-divider { width: 1px; height: 32px; background: var(--cb-border); }
+    #crispy-eod-v2 .cb-role { padding: 5px 9px; border: 1px solid #AFC6E6; border-radius: 999px; background: #E9F1FB; color: #174A7C; font-size: 12px; font-weight: 700; }
+    #crispy-eod-v2 .cb-user-name { color: var(--cb-muted); font-size: 13px; }
+    #crispy-eod-v2 .cb-icon-action { min-height: 40px; border: 1px solid var(--cb-border); border-radius: 8px; background: var(--cb-quiet); padding: 0 11px; font-size: 12px; font-weight: 650; }
+    #crispy-eod-v2 .cb-icon-action.cb-logout { color: var(--cb-danger); background: transparent; }
+    #crispy-eod-v2 .cb-app-body { display: grid; grid-template-columns: 208px minmax(0,1fr); min-height: 740px; }
+    #crispy-eod-v2 .cb-rail { padding: 16px 12px; border-right: 1px solid var(--cb-border); background: var(--cb-base); }
+    #crispy-eod-v2 .cb-rail-heading { margin: 0 8px 8px; color: var(--cb-muted); font-size: 12px; font-weight: 600; }
+    #crispy-eod-v2 .cb-rail-item { display: flex; align-items: center; gap: 9px; min-height: 46px; padding: 0 12px; border: 0; border-left: 3px solid transparent; border-radius: 6px; background: transparent; color: var(--cb-muted); font-size: 13px; font-weight: 650; width: 100%; text-align: left; }
+    #crispy-eod-v2 .cb-rail-item.is-active { border-left-color: var(--cb-primary); background: var(--cb-highlight); color: var(--cb-ink); }
+    #crispy-eod-v2 .cb-rail-icon { width: 20px; text-align: center; color: var(--cb-primary); }
+    #crispy-eod-v2 .cb-screen { min-width: 0; padding: 16px; }
+    #crispy-eod-v2 .cb-screen-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    #crispy-eod-v2 .cb-header-mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; background: var(--cb-highlight); color: var(--cb-primary); font-weight: 800; }
+    #crispy-eod-v2 .cb-header-copy { min-width: 0; flex: 1; }
+    #crispy-eod-v2 .cb-header-title { margin: 0; font-family: "Arial Narrow", "Segoe UI", sans-serif; font-size: 28px; line-height: 1.15; font-weight: 800; }
+    #crispy-eod-v2 .cb-header-description { margin: 3px 0 0; color: var(--cb-muted); font-size: 13px; }
+    #crispy-eod-v2 .cb-header-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    #crispy-eod-v2 .cb-button { min-height: 42px; padding: 0 13px; border: 1px solid transparent; border-radius: 8px; background: var(--cb-highlight); font-weight: 650; }
+    #crispy-eod-v2 .cb-button.is-primary { background: var(--cb-primary); color: #fff; }
+    #crispy-eod-v2 .cb-button.is-quiet { background: var(--cb-quiet); }
+    #crispy-eod-v2 .cb-report-tabs { display: flex; gap: 18px; overflow-x: auto; border-bottom: 1px solid var(--cb-border); margin-bottom: 14px; }
+    #crispy-eod-v2 .cb-report-tab { flex: 0 0 auto; min-height: 40px; padding: 0 4px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--cb-muted); font-size: 13px; font-weight: 650; }
+    #crispy-eod-v2 .cb-report-tab.is-active { color: var(--cb-primary); border-bottom-color: var(--cb-primary); }
+    #crispy-eod-v2 .cb-report-tab[disabled] { opacity: .42; }
+    #crispy-eod-v2 .cb-mobile-filter-toggle { display: none; }
+    #crispy-eod-v2 .cb-content-grid { display: grid; grid-template-columns: 272px minmax(0,1fr); gap: 14px; align-items: start; }
+    #crispy-eod-v2 .cb-filter-panel { padding: 14px; border-radius: 8px; background: var(--cb-base); }
+    #crispy-eod-v2 .cb-filter-block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--cb-border); }
+    #crispy-eod-v2 .cb-filter-block:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+    #crispy-eod-v2 .cb-label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 650; }
+    #crispy-eod-v2 .cb-select,
+    #crispy-eod-v2 .cb-input { width: 100%; min-height: 44px; border: 1px solid var(--cb-border); border-radius: 8px; background: var(--cb-base); padding: 0 11px; }
+    #crispy-eod-v2 .cb-select:focus,
+    #crispy-eod-v2 .cb-input:focus { outline: 3px solid rgba(15,108,189,.24); border-color: #0F6CBD; }
+    #crispy-eod-v2 .cb-view-options { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    #crispy-eod-v2 .cb-view-option { display: flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 9px; border: 1px solid var(--cb-border); border-radius: 8px; background: var(--cb-base); font-size: 12px; }
+    #crispy-eod-v2 input[type="radio"] { accent-color: var(--cb-primary); }
+    #crispy-eod-v2 .cb-branch { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 11px; border-radius: 8px; background: var(--cb-sunken); color: var(--cb-muted); font-size: 13px; }
+    #crispy-eod-v2 .cb-helper { margin: 5px 0 0; color: var(--cb-muted); font-size: 11px; line-height: 1.4; }
+    #crispy-eod-v2 .cb-time-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+    #crispy-eod-v2 .cb-radio-line { display: flex; align-items: center; gap: 7px; min-height: 32px; font-size: 13px; }
+    #crispy-eod-v2 .cb-report-stage { min-width: 0; padding: 12px; border-radius: 8px; background: var(--cb-sunken); }
+    #crispy-eod-v2 .cb-stage-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    #crispy-eod-v2 .cb-stage-title { color: var(--cb-muted); font-size: 12px; font-weight: 650; }
+    #crispy-eod-v2 .cb-stage-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    #crispy-eod-v2 .cb-stage-action { min-height: 34px; padding: 0 9px; border: 1px solid var(--cb-border); border-radius: 6px; background: var(--cb-base); font-size: 11px; font-weight: 650; }
+    #crispy-eod-v2 .cb-paper { width: min(100%, 900px); min-height: 560px; margin: 0 auto; padding: 18px; background: #fff; color: #24211F; box-shadow: 0 8px 20px rgba(36,33,31,.14); }
+    #crispy-eod-v2 .cb-paper-meta { color: #6B6560; font-size: 10px; }
+    #crispy-eod-v2 .cb-paper-title { margin: 3px 0 2px; text-align: center; font-family: "Arial Narrow", Arial, sans-serif; font-size: 22px; font-weight: 800; }
+    #crispy-eod-v2 .cb-paper-subtitle { margin: 0 0 14px; text-align: center; color: #514C47; font-size: 11px; line-height: 1.55; }
+    #crispy-eod-v2 .cb-kpis { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border: 1px solid #D8D4CE; margin-bottom: 14px; }
+    #crispy-eod-v2 .cb-kpi { min-height: 76px; padding: 10px; border-right: 1px solid #D8D4CE; }
+    #crispy-eod-v2 .cb-kpi:last-child { border-right: 0; }
+    #crispy-eod-v2 .cb-kpi-label { color: #6B6560; font-size: 10px; }
+    #crispy-eod-v2 .cb-kpi-value { margin-top: 5px; color: #24211F; font-family: "Arial Narrow", Arial, sans-serif; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    #crispy-eod-v2 .cb-kpi-note { margin-top: 3px; color: #6B6560; font-size: 9px; }
+    #crispy-eod-v2 .cb-table-wrap { overflow-x: auto; }
+    #crispy-eod-v2 .cb-report-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    #crispy-eod-v2 .cb-report-table th { padding: 8px 7px; background: #FFF1DD; border-bottom: 2px solid #B42318; text-align: left; font-weight: 750; }
+    #crispy-eod-v2 .cb-report-table td { padding: 8px 7px; border-bottom: 1px solid #ECEAE6; }
+    #crispy-eod-v2 .cb-report-table .is-number { text-align: right; font-variant-numeric: tabular-nums; }
+    #crispy-eod-v2 .cb-report-table tfoot td { background: #F4F3F0; font-weight: 750; }
+    #crispy-eod-v2 .cb-badge { display: inline-block; padding: 3px 6px; border-radius: 999px; background: #E8F3EA; color: #126334; font-weight: 700; white-space: nowrap; }
+    #crispy-eod-v2 .cb-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+    #crispy-eod-v2 .cb-breakdown-section { padding-top: 8px; border-top: 2px solid #C66A15; }
+    #crispy-eod-v2 .cb-breakdown-section h4 { margin: 0 0 5px; font-size: 11px; }
+    #crispy-eod-v2 .cb-breakdown-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 10px; }
+    #crispy-eod-v2 .cb-footnote { margin: 12px 0 0; color: #6B6560; font-size: 9px; text-align: right; }
+    #crispy-eod-v2 .cb-review { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
+    #crispy-eod-v2 .cb-review-copy { color: var(--cb-muted); font-size: 13px; }
+    #crispy-eod-v2 .cb-review-button.is-approve { border-color: var(--cb-success); }
+    #crispy-eod-v2 .cb-review-button.is-approve.is-selected { background: var(--cb-success); }
+    #crispy-eod-v2 .cb-review-button.is-revise { border-color: var(--cb-secondary); }
+    #crispy-eod-v2 .cb-review-button.is-revise.is-selected { background: var(--cb-secondary); }
+    #crispy-eod-v2 .cb-app.is-mobile { max-width: 390px; margin: 0 auto; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-brand-name,
+    #crispy-eod-v2 .cb-app.is-mobile .cb-divider,
+    #crispy-eod-v2 .cb-app.is-mobile .cb-user-name,
+    #crispy-eod-v2 .cb-app.is-mobile .cb-icon-action.cb-theme,
+    #crispy-eod-v2 .cb-app.is-mobile .cb-rail { display: none; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-app-body { display: block; min-height: 0; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-screen { padding: 12px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-screen-header { align-items: flex-start; flex-wrap: wrap; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-header-title { font-size: 24px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-header-actions { width: 100%; justify-content: flex-start; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-report-tabs { gap: 14px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-mobile-filter-toggle { display: inline-flex; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-content-grid { display: block; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-filter-panel { margin-bottom: 10px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-filter-panel.is-collapsed { display: none; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-stage-toolbar { align-items: flex-start; flex-direction: column; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-report-stage { padding: 8px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-paper { min-height: 0; padding: 12px 10px 18px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-kpis { grid-template-columns: 1fr 1fr; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-kpi:nth-child(2) { border-right: 0; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-kpi:nth-child(-n+2) { border-bottom: 1px solid #D8D4CE; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-report-table { min-width: 680px; }
+    #crispy-eod-v2 .cb-app.is-mobile .cb-breakdown { grid-template-columns: 1fr; }
+    @media (max-width: 760px) {
+      #crispy-eod-v2 .cb-preview-tools,
+      #crispy-eod-v2 .cb-review { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+
+  <div class="cb-preview-tools">
+    <strong>Bản thiết kế đồng bộ Crispy Bite</strong>
+    <div class="cb-device-options" aria-label="Chọn kích thước xem trước">
+      <button type="button" class="cb-device" data-device="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" class="cb-device" data-device="mobile" aria-pressed="false">Di động</button>
+    </div>
+  </div>
+
+  <section class="cb-app" aria-label="Giao diện Báo cáo cuối ngày Crispy Bite">
+    <header class="cb-commandbar">
+      <div class="cb-identity"><span class="cb-brand-mark">CB</span><span class="cb-brand-name">Crispy Bite</span><span class="cb-divider"></span><span class="cb-role">Quản trị</span><span class="cb-user-name">Nguyễn An</span></div>
+      <div class="cb-command-actions"><button type="button" class="cb-icon-action cb-theme">Giao diện</button><button type="button" class="cb-icon-action cb-logout">Đăng xuất</button></div>
+    </header>
+
+    <div class="cb-app-body">
+      <aside class="cb-rail" aria-label="Khu vực làm việc">
+        <p class="cb-rail-heading">Khu vực làm việc</p>
+        <button type="button" class="cb-rail-item is-active"><span class="cb-rail-icon">▥</span>Báo cáo</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">≡</span>Thực đơn</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">₫</span>Bảng giá</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">□</span>Kho hàng</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">▤</span>Đơn hàng</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">○</span>Khách hàng</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">♙</span>Nhân viên</button>
+        <button type="button" class="cb-rail-item"><span class="cb-rail-icon">▧</span>Sổ quỹ</button>
+      </aside>
+
+      <main class="cb-screen">
+        <div class="cb-screen-header">
+          <div class="cb-header-mark">BC</div>
+          <div class="cb-header-copy"><h2 class="cb-header-title">Báo cáo cuối ngày</h2><p class="cb-header-description">Đối soát theo thời điểm nghiệp vụ, múi giờ Asia/Ho_Chi_Minh.</p></div>
+          <div class="cb-header-actions"><button type="button" class="cb-button is-quiet cb-mobile-filter-toggle">Bộ lọc</button><button type="button" class="cb-button">In</button><button type="button" class="cb-button">Xuất XLSX</button><button type="button" class="cb-button is-primary">Làm mới</button></div>
+        </div>
+
+        <nav class="cb-report-tabs" aria-label="Menu Báo cáo">
+          <button type="button" class="cb-report-tab is-active">Cuối ngày</button>
+          <button type="button" class="cb-report-tab">Bán hàng</button>
+          <button type="button" class="cb-report-tab" disabled>Hàng hóa</button>
+          <button type="button" class="cb-report-tab" disabled>Khách hàng</button>
+          <button type="button" class="cb-report-tab" disabled>Nhà cung cấp</button>
+          <button type="button" class="cb-report-tab" disabled>Nhân viên</button>
+          <button type="button" class="cb-report-tab" disabled>Kênh bán hàng</button>
+          <button type="button" class="cb-report-tab" disabled>Tài chính</button>
+        </nav>
+
+        <div class="cb-content-grid">
+          <aside class="cb-filter-panel" aria-label="Tiêu chí báo cáo">
+            <div class="cb-filter-block">
+              <label class="cb-label" for="cb-concern">Mối quan tâm</label>
+              <select id="cb-concern" class="cb-select">
+                <option value="sales">Bán hàng</option>
+                <option value="cashflow">Thu chi</option>
+                <option value="goods">Hàng hóa</option>
+                <option value="cancelled">Hủy món</option>
+                <option value="summary">Tổng hợp</option>
+              </select>
+            </div>
+            <div class="cb-filter-block">
+              <span class="cb-label">Kiểu hiển thị</span>
+              <div class="cb-view-options"><label class="cb-view-option"><input type="radio" name="cb-view" value="summary" checked> Báo cáo dọc</label><label class="cb-view-option"><input type="radio" name="cb-view" value="detail"> Báo cáo ngang</label></div>
+            </div>
+            <div class="cb-filter-block">
+              <span class="cb-label">Chi nhánh</span><div class="cb-branch"><span>Nhà hàng chính</span><strong>Đã khóa</strong></div><p class="cb-helper">Dữ liệu bán hàng hiện dùng phạm vi một nhà hàng.</p>
+            </div>
+            <div class="cb-filter-block">
+              <label class="cb-label" for="cb-date">Ngày nghiệp vụ</label><input id="cb-date" class="cb-input" type="date" value="2026-10-03"><div class="cb-time-row"><input class="cb-input" type="time" value="00:00" aria-label="Từ giờ"><input class="cb-input" type="time" value="23:59" aria-label="Đến giờ"></div>
+            </div>
+            <div class="cb-filter-block" data-filter="customer"><label class="cb-label" for="cb-customer">Khách hàng</label><input id="cb-customer" class="cb-input" type="search" placeholder="Mã, tên, điện thoại"></div>
+            <div class="cb-filter-block" data-filter="receiver"><label class="cb-label" for="cb-receiver">Người nhận đơn</label><select id="cb-receiver" class="cb-select"><option>Tất cả nhân viên</option><option>Trần Minh</option><option>Chưa xác định</option></select></div>
+            <div class="cb-filter-block" data-filter="creator"><label class="cb-label" for="cb-creator">Người tạo</label><select id="cb-creator" class="cb-select"><option>Tất cả tài khoản</option><option>Thu ngân Lan</option><option>Khách tự đặt</option></select></div>
+            <div class="cb-filter-block" data-filter="payment"><label class="cb-label" for="cb-payment">Phương thức thanh toán</label><select id="cb-payment" class="cb-select"><option>Tất cả phương thức</option><option>Tiền mặt</option><option>Chuyển khoản</option><option>Ví điện tử</option></select></div>
+            <div class="cb-filter-block" data-filter="delivery"><span class="cb-label">Giao hàng</span><label class="cb-radio-line"><input type="radio" name="cb-delivery" checked> Tất cả</label><label class="cb-radio-line"><input type="radio" name="cb-delivery"> Có giao hàng</label><label class="cb-radio-line"><input type="radio" name="cb-delivery"> Không giao hàng</label></div>
+            <div class="cb-filter-block" data-filter="table"><label class="cb-label" for="cb-area">Phòng/Bàn</label><select id="cb-area" class="cb-select"><option>Tất cả khu vực</option><option>Tầng trệt</option><option>Sân vườn</option></select><select class="cb-select" style="margin-top:6px" aria-label="Chọn bàn"><option>Tất cả bàn</option><option>Bàn 01</option><option>Bàn 08</option></select></div>
+            <div class="cb-filter-block" data-filter="cancel-reason"><label class="cb-label" for="cb-reason">Lý do hủy</label><select id="cb-reason" class="cb-select"><option>Tất cả lý do</option><option>Khách đổi món</option><option>Hết nguyên liệu</option><option>Nhập nhầm món</option></select></div>
+          </aside>
+
+          <section class="cb-report-stage" aria-label="Nội dung báo cáo">
+            <div class="cb-stage-toolbar"><span class="cb-stage-title" id="cb-stage-title">Tổng quan · Bán hàng</span><div class="cb-stage-actions"><button type="button" class="cb-stage-action">Trang 1 / 1</button><button type="button" class="cb-stage-action">Thu nhỏ</button><button type="button" class="cb-stage-action">Phóng to</button><button type="button" class="cb-stage-action">Toàn màn hình</button></div></div>
+            <article class="cb-paper">
+              <div class="cb-paper-meta">Lập lúc 03/10/2026 23:59 · Asia/Ho_Chi_Minh</div>
+              <h3 class="cb-paper-title">Báo cáo cuối ngày về bán hàng</h3>
+              <p class="cb-paper-subtitle">Ngày nghiệp vụ 03/10/2026 · 00:00–23:59<br>Chi nhánh: Nhà hàng chính</p>
+              <div class="cb-kpis"></div>
+              <div class="cb-table-wrap"><table class="cb-report-table"><thead><tr id="cb-table-head"></tr></thead><tbody id="cb-table-body"></tbody><tfoot><tr id="cb-table-foot"></tr></tfoot></table></div>
+              <div class="cb-breakdown"><section class="cb-breakdown-section"><h4>Đối soát nghiệp vụ</h4><div class="cb-breakdown-row"><span>Đơn mở hôm trước, hoàn tất hôm nay</span><strong>3</strong></div><div class="cb-breakdown-row"><span>Giao dịch cần kiểm tra</span><strong>0</strong></div></section><section class="cb-breakdown-section"><h4>Dấu vết dữ liệu</h4><div class="cb-breakdown-row"><span>Thời điểm nghiệp vụ</span><strong>Đã áp dụng</strong></div><div class="cb-breakdown-row"><span>Dữ liệu trùng nguồn</span><strong>Đã loại</strong></div></section></div>
+              <p class="cb-footnote">Bán hàng, thanh toán, trả hàng, thu chi và kho được ghi nhận theo timestamp nghiệp vụ riêng.</p>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <div class="cb-review"><span class="cb-review-copy" aria-live="polite">Thử chọn 5 mối quan tâm, Báo cáo dọc/ngang và chế độ Di động.</span><div class="cb-review-actions"><button type="button" class="cb-review-button is-approve" data-choice="approve-ui-v2">Duyệt giao diện mới</button><button type="button" class="cb-review-button is-revise" data-choice="revise-ui-v2">Cần chỉnh tiếp</button></div></div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('crispy-eod-v2');
+      if (!root || root.dataset.ready === 'true') return;
+      root.dataset.ready = 'true';
+      const app = root.querySelector('.cb-app');
+      const filters = root.querySelector('.cb-filter-panel');
+      const concernSelect = root.querySelector('#cb-concern');
+      const stageTitle = root.querySelector('#cb-stage-title');
+      const reportTitle = root.querySelector('.cb-paper-title');
+      const kpis = root.querySelector('.cb-kpis');
+      const tableHead = root.querySelector('#cb-table-head');
+      const tableBody = root.querySelector('#cb-table-body');
+      const tableFoot = root.querySelector('#cb-table-foot');
+      const breakdown = root.querySelector('.cb-breakdown');
+      let view = 'summary';
+      const concerns = {
+        sales: { name:'Bán hàng', title:'Báo cáo cuối ngày về bán hàng', kpis:[['Hóa đơn hoàn tất','42','Theo completedAt'],['Doanh thu bán','18.460.000 ₫','Trước trả hàng'],['Giá trị trả','620.000 ₫','Theo returnedAt'],['Doanh thu thuần','17.840.000 ₫','Không trộn dòng tiền']], head:['Mã chứng từ','Thời gian','Khách hàng','Người nhận','Doanh thu','Thanh toán','Trạng thái'], rows:[['HD-0042','21:47','Nguyễn Minh Anh','Trần Minh','486.000 ₫','486.000 ₫','Hoàn tất'],['HD-0041','21:31','Khách lẻ','Trần Minh','325.000 ₫','325.000 ₫','Hoàn tất'],['TH-0002','20:54','Lê Ngọc','Chưa xác định','−120.000 ₫','−120.000 ₫','Đã trả']], foot:['Tổng theo bộ lọc','','','','17.840.000 ₫','17.515.000 ₫','42 hóa đơn'] },
+        cashflow: { name:'Thu chi', title:'Báo cáo cuối ngày về thu chi', kpis:[['Tổng thu','19.065.000 ₫','Phiếu POSTED'],['Tổng chi','3.780.000 ₫','Theo occurredAt'],['Thuần trong ngày','15.285.000 ₫','Thu trừ chi'],['Chênh lệch đối soát','0 ₫','Không cộng trùng']], head:['Mã phiếu','Thời gian','Loại','Nguồn','Phương thức','Giá trị','Người tạo'], rows:[['PT-0088','21:48','Thu','Thanh toán HD-0042','Chuyển khoản','486.000 ₫','Thu ngân Lan'],['PC-0021','18:15','Chi','Nhập hàng NCC','Chuyển khoản','2.450.000 ₫','Quản trị'],['PC-0020','16:40','Chi','Hoàn tiền TH-0002','Tiền mặt','120.000 ₫','Thu ngân Lan']], foot:['Tổng theo bộ lọc','','','','','15.285.000 ₫','126 phiếu'] },
+        goods: { name:'Hàng hóa', title:'Báo cáo cuối ngày về hàng hóa', kpis:[['Món bán','186','OrderItem hoàn tất'],['Giá vốn bán','6.240.000 ₫','AUTO_DEDUCT'],['Giá trị trả kho','185.000 ₫','SALES_RETURN'],['Xuất hủy','96.000 ₫','KITCHEN_WASTE']], head:['Thời gian','Mã hàng','Tên hàng','Nghiệp vụ','Số lượng','Giá trị vốn','Chứng từ'], rows:[['21:47','MON-0012','Burger bò phô mai','Bán hàng','2','96.000 ₫','HD-0042'],['20:54','MON-0008','Cơm gà sốt tiêu','Trả kho','1','42.000 ₫','TH-0002'],['16:18','NL-0021','Khoai tây','Xuất hủy','2,5 kg','76.000 ₫','XH-0014']], foot:['Tổng theo bộ lọc','','','','186','6.151.000 ₫',''] },
+        cancelled: { name:'Hủy món', title:'Báo cáo cuối ngày về hủy món', kpis:[['Đơn bị hủy','5','Theo cancelledAt'],['Món trong đơn hủy','14','Có snapshot dòng món'],['Giá trị chưa ghi nhận','1.280.000 ₫','Không tính doanh thu'],['Hoàn nguyên kho','12 dòng','Có dấu vết']], head:['Thời gian','Mã đơn','Món hủy','Số lượng','Lý do','Người hủy','Giá trị'], rows:[['19:12','HD-0034','Burger bò phô mai','2','Khách đổi món','Quản trị','240.000 ₫'],['18:46','HD-0031','Mì Ý hải sản','1','Hết nguyên liệu','Quản trị','145.000 ₫'],['14:03','HD-0020','Combo gia đình','1','Nhập nhầm món','Quản trị','620.000 ₫']], foot:['Tổng theo bộ lọc','','','14','','','1.280.000 ₫'] },
+        summary: { name:'Tổng hợp', title:'Báo cáo cuối ngày tổng hợp', kpis:[['Doanh thu thuần','17.840.000 ₫','Bán trừ trả'],['Dòng tiền thuần','15.285.000 ₫','Thu trừ chi'],['Giá vốn & hao hụt','6.336.000 ₫','Bán + hủy'],['Lợi nhuận gộp','11.504.000 ₫','Chưa trừ chi phí khác']], head:['Nhóm nghiệp vụ','Số chứng từ','Giá trị tăng','Giá trị giảm','Thuần','Cần kiểm tra','Trạng thái'], rows:[['Bán hàng','42','18.460.000 ₫','620.000 ₫','17.840.000 ₫','0','Đã đối soát'],['Thu chi','126','19.065.000 ₫','3.780.000 ₫','15.285.000 ₫','0','Đã đối soát'],['Hàng hóa','214','185.000 ₫','6.336.000 ₫','−6.151.000 ₫','0','Đã đối soát'],['Hủy món','5','0 ₫','1.280.000 ₫','−1.280.000 ₫','0','Đã ghi nhận']], foot:['Toàn ngày','387','37.710.000 ₫','12.016.000 ₫','','0','Hoàn tất'] }
+      };
+      const numberColumns = new Set(['Doanh thu','Thanh toán','Giá trị','Giá trị vốn','Số lượng','Giá trị tăng','Giá trị giảm','Thuần']);
+      const render = () => {
+        const key = concernSelect.value;
+        const data = concerns[key];
+        reportTitle.textContent = data.title;
+        stageTitle.textContent = `${view === 'summary' ? 'Tổng quan' : 'Chi tiết'} · ${data.name}`;
+        kpis.innerHTML = data.kpis.map(item => `<div class="cb-kpi"><div class="cb-kpi-label">${item[0]}</div><div class="cb-kpi-value">${item[1]}</div><div class="cb-kpi-note">${item[2]}</div></div>`).join('');
+        tableHead.innerHTML = data.head.map(item => `<th class="${numberColumns.has(item) ? 'is-number' : ''}">${item}</th>`).join('');
+        tableBody.innerHTML = data.rows.map(row => `<tr>${row.map((item,index) => `<td class="${numberColumns.has(data.head[index]) ? 'is-number' : ''}">${index === row.length - 1 && ['Hoàn tất','Đã trả','Đã đối soát','Đã ghi nhận'].includes(item) ? `<span class="cb-badge">${item}</span>` : item}</td>`).join('')}</tr>`).join('');
+        tableFoot.innerHTML = data.foot.map((item,index) => `<td class="${numberColumns.has(data.head[index]) ? 'is-number' : ''}">${item}</td>`).join('');
+        kpis.style.display = view === 'summary' ? 'grid' : 'none';
+        breakdown.style.display = view === 'summary' ? 'grid' : 'none';
+        const visible = {
+          customer: ['sales','goods','summary'], receiver: ['sales','cancelled','summary'], creator: ['sales','cashflow','cancelled','summary'], payment: ['sales','cashflow','summary'], delivery: ['sales','goods','summary'], table: ['sales','goods','cancelled','summary'], 'cancel-reason': ['cancelled']
+        };
+        Object.entries(visible).forEach(([name, keys]) => { const el = root.querySelector(`[data-filter="${name}"]`); if (el) el.style.display = keys.includes(key) ? 'block' : 'none'; });
+      };
+      concernSelect.addEventListener('change', render);
+      root.querySelectorAll('input[name="cb-view"]').forEach(input => input.addEventListener('change', event => { view = event.target.value; render(); }));
+      root.querySelectorAll('[data-device]').forEach(button => button.addEventListener('click', () => { const mobile = button.dataset.device === 'mobile'; app.classList.toggle('is-mobile', mobile); root.querySelectorAll('[data-device]').forEach(item => item.setAttribute('aria-pressed', String(item === button))); if (!mobile) filters.classList.remove('is-collapsed'); }));
+      root.querySelector('.cb-mobile-filter-toggle').addEventListener('click', () => filters.classList.toggle('is-collapsed'));
+      root.querySelectorAll('.cb-review-button').forEach(button => button.addEventListener('click', () => { root.querySelectorAll('.cb-review-button').forEach(item => item.classList.toggle('is-selected', item === button)); if (typeof window.toggleSelect === 'function') window.toggleSelect(button); }));
+      render();
+    })();
+  </script>
+</div>

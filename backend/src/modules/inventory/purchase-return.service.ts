@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Prisma } from '@prisma/client';
+import { CashVoucherSourceType, Prisma } from '@prisma/client';
 import { prisma } from '../../config/prisma';
 import { ApiError } from '../../lib/api-error';
 import { emitInventoryChanged } from './inventory.events';
@@ -11,6 +11,8 @@ import { serializePurchaseReturnCsv, serializePurchaseReturnWorkbook } from './p
 import { parsePurchaseReturnExcelBuffer } from './purchase-return.import';
 import type { PurchaseReturnImportPreviewDto } from './purchase-return.types';
 import type { PurchaseReturnInput, PurchaseReturnQuery } from './purchase-return.schemas';
+import { CashbookPostingService } from '../cashbook/cashbook-posting.service';
+import { emitCashbookChanged } from '../cashbook/cashbook.events';
 
 export const returnInclude = { lines: { orderBy: { id: 'asc' as const } }, supplier: { select: { id: true, code: true, name: true, isActive: true } }, sourceReceipt: { select: { id: true, receiptCode: true } } } satisfies Prisma.PurchaseReturnInclude;
 export type ReturnRecord = Prisma.PurchaseReturnGetPayload<{ include: typeof returnInclude }>;
@@ -141,7 +143,7 @@ export class PurchaseReturnService {
     }, txOptions);
     notify(row); return returnDto(row);
   }
-  static async complete(id: number, expectedVersion: number, actor: ReturnActor, requestedFinancialAccountId?: number | null) {
+  static async complete(id: number, expectedVersion: number, actor: ReturnActor) {
     const outcome = await prisma.$transaction(async tx => {
       const current = await lockedDraft(tx, id, expectedVersion);
       if (!current.supplier?.isActive || !current.lines.length) throw ApiError.badRequest('Cần nhà cung cấp đang hoạt động và ít nhất một dòng hàng');
@@ -171,29 +173,27 @@ export class PurchaseReturnService {
         await tx.purchaseReturnLine.update({ where: { id: line.id }, data: { stockCostPerUnit: ingredient.costPerUnit, stockCostAmount: cost } });
         await tx.inventoryTransaction.create({ data: { ingredientId: ingredient.id, purchaseReturnId: id, type: 'PURCHASE_RETURN', quantity: -line.quantity, costAmount: -cost, note: 'Trả hàng nhập ' + current.returnCode, createdByUserId: actor.id } });
       }
-      const selectedFinancialAccountId = requestedFinancialAccountId === undefined ? current.financialAccountId : requestedFinancialAccountId;
-      const completed = await tx.purchaseReturn.update({ where: { id }, data: { status: 'COMPLETED', financialAccountId: selectedFinancialAccountId, version: { increment: 1 }, completedAt: new Date(), completedByUserId: actor.id }, include: returnInclude });
-      let voucher = null;
-      if (completed.refundAmount > 0) {
-        const financialAccountId = await resolveCashbookAccountForPayment(tx, completed.refundMethod as 'CASH' | 'BANK_TRANSFER' | 'CREDIT_CARD' | 'E_WALLET', completed.financialAccountId);
-        if (financialAccountId !== null) {
-          const category = await tx.cashFlowCategory.findUniqueOrThrow({ where: { code: 'SUPPLIER_REFUND' } });
-          voucher = await CashbookPostingService.post(tx, {
-            direction: 'RECEIPT', amount: completed.refundAmount, accountId: financialAccountId, categoryId: category.id,
-            paymentMethod: completed.refundMethod as 'CASH' | 'BANK_TRANSFER' | 'CREDIT_CARD' | 'E_WALLET',
-            occurredAt: completed.completedAt ?? new Date(), sourceType: 'PURCHASE_RETURN_REFUND',
-            sourceTransactionId: completed.id, sourceCode: completed.returnCode,
-            note: completed.refundExternalReference || completed.note || `Nhà cung cấp hoàn tiền theo ${completed.returnCode}`,
-            counterpartyType: 'SUPPLIER', counterpartyId: completed.supplierId,
-            counterpartyName: completed.supplier?.name ?? null
-          }, { id: actor.id, name: actor.name, role: 'ADMIN' });
-        }
-      }
-      await audit(tx, completed, actor, 'COMPLETED'); return { row: completed, voucher };
-    }, txOptions).catch(normalizeCashbookPersistenceError);
-    const row = outcome.row;
-    notify(row);
-    if (outcome.voucher) emitToAll('cashbook:changed', cashbookChangedEvent(outcome.voucher));
-    return returnDto(row);
+      const completedAt = new Date();
+      const completed = await tx.purchaseReturn.update({ where: { id }, data: { status: 'COMPLETED', version: { increment: 1 }, completedAt, completedByUserId: actor.id }, include: returnInclude });
+      const cashVoucher = completed.refundAmount > 0 ? await CashbookPostingService.post(tx, {
+        direction: 'RECEIPT',
+        paymentMethod: completed.refundMethod,
+        accountId: completed.refundMethod === 'CASH' ? undefined : (completed.financialAccountId ?? undefined),
+        categoryCode: 'SUPPLIER_REFUND',
+        amount: completed.refundAmount,
+        occurredAt: completedAt,
+        sourceType: CashVoucherSourceType.PURCHASE_RETURN,
+        sourceId: completed.id,
+        sourceCode: completed.returnCode,
+        counterpartyType: 'SUPPLIER',
+        counterpartyId: completed.supplierId,
+        counterpartyName: completed.supplier?.name,
+        affectsBusinessResult: false
+      }, { id: actor.id, name: actor.name ?? 'Hệ thống' }) : null;
+      await audit(tx, completed, actor, 'COMPLETED'); return { row: completed, cashVoucher };
+    }, txOptions);
+    notify(outcome.row);
+    if (outcome.cashVoucher) emitCashbookChanged({ voucherIds: [outcome.cashVoucher.id], reason: 'SOURCE_POSTED', updatedAt: new Date().toISOString() });
+    return returnDto(outcome.row);
   }
 }

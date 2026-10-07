@@ -1,0 +1,937 @@
+[
+  {
+    "page": 1,
+    "chars": 307,
+    "last": " THUẬT PHẦN MỀM\r\nCHUYÊN NGÀNH: PHÁT TRIỂN ỨNG DỤNG PHẦN MỀM\r\nSINH VIÊN: PHAN VĂN KHÁNH\r\nMÃ SV: 12523037\r\nMÃ LỚP: 12523W.4\r\nHƯỚNG DẪN: TS. HOÀNG QUỐC VIỆT\r\nHƯNG YÊN - 2026"
+  },
+  {
+    "page": 2,
+    "chars": 3019,
+    "last": "...........................................................................................................................\r\nGIẢNG VIÊN HƯỚNG DẪN\r\n (Ký và ghi rõ họ tên) "
+  },
+  {
+    "page": 3,
+    "chars": 601,
+    "last": "em thực hiện.\r\nNếu vi phạm lời cam đoan này, em xin chịu hoàn toàn trách nhiệm trước khoa và \r\nnhà trường.\r\nHưng Yên, ngày 07 tháng 10 năm 2026\r\nSINH VIÊN\r\nPhan Văn Khánh"
+  },
+  {
+    "page": 4,
+    "chars": 902,
+    "last": "hỏi những thiếu sót. Em hi vọng sẽ nhận được những ý kiến \r\nnhận xét, góp ý của các Thầy giáo, Cô giáo về những kết quả triển khai trong đồ án.\r\nEm xin trân trọng cảm ơn!"
+  },
+  {
+    "page": 5,
+    "chars": 49,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n5"
+  },
+  {
+    "page": 6,
+    "chars": 4669,
+    "last": "............................................33\r\n3.5.4. UC04 — Cập nhật vé bếp ..........................................................................................33"
+  },
+  {
+    "page": 7,
+    "chars": 4642,
+    "last": "........................................67\r\n4.3.5. Sổ quỹ và phiếu thu chi..............................................................................................68"
+  },
+  {
+    "page": 8,
+    "chars": 4633,
+    "last": ".....................................................98\r\nA.23. Model EmployeePayrollAdjustment..........................................................................98"
+  },
+  {
+    "page": 9,
+    "chars": 4632,
+    "last": "...........................................132\r\nA.58. Model InventoryCheck.............................................................................................133"
+  },
+  {
+    "page": 10,
+    "chars": 4772,
+    "last": "................................167\r\nB.18. Module system ..............................................................................................................168"
+  },
+  {
+    "page": 11,
+    "chars": 4817,
+    "last": "...................................183\r\nC.35. TC34: Sổ quỹ chi tiền ...................................................................................................183"
+  },
+  {
+    "page": 12,
+    "chars": 1049,
+    "last": "...............................................186\r\nD.1. Hướng dẫn bổ sung và cập nhật tự động.........................................................................186"
+  },
+  {
+    "page": 13,
+    "chars": 1201,
+    "last": "liệu \r\nquan hệ\r\n15 POS Point of Sale Điểm bán hàng / \r\nmàn hình thu ngân\r\n16 QSR Quick Service Restaurant Nhà hàng phục vụ \r\nnhanh\r\n17 QR Quick Response Mã phản hồi nhanh"
+  },
+  {
+    "page": 14,
+    "chars": 475,
+    "last": "n phục vụ\r\n22 UML Unified Modeling Language Ngôn ngữ mô hình \r\nhóa thống nhất\r\n23 UI User Interface Giao diện người \r\ndùng\r\n24 UX User Experience Trải nghiệm người \r\ndùng"
+  },
+  {
+    "page": 15,
+    "chars": 4426,
+    "last": ".................................................49\r\nBảng 3.31: Khóa liên kết trong miền thực đơn và bảng giá ..........................................................50"
+  },
+  {
+    "page": 16,
+    "chars": 4505,
+    "last": "...............................................101\r\nBảng A.26: Cấu trúc model EmployeePayrollLine .....................................................................102"
+  },
+  {
+    "page": 17,
+    "chars": 4637,
+    "last": "...............................................138\r\nBảng A.63: Cấu trúc model MenuItemIngredient.......................................................................138"
+  },
+  {
+    "page": 18,
+    "chars": 4658,
+    "last": "...................................173\r\nBảng C.4: Phiếu kiểm thử TC03 .................................................................................................173"
+  },
+  {
+    "page": 19,
+    "chars": 4902,
+    "last": "....................................185\r\nBảng C.41: Phiếu kiểm thử TC40 ...............................................................................................185"
+  },
+  {
+    "page": 20,
+    "chars": 176,
+    "last": "3: Hệ thống quản lý nhà hàng Crispy Bite\r\n20\r\nBảng D.1: Checklist ảnh chụp nghiệm thu..................................................................................186"
+  },
+  {
+    "page": 21,
+    "chars": 3642,
+    "last": "hưa bổ sung ảnh] ...........................68\r\nHình 4.12: Sơ đồ triển khai môi trường ứng dụng ........................................................................71"
+  },
+  {
+    "page": 22,
+    "chars": 1805,
+    "last": "\nMã nguồn, API, giao diện và kiểm thử \r\nliên quan\r\nM3 Đồng bộ POS, KDS và trang gọi món \r\ncủa khách bằng API và sự kiện.\r\nMã nguồn, API, giao diện và kiểm thử \r\nliên quan"
+  },
+  {
+    "page": 23,
+    "chars": 1926,
+    "last": "iệp vụ và truy cập dữ liệu.\r\n• Triển khai lặp: xây chức năng, viết kiểm thử ở mức phù hợp, chạy kiểm tra kiểu, kiểm \r\ntra giao diện, sau đó đối chiếu kết quả với yêu cầu."
+  },
+  {
+    "page": 24,
+    "chars": 452,
+    "last": "iến trúc và dữ \r\nliệu. Chương 4 mô tả cách cài đặt, kiểm thử, triển khai. Kết luận tổng hợp kết quả và giới \r\nhạn; phụ lục cung cấp danh mục chi tiết trích từ repository."
+  },
+  {
+    "page": 25,
+    "chars": 1948,
+    "last": "po cung cấp bộ công cụ phát triển và xuất bản cho ứng dụng React Native; trong dự \r\nán, cùng mã nguồn frontend phục vụ giao diện web và các ngữ cảnh thiết bị. TypeScript "
+  },
+  {
+    "page": 26,
+    "chars": 1991,
+    "last": " cần ghi lý do và audit. Phần đánh giá bảo \r\nmật tham khảo nguyên tắc xác thực và ủy quyền của OWASP [7], [8], đồng thời kiểm tra \r\ntrực tiếp middleware trong repository."
+  },
+  {
+    "page": 27,
+    "chars": 452,
+    "last": " phát hiện lỗi kiểu/cú pháp trước khi chạy. Từng loại \r\nkiểm thử có giới hạn: một bài test đơn vị xanh không chứng minh quy trình trên thiết bị \r\nthật đã được nghiệm thu."
+  },
+  {
+    "page": 28,
+    "chars": 1614,
+    "last": "Bếp\r\nF07 Thanh toán, xuất hóa đơn, hoàn trả Thu ngân, quản trị\r\nF08 Áp dụng mã ưu đãi và bảng giá Thu ngân, quản trị\r\nF09 Quản lý nguyên liệu và định lượng \r\nBOM Quản trị"
+  },
+  {
+    "page": 29,
+    "chars": 1069,
+    "last": "g báo thay đổi đến màn hình liên \r\nquan.\r\nKịch bản hai thiết bị và tải lại REST.\r\nTruy vết Ghi người, thời điểm, lý do ở thao tác \r\nnhạy cảm. Đối chiếu nhật ký kiểm toán."
+  },
+  {
+    "page": 30,
+    "chars": 137,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n30\r\n3.4. Biểu đồ ca sử dụng\r\nHình 3.1: Use case bán hàng và khách\r\nHình 3.2: Use case bếp"
+  },
+  {
+    "page": 31,
+    "chars": 107,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n31\r\nHình 3.3: Use case quản trị\r\nHình 3.4: Use case nhân sự"
+  },
+  {
+    "page": 32,
+    "chars": 1761,
+    "last": "oặc từ chối theo hợp đồng.\r\nĐiều kiện sau Đơn được lưu, bàn cập nhật và vé bếp xuất hiện.\r\nTruy vết Các route và thực thể liên quan được liệt kê ở Phụ lục B và Phụ lục A."
+  },
+  {
+    "page": 33,
+    "chars": 1484,
+    "last": "ể liên quan được liệt kê ở Phụ lục B và Phụ lục A.\r\n3.5.5. UC05 — Thanh toán đơn hàng\r\nBảng 3.8: Đặc tả UC05 – Thanh toán đơn hàng\r\nThuộc tính Nội dung\r\nTác nhân Thu ngân"
+  },
+  {
+    "page": 34,
+    "chars": 1481,
+    "last": ".7. UC07 — Hủy đơn có kiểm toán\r\nBảng 3.10: Đặc tả UC07 – Hủy đơn có kiểm toán\r\nThuộc tính Nội dung\r\nTác nhân Quản trị\r\nĐiều kiện trước Có quyền ADMIN; đơn được phép hủy."
+  },
+  {
+    "page": 35,
+    "chars": 1547,
+    "last": "số lượng tiêu hao.\r\n3. Lưu BOM qua API.\r\n4. Máy chủ kiểm tra đơn vị và tính giá vốn tham chiếu.\r\nNgoại lệ 1. Nguyên liệu không tồn tại hoặc số lượng không dương: từ chối."
+  },
+  {
+    "page": 36,
+    "chars": 1349,
+    "last": "\n2. Số lượng không hợp lệ: báo lỗi.\r\nĐiều kiện sau Có biên bản và dấu vết điều chỉnh tồn.\r\nTruy vết Các route và thực thể liên quan được liệt kê ở Phụ lục B và Phụ lục A."
+  },
+  {
+    "page": 37,
+    "chars": 1334,
+    "last": "ụ lục A.\r\n3.5.14. UC14 — Lập lịch ca làm\r\nBảng 3.17: Đặc tả UC14 – Lập lịch ca làm\r\nThuộc tính Nội dung\r\nTác nhân Quản trị\r\nĐiều kiện trước Có nhân viên và ca làm hợp lệ."
+  },
+  {
+    "page": 38,
+    "chars": 1546,
+    "last": " hoặc khóa kỳ theo trạng thái.\r\n5. Ghi thanh toán nếu thực hiện.\r\nNgoại lệ 1. Thiếu dữ liệu hoặc chính sách: nêu vấn đề cần xử lý.\r\n2. Kỳ đã khóa: chặn tính lại tùy tiện."
+  },
+  {
+    "page": 39,
+    "chars": 1359,
+    "last": "dữ liệu: hiển thị trạng thái rỗng.\r\nĐiều kiện sau Người quản trị xem được tổng quan ngày.\r\nTruy vết Các route và thực thể liên quan được liệt kê ở Phụ lục B và Phụ lục A."
+  },
+  {
+    "page": 40,
+    "chars": 1541,
+    "last": " phát tín hiệu \r\nkhi đơn, bàn hoặc trạng thái bếp thay đổi. Tách API và sự kiện giúp màn hình khôi phục \r\nđược trạng thái ngay cả khi mất kết nối thời gian thực tạm thời."
+  },
+  {
+    "page": 41,
+    "chars": 801,
+    "last": " chia thành các \r\nmiền: đơn hàng, kho, nhân sự và tài chính. Các sơ đồ thể hiện khóa và quan hệ chính; \r\nPhụ lục A ghi toàn bộ trường và ràng buộc trích từ Prisma schema."
+  },
+  {
+    "page": 42,
+    "chars": 129,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n42\r\nHình 3.6: Quan hệ dữ liệu đơn hàng\r\nHình 3.7: Quan hệ dữ liệu kho và mua hàng"
+  },
+  {
+    "page": 43,
+    "chars": 122,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n43\r\nHình 3.8: Quan hệ dữ liệu nhân sự\r\nHình 3.9: Quan hệ dữ liệu tài chính"
+  },
+  {
+    "page": 44,
+    "chars": 1055,
+    "last": "odel liên quan. Các bảng chính là User, \r\nBranch, Department, JobTitle, Employee, EmployeeCompensation.\r\nHình 3.10: Lược đồ quan hệ chi tiết tài khoản, chi nhánh và hồ sơ"
+  },
+  {
+    "page": 45,
+    "chars": 717,
+    "last": " việc\r\nBảng 3.26: Khóa liên kết trong miền ca làm việc\r\nModel nguồn Model đích Trường FK\r\nEmployeeScheduleRule Employee employeeId\r\nEmployeeScheduleRule WorkShift shiftId"
+  },
+  {
+    "page": 46,
+    "chars": 804,
+    "last": "eKioskSession checkOutKioskSessionId\r\nEmployeeAttendanceSession BranchAttendancePolicyVersion attendancePolicyVersionId\r\nEmployeeAttendanceDisposition Employee employeeId"
+  },
+  {
+    "page": 47,
+    "chars": 687,
+    "last": "llLineId\r\nEmployeePayrollPayment EmployeePayrollBatch payrollBatchId\r\nEmployeePayrollPayment EmployeePayrollLine payrollLineId\r\nEmployeePayrollPayment Employee employeeId"
+  },
+  {
+    "page": 48,
+    "chars": 837,
+    "last": "Entry CommissionRule commissionRuleId\r\nCommissionPayrollAllocation CommissionPayrollAllocation priorEventId\r\nCommissionPayrollAllocation CommissionEntry commissionEntryId"
+  },
+  {
+    "page": 49,
+    "chars": 796,
+    "last": "7: Thực đơn và bảng giá\r\nNhóm thực đơn và bảng giá gồm 6 model liên quan. Các bảng chính là Category, \r\nMenuItem, ModifierGroup, ModifierOption, PriceList, PriceListItem."
+  },
+  {
+    "page": 50,
+    "chars": 575,
+    "last": "thanh toán\r\nNhóm đơn hàng và thanh toán gồm 6 model liên quan. Các bảng chính là \r\nDiningTable, Order, OrderItem, OrderPaymentTransaction, OrderReturn, \r\nOrderReturnLine."
+  },
+  {
+    "page": 51,
+    "chars": 622,
+    "last": " liệu và định lượng gồm 6 model liên quan. Các bảng chính là \r\nIngredient, MenuItemIngredient, InventoryTransaction, InventoryCheck, \r\nInventoryCheckLine, InventoryWaste."
+  },
+  {
+    "page": 52,
+    "chars": 708,
+    "last": "hóm nhập hàng và công nợ gồm 6 model liên quan. Các bảng chính là Supplier, \r\nPurchaseReceipt, PurchaseReceiptLine, SupplierPayment, PurchaseReturn, \r\nPurchaseReturnLine."
+  },
+  {
+    "page": 53,
+    "chars": 731,
+    "last": "ceReceiptLineId\r\nMiền 11: Sổ quỹ\r\nNhóm sổ quỹ gồm 5 model liên quan. Các bảng chính là FinancialAccount, \r\nCashVoucher, CashFlowCategory, FinancialParty, SupplierPayment."
+  },
+  {
+    "page": 54,
+    "chars": 510,
+    "last": "ntId\r\nMiền 12: Đối tác giao hàng\r\nNhóm đối tác giao hàng gồm 5 model liên quan. Các bảng chính là CustomerGroup, \r\nCustomer, DeliveryPartner, DeliveryPartnerGroup, Order."
+  },
+  {
+    "page": 55,
+    "chars": 557,
+    "last": "nhân sự gồm 5 model liên quan. Các bảng chính là Branch, \r\nBranchEmployeeSettingsRevision, BranchPayrollPolicyVersion, \r\nBranchWorkweekPolicyVersion, BranchHolidayPeriod."
+  },
+  {
+    "page": 56,
+    "chars": 373,
+    "last": "hEmployeeSettingsRevisio\r\nn\r\nBranch branchId\r\nBranchPayrollPolicyVersion Branch branchId\r\nBranchWorkweekPolicyVersion Branch branchId\r\nBranchHolidayPeriod Branch branchId"
+  },
+  {
+    "page": 57,
+    "chars": 166,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n57\r\n3.8. Thiết kế luồng xử lý\r\nHình 3.10: Biểu đồ tuần tự tạo đơn và chuyển bếp\r\nHình 3.11: Biểu đồ tuần tự thanh toán"
+  },
+  {
+    "page": 58,
+    "chars": 358,
+    "last": " bàn, nhập kho, tính \r\nlương, sổ quỹ và hoàn trả. Mỗi bước được kiểm tra ở server và thay đổi dữ liệu liên quan \r\ncần hoàn tất trong cùng giao dịch khi nghiệp vụ yêu cầu."
+  },
+  {
+    "page": 59,
+    "chars": 276,
+    "last": "n kiểm tra cả nhánh lỗi: đầu vào thiếu, quyền không phù hợp, trạng \r\nthái chứng từ đã chốt hoặc một bước lưu thất bại. Kết quả cuối phải truy vết được về bản \r\nghi nguồn."
+  },
+  {
+    "page": 60,
+    "chars": 280,
+    "last": "n kiểm tra cả nhánh lỗi: đầu vào thiếu, quyền không phù hợp, \r\ntrạng thái chứng từ đã chốt hoặc một bước lưu thất bại. Kết quả cuối phải truy vết được \r\nvề bản ghi nguồn."
+  },
+  {
+    "page": 61,
+    "chars": 282,
+    "last": "n kiểm tra cả nhánh lỗi: đầu vào thiếu, quyền không phù hợp, \r\ntrạng thái chứng từ đã chốt hoặc một bước lưu thất bại. Kết quả cuối phải truy vết được \r\nvề bản ghi nguồn."
+  },
+  {
+    "page": 62,
+    "chars": 288,
+    "last": "n kiểm tra cả nhánh lỗi: đầu vào thiếu, quyền không phù hợp, \r\ntrạng thái chứng từ đã chốt hoặc một bước lưu thất bại. Kết quả cuối phải truy vết được \r\nvề bản ghi nguồn."
+  },
+  {
+    "page": 63,
+    "chars": 1009,
+    "last": "ạng thái chế biến\r\nBàn Sơ đồ và tình trạng bàn Chọn/chuyển bàn\r\nKho Nguyên liệu, tồn, cảnh báo Nhập và kiểm kê\r\nNhân sự Hồ sơ, ca, công, lương Quản trị vòng đời nhân viên"
+  },
+  {
+    "page": 64,
+    "chars": 132,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n64\r\nMàn hình Dữ liệu chính Tác vụ trọng tâm\r\nBáo cáo KPI theo ngày Theo dõi vận hành"
+  },
+  {
+    "page": 65,
+    "chars": 1488,
+    "last": "o \r\nđơn. Dữ liệu hiển thị chỉ hỗ trợ chọn món; server phải kiểm tra lại giá và điều kiện trước \r\nkhi ghi. Việc tạo đơn sử dụng khóa chống thao tác lặp khi mạng chập chờn."
+  },
+  {
+    "page": 66,
+    "chars": 1804,
+    "last": "[CẦN BỔ SUNG ẢNH CHỤP: Sơ đồ bàn và danh sách đặt bàn; chụp bản build ngày nghiệm \r\nthu, che dữ liệu cá nhân]\r\nHình 4.5: Sơ đồ bàn và danh sách đặt bàn [chưa bổ sung ảnh]"
+  },
+  {
+    "page": 67,
+    "chars": 1861,
+    "last": " Workspace nhân sự, lịch ca, chấm công và lương; đối chiếu nội \r\ndung với dữ liệu thử nghiệm]\r\nHình 4.9: Workspace nhân sự, lịch ca, chấm công và lương [chưa bổ sung ảnh]"
+  },
+  {
+    "page": 68,
+    "chars": 2034,
+    "last": "d kiểm tra dữ liệu \r\nở các luồng có schema. Phụ lục B ghi đầy đủ tiền tố API ghép từ app.ts và đường dẫn \r\ntrong từng router để có thể đối chiếu trực tiếp khi triển khai."
+  },
+  {
+    "page": 69,
+    "chars": 1502,
+    "last": "\nchạy lại kèm bản biên tập ngày 07/10/2026 để xác nhận tình trạng hiện tại. Các kịch bản \r\ntích hợp và E2E ở Phụ lục C là tiêu chí nghiệm thu, không phải kết quả đã chạy."
+  },
+  {
+    "page": 70,
+    "chars": 1211,
+    "last": "ã được rà soát, nạp dữ liệu mẫu chỉ \r\nở môi trường thử nghiệm, cấu hình khóa JWT và thông tin DB ngoài mã nguồn, kiểm tra \r\n/health và xác nhận các vai trò thao tác được."
+  },
+  {
+    "page": 71,
+    "chars": 318,
+    "last": "ày hiện là điểm bắt đầu của phân hệ phân tích; báo cáo nhiều trang cần \r\ntriển khai riêng. Nghiệm thu thực địa còn phụ thuộc mạng, thiết bị, thanh toán và dữ liệu \r\nthật."
+  },
+  {
+    "page": 72,
+    "chars": 1215,
+    "last": "ám sát/sao lưu và đối soát dữ liệu tài \r\nchính với chứng từ thật. Khi bổ sung ảnh chụp, người thực hiện cần cập nhật chú thích, \r\nmục lục hình và các số trang trong Word."
+  },
+  {
+    "page": 73,
+    "chars": 1288,
+    "last": "[9] Nhóm phát triển Crispy Bite, README.md, package.json, \r\nbackend/prisma/schema.prisma, backend/src và frontend/src trong repository dự án; đối \r\nchiếu ngày 07/10/2026."
+  },
+  {
+    "page": 74,
+    "chars": 1734,
+    "last": "\n[id], onDelete: Restrict)\r\nQuy tắc mức model: @@unique([kioskSessionId, idempotencyKey], map: \r\n\"AttendanceKioskIdempotency_session_key\"); @@index([attendanceSessionId])"
+  },
+  {
+    "page": 75,
+    "chars": 1664,
+    "last": "edAt DateTime? Mốc thời gian lastUsedAt —\r\nbranch Branch Đối tượng liên quan \r\nBranch; trường ORM\r\n@relation(fields: [branchId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 76,
+    "chars": 1677,
+    "last": "ssion; \r\ntrường ORM\r\n—\r\nattendanceSessions EmployeeAttendanc\r\neSession[]\r\nTập đối tượng liên quan \r\nEmployeeAttendanceSessi\r\non; trường ORM\r\n@relation(\"AttendanceBranch\")"
+  },
+  {
+    "page": 77,
+    "chars": 1712,
+    "last": "h của bản ghi @id @default(autoincrement())\r\nbranchId Int Khóa ngoại đến Branch.id —\r\neffectiveFrom DateTime Bắt đầu hiệu lực @db.Date\r\nrevision Int Thuộc tính revision —"
+  },
+  {
+    "page": 78,
+    "chars": 1643,
+    "last": "ranchId Int Khóa ngoại đến Branch.id @id\r\nattendanceRevision Int Thuộc tính \r\nattendanceRevision @default(1)\r\npayrollRevision Int Thuộc tính \r\npayrollRevision @default(1)"
+  },
+  {
+    "page": 79,
+    "chars": 1651,
+    "last": "SetNull)\r\narchivedBy User? Đối tượng liên quan User; \r\ntrường ORM\r\n@relation(\"HolidayPeriodArchiver\r\n\", fields: [archivedByUserId], \r\nreferences: [id], onDelete: SetNull)"
+  },
+  {
+    "page": 80,
+    "chars": 1890,
+    "last": "chId Int Khóa ngoại đến Branch.id —\r\neffectiveFrom DateTime Bắt đầu hiệu lực @db.Date\r\nrevision Int Thuộc tính revision —\r\nmonday Boolean Thuộc tính monday @default(true)"
+  },
+  {
+    "page": 81,
+    "chars": 1653,
+    "last": "e —\r\nresolution Json Thuộc tính resolution —\r\nreason String Lý do @db.VarChar(500)\r\ncreatedByUserId Int\r\nMã tham chiếu nghiệp vụ \r\ncreatedByUserId; không \r\nkhai báo FK\r\n—"
+  },
+  {
+    "page": 82,
+    "chars": 1508,
+    "last": "—\r\norderReturnLineId Int? Khóa ngoại đến \r\nOrderReturnLine.id —\r\nemployeeId Int Khóa ngoại đến \r\nEmployee.id —\r\ncommissionPlanId Int? Khóa ngoại đến \r\nCommissionPlan.id —"
+  },
+  {
+    "page": 83,
+    "chars": 1411,
+    "last": "d], \r\nreferences: [id], onDelete: \r\nRestrict)\r\nrootChildren CommissionEntry[]\r\nTập đối tượng liên quan \r\nCommissionEntry; trường \r\nORM\r\n@relation(\"CommissionEntryRoot\r\n\")"
+  },
+  {
+    "page": 84,
+    "chars": 2014,
+    "last": "ype_key\"); @@index([originalEntryId, occurredAt]); \r\n@@index([sourceEntryId, occurredAt]); @@index([employeeId, accountingDate, id]); \r\n@@index([orderItemId, occurredAt])"
+  },
+  {
+    "page": 85,
+    "chars": 1747,
+    "last": "yrollBatch EmployeePayrollBat\r\nch\r\nĐối tượng liên quan \r\nEmployeePayrollBatch; \r\ntrường ORM\r\n@relation(fields: [payrollBatchId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 86,
+    "chars": 1605,
+    "last": "dAt —\r\narchiveReason String? Thuộc tính archiveReason @db.VarChar(500)\r\ncreatedAt DateTime Thời điểm tạo @default(now())\r\nupdatedAt DateTime Thời điểm cập nhật @updatedAt"
+  },
+  {
+    "page": 87,
+    "chars": 1465,
+    "last": " Int?\r\nMã tham chiếu nghiệp vụ \r\nendedByUserId; không \r\nkhai báo FK\r\n—\r\nendedAt DateTime? Mốc thời gian endedAt —\r\nendReason String? Thuộc tính endReason @db.VarChar(500)"
+  },
+  {
+    "page": 88,
+    "chars": 1656,
+    "last": "serId; không \r\nkhai báo FK\r\n—\r\norderItem OrderItem Đối tượng liên quan \r\nOrderItem; trường ORM\r\n@relation(fields: [orderItemId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 89,
+    "chars": 1453,
+    "last": "i điểm tạo @default(now())\r\nplan CommissionPlan\r\nĐối tượng liên quan \r\nCommissionPlan; trường \r\nORM\r\n@relation(fields: [planId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 90,
+    "chars": 1519,
+    "last": " Thuộc tính itemSku @db.VarChar(80)\r\nitemName String Thuộc tính itemName @db.VarChar(200)\r\nunitPrice Int Đơn giá —\r\nmodifierSnapshot Json? Thuộc tính \r\nmodifierSnapshot —"
+  },
+  {
+    "page": 91,
+    "chars": 1570,
+    "last": " quan \r\nCommissionRecognitionIs\r\nsue; trường ORM\r\n—\r\nQuy tắc mức model: @@index([orderId, saleBusinessDate]); \r\n@@index([commissionEmployeeIdAtPayment, saleBusinessDate])"
+  },
+  {
+    "page": 92,
+    "chars": 1499,
+    "last": "\njobTitleId Int? Khóa ngoại đến JobTitle.id —\r\nstartDate DateTime? Ngày startDate @db.Date\r\nendDate DateTime? Ngày endDate @db.Date\r\nnote String? Ghi chú @db.VarChar(500)"
+  },
+  {
+    "page": 93,
+    "chars": 1580,
+    "last": " liên quan \r\nEmployeeScheduleRule; \r\ntrường ORM\r\n—\r\nattendanceSessions EmployeeAttendanc\r\neSession[]\r\nTập đối tượng liên quan \r\nEmployeeAttendanceSessi\r\non; trường ORM\r\n—"
+  },
+  {
+    "page": 94,
+    "chars": 1683,
+    "last": "cheduleRuleId Int Khóa ngoại đến \r\nEmployeeScheduleRule.id —\r\nworkDate DateTime Ngày workDate @db.Date\r\ntype\r\nAttendanceDispositi\r\nonType Thuộc tính type @default(ABSENT)"
+  },
+  {
+    "page": 95,
+    "chars": 1764,
+    "last": " Ràng buộc / mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\nemployeeId Int Khóa ngoại đến \r\nEmployee.id —\r\nbranchId Int Khóa ngoại đến Branch.id —"
+  },
+  {
+    "page": 96,
+    "chars": 1381,
+    "last": "ot Int\r\nThuộc tính \r\nlateThresholdMinutesSnap\r\nshot\r\n@default(0)\r\nearlyLeaveThreshol\r\ndMinutesSnapshot Int\r\nThuộc tính \r\nearlyLeaveThresholdMinu\r\ntesSnapshot\r\n@default(0)"
+  },
+  {
+    "page": 97,
+    "chars": 1986,
+    "last": "At]); @@index([branchId, scheduleRuleId, scheduleDate], map: \r\n\"AttendanceSession_schedule_occurrence_idx\"); @@index([checkOutAt]); \r\n@@index([attendancePolicyVersionId])"
+  },
+  {
+    "page": 98,
+    "chars": 1559,
+    "last": "\npayrollLineId Int Khóa ngoại đến \r\nEmployeePayrollLine.id —\r\ntype\r\nPayrollAdjustmentT\r\nype\r\nThuộc tính type —\r\namount Int Số tiền —\r\nreason String Lý do @db.VarChar(500)"
+  },
+  {
+    "page": 99,
+    "chars": 1814,
+    "last": " vụ @default(DRAFT)\r\ntotalGrossAmount Int Giá trị tiền tệ \r\ntotalGrossAmount @default(0)\r\ntotalAdjustmentAm\r\nount\r\nInt Giá trị tiền tệ \r\ntotalAdjustmentAmount @default(0)"
+  },
+  {
+    "page": 100,
+    "chars": 1531,
+    "last": "atedBy User? Đối tượng liên quan User; \r\ntrường ORM\r\n@relation(\"EmployeePayrollBatch\r\nCalculator\", fields: \r\n[calculatedByUserId], references: \r\n[id], onDelete: Restrict)"
+  },
+  {
+    "page": 101,
+    "chars": 1684,
+    "last": ")\r\nresponse Json Phản hồi lưu để trả lại khi \r\ngửi lặp —\r\npayrollBatchId Int? Khóa ngoại đến \r\nEmployeePayrollBatch.id —\r\ncreatedAt DateTime Thời điểm tạo @default(now())"
+  },
+  {
+    "page": 102,
+    "chars": 1605,
+    "last": " Ngày \r\nemploymentStartDate @db.Date\r\nemploymentEndDat\r\ne\r\nDateTime? Ngày \r\nemploymentEndDate @db.Date\r\nactiveCalendarDays Int Thuộc tính \r\nactiveCalendarDays @default(0)"
+  },
+  {
+    "page": 103,
+    "chars": 1421,
+    "last": "sourceSnapshot —\r\ncalculatedAt DateTime Mốc thời gian \r\ncalculatedAt —\r\ncreatedAt DateTime Thời điểm tạo @default(now())\r\nupdatedAt DateTime Thời điểm cập nhật @updatedAt"
+  },
+  {
+    "page": 104,
+    "chars": 1695,
+    "last": "entMet\r\nhod Thuộc tính method —\r\nfinancialAccountId Int? Khóa ngoại đến \r\nFinancialAccount.id —\r\nexternalReference String? Thuộc tính \r\nexternalReference @db.VarChar(120)"
+  },
+  {
+    "page": 105,
+    "chars": 1827,
+    "last": "AccountId, paidAt])\r\nA.28. Model EmployeeScheduleException\r\nMiền: Nhân sự và chính sách. Số trường/quan hệ: 9. Trường liên kết nổi bật: scheduleRuleId, \r\ncreatedByUserId."
+  },
+  {
+    "page": 106,
+    "chars": 1682,
+    "last": "reatedAt DateTime Thời điểm tạo @default(now())\r\nactor User Đối tượng liên quan User; \r\ntrường ORM\r\n@relation(fields: [actorId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 107,
+    "chars": 1561,
+    "last": "ferences: [id], onDelete: \r\nRestrict)\r\nshift WorkShift Đối tượng liên quan \r\nWorkShift; trường ORM\r\n@relation(fields: [shiftId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 108,
+    "chars": 1801,
+    "last": " quan \r\nEmployee; trường ORM —\r\nA.32. Model User\r\nMiền: Nhân sự và chính sách. Số trường/quan hệ: 39. Trường liên kết nổi bật: không có khóa ngoại đặt \r\ntên theo quy ước."
+  },
+  {
+    "page": 109,
+    "chars": 1931,
+    "last": "createdAttendanceK\r\nioskSessions\r\nAttendanceKioskSes\r\nsion[]\r\nTập đối tượng liên quan \r\nAttendanceKioskSession; \r\ntrường ORM\r\n@relation(\"AttendanceKioskSessi\r\nonCreator\")"
+  },
+  {
+    "page": 110,
+    "chars": 2250,
+    "last": "eat\r\nor\")\r\ncreatedPayrollPolici\r\nes\r\nBranchPayrollPolicy\r\nVersion[]\r\nTập đối tượng liên quan \r\nBranchPayrollPolicyVersi\r\non; trường ORM\r\n@relation(\"PayrollPolicyCreator\")"
+  },
+  {
+    "page": 111,
+    "chars": 1781,
+    "last": "uộc tính endMinute —\r\nisActive Boolean Thuộc tính isActive @default(true)\r\ncreatedByUserId Int? Khóa ngoại đến User.id —\r\ncreatedAt DateTime Thời điểm tạo @default(now())"
+  },
+  {
+    "page": 112,
+    "chars": 1532,
+    "last": "ds: \r\n[actorId], references: [id], \r\nonDelete: SetNull)\r\nQuy tắc mức model: @@index([actorId]); @@index([action]); @@index([targetType, targetId]); \r\n@@index([createdAt])"
+  },
+  {
+    "page": 113,
+    "chars": 1490,
+    "last": "ustomerGroup.id —\r\nisActive Boolean Thuộc tính isActive @default(true)\r\ncreatedAt DateTime Thời điểm tạo @default(now())\r\nupdatedAt DateTime Thời điểm cập nhật @updatedAt"
+  },
+  {
+    "page": 114,
+    "chars": 1515,
+    "last": "ủa bản ghi @id @default(autoincrement())\r\ncode String Mã nghiệp vụ @unique\r\nname String Tên hiển thị —\r\nphone String? Thuộc tính phone —\r\nemail String? Thuộc tính email —"
+  },
+  {
+    "page": 115,
+    "chars": 1605,
+    "last": "ên quan \r\nDeliveryPartner; trường \r\nORM\r\n—\r\nA.40. Model DiningTable\r\nMiền: Bán hàng và khách hàng. Số trường/quan hệ: 16. Trường liên kết nổi bật: areaId, currentOrderId."
+  },
+  {
+    "page": 116,
+    "chars": 1505,
+    "last": " nghĩa Ràng buộc / mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\ncategoryId Int Khóa ngoại đến \r\nCategory.id —\r\nsku String Thuộc tính sku @unique"
+  },
+  {
+    "page": 117,
+    "chars": 1572,
+    "last": "ợng liên quan \r\nCommissionSaleBasis; \r\ntrường ORM\r\n—\r\nA.42. Model ModifierGroup\r\nMiền: Bán hàng và khách hàng. Số trường/quan hệ: 10. Trường liên kết nổi bật: menuItemId."
+  },
+  {
+    "page": 118,
+    "chars": 1481,
+    "last": " @updatedAt\r\nmodifierGroup ModifierGroup\r\nĐối tượng liên quan \r\nModifierGroup; trường \r\nORM\r\n@relation(fields: \r\n[modifierGroupId], references: \r\n[id], onDelete: Cascade)"
+  },
+  {
+    "page": 119,
+    "chars": 1450,
+    "last": "8% (VND)\r\nfinalAmount Int Giá trị tiền tệ finalAmount // Tong thanh toan (VND)\r\nvoucherId Int? Khóa ngoại đến \r\nVoucher.id —\r\nvoucherCode String? Thuộc tính voucherCode —"
+  },
+  {
+    "page": 120,
+    "chars": 1755,
+    "last": "es: \r\n[id], onDelete: Restrict)\r\npriceList PriceList? Đối tượng liên quan \r\nPriceList; trường ORM\r\n@relation(fields: [priceListId], \r\nreferences: [id], onDelete: SetNull)"
+  },
+  {
+    "page": 121,
+    "chars": 1717,
+    "last": "a chính của bản ghi @id @default(autoincrement())\r\norderId Int Khóa ngoại đến Order.id —\r\nmenuItemId Int Khóa ngoại đến \r\nMenuItem.id —\r\nquantity Int Số lượng @default(1)"
+  },
+  {
+    "page": 122,
+    "chars": 1608,
+    "last": "Id])\r\nA.46. Model OrderPaymentTransaction\r\nMiền: Bán hàng và khách hàng. Số trường/quan hệ: 14. Trường liên kết nổi bật: orderId, \r\nfinancialAccountId, confirmedByUserId."
+  },
+  {
+    "page": 123,
+    "chars": 1696,
+    "last": " model OrderReturn\r\nTrường Kiểu Ý nghĩa Ràng buộc / mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\nreturnCode String Thuộc tính returnCode @unique"
+  },
+  {
+    "page": 124,
+    "chars": 1525,
+    "last": "RM\r\n@relation(fields: \r\n[financialAccountId], references: \r\n[id], onDelete: Restrict)\r\nlines OrderReturnLine[]\r\nTập đối tượng liên quan \r\nOrderReturnLine; trường \r\nORM\r\n—"
+  },
+  {
+    "page": 125,
+    "chars": 1527,
+    "last": "s: [id], onDelete: \r\nCascade)\r\norderItem OrderItem Đối tượng liên quan \r\nOrderItem; trường ORM\r\n@relation(fields: [orderItemId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 126,
+    "chars": 1563,
+    "last": " \r\n@@index([effectiveFrom, effectiveTo])\r\nA.50. Model PriceListItem\r\nMiền: Bán hàng và khách hàng. Số trường/quan hệ: 9. Trường liên kết nổi bật: priceListId, menuItemId."
+  },
+  {
+    "page": 127,
+    "chars": 1487,
+    "last": "goại đến \r\nDiningTable.id —\r\npolicyId Int? Khóa ngoại đến \r\nReservationPolicy.id —\r\nscheduledAt DateTime Mốc thời gian scheduledAt —\r\npartySize Int Thuộc tính partySize —"
+  },
+  {
+    "page": 128,
+    "chars": 1543,
+    "last": "rences: [id], onDelete: \r\nRestrict)\r\ntable DiningTable? Đối tượng liên quan \r\nDiningTable; trường ORM\r\n@relation(fields: [tableId], \r\nreferences: [id], onDelete: SetNull)"
+  },
+  {
+    "page": 129,
+    "chars": 1486,
+    "last": "g liên quan \r\nReservation; trường ORM\r\n@relation(fields: [reservationId], \r\nreferences: [id], onDelete: \r\nCascade)\r\nQuy tắc mức model: @@index([reservationId, createdAt])"
+  },
+  {
+    "page": 130,
+    "chars": 1594,
+    "last": "ces: \r\n[id], onDelete: Restrict)\r\nQuy tắc mức model: @@unique([reservationId, orderId]); @@index([reservationId, createdAt]); \r\n@@index([financialAccountId, confirmedAt])"
+  },
+  {
+    "page": 131,
+    "chars": 1593,
+    "last": "Order @default(0)\r\nisActive Boolean Thuộc tính isActive @default(true)\r\ncreatedAt DateTime Thời điểm tạo @default(now())\r\nupdatedAt DateTime Thời điểm cập nhật @updatedAt"
+  },
+  {
+    "page": 132,
+    "chars": 1449,
+    "last": "e, isActive])\r\nKHO VÀ MUA HÀNG\r\nA.57. Model Ingredient\r\nMiền: Kho và mua hàng. Số trường/quan hệ: 16. Trường liên kết nổi bật: không có khóa ngoại đặt tên \r\ntheo quy ước."
+  },
+  {
+    "page": 133,
+    "chars": 1662,
+    "last": "ex([isActive])\r\nA.58. Model InventoryCheck\r\nMiền: Kho và mua hàng. Số trường/quan hệ: 14. Trường liên kết nổi bật: createdByUserId, \r\nbalancedByUserId, cancelledByUserId."
+  },
+  {
+    "page": 134,
+    "chars": 1510,
+    "last": "heckLine\r\nTrường Kiểu Ý nghĩa Ràng buộc / mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\ninventoryCheckId Int Khóa ngoại đến \r\nInventoryCheck.id —"
+  },
+  {
+    "page": 135,
+    "chars": 1632,
+    "last": "nType Thuộc tính type —\r\nquantity Float Số lượng // + khi nhap kho, - khi xuat/hao \r\nhut\r\ncostAmount Int Giá trị tiền tệ costAmount @default(0) // Gia tri VND giao \r\ndich"
+  },
+  {
+    "page": 136,
+    "chars": 2019,
+    "last": "Quy tắc mức model: @@unique([purchaseReturnId, ingredientId]); @@unique([orderReturnId, \r\ningredientId]); @@index([ingredientId]); @@index([type]); @@index([createdAt]); "
+  },
+  {
+    "page": 137,
+    "chars": 1491,
+    "last": "sactio\r\nns\r\nInventoryTransactio\r\nn[]\r\nTập đối tượng liên quan \r\nInventoryTransaction; \r\ntrường ORM\r\n—\r\nQuy tắc mức model: @@index([status, wastedAt]); @@index([wastedAt])"
+  },
+  {
+    "page": 138,
+    "chars": 1555,
+    "last": "l MenuItemIngredient\r\nTrường Kiểu Ý nghĩa Ràng buộc / mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\nmenuItemId Int Khóa ngoại đến \r\nMenuItem.id —"
+  },
+  {
+    "page": 139,
+    "chars": 1593,
+    "last": " trị tiền tệ paidAmount @default(0)\r\npaymentMethod PaymentMethod Thuộc tính \r\npaymentMethod @default(CASH)\r\nfinancialAccountId Int? Khóa ngoại đến \r\nFinancialAccount.id —"
+  },
+  {
+    "page": 140,
+    "chars": 1622,
+    "last": " quan \r\nSupplierPayment; trường \r\nORM\r\n—\r\nQuy tắc mức model: @@index([supplierId, receivedAt]); @@index([status, receivedAt]); \r\n@@index([financialAccountId, receivedAt])"
+  },
+  {
+    "page": 141,
+    "chars": 1574,
+    "last": "Kho và mua hàng. Số trường/quan hệ: 28. Trường liên kết nổi bật: supplierId, sourceReceiptId, \r\nfinancialAccountId, createdByUserId, completedByUserId, cancelledByUserId."
+  },
+  {
+    "page": 142,
+    "chars": 1357,
+    "last": "dByName @db.VarChar(120)\r\ncompletedByUserId Int?\r\nMã tham chiếu nghiệp vụ \r\ncompletedByUserId; \r\nkhông khai báo FK\r\n—\r\ncompletedAt DateTime? Mốc thời gian \r\ncompletedAt —"
+  },
+  {
+    "page": 143,
+    "chars": 1719,
+    "last": "\ningredientId Int Khóa ngoại đến \r\nIngredient.id —\r\nsourceReceiptLineI\r\nd\r\nInt? Khóa ngoại đến \r\nPurchaseReceiptLine.id —\r\ningredientSku String Thuộc tính ingredientSku —"
+  },
+  {
+    "page": 144,
+    "chars": 1534,
+    "last": " Mã nghiệp vụ @unique\r\nname String Tên hiển thị —\r\nphone String? Thuộc tính phone —\r\nemail String? Thuộc tính email —\r\naddress String? Thuộc tính address @db.VarChar(255)"
+  },
+  {
+    "page": 145,
+    "chars": 1546,
+    "last": "mặc định\r\nid Int Khóa chính của bản ghi @id @default(autoincrement())\r\nname String Tên hiển thị @unique @db.VarChar(100)\r\ncreatedAt DateTime Thời điểm tạo @default(now())"
+  },
+  {
+    "page": 146,
+    "chars": 1481,
+    "last": " tính \r\nreversalRequestDigest @db.Char(64)\r\nnote String? Ghi chú @db.VarChar(500)\r\ncreatedByUserId Int?\r\nMã tham chiếu nghiệp vụ \r\ncreatedByUserId; không \r\nkhai báo FK\r\n—"
+  },
+  {
+    "page": 147,
+    "chars": 1701,
+    "last": "n\r\nThuộc tính \r\naffectsBusinessResultDefa\r\nult\r\n@default(false)\r\nisSystem Boolean Thuộc tính isSystem @default(false)\r\nisActive Boolean Thuộc tính isActive @default(true)"
+  },
+  {
+    "page": 148,
+    "chars": 1513,
+    "last": "arChar(50)\r\ncounterpartyId Int?\r\nMã tham chiếu nghiệp vụ \r\ncounterpartyId; không khai \r\nbáo FK\r\n—\r\ncounterpartyName String? Thuộc tính \r\ncounterpartyName @db.VarChar(160)"
+  },
+  {
+    "page": 149,
+    "chars": 1565,
+    "last": "e: \r\nRestrict)\r\ncategory CashFlowCategory\r\nĐối tượng liên quan \r\nCashFlowCategory; \r\ntrường ORM\r\n@relation(fields: [categoryId], \r\nreferences: [id], onDelete: \r\nRestrict)"
+  },
+  {
+    "page": 150,
+    "chars": 1956,
+    "last": "ateTime(3)\r\nactivatedBy User? Đối tượng liên quan User; \r\ntrường ORM\r\n@relation(\"CashbookActivator\", \r\nfields: [activatedByUserId], \r\nreferences: [id], onDelete: SetNull)"
+  },
+  {
+    "page": 151,
+    "chars": 1559,
+    "last": "PaymentTrans\r\naction[]\r\nTập đối tượng liên quan \r\nOrderPaymentTransaction; \r\ntrường ORM\r\n—\r\norderReturns OrderReturn[] Tập đối tượng liên quan \r\nOrderReturn; trường ORM —"
+  },
+  {
+    "page": 152,
+    "chars": 1229,
+    "last": "iểm tạo @default(now()) \r\n@db.DateTime(3)\r\nupdatedAt DateTime Thời điểm cập nhật @updatedAt @db.DateTime(3)\r\nQuy tắc mức model: @@index([name]); @@index([isActive, name])"
+  },
+  {
+    "page": 153,
+    "chars": 754,
+    "last": "11\r\nemployee-schedules 10\r\nemployee-settings 8\r\nemployees 14\r\ninventory 62\r\nmenu 13\r\norders 31\r\nprice-lists 6\r\nreports 1\r\nreservations 13\r\nsystem 5\r\ntables 17\r\nvouchers 7"
+  },
+  {
+    "page": 154,
+    "chars": 962,
+    "last": "\r\n02 GET /api/cashbook/counterparties\r\n03 GET /api/cashbook/purchase-invoices\r\n04 GET /api/cashbook/parties\r\n05 POST /api/cashbook/parties\r\n06 POST /api/cashbook/accounts"
+  },
+  {
+    "page": 155,
+    "chars": 806,
+    "last": " Method Đường dẫn API đầy đủ\r\n01 GET /api/customers/selectable\r\n02 GET /api/customers/groups\r\n03 GET /api/customers\r\n04 POST /api/customers\r\n05 POST /api/customers/groups"
+  },
+  {
+    "page": 156,
+    "chars": 1287,
+    "last": "ployee-commissions\r\nRouter employee-commission.routes.ts gồm 14 method/path, gắn tại /api/employee￾commissions. Quyền chi tiết được áp dụng qua middleware của từng route."
+  },
+  {
+    "page": 157,
+    "chars": 1169,
+    "last": " middleware của từng route.\r\nBảng B.9: Các API của module employee-payroll\r\nSTT Method Đường dẫn API đầy đủ\r\n01 GET /api/employee-payrolls\r\n02 POST /api/employee-payrolls"
+  },
+  {
+    "page": 158,
+    "chars": 1175,
+    "last": "ort/preview\r\n05 POST /api/employee-schedules/import/commit\r\n06 GET /api/employee-schedules/shifts\r\n07 POST /api/employee-schedules\r\n08 POST /api/employee-schedules/shifts"
+  },
+  {
+    "page": 159,
+    "chars": 1065,
+    "last": "ees. Quyền chi \r\ntiết được áp dụng qua middleware của từng route.\r\nBảng B.12: Các API của module employees\r\nSTT Method Đường dẫn API đầy đủ\r\n01 POST /api/employees/avatar"
+  },
+  {
+    "page": 160,
+    "chars": 847,
+    "last": "ware của từng route.\r\nBảng B.13: Các API của module inventory\r\nSTT Method Đường dẫn API đầy đủ\r\n01 GET /api/inventory/excel/template\r\n02 POST /api/inventory/kitchen-waste"
+  },
+  {
+    "page": 161,
+    "chars": 989,
+    "last": "ntory/purchase-receipts\r\n21 POST /api/inventory/purchase-receipts\r\n22 GET /api/inventory/purchase-receipts/export\r\n23 POST /api/inventory/purchase-receipts/import/preview"
+  },
+  {
+    "page": 162,
+    "chars": 1001,
+    "last": "tory/checks/:id\r\n41\r\nPATC\r\nH\r\n/api/inventory/checks/:id\r\n42 POST /api/inventory/checks/:id/balance\r\n43 POST /api/inventory/checks/:id/cancel\r\n44 GET /api/inventory/wastes"
+  },
+  {
+    "page": 163,
+    "chars": 923,
+    "last": "nventory/recipes/:menuItemId\r\nB.13. Module menu\r\nRouter menu.routes.ts gồm 13 method/path, gắn tại /api/menu. Quyền chi tiết được áp \r\ndụng qua middleware của từng route."
+  },
+  {
+    "page": 164,
+    "chars": 675,
+    "last": "/api/menu/:id/sold-out\r\nB.14. Module orders\r\nRouter orders.routes.ts gồm 31 method/path, gắn tại /api/orders. Quyền chi tiết được \r\náp dụng qua middleware của từng route."
+  },
+  {
+    "page": 165,
+    "chars": 990,
+    "last": "ates\r\n17 GET /api/orders/returns\r\n18 GET /api/orders/returns/export\r\n19 GET /api/orders/returns/:id\r\n20 POST /api/orders/returns\r\n21 GET /api/orders/payment-confirmations"
+  },
+  {
+    "page": 166,
+    "chars": 922,
+    "last": "k\r\n03\r\nPATC\r\nH\r\n/api/price-lists/:priceListId/items/:menuItemId\r\n04 POST /api/price-lists/:priceListId/import/preview\r\n05 POST /api/price-lists/:priceListId/import/commit"
+  },
+  {
+    "page": 167,
+    "chars": 1105,
+    "last": "8 POST /api/reservations/:id/deposit/reject\r\n09 POST /api/reservations/:id/deposit/refund\r\n10 POST /api/reservations/:id/reschedule\r\n11 POST /api/reservations/:id/no-show"
+  },
+  {
+    "page": 168,
+    "chars": 987,
+    "last": "es/manage/export\r\n03 GET /api/tables/manage/import/template\r\n04 POST /api/tables/manage/import/preview\r\n05 POST /api/tables/manage/import/commit\r\n06 GET /api/tables/areas"
+  },
+  {
+    "page": 169,
+    "chars": 767,
+    "last": "chers\r\nSTT Method Đường dẫn API đầy đủ\r\n01 POST /api/vouchers/validate\r\n02 GET /api/vouchers/active\r\n03 GET /api/vouchers\r\n04 GET /api/vouchers/:id\r\n05 POST /api/vouchers"
+  },
+  {
+    "page": 170,
+    "chars": 149,
+    "last": "Đồ án 3: Hệ thống quản lý nhà hàng Crispy Bite\r\n170\r\nSTT Method Đường dẫn API đầy đủ\r\n06\r\nPATC\r\nH\r\n/api/vouchers/:id\r\n07\r\nDELE\r\nTE\r\n/api/vouchers/:id"
+  },
+  {
+    "page": 171,
+    "chars": 1427,
+    "last": "u kiện\r\nTC19 Voucher hết hạn Không giảm giá\r\nTC20 BOM tiêu hao Tạo giao dịch trừ kho\r\nTC21 Nhập nguyên liệu Tăng tồn và ghi lịch sử\r\nTC22 Kiểm kê Ghi giao dịch điều chỉnh"
+  },
+  {
+    "page": 172,
+    "chars": 1270,
+    "last": " Dùng tài khoản seed hợp lệ\r\nKết quả mong đợi Nhận phiên và tab đúng vai trò\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 173,
+    "chars": 1138,
+    "last": "p.\r\nThao tác Chọn bàn, món, tùy chọn\r\nKết quả mong đợi Đơn gắn bàn và vé bếp\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 174,
+    "chars": 1114,
+    "last": "phù hợp.\r\nThao tác Lặp khóa idempotency\r\nKết quả mong đợi Không sinh hai đơn\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 175,
+    "chars": 1112,
+    "last": "ác PENDING → PREPARING → READY\r\nKết quả mong đợi Trạng thái tăng đúng thứ tự\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 176,
+    "chars": 1114,
+    "last": ".\r\nThao tác Thanh toán đơn chưa trả\r\nKết quả mong đợi Cập nhật đơn/giao dịch\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 177,
+    "chars": 1102,
+    "last": "ù hợp.\r\nThao tác ADMIN nhập lý do hợp lệ\r\nKết quả mong đợi Có audit, đơn hủy\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 178,
+    "chars": 1101,
+    "last": "yền phù hợp.\r\nThao tác Nhập mã hết hiệu lực\r\nKết quả mong đợi Không giảm giá\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 179,
+    "chars": 1086,
+    "last": "hù hợp.\r\nThao tác Chốt chênh lệch\r\nKết quả mong đợi Ghi giao dịch điều chỉnh\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 180,
+    "chars": 1138,
+    "last": "\nThao tác Chọn thời điểm không khả dụng\r\nKết quả mong đợi Thông báo xung đột\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 181,
+    "chars": 1102,
+    "last": "p.\r\nThao tác Nhân viên thao tác vào/ra\r\nKết quả mong đợi Ghi đúng phiên công\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 182,
+    "chars": 1112,
+    "last": "o tác Chi từ tài khoản đã chọn\r\nKết quả mong đợi Đúng tài khoản và giao dịch\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 183,
+    "chars": 1079,
+    "last": "ù hợp.\r\nThao tác Tạo phiếu chi hợp lệ\r\nKết quả mong đợi Giảm số dư tài khoản\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 184,
+    "chars": 1127,
+    "last": "Thao tác Chọn ngày không có dữ liệu\r\nKết quả mong đợi Hiển thị 0/rỗng hợp lý\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 185,
+    "chars": 1131,
+    "last": "ợp.\r\nThao tác Viewport 1440×900\r\nKết quả mong đợi Điều hướng và bảng rõ ràng\r\nKết quả thực tế [CẦN GHI KHI NGHIỆM THU]\r\nBằng chứng [CẦN ĐÍNH KÈM LOG/ẢNH CHỤP NẾU ÁP DỤNG]"
+  },
+  {
+    "page": 186,
+    "chars": 1621,
+    "last": "ng\r\nChèn ảnh ngay phía trên Caption tương ứng ở Chương 4 và thay dòng ghi chú bằng \r\nảnh thật. Giữ Caption có trường SEQ; xóa cụm [chưa bổ sung ảnh] sau khi đã chèn. Nếu "
+  },
+  {
+    "page": 187,
+    "chars": 457,
+    "last": " Word yêu cầu, sau đó lưu tài liệu. Các \r\nbảng đặc tả đã có đầy đủ; phần cần hoàn thiện là ảnh giao diện và kết quả thực tế/bằng \r\nchứng của các phiếu kiểm thử Phụ lục C."
+  }
+]
