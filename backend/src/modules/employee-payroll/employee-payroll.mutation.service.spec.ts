@@ -113,7 +113,7 @@ describe('EmployeePayrollMutationService', () => {
     const created = await service.create(
       { branchId, month: '2026-09', scope: 'CUSTOM', employeeIds: [workingId] }, actor, 'commission-payroll-create'
     );
-    let stored = await prismaTest.employeePayrollBatch.findUniqueOrThrow({ where: { id: created.id }, include: { lines: true, commissionAllocations: true } });
+    const stored = await prismaTest.employeePayrollBatch.findUniqueOrThrow({ where: { id: created.id }, include: { lines: true, commissionAllocations: true } });
     expect(stored).toMatchObject({ totalCommissionAmount: -12_000_000, totalCommissionDeferredDebitAmount: 100_000, totalNetAmount: 0 });
     expect(stored.lines[0]).toMatchObject({ commissionAmount: -12_000_000, commissionDeferredDebitAmount: 100_000, netAmount: 0 });
     expect(stored.commissionAllocations.map(item => [item.commissionEntryId, item.allocatedAmount])).toEqual([

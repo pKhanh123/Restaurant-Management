@@ -2,25 +2,25 @@
 
 > **Hệ Thống Đa Nền Tảng Đặt Món & Quản Lý Nhà Hàng Fast Food "CRISPY BITE"**  
 > **Kiến trúc**: Full-Stack Monorepo (React Native / Expo SDK 54 + Node.js / Express / Prisma / MySQL + Real-time Socket.io)  
-> **Trạng thái**: Đã hợp nhất thành công toàn bộ 52 commits đợt 3 từ nhánh `pKhanh` vào `main`. Tích hợp hoàn hảo Hệ sinh thái Quản trị Nhân sự HRM toàn diện (Hồ sơ nhân viên, Avatar upload, Phân ca làm việc tuần, Chấm công Kiosk độc lập & Duyệt công Admin, Động cơ tính lương tự động Snapshot Payroll, Cài đặt chính sách phiên bản hóa Versioned Policies, Đặt bàn kèm cọc Reservations, Quản lý Khách hàng & Đối tác giao hàng Delivery Partners); Full Quality Gate PASS 100%.  
-> **Cập nhật lần cuối**: 2026-10-01 08:30:00
+> **Trạng thái**: Đã hợp nhất thành công toàn bộ đợt 4 từ nhánh `pKhanh` vào `main` (Merge PR #2 `0a4dba6`). Tích hợp hoàn hảo Hệ thống Sổ Quỹ & Dòng Tiền (Cashbook Ledger) và Động Cơ Tính Hoa Hồng Nhân Viên (Employee Commission Engine); Full Quality Gate PASS 100% (1,111/1,111 tests).  
+> **Cập nhật lần cuối**: 2026-10-03 20:30:00
 
 ---
 
 ## 📈 1. TỔNG QUAN TIẾN ĐỘ (OVERALL PROGRESS)
 
 ```
-[████████████████████] 100% HOÀN THÀNH (Phase 0 đến Phase 12; Hệ sinh thái Vận hành, Quản trị QSR & Nhân sự HRM Toàn diện)
+[████████████████████] 100% HOÀN THÀNH (Phase 0 đến Phase 13; Hệ sinh thái Vận hành, Quản trị QSR, Nhân sự HRM, Sổ Quỹ & Hoa Hồng Toàn diện)
 ```
 
 ### 🧪 Bằng chứng kiểm chứng chất lượng (Verification Metrics)
-- **Backend Test Suite (Vitest)**: 105/105 test files passed (725/725 tests pass 100% — bao gồm Toàn bộ cụm Nhân sự Employees, Lịch làm việc Schedules, Chấm công Attendance Kiosk & Admin, Tính lương Payroll, Cài đặt chính sách Employee Settings, Đặt bàn Reservations, Khách hàng Customers, Đối tác giao hàng Delivery Partners, Kho NVL, BOM & COGS, Price List, Menu Bulk/Import/Export, Voucher Engine, Table Transfer, KDS Kitchen Waste, Order Idempotency, FSM, Auth RBAC, Reports & Real-time Socket).
-- **Frontend Test Suite (Vitest)**: 71/71 test files passed (247/247 tests pass 100% — bao gồm ViewModels & Screens cho Nhân sự, Lịch làm việc tuần, Chấm công Kiosk/Admin, Bảng lương, Cài đặt chính sách, Đặt bàn, Khách hàng, NCC, Phiếu nhập, Phiếu hủy, Phiếu kiểm kho, Bảng giá, Menu bulk, Notification helper, UI Tokens & Guards).
-- **Tổng Unit / Integration Tests**: **972/972 tests passed 100%** (725 backend + 247 frontend).
+- **Backend Test Suite (Vitest)**: 123/123 test files passed (822/822 tests pass 100% — bao gồm Toàn bộ cụm Sổ quỹ Cashbook, Hoa hồng nhân viên Employee Commissions, Nhân sự Employees, Lịch ca kíp Schedules, Chấm công Kiosk/Admin, Tính lương Payroll, Cài đặt chính sách Employee Settings, Đặt bàn Reservations, Khách hàng Customers, Đối tác giao hàng Delivery Partners, Kho NVL, BOM & COGS, Price List, Menu Bulk/Import/Export, Voucher Engine, Table Transfer, KDS Kitchen Waste, Order Idempotency, FSM, Auth RBAC, Reports & Real-time Socket).
+- **Frontend Test Suite (Vitest)**: 86/86 test files passed (289/289 tests pass 100% — bao gồm Sổ quỹ Cashbook, Hoa hồng nhân viên Employee Commissions, ViewModels & Screens cho Nhân sự, Lịch làm việc tuần, Chấm công Kiosk/Admin, Bảng lương, Cài đặt chính sách, Đặt bàn, Khách hàng, NCC, Phiếu nhập, Phiếu hủy, Phiếu kiểm kho, Bảng giá, Menu bulk, Notification helper, UI Tokens & Guards).
+- **Tổng Unit / Integration Tests**: **1,111/1,111 tests passed 100%** (822 backend + 289 frontend).
 - **Monorepo Typecheck (TypeScript)**: `npm run typecheck` $\rightarrow$ 0 lỗi biên dịch trên toàn bộ workspaces (`backend` + `frontend`).
 - **Monorepo Lint (ESLint)**: `npm run lint` $\rightarrow$ 0 lỗi trên toàn bộ workspaces.
 - **Expo Doctor Check**: `npm run doctor` $\rightarrow$ 18/18 checks đạt tiêu chuẩn Expo SDK 54.
-- **Database Migrations**: Đồng bộ nhất quán **25 migrations** trên cả `crispy_bite_dev` và `crispy_bite_test` kèm bảng kiểm toán `_prisma_migrations`.
+- **Database Migrations**: Đồng bộ nhất quán **33 migrations** trên cả `crispy_bite_dev` và `crispy_bite_test` kèm bảng kiểm toán `_prisma_migrations`.
 
 ### 🗂️ Tiến độ theo Giai đoạn (Phase Summary)
 | Giai đoạn | Mục tiêu cốt lõi | Trạng thái |
@@ -38,6 +38,7 @@
 | **Phase 10: Mở Rộng Nghiệp Vụ QSR** | Chuyển bàn thông minh, Báo hủy bếp, Cảnh báo NVL KDS, Voucher & Coupon Engine | **HOÀN TẤT** (100%) |
 | **Phase 11: Chuỗi Cung Ứng & Vận Hành** | Quản lý NCC, Phiếu nhập, Kiểm kho, Xuất hủy, Trả hàng nhập, Hóa đơn & Đổi trả bán | **HOÀN TẤT** (100%) |
 | **Phase 12: Quản Trị Nhân Sự (HRM)** | Hồ sơ NV, Lịch ca kíp, Chấm công Kiosk/Admin, Tính lương, Cài đặt chính sách, Đặt bàn | **HOÀN TẤT** (100%) |
+| **Phase 13: Sổ Quỹ & Hoa Hồng (Cashbook & Commissions)** | Sổ quỹ tiền mặt/ngân hàng, phiếu thu chi, hạch toán liên thông, động cơ hoa hồng NV & bảng lương | **HOÀN TẤT** (100%) |
 
 ---
 
@@ -294,7 +295,28 @@
       - `npm run typecheck`: 100% không lỗi (backend + frontend).
       - `npm run lint`: Sạch lỗi (0 error).
       - `npm run doctor`: 18/18 checks đạt tiêu chuẩn Expo SDK 54.
-      - Đã hoàn tất merge vào nhánh chính `main` và đẩy lên GitHub.
+38. **Hợp nhất Toàn diện Nhánh `pKhanh` Đợt 4 (26 commits) vào `main` — Hệ Thống Sổ Quỹ & Dòng Tiền (Cashbook Ledger) và Động Cơ Tính Hoa Hồng Nhân Viên (Employee Commission Engine)**:
+    - *Bối cảnh & Nghiệp vụ tiếp nhận*: Nhánh `origin/pKhanh` hoàn thành tích hợp đợt 4 (PR #1 từ `codex/cashbook-commission-integration` vào `pKhanh` và PR #2 vào `main` commit `0a4dba6`) bổ sung 152 files thay đổi, +9,567 dòng code:
+      1. **Hệ thống Sổ Quỹ & Dòng Tiền (Cashbook Ledger & Money Events)**: Quản lý tài khoản tiền mặt (`CASH`), tài khoản ngân hàng (`BANK`), kiểm soát số dư theo thời gian thực (Chronological Balance Enforcement); hạch toán tự động từ bán hàng POS (`POS_SALE`), đổi trả hàng (`SALES_RETURN`), nhập kho NCC (`PURCHASE_RECEIPT`), trả hàng NCC (`PURCHASE_RETURN`), thanh toán công nợ (`SUPPLIER_PAYMENT`), chi lương (`PAYROLL_PAYMENT`), cọc/hoàn cọc bàn (`RESERVATION_DEPOSIT`, `RESERVATION_REFUND`); phiếu thu/chi thủ công và in phiếu nhiệt/PDF.
+      2. **Động cơ Hoa Hồng Nhân Viên (Employee Commission Engine)**: Cấu hình chính sách hoa hồng theo món ăn hoặc doanh thu, gán nhân viên tư vấn/bán hàng theo từng dòng đơn hàng POS (`CommissionAssigneePicker`, `commissionCart`), ghi nhận doanh thu và tính hoa hồng tự động khi đơn hoàn tất, tự động khấu trừ/đảo ngược khi phát sinh trả hàng (`Sales Return`), kết chuyển phân bổ vào bảng lương định kỳ (`Payroll Allocation`), màn hình Quản trị hoa hồng (`EmployeeCommissionScreen`) và WebSocket realtime.
+    - *Xử lý Kỹ thuật & Sửa lỗi Root Cause (RCA)*:
+      1. **RCA 1: Lỗi Unique Constraint Violated trên `CashFlowCategory_code_key` trong `database.ts`**:
+         - *Nguyên nhân*: Bảng `CashFlowCategory` bị `CashVoucher` tham chiếu (`onDelete: Restrict`). Lệnh `TRUNCATE TABLE CashFlowCategory` quăng lỗi MySQL 1701 (`Cannot truncate a table referenced in a foreign key constraint`). Khối catch chuyển sang `DELETE FROM CashFlowCategory` nhưng nếu transaction trước đó bị gián đoạn, 10 bản ghi hệ thống không bị xóa sạch. Lệnh `prismaTest.cashFlowCategory.createMany()` sau đó chèn đè gây lỗi vi phạm khóa duy nhất `CashFlowCategory_code_key`.
+         - *Giải pháp*: Chuyển `cashFlowCategory` sang cơ chế `upsert` theo `code` cho 10 `systemCategories` (giống chuẩn của `financialAccount` và `cashbookSetting`), kèm lệnh `deleteMany({ where: { isSystem: false } })` để dọn sạch các danh mục tùy biến từ các test case khác.
+      2. **RCA 2: Timeout Mặc định Vitest khi Chạy Full Suite Cơ Sở Dữ Liệu Lớn**:
+         - *Nguyên nhân*: Quá trình seed dữ liệu mẫu đầy đủ trong `beforeEach` cho các test suite phức tạp (như `menu-import-api.spec.ts`) có thể tiệm cận ngưỡng `hookTimeout: 10000ms`, gây timeout và để lại transaction MySQL dở dang.
+         - *Giải pháp*: Cập nhật script test trong `backend/package.json` với `--testTimeout=30000 --hookTimeout=30000` để các bài test database integration chạy tuần tự ổn định 100%.
+      3. **RCA 3: Chuẩn Hóa TypeScript Linting (prefer-const & no-empty-object-type)**:
+         - Sửa biến `stored` từ `let` thành `const` trong `employee-payroll.mutation.service.spec.ts`.
+         - Đổi `interface CartItem extends CommissionCartLine {}` thành `type CartItem = CommissionCartLine;` trong `RestaurantContext.tsx` để tuân thủ rule `@typescript-eslint/no-empty-object-type`.
+    - *Kết quả nghiệm thu*:
+      - Backend: 123/123 test files, 822/822 tests PASS (100%).
+      - Frontend: 86/86 test files, 289/289 tests PASS (100%).
+      - Tổng cộng hệ thống: **1,111/1,111 tests PASS (100%)** (Vượt mốc 1,100 tests!).
+      - `npm run typecheck`: 100% không lỗi (backend + frontend).
+      - `npm run lint`: Sạch lỗi (0 error, 1 warning nhỏ unused).
+      - `npm run doctor`: 18/18 checks đạt tiêu chuẩn Expo SDK 54.
+      - 33 migrations Prisma đã deploy và đồng bộ vào `_prisma_migrations` trên cả `crispy_bite_dev` và `crispy_bite_test`.
 
 ---
 *Tệp tiến độ được tối ưu hóa tinh gọn, lưu trữ các quy chuẩn kiến trúc và tiến độ cập nhật phục vụ phát triển liên tục.*

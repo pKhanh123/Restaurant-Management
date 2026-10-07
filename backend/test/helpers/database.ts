@@ -147,11 +147,33 @@ export async function truncateAllTables() {
     ['REVERSAL_PAYMENT', 'Đảo phiếu thu', 'PAYMENT', false],
     ['PAYROLL_PAYMENT', 'Chi trả lương', 'PAYMENT', false]
   ] as const;
-  await prismaTest.cashFlowCategory.createMany({
-    data: systemCategories.map(([code, name, direction, affectsBusinessResultDefault]) => ({
-      code, name, direction, affectsBusinessResultDefault, isSystem: true, isActive: true, updatedAt: baselineAt
-    }))
-  });
+  try {
+    await prismaTest.cashFlowCategory.deleteMany({ where: { isSystem: false } });
+  } catch {
+    // Ignore if table not yet migrated
+  }
+  for (const [code, name, direction, affectsBusinessResultDefault] of systemCategories) {
+    await prismaTest.cashFlowCategory.upsert({
+      where: { code },
+      create: {
+        code,
+        name,
+        direction,
+        affectsBusinessResultDefault,
+        isSystem: true,
+        isActive: true,
+        updatedAt: baselineAt
+      },
+      update: {
+        name,
+        direction,
+        affectsBusinessResultDefault,
+        isSystem: true,
+        isActive: true,
+        updatedAt: baselineAt
+      }
+    });
+  }
 }
 
 export async function seedEmployeeSettingsBaselines(branchId: number, createdByUserId?: number) {

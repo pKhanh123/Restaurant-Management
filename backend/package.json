@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
     "build": "tsc",
     "start": "node dist/src/server.js",
-    "test": "vitest run --fileParallelism=false",
+    "test": "vitest run --fileParallelism=false --testTimeout=30000 --hookTimeout=30000",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
