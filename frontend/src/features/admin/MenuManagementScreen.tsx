@@ -182,7 +182,7 @@ export const MenuManagementScreen: React.FC = () => {
   const [isCategorySaving, setIsCategorySaving] = useState(false);
   const [isCategoryReordering, setIsCategoryReordering] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const isMobile = width < 768;
+  const isMobile = width < 1000;
   const switchAppearance = {
     style: styles.switchTarget,
     thumbColor: theme.surfaceBase,
@@ -1617,9 +1617,9 @@ const styles = StyleSheet.create({
   toolbarMobile: { padding: spacing.md },
   commandBar: { alignItems: 'center', flexDirection: 'row', gap: spacing.md },
   commandBarMobile: { alignItems: 'stretch', flexDirection: 'column' },
-  headerActions: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  headerActions: { alignItems: 'center', flexDirection: 'row', flexShrink: 1, flexWrap: 'wrap', gap: spacing.sm, minWidth: 0 },
   searchBox: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flex: 1, flexDirection: 'row', gap: spacing.sm, minHeight: spacing.touchTargetMobile, maxWidth: 560, paddingLeft: spacing.md, paddingRight: spacing.xs },
-  searchInput: { flex: 1, fontFamily: typography.families.body, fontSize: typography.sizes.sm, minHeight: spacing.touchTargetMobile },
+  searchInput: { flex: 1, fontFamily: typography.families.body, fontSize: typography.sizes.sm, minHeight: spacing.touchTargetMobile, minWidth: 0 },
   iconButton: { alignItems: 'center', borderRadius: radii.md, height: spacing.touchTargetMobile, justifyContent: 'center', width: spacing.touchTargetMobile },
   toolbarActions: { alignItems: 'center', flexDirection: 'row', gap: spacing.sm },
   managementBody: { flex: 1, flexDirection: 'row', gap: spacing.md, padding: spacing.md },

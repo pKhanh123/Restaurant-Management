@@ -85,13 +85,13 @@ export const Field: React.FC<FieldProps> = ({
 
 const styles = StyleSheet.create({
   container: { gap: spacing.xs },
-  label: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm },
+  label: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm, lineHeight: typography.lineHeights.sm },
   input: {
     borderRadius: radii.md,
     borderWidth: 1,
     fontFamily: typography.families.body,
     fontSize: typography.sizes.md,
-    minHeight: 44,
+    minHeight: spacing.touchTargetMobile,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm
   },

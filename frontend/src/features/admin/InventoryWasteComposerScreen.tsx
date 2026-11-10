@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   linesPanel: { flex: 1, minWidth: 0, overflow: 'hidden', padding: spacing.md },
   sidePanel: { gap: spacing.sm, width: 330 },
   sidePanelNarrow: { width: '100%' },
-  panelHeader: { alignItems: 'center', flexDirection: 'row', gap: spacing.md, justifyContent: 'space-between', marginBottom: spacing.md },
+  panelHeader: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md, justifyContent: 'space-between', marginBottom: spacing.md },
   panelTitle: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.lg },
   muted: { fontFamily: typography.families.body, fontSize: typography.sizes.sm },
   sku: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm },
@@ -377,9 +377,9 @@ const styles = StyleSheet.create({
   recent: { borderRadius: radii.sm, gap: spacing.sm, minHeight: 120, padding: spacing.md },
   recentRow: { borderBottomColor: 'rgba(128,128,128,0.2)', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: spacing.xs },
   validationHint: { fontFamily: typography.families.bodyMedium, fontSize: typography.sizes.sm },
-  footerActions: { flexDirection: 'row', gap: spacing.sm },
+  footerActions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   loading: { alignItems: 'center', flex: 1, gap: spacing.md, justifyContent: 'center' },
   importCard: { gap: spacing.sm, padding: spacing.md },
   errorRow: { fontFamily: typography.families.body, fontSize: typography.sizes.sm },
-  importActions: { flexDirection: 'row', gap: spacing.sm, justifyContent: 'flex-end' }
+  importActions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'flex-end' }
 });

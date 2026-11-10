@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { LucideIcon } from 'lucide-react-native';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { radii, typography } from '../theme';
 import { AppIcon } from './AppIcon';
@@ -49,6 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <Pressable
+      {...(Platform.OS === 'web' && { dataSet: { interaction: 'button' } })}
       testID={testID}
       accessibilityRole="button"
       accessibilityLabel={loading ? `${label}, đang xử lý` : label}
@@ -64,7 +65,7 @@ export const Button: React.FC<ButtonProps> = ({
           minHeight: metrics.minHeight,
           paddingHorizontal: metrics.horizontalPadding
         },
-        focused && { borderColor: theme.focusRing, borderWidth: 3 },
+        focused && { borderColor: theme.focusRing },
         isDisabled && styles.disabled
       ]}
     >
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: 'transparent',
     borderRadius: radii.md,
-    borderWidth: 1,
+    borderWidth: 2,
     justifyContent: 'center'
   },
   content: { alignItems: 'center', flexDirection: 'row', gap: 8, justifyContent: 'center' },

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Pressable, SafeAreaView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import {
   BarChart3,
   ChefHat,
@@ -85,9 +85,10 @@ interface NavigationItemsProps {
   activeTab: TabKey;
   onSelect: (tab: TabKey) => void;
   vertical?: boolean;
+  scrollable?: boolean;
 }
 
-const NavigationItems: React.FC<NavigationItemsProps> = ({ tabs, activeTab, onSelect, vertical = false }) => {
+const NavigationItems: React.FC<NavigationItemsProps> = ({ tabs, activeTab, onSelect, vertical = false, scrollable = false }) => {
   const { theme } = useTheme();
 
   return (
@@ -104,6 +105,7 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({ tabs, activeTab, onSe
             onPress={() => onSelect(tab.key)}
             style={({ pressed }) => [
               vertical ? styles.railItem : styles.tabItem,
+              scrollable && styles.scrollableTabItem,
               { backgroundColor: active ? theme.interactiveSecondary : pressed ? theme.interactiveQuiet : 'transparent', borderColor: 'transparent' },
               active && { borderColor: theme.primary }
             ]}
@@ -189,7 +191,13 @@ export const RoleTabs: React.FC = () => {
 
       {isMobile && tabs.length > 1 && (
         <View style={[styles.bottomNav, { backgroundColor: theme.surfaceBase, borderTopColor: theme.borderSubtle }]}>
-          <NavigationItems tabs={tabs} activeTab={selected.key} onSelect={setActiveTab} />
+          {tabs.length > 5 ? (
+            <ScrollView horizontal>
+              <NavigationItems tabs={tabs} activeTab={selected.key} onSelect={setActiveTab} scrollable />
+            </ScrollView>
+          ) : (
+            <NavigationItems tabs={tabs} activeTab={selected.key} onSelect={setActiveTab} />
+          )}
         </View>
       )}
     </SafeAreaView>
@@ -216,6 +224,7 @@ const styles = StyleSheet.create({
   horizontalNav: { flexDirection: 'row', gap: spacing.xs },
   railItem: { alignItems: 'center', borderLeftWidth: 3, borderRadius: radii.sm, flexDirection: 'row', gap: spacing.sm, minHeight: 48, paddingHorizontal: spacing.md },
   tabItem: { alignItems: 'center', borderBottomWidth: 3, borderRadius: radii.sm, flex: 1, gap: 2, justifyContent: 'center', minHeight: 54, paddingHorizontal: spacing.xs, paddingVertical: spacing.xs },
+  scrollableTabItem: { flexGrow: 0, flexBasis: 'auto', minWidth: 76, paddingHorizontal: spacing.sm },
   navLabel: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.xs },
   bottomNav: { borderTopWidth: 1, paddingHorizontal: spacing.xs },
 });

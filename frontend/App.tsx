@@ -17,6 +17,7 @@ import { ToastProvider } from './src/contexts/ToastContext';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import { RestaurantProvider } from './src/contexts/RestaurantContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
+import { WebPresentation } from './src/ui/WebPresentation';
 
 function AppContent() {
   const { isDark, setRoleTheme } = useTheme();
@@ -28,6 +29,7 @@ function AppContent() {
 
   return (
     <>
+      <WebPresentation />
       <StatusBar style={isDark ? 'light' : 'dark'} />
       <RootNavigator />
     </>

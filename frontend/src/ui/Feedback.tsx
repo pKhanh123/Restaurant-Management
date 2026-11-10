@@ -67,10 +67,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 };
 
 const styles = StyleSheet.create({
-  alert: { borderRadius: radii.md, borderWidth: 1, gap: 2, padding: spacing.md },
+  alert: { borderRadius: radii.md, borderWidth: 1, gap: spacing.xs, padding: spacing.md },
   alertTitle: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm },
   alertMessage: { fontFamily: typography.families.body, fontSize: typography.sizes.sm, lineHeight: typography.lineHeights.sm },
-  emptyState: { alignItems: 'center', gap: spacing.sm, padding: spacing.xxl },
+  emptyState: { alignItems: 'center', gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: spacing.xxl },
   emptyTitle: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.lg, textAlign: 'center' },
   emptyDescription: { fontFamily: typography.families.body, fontSize: typography.sizes.sm, lineHeight: typography.lineHeights.sm, maxWidth: 360, textAlign: 'center' },
   action: { marginTop: spacing.sm }

@@ -176,9 +176,9 @@ export const EmployeeScheduleScreen: React.FC<EmployeeScheduleScreenProps> = ({ 
         <AppIcon icon={Search} color={theme.textSecondary} size={18} />
         <TextInput testID="schedule-search" accessibilityLabel="Tìm kiếm nhân viên" value={searchText} onChangeText={setSearchText} placeholder="Tìm kiếm nhân viên" placeholderTextColor={theme.textSecondary} style={[styles.searchInput, { color: theme.textPrimary }]} />
       </View>
-      <View style={styles.weekControls}>
+      <View style={[styles.weekControls, compact && styles.weekControlsCompact]}>
         <Pressable testID="schedule-week-previous" accessibilityRole="button" accessibilityLabel="Tuần trước" onPress={() => { setWeekStart(value => addWeeksToWeekStart(value, -1)); setPage(1); }} style={[styles.iconButton, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}><AppIcon icon={ChevronLeft} color={theme.textPrimary} size={18} /></Pressable>
-        <View style={[styles.weekLabelWrap, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}><AppIcon icon={CalendarDays} color={theme.primary} size={16} /><Text style={[styles.weekLabel, { color: theme.textPrimary }]}>{weekLabel}</Text></View>
+        <View style={[styles.weekLabelWrap, compact && styles.weekLabelWrapCompact, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}><AppIcon icon={CalendarDays} color={theme.primary} size={16} /><Text style={[styles.weekLabel, { color: theme.textPrimary }]} numberOfLines={1}>{weekLabel}</Text></View>
         <Pressable testID="schedule-week-next" accessibilityRole="button" accessibilityLabel="Tuần sau" onPress={() => { setWeekStart(value => addWeeksToWeekStart(value, 1)); setPage(1); }} style={[styles.iconButton, { backgroundColor: theme.surfaceBase, borderColor: theme.borderSubtle }]}><AppIcon icon={ChevronRight} color={theme.textPrimary} size={18} /></Pressable>
         <Button testID="schedule-week-current" variant="secondary" label="Tuần này" onPress={() => { setWeekStart(getMondayWeekStart(getBusinessDate())); setPage(1); }} />
       </View>
@@ -302,8 +302,10 @@ const styles = StyleSheet.create({
   searchWrapCompact: { maxWidth: undefined, minWidth: undefined, width: '100%' },
   searchInput: { flex: 1, fontFamily: typography.families.body, fontSize: typography.sizes.sm, height: 42, outlineStyle: 'none' } as any,
   weekControls: { alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
+  weekControlsCompact: { width: '100%' },
   iconButton: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, height: 44, justifyContent: 'center', width: 40 },
   weekLabelWrap: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, height: 44, paddingHorizontal: spacing.md },
+  weekLabelWrapCompact: { flexShrink: 1 },
   weekLabel: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm },
   viewMode: { alignItems: 'center', borderRadius: radii.md, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, minHeight: 44, paddingHorizontal: spacing.md },
   viewModeText: { fontFamily: typography.families.bodyMedium, fontSize: typography.sizes.sm },

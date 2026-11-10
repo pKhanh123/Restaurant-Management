@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SlidersHorizontal, UtensilsCrossed } from 'lucide-react-native';
 import { MenuItemDto } from '../../api/contracts';
 import { resolveImageUrl } from '../../api/config';
@@ -15,6 +15,8 @@ interface Props {
 
 export const MenuItemCard: React.FC<Props> = ({ item, onPress }) => {
   const { theme } = useTheme();
+  const [failedImageUrl, setFailedImageUrl] = useState<string>();
+  const imageUrl = item.imageUrl ? resolveImageUrl(item.imageUrl) : undefined;
   const formattedPrice = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND'
@@ -25,6 +27,7 @@ export const MenuItemCard: React.FC<Props> = ({ item, onPress }) => {
 
   return (
     <Pressable
+      {...(Platform.OS === 'web' && { dataSet: { interaction: 'menu-card' } })}
       testID={`menu-item-${item.id}`}
       accessibilityRole="button"
       accessibilityLabel={`${item.name}, ${formattedPrice}${!item.isAvailable ? ', hết hàng' : isOutOfStock ? ', hết tồn' : ''}`}
@@ -41,8 +44,8 @@ export const MenuItemCard: React.FC<Props> = ({ item, onPress }) => {
       ]}
     >
       <View style={[styles.media, { backgroundColor: theme.surfaceSunken }]}>
-        {item.imageUrl ? (
-          <Image source={{ uri: resolveImageUrl(item.imageUrl) || '' }} style={{ height: '100%', width: '100%' }} resizeMode="cover" />
+        {imageUrl && imageUrl !== failedImageUrl ? (
+          <Image source={{ uri: imageUrl }} onError={() => setFailedImageUrl(imageUrl)} style={styles.image} resizeMode="cover" />
         ) : (
           <AppIcon icon={UtensilsCrossed} color={theme.textSecondary} size={28} />
         )}
@@ -72,7 +75,8 @@ export const MenuItemCard: React.FC<Props> = ({ item, onPress }) => {
 const styles = StyleSheet.create({
   card: { borderRadius: radii.md, borderWidth: 1, flex: 1, marginBottom: spacing.md, minHeight: 164, overflow: 'hidden' },
   disabled: { opacity: 0.55 },
-  media: { alignItems: 'center', height: 64, justifyContent: 'center' },
+  media: { alignItems: 'center', height: 88, justifyContent: 'center', overflow: 'hidden' },
+  image: { height: '100%', width: '100%' },
   content: { flex: 1, gap: spacing.md, justifyContent: 'space-between', padding: spacing.md },
   copy: { gap: spacing.xs },
   name: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.md, lineHeight: typography.lineHeights.md },

@@ -985,16 +985,18 @@ const styles = StyleSheet.create({
   dateNavButton: {
     alignItems: 'center',
     borderRadius: radii.md,
-    height: 38,
+    height: spacing.touchTargetMobile,
     justifyContent: 'center',
-    width: 38
+    width: spacing.touchTargetMobile
   },
   dateDisplayTrigger: {
     alignItems: 'center',
     borderRadius: radii.md,
     borderWidth: 1,
-    gap: 2,
-    minWidth: 200,
+    flexShrink: 1,
+    gap: spacing.xs,
+    minWidth: 0,
+    minHeight: spacing.touchTargetMobile,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs
   },

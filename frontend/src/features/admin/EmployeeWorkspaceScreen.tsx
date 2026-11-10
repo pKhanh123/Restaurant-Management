@@ -103,8 +103,8 @@ export const EmployeeWorkspaceScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, minHeight: 0 },
-  subnav: { alignItems: 'stretch', borderBottomWidth: 1, flexDirection: 'row', paddingHorizontal: spacing.lg },
-  tab: { alignItems: 'center', borderBottomColor: 'transparent', borderBottomWidth: 3, borderTopLeftRadius: radii.sm, borderTopRightRadius: radii.sm, flexDirection: 'row', gap: spacing.sm, justifyContent: 'center', minHeight: 52, paddingHorizontal: spacing.lg },
+  subnav: { alignItems: 'stretch', borderBottomWidth: 1, flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: spacing.lg },
+  tab: { alignItems: 'center', borderBottomColor: 'transparent', borderBottomWidth: 3, borderTopLeftRadius: radii.sm, borderTopRightRadius: radii.sm, flexDirection: 'row', gap: spacing.sm, justifyContent: 'center', minHeight: spacing.touchTargetMobile, paddingHorizontal: spacing.md },
   tabText: { fontFamily: typography.families.bodySemibold, fontSize: typography.sizes.sm },
   content: { flex: 1, minHeight: 0 }
 });

@@ -879,7 +879,7 @@ export const TableOrderScreen: React.FC<Props> = ({ tableNumber = 4, qrCodeToken
             <View>
               <Text accessibilityRole="header" style={[styles.screenTitle, { color: theme.textPrimary }]}>Thực đơn</Text>
               <Text style={[styles.menuDescription, { color: theme.textSecondary }]}>
-                {liveOrder ? 'Chọn thêm món bạn muốn gọi thêm vào bàn.' : 'Chọn món bạn muốn gọi tại bàn.'}
+                {liveOrder ? 'Chọn món để gọi thêm cho bàn.' : 'Chọn món rồi kiểm tra giỏ hàng trước khi gửi.'}
               </Text>
             </View>
           </View>
@@ -933,7 +933,7 @@ export const TableOrderScreen: React.FC<Props> = ({ tableNumber = 4, qrCodeToken
                   </View>
                   <View style={styles.cartBarCopyText}>
                     <Text style={[styles.cartTitle, { color: theme.textPrimary }]}>Xem giỏ hàng ({cartItemCount})</Text>
-                    <Text style={[styles.cartMeta, { color: theme.textSecondary }]}>Chạm để xem món & sửa</Text>
+                    <Text style={[styles.cartMeta, { color: theme.textSecondary }]}>Kiểm tra món và số lượng</Text>
                   </View>
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>

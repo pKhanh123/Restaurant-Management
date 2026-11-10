@@ -65,7 +65,10 @@ export const LoginScreen: React.FC = () => {
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.surfaceCanvas }]}>
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={[styles.scrollContent, isDesktop && styles.scrollContentDesktop]} keyboardShouldPersistTaps="handled">
-          <View style={[styles.composition, isDesktop && styles.compositionDesktop]}>
+          <View
+            {...(Platform.OS === 'web' && { dataSet: { enter: 'login' } })}
+            style={[styles.composition, isDesktop && styles.compositionDesktop]}
+          >
             <View
               style={[
                 styles.brandPanel,
@@ -77,8 +80,8 @@ export const LoginScreen: React.FC = () => {
                 <BrandMark size="large" />
               </View>
               {isDesktop && <View style={styles.brandMessage}>
-                <Text style={[styles.brandHeading, { color: isDark ? theme.textPrimary : theme.textInverse }]}>Ca làm việc bắt đầu tại đây.</Text>
-                <Text style={[styles.brandBody, { color: isDark ? theme.textSecondary : theme.textInverse }]}>Một màn hình chung cho quầy, bếp và quản trị nhà hàng.</Text>
+                <Text style={[styles.brandHeading, { color: isDark ? theme.textPrimary : theme.textInverse }]}>Quầy, bếp và quản trị</Text>
+                <Text style={[styles.brandBody, { color: isDark ? theme.textSecondary : theme.textInverse }]}>Bán hàng, nhận món và theo dõi hoạt động của nhà hàng Crispy Bite.</Text>
               </View>}
               {isDesktop && <View style={[styles.shiftStatus, { borderColor: isDark ? theme.borderStrong : theme.textInverse }]}>
                 <View style={[styles.statusDot, { backgroundColor: isDark ? theme.success : theme.textInverse }]} />
@@ -86,7 +89,7 @@ export const LoginScreen: React.FC = () => {
               </View>}
             </View>
 
-            <Surface level="base" style={[styles.formPanel, isDesktop && styles.formPanelDesktop]}>
+            <Surface level="raised" style={[styles.formPanel, isDesktop && styles.formPanelDesktop]}>
               <View style={styles.formHeader}>
                 <View style={styles.titleGroup}>
                   <Text accessibilityRole="header" style={[styles.title, { color: theme.textPrimary }]}>Đăng nhập</Text>
@@ -224,10 +227,10 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   scrollContent: { flexGrow: 1, justifyContent: 'center', padding: spacing.md },
   scrollContentDesktop: { padding: spacing.xxl },
-  composition: { alignSelf: 'center', maxWidth: 1080, width: '100%' },
-  compositionDesktop: { flexDirection: 'row', minHeight: 640 },
-  brandPanel: { borderRadius: radii.md, gap: spacing.xl, padding: spacing.xl },
-  brandPanelDesktop: { borderBottomRightRadius: 0, borderTopRightRadius: 0, justifyContent: 'space-between', padding: spacing.xxl, width: '40%' },
+  composition: { alignSelf: 'center', gap: spacing.md, maxWidth: 540, width: '100%' },
+  compositionDesktop: { alignItems: 'stretch', flexDirection: 'row', gap: spacing.lg, maxWidth: 1080 },
+  brandPanel: { borderRadius: radii.lg, gap: spacing.xl, padding: spacing.lg },
+  brandPanelDesktop: { flex: 2, justifyContent: 'space-between', minWidth: 0, padding: spacing.xxl },
   brandPlate: { alignSelf: 'flex-start', borderRadius: radii.md, padding: spacing.sm },
   brandMessage: { gap: spacing.sm, maxWidth: 360 },
   brandHeading: { fontFamily: typography.families.operationalBold, fontSize: typography.sizes.xxl, lineHeight: typography.lineHeights.xxl },
@@ -235,8 +238,8 @@ const styles = StyleSheet.create({
   shiftStatus: { alignItems: 'center', alignSelf: 'flex-start', borderRadius: radii.sm, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, minHeight: 44, paddingHorizontal: spacing.md },
   statusDot: { borderRadius: radii.pill, height: 8, width: 8 },
   shiftText: { fontFamily: typography.families.bodyMedium, fontSize: typography.sizes.sm },
-  formPanel: { gap: spacing.lg, marginTop: spacing.md, padding: spacing.xl },
-  formPanelDesktop: { borderBottomLeftRadius: 0, borderLeftWidth: 0, borderTopLeftRadius: 0, justifyContent: 'center', marginTop: 0, paddingHorizontal: 56, width: '60%' },
+  formPanel: { borderRadius: radii.lg, gap: spacing.lg, padding: spacing.lg },
+  formPanelDesktop: { flex: 3, justifyContent: 'center', minWidth: 0, padding: spacing.xxl },
   formHeader: { alignItems: 'flex-start', flexDirection: 'row', gap: spacing.md, justifyContent: 'space-between' },
   headerActions: { flexDirection: 'row', gap: spacing.xs },
   titleGroup: { flex: 1, gap: spacing.xs },

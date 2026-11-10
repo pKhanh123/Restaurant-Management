@@ -445,7 +445,7 @@ const LegacyInventoryOperations: React.FC<{ initialTab?: ActiveTab; initialMenuI
               { color: activeTab === 'inventory' ? theme.primary : theme.textSecondary }
             ]}
           >
-            Kho Nguyên Vật Liệu
+            Nguyên vật liệu
           </Text>
         </Pressable>
 
@@ -467,7 +467,7 @@ const LegacyInventoryOperations: React.FC<{ initialTab?: ActiveTab; initialMenuI
               { color: activeTab === 'bom' ? theme.primary : theme.textSecondary }
             ]}
           >
-            Định Lượng Món (BOM Recipe)
+            Định lượng món
           </Text>
         </Pressable>
       </View>
@@ -1351,6 +1351,7 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     borderBottomWidth: 1,
     paddingHorizontal: spacing.lg,
     backgroundColor: 'transparent'
@@ -1358,9 +1359,12 @@ const styles = StyleSheet.create({
   tabButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    borderBottomColor: 'transparent',
+    borderBottomWidth: 3,
+    gap: spacing.sm,
+    minHeight: spacing.touchTargetMobile,
     paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg
+    paddingHorizontal: spacing.md
   },
   tabButtonText: {
     fontFamily: typography.families.bodySemibold,

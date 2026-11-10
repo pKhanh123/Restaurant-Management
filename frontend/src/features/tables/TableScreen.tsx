@@ -984,7 +984,7 @@ const styles = StyleSheet.create({
   emptyFilter: { width: '100%' },
   tableCard: {
     borderLeftWidth: 4,
-    borderRadius: radii.md,
+    borderRadius: radii.lg,
     borderWidth: 1,
     gap: spacing.sm,
     minHeight: 184,
@@ -1005,7 +1005,7 @@ const styles = StyleSheet.create({
   orderCount: { fontFamily: typography.families.body, fontSize: typography.sizes.xs },
   orderTotal: {
     fontFamily: typography.families.operationalBold,
-    fontSize: typography.sizes.lg,
+    fontSize: typography.sizes.xl,
     fontVariant: [...typography.numeric.fontVariant]
   },
   elapsedRow: { alignItems: 'center', flexDirection: 'row', gap: spacing.xs },
