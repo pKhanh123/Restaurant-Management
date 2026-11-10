@@ -28,8 +28,11 @@ export const DeliveryPartnersScreen: React.FC = () => {
   const deactivate = async (partner: DeliveryPartnerDto) => { try { await updateDeliveryPartnerApi(token, partner.id, { isActive: !partner.isActive }); await load(); } catch (e: any) { setError(e.message || 'Không thể cập nhật trạng thái'); } };
   const exportCsv = async () => { try { const blob = await downloadDeliveryPartnersApi(token, query); if (!triggerDownload(blob)) setError('Xuất file hiện hỗ trợ trên giao diện Web.'); } catch (e: any) { setError(e.message || 'Không thể xuất file'); } };
   const items = data?.items ?? [];
+  const headerActions = <View style={[styles.actions, compact && { width: '100%', flexWrap: 'wrap' }]}><Button variant="secondary" label="Import" onPress={() => setImportOpen(true)} /><Button variant="secondary" label="Xuất XLSX" icon={Download} onPress={() => void exportCsv()} /><Button variant="primary" label="Đối tác giao hàng" icon={Plus} onPress={openCreate} /></View>;
+
   return <View style={[styles.screen, { backgroundColor: theme.surfaceCanvas }]}>
-    <ScreenHeader title="Đối tác giao hàng" description="Quản lý đơn vị giao nhận và theo dõi phí giao từ các đơn hoàn thành" leading={<View style={[styles.mark, { backgroundColor: theme.interactiveSecondary }]}><AppIcon icon={Truck} color={theme.primary} /></View>} actions={<View style={styles.actions}><Button variant="secondary" label="Import" onPress={() => setImportOpen(true)} /><Button variant="secondary" label="Xuất XLSX" icon={Download} onPress={() => void exportCsv()} /><Button variant="primary" label="Đối tác giao hàng" icon={Plus} onPress={openCreate} /></View>} />
+    <ScreenHeader title="Đối tác giao hàng" description="Quản lý đơn vị giao nhận và theo dõi phí giao từ các đơn hoàn thành" leading={<View style={[styles.mark, { backgroundColor: theme.interactiveSecondary }]}><AppIcon icon={Truck} color={theme.primary} /></View>} actions={compact ? undefined : headerActions} />
+    {compact && headerActions}
     {error && <InlineAlert title="Không thể hoàn tất thao tác" message={error} />}
     <View style={[styles.layout, compact && styles.layoutCompact]}>
       <Surface level="base" style={[styles.filters, compact && styles.filtersCompact, { borderColor: theme.borderSubtle }]}>

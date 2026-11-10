@@ -964,7 +964,7 @@ export const TableScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  workspaceTabs: { borderBottomWidth: 1, flexDirection: 'row', gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
+  workspaceTabs: { borderBottomWidth: 1, flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
   container: { flex: 1 },
   header: { borderBottomWidth: 1, paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
   filterToolbar: { borderBottomWidth: 1 },
