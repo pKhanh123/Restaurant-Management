@@ -11,6 +11,7 @@ import { Surface } from '../../ui/Surface';
 import { EndOfDayReportFilters } from './EndOfDayReportFilters';
 import { EndOfDayReportView } from './EndOfDayReportView';
 import { useEndOfDayReport } from './useEndOfDayReport';
+import { escapeHtml } from '../../lib/pdfExport';
 
 export interface EndOfDayReportScreenProps {
   snapshot?: EndOfDayReportResponse;
@@ -68,6 +69,10 @@ export const EndOfDayReportScreen = ({ snapshot: suppliedSnapshot, initialFilter
     style.textContent = `body{margin:16px;color:#24211F;background:#fff;font-family:Arial,sans-serif} *{overflow:visible!important;max-height:none!important} [role="button"]{display:none!important} @page{size:A4 ${snapshot.metadata.view === 'HORIZONTAL' ? 'landscape' : 'portrait'};margin:12mm}
       @media print{
         body{margin:0}
+        .report-print-heading{display:flex;align-items:center;gap:12px;margin:0 0 22px;padding:0 0 14px;border-bottom:2px solid #B42318}
+        .report-print-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#B42318;color:#fff;font-weight:800;letter-spacing:-.08em}
+        .report-print-brand{font-size:14pt;font-weight:800;letter-spacing:.025em}.report-print-detail{color:#706962;font-size:8pt;margin-top:2px}
+        .report-print-period{margin-left:auto;text-align:right;color:#B42318;font-size:8pt;font-weight:700}
         [data-testid="report-sheet"]{width:100%!important;max-width:none!important;padding:0!important}
         [data-testid="report-detail-scroll"],[data-testid="report-detail-scroll"]>div{display:block!important;width:100%!important;min-width:0!important}
         [role="table"]{display:table!important;width:100%!important;table-layout:fixed;border-collapse:collapse}
@@ -77,6 +82,11 @@ export const EndOfDayReportScreen = ({ snapshot: suppliedSnapshot, initialFilter
         [role="columnheader"],[role="cell"]{display:table-cell!important;width:10%!important;min-width:0!important;padding:4px!important;font-size:8pt!important;line-height:1.35!important;overflow-wrap:anywhere;vertical-align:top}
       }`;
     const printedSurface = surface.cloneNode(true) as Element;
+    const concernLabels = { SALES: 'Bán hàng', CASHFLOW: 'Thu chi', GOODS: 'Hàng hóa', CANCELLED_ITEMS: 'Món hủy', SUMMARY: 'Tổng hợp' };
+    const reportHeading = printDocument.createElement('header');
+    reportHeading.className = 'report-print-heading';
+    reportHeading.innerHTML = `<span class="report-print-mark">CB</span><div><div class="report-print-brand">CRISPY BITE</div><div class="report-print-detail">Báo cáo cuối ngày - ${escapeHtml(snapshot.metadata.operatingScope.name)}</div></div><div class="report-print-period">${concernLabels[snapshot.metadata.concern]}<div class="report-print-detail">${escapeHtml(snapshot.metadata.date)} | ${escapeHtml(snapshot.metadata.from.slice(11, 16))}-${escapeHtml(snapshot.metadata.to.slice(11, 16))}</div></div>`;
+    printedSurface.prepend(reportHeading);
     // Native header groups repeat across printed pages; the scrolling screen table stays intact.
     for (const sourceTable of Array.from(printedSurface.querySelectorAll('[role="table"]'))) {
       const table = printDocument.createElement('table');
@@ -106,7 +116,7 @@ export const EndOfDayReportScreen = ({ snapshot: suppliedSnapshot, initialFilter
   return <ScrollView testID="reports-end-of-day-shell" style={{ backgroundColor: theme.surfaceCanvas }} contentContainerStyle={styles.container}>
     <ScreenHeader title="Báo cáo cuối ngày" description="Tổng hợp hoạt động trong ngày tại Nhà hàng chính." />
     <View style={styles.actions}>
-      <Button testID="report-print" variant="secondary" label="In" disabled={!snapshot} onPress={printReport} />
+      <Button testID="report-print" variant="secondary" label="In / lưu PDF" disabled={!snapshot} onPress={printReport} />
       <Button testID="report-export" variant="secondary" label="Xuất XLSX" disabled={!snapshot} loading={exporting} onPress={exportReport} />
       <Button testID="report-refresh" variant="quiet" label="Làm mới" onPress={report.refresh} />
     </View>

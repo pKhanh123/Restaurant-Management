@@ -7,6 +7,8 @@ import { OrderInvoiceExportRow } from './order-invoice.export';
 const invoiceInclude = Prisma.validator<Prisma.OrderInclude>()({
   items: { include: { menuItem: { select: { sku: true, name: true } } }, orderBy: { id: 'asc' } },
   table: { select: { tableNumber: true } },
+  customer: { select: { name: true } },
+  deliveryPartner: { select: { name: true } },
   createdByUser: { select: { id: true, name: true } }
 });
 type InvoiceRecord = Prisma.OrderGetPayload<{ include: typeof invoiceInclude }>;
@@ -19,11 +21,13 @@ async function getPrisma(): Promise<PrismaClient> {
 
 export type OrderInvoiceListItem = {
   id: number; code: string; createdAt: Date; orderType: OrderType; status: OrderStatus; paymentStatus: PaymentStatus;
-  paymentMethod: string | null; customerName: null; tableNumber: number | null;
-  totalGoods: number; discountAmount: 0; totalAfterDiscount: number; vatAmount: number; finalAmount: number; paidAmount: number; itemCount: number;
+  paymentMethod: string | null; customerName: string | null; tableNumber: number | null;
+  totalGoods: number; discountAmount: number; totalAfterDiscount: number; vatAmount: number; finalAmount: number; paidAmount: number; itemCount: number;
 };
 
 export type OrderInvoiceDetail = OrderInvoiceListItem & {
+  deliveryFee: number; deliveryAddress: string | null; deliveryPartnerName: string | null; buzzerNumber: number | null;
+  voucherCode: string | null; voidReason: string | null;
   paidAt: Date | null; notes: string | null; createdByUser: { id: number; name: string } | null;
   items: Array<{ id: number; menuItemId: number; sku: string; menuItemName: string; quantity: number; unitPrice: number; subtotal: number; notes: string | null; selectedModifiers: Prisma.JsonValue | null }>;
 };
@@ -60,16 +64,19 @@ function whereFromQuery(query: OrderInvoiceQuery): Prisma.OrderWhereInput {
 function mapListItem(order: InvoiceRecord): OrderInvoiceListItem {
   return {
     id: order.id, code: order.code, createdAt: order.createdAt, orderType: order.orderType, status: order.status,
-    paymentStatus: order.paymentStatus, paymentMethod: order.paymentMethod, customerName: null,
-    tableNumber: order.table?.tableNumber ?? null, totalGoods: order.totalAmount, discountAmount: 0,
-    totalAfterDiscount: order.totalAmount, vatAmount: order.vatAmount, finalAmount: order.finalAmount,
+    paymentStatus: order.paymentStatus, paymentMethod: order.paymentMethod, customerName: order.customer?.name ?? null,
+    tableNumber: order.table?.tableNumber ?? null, totalGoods: order.totalAmount, discountAmount: order.discountAmount,
+    totalAfterDiscount: Math.max(0, order.totalAmount - order.discountAmount), vatAmount: order.vatAmount, finalAmount: order.finalAmount,
     paidAmount: order.paymentStatus === PaymentStatus.PAID ? order.finalAmount : 0, itemCount: order.items.length
   };
 }
 
 function mapDetail(order: InvoiceRecord): OrderInvoiceDetail {
   return {
-    ...mapListItem(order), paidAt: order.paidAt, notes: order.notes, createdByUser: order.createdByUser,
+    ...mapListItem(order), deliveryFee: order.deliveryFee, deliveryAddress: order.deliveryAddress,
+    deliveryPartnerName: order.deliveryPartner?.name ?? null, buzzerNumber: order.buzzerNumber,
+    voucherCode: order.voucherCode, voidReason: order.voidReason,
+    paidAt: order.paidAt, notes: order.notes, createdByUser: order.createdByUser,
     items: order.items.map((item) => ({
       id: item.id, menuItemId: item.menuItemId, sku: item.menuItem.sku, menuItemName: item.menuItem.name,
       quantity: item.quantity, unitPrice: item.unitPrice, subtotal: item.subtotal, notes: item.notes,
@@ -85,12 +92,12 @@ export class OrderInvoiceService {
     const [totalRows, records, allTotals] = await Promise.all([
       prisma.order.count({ where }),
       prisma.order.findMany({ where, include: invoiceInclude, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], skip: (query.page - 1) * query.pageSize, take: query.pageSize }),
-      prisma.order.findMany({ where, select: { totalAmount: true, vatAmount: true, finalAmount: true, paymentStatus: true } })
+      prisma.order.findMany({ where, select: { totalAmount: true, discountAmount: true, vatAmount: true, finalAmount: true, paymentStatus: true } })
     ]);
     const summary = allTotals.reduce((result, order) => ({
       totalGoods: result.totalGoods + order.totalAmount,
-      totalDiscount: 0,
-      totalAfterDiscount: result.totalAfterDiscount + order.totalAmount,
+      totalDiscount: result.totalDiscount + order.discountAmount,
+      totalAfterDiscount: result.totalAfterDiscount + Math.max(0, order.totalAmount - order.discountAmount),
       totalVat: result.totalVat + order.vatAmount,
       totalFinal: result.totalFinal + order.finalAmount,
       totalPaid: result.totalPaid + (order.paymentStatus === PaymentStatus.PAID ? order.finalAmount : 0)

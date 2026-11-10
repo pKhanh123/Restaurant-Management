@@ -58,7 +58,7 @@ import {
   updatePriceListItemApi
 } from '../api/priceList';
 
-export type CartItem = CommissionCartLine;
+export interface CartItem extends CommissionCartLine {}
 
 interface RestaurantContextType {
   // Menu State

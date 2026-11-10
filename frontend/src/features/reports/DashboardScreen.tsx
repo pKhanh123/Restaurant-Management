@@ -14,7 +14,8 @@ import {
   BarChart2,
   CreditCard,
   QrCode,
-  Coins
+  Coins,
+  FileDown
 } from 'lucide-react-native';
 import {
   StyleSheet,
@@ -34,6 +35,8 @@ import { brandColors, radii, spacing, typography } from '../../theme';
 import { AppIcon, Button, EmptyState, InlineAlert, ScreenHeader, StatusBadge, Surface } from '../../ui';
 import { ReceiptModal } from '../pos/ReceiptModal';
 import { DatePickerModal } from './DatePickerModal';
+import { createSalesReportPdfHtml } from './salesReportPdf';
+import { exportHtmlAsPdf } from '../../lib/pdfExport';
 
 function formatVietnamDate(dateObj: Date): string {
   const formatter = new Intl.DateTimeFormat('en-CA', {
@@ -62,6 +65,8 @@ export const DashboardScreen: React.FC = () => {
   const [report, setReport] = useState<DailyReportDto | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [exportError, setExportError] = useState<string | null>(null);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
 
   // Date Picker Modal State
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
@@ -201,6 +206,18 @@ export const DashboardScreen: React.FC = () => {
     setIsReceiptModalOpen(true);
   };
 
+  const exportSalesReport = async () => {
+    if (!report || isExportingPdf) return;
+    setIsExportingPdf(true);
+    try {
+      await exportHtmlAsPdf(createSalesReportPdfHtml(report), `Bao_cao_ban_hang_${report.date}.pdf`);
+    } catch (error) {
+      setExportError(error instanceof Error ? error.message : 'Không thể xuất báo cáo PDF.');
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.surfaceCanvas }]}>
       {/* Header Toolbar */}
@@ -272,6 +289,15 @@ export const DashboardScreen: React.FC = () => {
 
           {/* Quick Actions */}
           <View style={styles.dateActions}>
+            <Button
+              testID="sales-report-pdf"
+              variant="secondary"
+              label="Xuất PDF"
+              icon={FileDown}
+              disabled={!report || isLoading}
+              loading={isExportingPdf}
+              onPress={exportSalesReport}
+            />
             {!isToday && (
               <Button variant="quiet" label="Về hôm nay" onPress={handleToday} />
             )}
@@ -285,6 +311,7 @@ export const DashboardScreen: React.FC = () => {
           </View>
         </View>
       </View>
+      {exportError ? <View style={styles.exportError}><InlineAlert title="Không thể xuất báo cáo PDF" message={exportError} /></View> : null}
 
       <ScrollView
         contentContainerStyle={[styles.scrollContent, isMobile && styles.scrollContentMobile]}
@@ -938,6 +965,7 @@ export const DashboardScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   reportHeader: { borderBottomWidth: 1, gap: spacing.md, padding: spacing.lg },
+  exportError: { paddingHorizontal: spacing.lg, paddingTop: spacing.sm },
   dateToolbar: {
     alignItems: 'center',
     flexDirection: 'row',

@@ -19,6 +19,7 @@ import {
   DeliveryPartnerType
 } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { CashbookPostingService } from '../src/modules/cashbook/cashbook-posting.service';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -865,34 +866,106 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
     console.log(`✅ Da seed ${createdWastes.length} InventoryWaste & Lines`);
 
     // =========================================================================
-    // 13. SEED 25 ĐƠN HÀNG (ORDERS) & ORDER ITEMS
+    // 13. CASHBOOK DEFAULTS + SEED 25 ĐƠN HÀNG (ORDERS) & ORDER ITEMS
     // =========================================================================
-    const createdOrders: Array<{ id: number; total: number }> = [];
+    await prisma.financialAccount.updateMany({
+      where: { type: 'CASH', isDefault: true, code: { not: 'CASH' } },
+      data: { isDefault: false }
+    });
+    const cashAccount = await prisma.financialAccount.upsert({
+      where: { code: 'CASH' },
+      update: { name: 'Tiền mặt tại quầy', type: 'CASH', isDefault: true, isActive: true },
+      create: { code: 'CASH', name: 'Tiền mặt tại quầy', type: 'CASH', openingBalance: 0, isDefault: true, isActive: true }
+    });
+    const cashbookCategoryDefs = [
+      { code: 'CUSTOMER_PAYMENT', name: 'Khách thanh toán', direction: 'RECEIPT', affectsBusinessResultDefault: false },
+      { code: 'SUPPLIER_REFUND', name: 'Nhà cung cấp hoàn tiền', direction: 'RECEIPT', affectsBusinessResultDefault: false },
+      { code: 'OTHER_INCOME', name: 'Thu khác', direction: 'RECEIPT', affectsBusinessResultDefault: true },
+      { code: 'SUPPLIER_PAYMENT', name: 'Trả nhà cung cấp', direction: 'PAYMENT', affectsBusinessResultDefault: false },
+      { code: 'CUSTOMER_REFUND', name: 'Hoàn tiền khách', direction: 'PAYMENT', affectsBusinessResultDefault: false },
+      { code: 'OPERATING_EXPENSE', name: 'Chi phí vận hành', direction: 'PAYMENT', affectsBusinessResultDefault: true },
+      { code: 'OTHER_EXPENSE', name: 'Chi khác', direction: 'PAYMENT', affectsBusinessResultDefault: true },
+      { code: 'REVERSAL_RECEIPT', name: 'Đảo phiếu chi', direction: 'RECEIPT', affectsBusinessResultDefault: false },
+      { code: 'REVERSAL_PAYMENT', name: 'Đảo phiếu thu', direction: 'PAYMENT', affectsBusinessResultDefault: false }
+    ] as const;
+    for (const category of cashbookCategoryDefs) {
+      await prisma.cashFlowCategory.upsert({
+        where: { code: category.code },
+        update: { ...category, isSystem: true, isActive: true },
+        create: { ...category, isSystem: true, isActive: true }
+      });
+    }
+    await prisma.cashbookSetting.upsert({
+      where: { id: 1 },
+      update: {},
+      create: { id: 1 }
+    });
+
+    const createdOrders: Array<{ id: number; total: number; code: string }> = [];
     const createdOrderItems: Array<{ id: number; orderId: number; menuItemId: number; price: number }> = [];
+    const redundantSeedOrderItemIds: number[] = [];
+    const seededOrderItemNote = 'Chiên giòn cay nhiều';
 
     for (let i = 1; i <= 25; i++) {
-      const code = `CRISPY-20260901-${i.toString().padStart(4, '0')}`;
-      const orderDate = new Date(Date.now() - (26 - i) * 3600000 * 8);
+      const code = 'CRISPY-20260901-' + i.toString().padStart(4, '0');
+      const existingOrder = await prisma.order.findUnique({ where: { code }, select: { createdAt: true, paidAt: true, completedAt: true } });
+      const orderDate = existingOrder?.paidAt ?? existingOrder?.createdAt ?? new Date(Date.now() - (26 - i) * 3600000 * 8);
       const orderType = i % 3 === 0 ? OrderType.DELIVERY : i % 2 === 0 ? OrderType.TAKE_AWAY : OrderType.DINE_IN;
       const tableId = orderType === OrderType.DINE_IN ? createdTables[(i - 1) % createdTables.length] : null;
       const deliveryPartnerId = orderType === OrderType.DELIVERY ? createdDeliveryPartners[i % createdDeliveryPartners.length] : null;
+      const expectedItems = [0, 1].map((j) => {
+        const menuItem = createdMenuItems[(i * 2 + j) % createdMenuItems.length];
+        return { menuItem, quantity: 2, subtotal: menuItem.basePrice * 2 };
+      });
+      const totalAmount = expectedItems.reduce((sum, item) => sum + item.subtotal, 0);
+      const voucherApplies = totalAmount >= 50000;
+      const discountAmount = voucherApplies
+        ? Math.min(totalAmount, Math.min(Math.round(totalAmount * 0.1), 50000))
+        : 0;
+      const taxableAmount = Math.max(0, totalAmount - discountAmount);
+      const vatAmount = Math.round(taxableAmount * 0.08);
+      const deliveryFee = 0;
+      const finalAmount = taxableAmount + vatAmount + deliveryFee;
 
       const order = await prisma.order.upsert({
         where: { code },
-        update: { status: OrderStatus.COMPLETED, paymentStatus: PaymentStatus.PAID },
+        update: {
+          orderType,
+          status: OrderStatus.COMPLETED,
+          tableId,
+          deliveryPartnerId,
+          deliveryAddress: orderType === OrderType.DELIVERY ? 'Địa chỉ demo ' + i + ', TP. Hồ Chí Minh' : null,
+          deliveryFee,
+          deliveryFeePaid: 0,
+          priceListId: createdPriceLists[0],
+          totalAmount,
+          discountAmount,
+          vatAmount,
+          finalAmount,
+          voucherId: voucherApplies ? createdVouchers['CRISPY10'] : null,
+          voucherCode: voucherApplies ? 'CRISPY10' : null,
+          paymentMethod: PaymentMethod.CASH,
+          paymentStatus: PaymentStatus.PAID,
+          paidAt: orderDate,
+          completedAt: existingOrder?.completedAt ?? orderDate,
+          createdByUserId: createdUsers['cashier']
+        },
         create: {
           code,
           orderType,
           status: OrderStatus.COMPLETED,
           tableId,
           deliveryPartnerId,
+          deliveryAddress: orderType === OrderType.DELIVERY ? 'Địa chỉ demo ' + i + ', TP. Hồ Chí Minh' : null,
+          deliveryFee,
+          deliveryFeePaid: 0,
           priceListId: createdPriceLists[0],
-          totalAmount: 150000,
-          discountAmount: 10000,
-          vatAmount: 11200,
-          finalAmount: 151200,
-          voucherId: createdVouchers['CRISPY10'],
-          voucherCode: 'CRISPY10',
+          totalAmount,
+          discountAmount,
+          vatAmount,
+          finalAmount,
+          voucherId: voucherApplies ? createdVouchers['CRISPY10'] : null,
+          voucherCode: voucherApplies ? 'CRISPY10' : null,
           paymentMethod: PaymentMethod.CASH,
           paymentStatus: PaymentStatus.PAID,
           paidAt: orderDate,
@@ -900,31 +973,71 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
           createdByUserId: createdUsers['cashier']
         }
       });
-      createdOrders.push({ id: order.id, total: 151200 });
 
-      for (let j = 0; j < 2; j++) {
-        const menuItem = createdMenuItems[(i * 2 + j) % createdMenuItems.length];
-        const item = await prisma.orderItem.create({
+      const existingItems = await prisma.orderItem.findMany({
+        where: { orderId: order.id },
+        orderBy: { id: 'asc' }
+      });
+      for (let j = 0; j < expectedItems.length; j++) {
+        const expected = expectedItems[j];
+        const itemData = {
+          orderId: order.id,
+          menuItemId: expected.menuItem.id,
+          quantity: expected.quantity,
+          unitPrice: expected.menuItem.basePrice,
+          subtotal: expected.subtotal,
+          notes: seededOrderItemNote
+        };
+        const item = existingItems[j]
+          ? await prisma.orderItem.update({ where: { id: existingItems[j].id }, data: itemData })
+          : await prisma.orderItem.create({ data: itemData });
+        createdOrderItems.push({ id: item.id, orderId: order.id, menuItemId: item.menuItemId, price: item.unitPrice });
+      }
+      redundantSeedOrderItemIds.push(...existingItems.slice(expectedItems.length).map((item) => item.id));
+
+      const confirmedAt = order.paidAt ?? orderDate;
+      const existingPayments = await prisma.orderPaymentTransaction.findMany({
+        where: { orderId: order.id, status: 'SUCCESS', paymentMethod: PaymentMethod.CASH },
+        orderBy: { id: 'asc' }
+      });
+      if (existingPayments.length > 1) {
+        throw new Error('Order ' + code + ' có nhiều giao dịch tiền mặt thành công; cần rà soát trước khi seed.');
+      }
+      if (existingPayments[0]) {
+        await prisma.orderPaymentTransaction.update({
+          where: { id: existingPayments[0].id },
           data: {
-            orderId: order.id,
-            menuItemId: menuItem.id,
-            quantity: 2,
-            unitPrice: menuItem.basePrice,
-            subtotal: menuItem.basePrice * 2,
-            notes: 'Chiên giòn cay nhiều'
+            amount: finalAmount,
+            financialAccountId: cashAccount.id,
+            confirmedByUserId: createdUsers['cashier'],
+            confirmedAt,
+            createdAt: confirmedAt
           }
         });
-        createdOrderItems.push({ id: item.id, orderId: order.id, menuItemId: menuItem.id, price: menuItem.basePrice });
+      } else {
+        await prisma.orderPaymentTransaction.create({
+          data: {
+            orderId: order.id,
+            status: 'SUCCESS',
+            amount: finalAmount,
+            paymentMethod: PaymentMethod.CASH,
+            financialAccountId: cashAccount.id,
+            confirmedByUserId: createdUsers['cashier'],
+            confirmedAt,
+            createdAt: confirmedAt
+          }
+        });
       }
+      createdOrders.push({ id: order.id, total: finalAmount, code });
     }
-    console.log(`✅ Da seed ${createdOrders.length} Order & ${createdOrderItems.length} OrderItem`);
+    console.log('✅ Da seed ' + createdOrders.length + ' Order, ' + createdOrderItems.length + ' OrderItem va payment transaction');
 
     // =========================================================================
     // 14. SEED 20 ĐƠN TRẢ MÓN (ORDER RETURNS) & LINES
     // =========================================================================
     const createdOrderReturns: number[] = [];
     for (let i = 1; i <= 20; i++) {
-      const code = `TRA-20260901-${i.toString().padStart(4, '0')}`;
+      const code = 'TRA-20260901-' + i.toString().padStart(4, '0');
       const orderObj = createdOrders[(i - 1) % createdOrders.length];
       const orderItem = createdOrderItems.find((oi) => oi.orderId === orderObj.id)!;
       const menuItem = createdMenuItems.find((m) => m.id === orderItem.menuItemId)!;
@@ -932,7 +1045,15 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
 
       const oReturn = await prisma.orderReturn.upsert({
         where: { returnCode: code },
-        update: { status: OrderReturnStatus.COMPLETED },
+        update: {
+          status: OrderReturnStatus.COMPLETED,
+          totalRefundDue: menuItem.basePrice,
+          refundedAmount: menuItem.basePrice,
+          refundMethod: PaymentMethod.CASH,
+          financialAccountId: cashAccount.id,
+          note: 'Khách trả món do làm nhầm vị ca ' + i,
+          createdByUserId: createdUsers['cashier']
+        },
         create: {
           returnCode: code,
           orderId: orderObj.id,
@@ -941,8 +1062,10 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
           totalRefundDue: menuItem.basePrice,
           refundedAmount: menuItem.basePrice,
           refundMethod: PaymentMethod.CASH,
-          note: `Khách trả món do làm nhầm vị ca ${i}`,
+          financialAccountId: cashAccount.id,
+          note: 'Khách trả món do làm nhầm vị ca ' + i,
           createdByUserId: createdUsers['cashier'],
+          createdByName: 'Thu Ngân Quầy (Cashier)',
           completedAt: retDate
         }
       });
@@ -952,7 +1075,11 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
         where: {
           orderReturnId_orderItemId: { orderReturnId: oReturn.id, orderItemId: orderItem.id }
         },
-        update: { quantity: 1 },
+        update: {
+          quantity: 1,
+          unitPrice: menuItem.basePrice,
+          lineAmount: menuItem.basePrice
+        },
         create: {
           orderReturnId: oReturn.id,
           orderItemId: orderItem.id,
@@ -964,8 +1091,114 @@ export async function seedDatabase(prisma: PrismaClient = defaultPrisma) {
           lineAmount: menuItem.basePrice
         }
       });
+      await prisma.orderReturnLine.deleteMany({
+        where: { orderReturnId: oReturn.id, orderItemId: { not: orderItem.id } }
+      });
     }
-    console.log(`✅ Da seed ${createdOrderReturns.length} OrderReturn & Lines`);
+    if (redundantSeedOrderItemIds.length) {
+      const referencedDuplicates = await prisma.orderReturnLine.count({
+        where: { orderItemId: { in: redundantSeedOrderItemIds } }
+      });
+      if (referencedDuplicates) {
+        throw new Error('Không thể dọn dòng món seed cũ vì còn dòng trả hàng tham chiếu.');
+      }
+      await prisma.orderItem.deleteMany({ where: { id: { in: redundantSeedOrderItemIds } } });
+    }
+    console.log('✅ Da seed ' + createdOrderReturns.length + ' OrderReturn & Lines');
+
+    // =========================================================================
+    // 14b. ACTIVATE DEMO CASHBOOK AND POST SOURCE TRANSACTIONS
+    // =========================================================================
+    const seedPaymentTransactions = await prisma.orderPaymentTransaction.findMany({
+      where: {
+        orderId: { in: createdOrders.map((order) => order.id) },
+        status: 'SUCCESS',
+        paymentMethod: PaymentMethod.CASH,
+        financialAccountId: cashAccount.id
+      },
+      include: { order: { select: { code: true, customerId: true } } }
+    });
+    const seedReturns = await prisma.orderReturn.findMany({
+      where: {
+        id: { in: createdOrderReturns },
+        status: OrderReturnStatus.COMPLETED,
+        refundMethod: PaymentMethod.CASH,
+        refundedAmount: { gt: 0 },
+        financialAccountId: cashAccount.id
+      },
+      include: { order: { select: { customerId: true } } }
+    });
+    const firstCashbookEventAt = [
+      ...seedPaymentTransactions.map((payment) => payment.confirmedAt ?? payment.createdAt),
+      ...seedReturns.map((orderReturn) => orderReturn.completedAt ?? orderReturn.returnedAt)
+    ].sort((left, right) => left.getTime() - right.getTime())[0];
+    if (firstCashbookEventAt) {
+      const setting = await prisma.cashbookSetting.findUniqueOrThrow({ where: { id: 1 } });
+      if (!setting.activatedAt) {
+        if (await prisma.cashVoucher.count()) {
+          throw new Error('Sổ quỹ có phiếu nhưng chưa kích hoạt; không tự đổi ngày/số dư đầu kỳ.');
+        }
+        const activeAccounts = await prisma.financialAccount.findMany({ where: { isActive: true } });
+        for (const account of activeAccounts) {
+          if (account.openingAt > firstCashbookEventAt) {
+            await prisma.financialAccount.update({
+              where: { id: account.id },
+              data: { openingAt: firstCashbookEventAt }
+            });
+          }
+        }
+        await prisma.cashbookSetting.update({
+          where: { id: 1 },
+          data: { activatedAt: firstCashbookEventAt, activatedByUserId: createdUsers['cashier'] }
+        });
+      }
+
+      const paymentCategory = await prisma.cashFlowCategory.findUniqueOrThrow({ where: { code: 'CUSTOMER_PAYMENT' } });
+      const refundCategory = await prisma.cashFlowCategory.findUniqueOrThrow({ where: { code: 'CUSTOMER_REFUND' } });
+      const postingEvents = [
+        ...seedPaymentTransactions.map((payment) => ({
+          occurredAt: payment.confirmedAt ?? payment.createdAt,
+          tieBreaker: payment.id,
+          direction: 'RECEIPT' as const,
+          amount: payment.amount,
+          accountId: payment.financialAccountId!,
+          categoryId: paymentCategory.id,
+          paymentMethod: PaymentMethod.CASH,
+          sourceType: 'ORDER_PAYMENT' as const,
+          sourceTransactionId: payment.id,
+          sourceCode: payment.order.code,
+          counterpartyType: payment.order.customerId ? 'CUSTOMER' : null,
+          counterpartyId: payment.order.customerId,
+          counterpartyName: null,
+          note: 'Khách thanh toán order'
+        })),
+        ...seedReturns.map((orderReturn) => ({
+          occurredAt: orderReturn.completedAt ?? orderReturn.returnedAt,
+          tieBreaker: orderReturn.id,
+          direction: 'PAYMENT' as const,
+          amount: orderReturn.refundedAmount,
+          accountId: orderReturn.financialAccountId!,
+          categoryId: refundCategory.id,
+          paymentMethod: PaymentMethod.CASH,
+          sourceType: 'SALES_RETURN_REFUND' as const,
+          sourceTransactionId: orderReturn.id,
+          sourceCode: orderReturn.returnCode,
+          counterpartyType: orderReturn.order.customerId ? 'CUSTOMER' : null,
+          counterpartyId: orderReturn.order.customerId,
+          counterpartyName: null,
+          note: orderReturn.note ?? 'Hoàn tiền trả hàng ' + orderReturn.returnCode
+        }))
+      ].sort((left, right) =>
+        left.occurredAt.getTime() - right.occurredAt.getTime() || left.tieBreaker - right.tieBreaker
+      );
+      for (const event of postingEvents) {
+        await prisma.$transaction((tx) => CashbookPostingService.post(tx, event, {
+          id: createdUsers['cashier'],
+          name: 'Thu Ngân Quầy (Cashier)',
+          role: 'CASHIER'
+        }));
+      }
+    }
 
     // =========================================================================
     // 15. SEED 60 GIAO DỊCH KHO (INVENTORY TRANSACTIONS)

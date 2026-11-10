@@ -154,17 +154,18 @@ describe('Menu item stock reservation and restoration (Phase 7)', () => {
     }));
   });
 
-  it('restores consumed stock when a paid order is voided with a financial reversal', async () => {
+  it('keeps consumed stock when a paid order cannot be voided', async () => {
     const item = await createMenuItem(4);
     const created = await OrdersService.createOrder(takeAwayItem(item.id, 2));
 
     await OrdersService.payOrder(created.order.id, { paymentMethod: 'CASH' });
 
-    const result = await OrdersService.voidOrder(created.order.id, { reason: 'Hủy sau thanh toán' });
-    expect(result.order).toMatchObject({ status: 'CANCELLED', paymentStatus: 'VOIDED' });
+    await expect(
+      OrdersService.voidOrder(created.order.id, { reason: 'Không được hủy sau thanh toán' })
+    ).rejects.toMatchObject({ statusCode: 409, code: 'ORDER_STATE_INVALID' });
 
     const storedItem = await prismaTest.menuItem.findUniqueOrThrow({ where: { id: item.id } });
-    expect(storedItem.stockQuantity).toBe(4);
+    expect(storedItem.stockQuantity).toBe(2);
   });
 
   it('allows only one of two concurrent orders to reserve the last unit', async () => {

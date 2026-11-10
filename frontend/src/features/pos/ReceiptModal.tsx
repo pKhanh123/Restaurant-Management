@@ -1,11 +1,13 @@
-import React from 'react';
-import { Alert, Modal, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Modal, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Printer, X } from 'lucide-react-native';
 import { OrderDto } from '../../api/contracts';
 import { useTheme } from '../../contexts/ThemeContext';
 import { elevation, radii, spacing, typography } from '../../theme';
 import { AppIcon, BrandMark, Button, StatusBadge } from '../../ui';
 import type { StatusTone } from '../../ui';
+import { exportHtmlAsPdf } from '../../lib/pdfExport';
+import { createReceiptPdfHtml } from './receiptPdf';
 
 interface Props {
   visible: boolean;
@@ -15,16 +17,18 @@ interface Props {
 
 export const ReceiptModal: React.FC<Props> = ({ visible, order, onClose }) => {
   const { theme } = useTheme();
+  const [exporting, setExporting] = useState(false);
   if (!order) return null;
 
-  const handlePrintOrExport = () => {
-    if (Platform.OS === 'web' && typeof window !== 'undefined' && window.print) {
-      window.print();
-    } else {
-      Alert.alert(
-        'Đã xuất hóa đơn',
-        `Hóa đơn ${order.code} đã được xuất thành snapshot PDF. Tổng thanh toán: ${order.finalAmount.toLocaleString('vi-VN')} đ.`
-      );
+  const handlePrintOrExport = async () => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      await exportHtmlAsPdf(createReceiptPdfHtml(order), `Hoa_don_${order.code}.pdf`);
+    } catch (error) {
+      Alert.alert('Chưa thể xuất PDF', error instanceof Error ? error.message : 'Vui lòng thử lại.');
+    } finally {
+      setExporting(false);
     }
   };
 
@@ -171,7 +175,7 @@ export const ReceiptModal: React.FC<Props> = ({ visible, order, onClose }) => {
 
           <View style={[styles.modalActions, { borderTopColor: theme.borderSubtle }]}>
             <Button variant="secondary" label="Đóng" onPress={onClose} />
-            <Button variant="primary" label="In hoặc xuất PDF" icon={Printer} onPress={handlePrintOrExport} />
+            <Button variant="primary" label="In / lưu PDF" icon={Printer} loading={exporting} onPress={handlePrintOrExport} />
           </View>
         </View>
       </SafeAreaView>
