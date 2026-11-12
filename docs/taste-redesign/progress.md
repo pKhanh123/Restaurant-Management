@@ -51,3 +51,8 @@
 - Sửa modal chọn hóa đơn trả hàng và form thêm phòng/bàn ở màn 390 px. Kiểm hình học xác nhận ô nhập khu vực, nút tạo khu vực và trường kế tiếp không còn chồng nhau. Web export, typecheck và lượt ảnh ở 390, 768, 1024, 1440 px đã qua.
 - Đã push các commit giao diện lên `codex/taste-redesign` tại `pKhanh123/Restaurant-Management`.
 - Tài liệu kế hoạch, phát hiện và tiến độ được đưa vào `docs/taste-redesign/` để đi cùng nhánh khi pull trên máy khác. Hướng dẫn chạy nằm ở README trong cùng thư mục.
+
+## 2026-11-12 - kiểm modal và script lặp lại
+- Chụp và kiểm modal chi tiết bàn, chọn hóa đơn trả hàng, thêm phòng/bàn, thêm nhân viên, thiết lập lương, thêm món và tạo voucher ở bốn viewport. Các form nhân viên, món và voucher không phát hiện lỗi bố cục ở màn 390 px.
+- Đưa kịch bản kiểm bằng dữ liệu giả lập vào `scripts/taste-visual-smoke.cjs` để có thể chạy lại trên máy khác. Script đã qua lượt chạy ở 390, 768, 1024 và 1440 px; có kiểm hình học cho ô nhập và nút tạo khu vực trong form phòng/bàn.
+- Các giao dịch backend thật và Android vẫn chờ môi trường kiểm thử tương ứng.

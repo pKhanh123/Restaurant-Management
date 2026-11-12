@@ -24,4 +24,13 @@ npm run typecheck:frontend
 npm run build:frontend
 ```
 
+Để lặp lại lượt kiểm bố cục bằng dữ liệu giả lập ở 390, 768, 1024 và 1440 px, cài trình duyệt Playwright một lần rồi chạy script từ gốc repo:
+
+```bash
+npx playwright install chromium
+node scripts/taste-visual-smoke.cjs frontend/dist visual-smoke-shots
+```
+
+Ảnh được lưu trong `visual-smoke-shots/` và không được đưa vào Git. Script chỉ dùng server cục bộ và dữ liệu giả lập; các thông báo lỗi tải dữ liệu là trạng thái thiếu fixture, không phản ánh backend thật.
+
 Không mang theo `node_modules`, `frontend/dist`, junction hoặc `.env` từ máy đã phát triển. Cài dependencies và cấu hình môi trường trên máy mới. Nhánh này chỉ thay đổi frontend; chưa kiểm luồng với backend thật hoặc Android. Lint frontend ở mốc gốc đã có 1 lỗi và 8 cảnh báo, Vitest frontend có 3 suite lỗi `__DEV__` ở mốc gốc.
