@@ -6,11 +6,19 @@
 - Backend MySQL: 79/79 ca qua ở 8 file đặt bàn, hoàn trả nhập hàng, công nợ nhà cung cấp, snapshot báo cáo cuối ngày, món hủy, cashbook đồng thời và hoa hồng. Nhóm đơn hàng đã qua 124/124 ca trong lượt kiểm trước.
 - Frontend: 92/92 file, 337/337 ca qua với lệnh `npm run test:frontend`; `npm run typecheck --workspace frontend` qua. Đã sửa setup test cho module Expo native dùng trong helper PDF, cập nhật mock in báo cáo và dữ liệu giả lập phân trang nhân viên.
 
-## Vấn đề cấu hình còn mở
+## Đã xử lý trong lượt tiếp theo
 
-- Nút đăng nhập tài khoản dùng thử ở frontend dùng mật khẩu mẫu cố định. Nếu `SEED_ADMIN_PASSWORD`, `SEED_CASHIER_PASSWORD` hoặc `SEED_KITCHEN_PASSWORD` được đổi khi seed, nút tương ứng sẽ báo sai mật khẩu. Lượt E2E đầu tiên tái hiện được; sau khi seed **riêng database test** bằng mật khẩu demo, 32/32 ca qua. Cần quyết định cách bật/tắt tài khoản dùng thử ở môi trường dùng mật khẩu tùy chỉnh; không đổi mật khẩu ngoài database test.
-- Luồng QR sau check-in và thanh toán trên trình duyệt chưa có E2E hoàn chỉnh. Backend có các bài kiểm thử đặt bàn và xác nhận thanh toán; E2E hiện kiểm việc từ chối gửi món khi chưa có phiên đặt bàn hợp lệ.
+- Nút tài khoản dùng thử vẫn đăng nhập một chạm khi mật khẩu mẫu còn đúng. Nếu máy chủ trả `INVALID_CREDENTIALS`, màn hình điền sẵn tên tài khoản và yêu cầu mật khẩu được cấp; không đưa mật khẩu tùy chỉnh vào frontend. Unit test và E2E desktop/mobile xác nhận fallback.
+- E2E QR mới đi từ tạo đặt bàn, khai báo và xác nhận cọc, check-in, gọi món trong trình duyệt khách đến xác nhận chuyển khoản và ticket bếp. Test kiểm đơn không xuất hiện trong KDS trước khi thu ngân xác nhận. Với Sổ quỹ đã kích hoạt, fixture dùng API quản trị tạo tài khoản BANK khi seed chưa có, rồi dùng tài khoản này cho cả hai giao dịch.
+- Web build từng thất bại vì entry Android nạp `InitializeCore` cho web. Đã tách entry theo nền tảng; web export và Android Hermes export đều qua.
+
+## Nghiệm thu bổ sung
+
+- E2E với backend thật và MySQL test dựng từ 36 migration: **36/36 ca qua** trên Desktop Chrome và Mobile Layout.
+- Frontend: **92/92 file, 338/338 ca qua**, frontend typecheck qua.
+- Backend nhóm đặt bàn và đơn QR: **3/3 file, 22/22 ca qua**. Các nhóm khác 79/79 ca và nhóm đơn hàng 124/124 ca đã qua ở lượt kiểm trước.
+- Android Hermes bundle xuất thành công; lượt này chưa chạy lại UI trên thiết bị vật lý. Kiểm tra trên Android emulator của lượt trước vẫn là mốc native hiện có.
 
 ## Phạm vi
 
-Không chạy lại toàn bộ 1.136 ca backend trong lượt này; lần chạy đầy đủ trước đó đã qua. Các nhóm backend bị ảnh hưởng trực tiếp và các tham chiếu chéo nêu trên đã được chạy lại.
+Không chạy lại toàn bộ 1.136 ca backend trong lượt này; lần chạy đầy đủ trước đó đã qua. Database dev không bị seed/reset; chỉ `crispy_bite_test` được dựng lại để chạy E2E.

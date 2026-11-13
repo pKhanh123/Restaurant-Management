@@ -165,6 +165,18 @@ test('QR ordering requires a checked-in reservation before sending food', async 
   await capture(page, 'qr-checkin-required', testInfo);
 });
 
+test('demo account falls back to assigned password when the seed password changed', async ({ page }) => {
+  await page.route('**/api/auth/login', route => route.fulfill({
+    status: 401,
+    json: { error: { code: 'INVALID_CREDENTIALS', message: 'Tên đăng nhập hoặc mật khẩu không chính xác' } }
+  }));
+  await page.goto('/');
+  await page.getByTestId('demo-btn-cashier').click();
+  await expect(page.getByTestId('input-username')).toHaveValue('cashier');
+  await expect(page.getByTestId('input-password')).toHaveValue('');
+  await expect(page.getByText('Tài khoản này dùng mật khẩu riêng. Nhập mật khẩu được cấp để đăng nhập.')).toBeVisible();
+});
+
 test('KDS reports failed REST synchronization without claiming a socket connection', async ({ page }) => {
   await page.route('**/api/orders?status=*', route => route.fulfill({ status: 503, json: { error: { code: 'UNAVAILABLE', message: 'Test synchronization unavailable' } } }));
   await login(page, 'kitchen');

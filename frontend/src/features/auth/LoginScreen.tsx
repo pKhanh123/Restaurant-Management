@@ -57,7 +57,13 @@ export const LoginScreen: React.FC = () => {
     clearSessionExpiredMessage();
     const result = await demoLogin(role);
     if (!result.success) {
-      setErrorMessage(result.error || 'Không thể mở tài khoản dùng thử. Vui lòng thử lại.');
+      if (result.requiresPassword) {
+        setUsername(role.toLowerCase());
+        setPassword('');
+        setErrorMessage('Tài khoản này dùng mật khẩu riêng. Nhập mật khẩu được cấp để đăng nhập.');
+      } else {
+        setErrorMessage(result.error || 'Không thể mở tài khoản dùng thử. Vui lòng thử lại.');
+      }
     }
   };
 

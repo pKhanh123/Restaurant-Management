@@ -192,4 +192,27 @@ describe('login with invalid credentials', () => {
       })
     );
   });
+
+  it('offers manual login when a demo account uses an assigned password', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: false,
+      status: 401,
+      json: async () => ({ error: { code: 'INVALID_CREDENTIALS', message: 'Tên đăng nhập hoặc mật khẩu không chính xác' } })
+    })));
+
+    let screen: ReturnType<typeof create>;
+    await act(async () => {
+      screen = create(<ThemeProvider><AuthProvider><RootNavigator /></AuthProvider></ThemeProvider>);
+    });
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    await act(async () => { screen!.root.findByProps({ testID: 'demo-btn-cashier' }).props.onPress(); });
+
+    expect(screen!.root.findByProps({ testID: 'input-username' }).props.value).toBe('cashier');
+    expect(screen!.root.findByProps({ testID: 'input-password' }).props.value).toBe('');
+    expect(screen!.root.findByProps({ accessibilityRole: 'alert' }).props.children).toContainEqual(
+      expect.objectContaining({ props: expect.objectContaining({
+        children: 'Tài khoản này dùng mật khẩu riêng. Nhập mật khẩu được cấp để đăng nhập.'
+      }) })
+    );
+  });
 });

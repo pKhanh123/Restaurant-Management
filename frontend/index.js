@@ -1,4 +1,4 @@
-import 'react-native/Libraries/Core/InitializeCore';
+import './initializeCore';
 import { registerRootComponent } from 'expo';
 import App from './App';
 

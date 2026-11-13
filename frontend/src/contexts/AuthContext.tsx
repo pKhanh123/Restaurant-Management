@@ -9,12 +9,14 @@ interface AuthContextType {
   isLoading: boolean;
   isRestoringSession: boolean;
   sessionExpiredMessage: string | null;
-  login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  demoLogin: (role: Role) => Promise<{ success: boolean; error?: string }>;
+  login: (username: string, password: string) => Promise<AuthResult>;
+  demoLogin: (role: Role) => Promise<AuthResult>;
   logout: () => void;
   handleUnauthorized: (reason?: string) => void;
   clearSessionExpiredMessage: () => void;
 }
+
+type AuthResult = { success: boolean; error?: string; code?: string; requiresPassword?: boolean };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -106,7 +108,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setSessionExpiredMessage(null);
   }, []);
 
-  const login = async (username: string, password: string): Promise<{ success: boolean; error?: string }> => {
+  const login = async (username: string, password: string): Promise<AuthResult> => {
     setIsLoading(true);
     setSessionExpiredMessage(null);
     const baseUrl = getApiBaseUrl();
@@ -122,7 +124,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (!response.ok) {
         const errJson = json as ApiErrorResponse;
         const msg = errJson.error?.message || 'Đăng nhập thất bại. Vui lòng thử lại.';
-        return { success: false, error: msg };
+        return { success: false, error: msg, code: errJson.error?.code };
       }
 
       const successData = (json as ApiResponse<LoginResponseDto>).data;
@@ -147,14 +149,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const demoLogin = async (role: Role): Promise<{ success: boolean; error?: string }> => {
+  const demoLogin = async (role: Role): Promise<AuthResult> => {
     const creds: Record<Role, { u: string; p: string }> = {
       CASHIER: { u: 'cashier', p: 'cashier123' },
       KITCHEN: { u: 'kitchen', p: 'kitchen123' },
       ADMIN: { u: 'admin', p: 'admin123' }
     };
     const { u, p } = creds[role];
-    return await login(u, p);
+    const result = await login(u, p);
+    return result.code === 'INVALID_CREDENTIALS' ? { ...result, requiresPassword: true } : result;
   };
 
   const logout = useCallback(() => {
