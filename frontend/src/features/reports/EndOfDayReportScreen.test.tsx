@@ -9,6 +9,12 @@ vi.mock('../../api/endOfDayReports', async importOriginal => ({ ...await importO
 import { downloadEndOfDayReportApi, EndOfDayReportApiError, fetchEndOfDayReportApi } from '../../api/endOfDayReports';
 import { Platform } from 'react-native';
 import { chromium } from '@playwright/test';
+import { existsSync } from 'node:fs';
+const launchPrintBrowser = () => chromium.launch(
+  process.env.PLAYWRIGHT_CHANNEL === 'chrome' || !existsSync(chromium.executablePath())
+    ? { channel: 'chrome' }
+    : undefined
+);
 let width = 1200;
 let palette = lightTheme;
 vi.mock('react-native', () => ({ Pressable: 'Pressable', View: 'View', Text: 'Text', TextInput: 'TextInput', ScrollView: 'ScrollView', ActivityIndicator: 'ActivityIndicator', Platform: { OS: 'web' }, useWindowDimensions: () => ({ width, height: 800 }), StyleSheet: { create: (s: unknown) => s } }));
@@ -86,8 +92,10 @@ describe('report refresh, export and print', () => {
   it('repeats all ten headers on every Chromium PDF page and preserves current-page content within A4 landscape', async () => {
     let screen: any;
     await act(async () => { screen = create(<EndOfDayReportScreen snapshot={{ ...snapshot, metadata: { ...snapshot.metadata, view: 'HORIZONTAL' } }} />); });
-    const handler = screen.root.findByProps({ testID: 'report-print' }).props.onPress.toString().replace(/__vite_ssr_import_\d+__\.Platform/g, 'Platform');
-    const browser = await chromium.launch();
+    const handler = screen.root.findByProps({ testID: 'report-print' }).props.onPress.toString()
+      .replace(/__vite_ssr_import_\d+__\.Platform/g, 'Platform')
+      .replace(/__vite_ssr_import_\d+__\.escapeHtml/g, 'escapeHtml');
+    const browser = await launchPrintBrowser();
     try {
       const page = await browser.newPage();
       const headers = ['Mối quan tâm', 'Loại bản ghi', 'Thời điểm', 'Chứng từ', 'Nội dung', 'Người nhận', 'Người tạo', 'Số lượng / ĐVT', 'Giá trị', 'Ghi chú / chất lượng'];
@@ -98,6 +106,7 @@ describe('report refresh, export and print', () => {
         const snapshot = { metadata };
         const setActionError = (message: string | null) => { if (message) throw new Error(message); };
         const Platform = { OS: 'web' };
+        const escapeHtml = (value: string) => value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] ?? character);
         const originalAppend = document.body.appendChild.bind(document.body);
         document.body.appendChild = ((node: Node) => {
           const result = originalAppend(node);
@@ -106,8 +115,8 @@ describe('report refresh, export and print', () => {
         }) as typeof document.body.appendChild;
         // These lexical bindings match the handler's production closure.
         eval(`(${handler})()`);
-        void snapshot; void setActionError; void Platform;
-      }, { handler, metadata: { view: 'HORIZONTAL' } });
+        void snapshot; void setActionError; void Platform; void escapeHtml;
+      }, { handler, metadata: { ...snapshot.metadata, view: 'HORIZONTAL' } });
       const printed = await page.locator('iframe').evaluate(frame => (frame as HTMLIFrameElement).contentDocument!.documentElement.outerHTML);
       expect(await page.locator('[data-testid="report-print-surface"] [role="table"]').count()).toBe(1);
       await page.setContent(printed);
@@ -152,12 +161,12 @@ describe('report refresh, export and print', () => {
     const frame = { style: {}, contentDocument: frameDocument, contentWindow: { focus: vi.fn(), print: vi.fn() }, remove: vi.fn(), setAttribute: vi.fn() };
     const cells = (role: string, prefix: string) => Array.from({ length: 10 }, (_, column) => `<div role="${role}" class="print-cell">${prefix} ${column + 1}</div>`).join('');
     const table = `<div data-testid="report-sheet"><div data-testid="report-detail-scroll"><div class="print-table-container"><div role="table"><div role="row" class="print-row">${cells('columnheader', 'Column')}</div>${Array.from({ length: 50 }, (_, row) => `<div role="row" class="print-row">${cells('cell', `Row ${row + 1}`)}</div>`).join('')}</div></div></div></div>`;
-    vi.stubGlobal('document', { styleSheets: [{ cssRules: [{ cssText: '.print-table-container{min-width:1600px}.print-row{display:flex}.print-cell{width:160px;flex-shrink:0;padding:8px;box-sizing:border-box}[data-testid="report-detail-scroll"]{overflow-x:auto}' }] }], querySelector: () => ({ cloneNode: () => ({ querySelectorAll: () => [] }) }), createElement: (tag: string) => tag === 'iframe' ? frame : { textContent: '' }, body: { appendChild: vi.fn() } });
+    vi.stubGlobal('document', { styleSheets: [{ cssRules: [{ cssText: '.print-table-container{min-width:1600px}.print-row{display:flex}.print-cell{width:160px;flex-shrink:0;padding:8px;box-sizing:border-box}[data-testid="report-detail-scroll"]{overflow-x:auto}' }] }], querySelector: () => ({ cloneNode: () => ({ prepend: vi.fn(), querySelectorAll: () => [] }) }), createElement: (tag: string) => tag === 'iframe' ? frame : { textContent: '' }, body: { appendChild: vi.fn() } });
     vi.stubGlobal('window', {});
     let screen: any;
     await act(async () => { screen = create(<EndOfDayReportScreen snapshot={{ ...snapshot, metadata: { ...snapshot.metadata, view: 'HORIZONTAL' } }} />); });
     await act(async () => { screen.root.findByProps({ testID: 'report-print' }).props.onPress(); });
-    const browser = await chromium.launch();
+    const browser = await launchPrintBrowser();
     try {
       const page = await browser.newPage({ viewport: { width: 1030, height: 700 } });
       await page.setContent(`<style>${printedStyles.join('\n')}</style>${table}`);
@@ -220,7 +229,7 @@ describe('report refresh, export and print', () => {
     const head = { appendChild: vi.fn() }; const body = { appendChild: vi.fn() };
     const frameDocument = { head: head as typeof head | null, body: body as typeof body | null, createElement: () => ({ textContent: '' }), open: () => { frameDocument.head = null; frameDocument.body = null; }, write: () => { frameDocument.head = head; frameDocument.body = body; }, close: vi.fn() };
     const print = vi.fn(); const frame = { style: {}, contentDocument: frameDocument, contentWindow: { focus: vi.fn(), print }, remove: vi.fn(), setAttribute: vi.fn(), onload: null as (() => void) | null };
-    const sheet = { cloneNode: vi.fn(() => ({ textContent: 'BÁO CÁO CUỐI NGÀY metadata', querySelectorAll: () => [] })) };
+    const sheet = { cloneNode: vi.fn(() => ({ textContent: 'BÁO CÁO CUỐI NGÀY metadata', prepend: vi.fn(), querySelectorAll: () => [] })) };
     const selector = vi.fn(() => sheet);
     vi.stubGlobal('document', { styleSheets: [{ cssRules: [{ cssText: '.report-test { color: #24211F; }' }] }], querySelector: selector, createElement: (tag: string) => tag === 'iframe' ? frame : { textContent: '' }, body: { appendChild: vi.fn() } }); vi.stubGlobal('window', {});
     let screen: any;

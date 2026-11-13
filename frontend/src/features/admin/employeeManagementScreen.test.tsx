@@ -134,7 +134,10 @@ describe('employee management screen', () => {
   });
 
   it('resets pagination when the debounced employee search changes', async () => {
-    vi.mocked(fetchEmployeesApi).mockResolvedValue({ ...emptyResult, pagination: { page: 1, pageSize: 30, totalRows: 31, totalPages: 2 } });
+    vi.mocked(fetchEmployeesApi).mockImplementation(async (_token, filter) => ({
+      ...emptyResult,
+      pagination: { page: filter?.page ?? 1, pageSize: 30, totalRows: 31, totalPages: 2 }
+    }));
     let screen: any;
     await act(async () => { screen = create(<EmployeeManagementScreen />); await Promise.resolve(); });
     const findNextButton = () => screen.root.findAllByType('Pressable').find((node: any) => node.findAllByType('Text').some((text: any) => text.children.includes('Sau')));

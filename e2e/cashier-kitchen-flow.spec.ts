@@ -77,6 +77,7 @@ test.describe('E2E Flow: Cashier to Kitchen Lifecycle', () => {
     await expect(receiptModal.getByRole('heading', { name: 'Hóa đơn bán hàng' })).toBeVisible();
     await expect(receiptModal.getByText('Thuế GTGT (VAT 8%)')).toBeVisible();
     await expect(receiptModal.getByText('Tổng thanh toán')).toBeVisible();
+    await expect(receiptModal).toContainText('Combo 1 Người: Gà Giòn + Khoai + Nước');
     const createdOrderCode = (await receiptModal.getByText(/^CRISPY-\d{8}-\d{4}$/).textContent())?.trim();
     expect(createdOrderCode).toBeTruthy();
 
@@ -120,6 +121,7 @@ test.describe('E2E Flow: Cashier to Kitchen Lifecycle', () => {
     const createdTicket = page.getByTestId(`kds-card-${createdOrderCode}`);
     await expect(createdTicket).toBeVisible();
     await expect(createdTicket).toContainText(createdOrderCode!);
+    await expect(createdTicket).toContainText('Combo 1 Người: Gà Giòn + Khoai + Nước');
 
     // Verify at least one order action button is visible and transition it
     const kdsActionBtn = page.getByTestId(`kds-action-btn-${createdOrderCode}`);
