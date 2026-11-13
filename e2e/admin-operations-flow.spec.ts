@@ -17,6 +17,7 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
     const reportsTab = page.getByTestId('tab-reports');
     await expect(reportsTab).toBeVisible({ timeout: 10000 });
     await expect(reportsTab.getByText('Báo cáo')).toBeVisible();
+    await page.getByTestId('reports-workspace-sales').click();
 
     const kpiRevenue = page.getByTestId('kpi-revenue');
     const kpiOrders = page.getByTestId('kpi-orders');
@@ -29,7 +30,7 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
     await expect(kpiSos).toBeVisible();
     await expect(kpiRevenue.getByText('Doanh thu thuần')).toBeVisible();
     await expect(kpiOrders.getByText('Đơn hàng')).toBeVisible();
-    await expect(kpiAov.getByText('Giá trị đơn trung bình')).toBeVisible();
+    await expect(kpiAov.getByText('Giá trị đơn TB')).toBeVisible();
     await expect(kpiSos.getByText('Tốc độ phục vụ')).toBeVisible();
 
     // Verify Top 5 Sellers section
@@ -42,7 +43,7 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
     await menuTab.click();
 
     // Menu Management: Verify filters, actions, items, and availability controls.
-    await expect(page.getByPlaceholder('Theo mã hoặc tên món')).toBeVisible();
+    await expect(page.getByRole('textbox', { name: 'Tìm món' })).toBeVisible();
     await expect(page.getByTestId('admin-btn-add-item')).toContainText('Món mới');
 
     const firstSwitch = page.locator('[data-testid^="menu-item-switch-"]').first();
@@ -57,7 +58,9 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
     await tablesTab.click();
 
     // Table operations expose status filters and readable status text.
-    await expect(page.getByRole('button', { name: 'Tất cả (12)' })).toBeVisible();
+    const allTablesFilter = page.getByRole('button', { name: /^Tất cả \(\d+\)$/ });
+    await expect(allTablesFilter).toBeVisible();
+    const totalTables = Number((await allTablesFilter.textContent())!.match(/\((\d+)\)/)![1]);
     // Other lifecycle tests may have created orders. Verify the live filter counts,
     // rather than assuming every project starts with twelve empty tables.
     const counts: number[] = [];
@@ -66,7 +69,7 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
       await expect(filter).toBeVisible();
       counts.push(Number((await filter.textContent())!.match(/\((\d+)\)/)![1]));
     }
-    expect(counts.reduce((total, count) => total + count, 0)).toBe(12);
+    expect(counts.reduce((total, count) => total + count, 0)).toBe(totalTables);
     await expect(page.getByText('Sẵn sàng', { exact: true }).first()).toBeVisible();
 
     // Check Table 01
@@ -94,6 +97,7 @@ test.describe('E2E Flow: Admin Operations & Reporting', () => {
     await expect(page.getByRole('heading', { name: 'Thực đơn' })).toBeVisible({ timeout: 10000 });
 
     await page.getByText('Gà Rán Giòn Cay (3 Miếng)', { exact: true }).click();
+    await page.getByTestId('btn-modal-add-to-cart').click();
     const cartSummary = page.getByTestId('customer-cart-summary');
     await expect(cartSummary).toBeVisible();
     await expect(cartSummary).toContainText('Xem giỏ hàng');

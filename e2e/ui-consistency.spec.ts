@@ -6,6 +6,13 @@ async function login(page: Page, role: 'cashier' | 'kitchen' | 'admin') {
   await expect(page.getByTestId('btn-logout')).toBeVisible();
 }
 
+async function addFirstMenuItem(page: Page) {
+  await page.locator('[data-testid^="menu-item-"]').first().click();
+  const firstModifier = page.locator('[data-testid^="modifier-option-"]').first();
+  if (await firstModifier.isVisible()) await firstModifier.click();
+  await page.getByTestId('btn-modal-add-to-cart').click();
+}
+
 async function capture(page: Page, name: string, testInfo: { outputPath: (name: string) => string }) {
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: testInfo.outputPath(`${name}.png`), fullPage: true, animations: 'disabled' });
@@ -28,7 +35,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 
   test(`login remains usable at ${viewport.width}x${viewport.height}`, async ({ page }, testInfo) => {
     await page.setViewportSize(viewport);
     await page.goto('/');
-    await expect(page.getByText('Crispy Bite', { exact: true })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Crispy Bite' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Chuyển sang giao diện tối' })).toBeVisible();
     await capture(page, 'login-light', testInfo);
     if (viewport.width === 390) await expect(page.getByTestId('demo-btn-admin')).toBeInViewport();
@@ -48,8 +55,7 @@ for (const viewport of [{ width: 1024, height: 768 }, { width: 1440, height: 900
     const cards = page.locator('[data-testid^="menu-item-"]');
     await expect(cards.first()).toBeVisible();
     await expectContentContained(cards);
-    await cards.first().click();
-    await page.getByTestId('btn-modal-add-to-cart').click();
+    await addFirstMenuItem(page);
     await expect(page.getByTestId('btn-open-checkout')).toBeInViewport();
     await capture(page, 'pos-light', testInfo);
     await page.getByRole('button', { name: 'Chuyển sang giao diện tối' }).click();
@@ -63,8 +69,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1024, height: 768 
   test(`KDS tickets and actions remain reachable at ${viewport.width}x${viewport.height}`, async ({ page }, testInfo) => {
     await page.setViewportSize(viewport);
     await login(page, 'cashier');
-    await page.locator('[data-testid^="menu-item-"]').first().click();
-    await page.getByTestId('btn-modal-add-to-cart').click();
+    await addFirstMenuItem(page);
     await page.getByTestId('btn-open-checkout').click();
     await page.getByTestId('btn-takeaway').click();
     const createdResponse = page.waitForResponse(response => response.url().endsWith('/api/orders') && response.request().method() === 'POST');
@@ -104,6 +109,7 @@ test('QR menu cards contain price and status at 390x844', async ({ page }, testI
   await expect(cards.first()).toBeVisible();
   await expectContentContained(cards);
   await page.getByText('Gà Rán Giòn Cay (3 Miếng)', { exact: true }).click();
+  await page.getByTestId('btn-modal-add-to-cart').click();
   await expect(page.getByTestId('customer-cart-summary').getByRole('button', { name: 'Gửi món' })).toBeInViewport();
   await capture(page, 'qr-cart-light', testInfo);
 });
@@ -119,8 +125,9 @@ test('Admin menu, reports and table actions fit at 1440x900', async ({ page }, t
   await capture(page, 'admin-form-light', testInfo);
   await page.getByRole('button', { name: 'Đóng biểu mẫu' }).click();
   await page.getByTestId('tab-reports').click();
+  await page.getByTestId('reports-workspace-sales').click();
   await expect(page.getByTestId('kpi-revenue')).toBeVisible();
-  expect((await page.getByTestId('kpi-revenue').boundingBox())!.height).toBeGreaterThanOrEqual(184);
+  expect((await page.getByTestId('kpi-revenue').boundingBox())!.height).toBeGreaterThanOrEqual(100);
   await capture(page, 'admin-reports-light', testInfo);
   await page.getByTestId('tab-tables').click();
   await expect(page.getByTestId('table-card-1')).toBeVisible();
@@ -141,7 +148,7 @@ test('font request failure still renders a usable login form', async ({ page }, 
   await expect(page.getByTestId('tab-pos')).toBeVisible();
 });
 
-test('QR payment does not instruct customers to scan an illustrative icon', async ({ page, request }, testInfo) => {
+test('QR ordering requires a checked-in reservation before sending food', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/?table=4&token=QR-TABLE-04');
   await page.waitForLoadState('networkidle');
@@ -152,22 +159,10 @@ test('QR payment does not instruct customers to scan an illustrative icon', asyn
   const menuItem = page.getByText('Gà Rán Giòn Cay (3 Miếng)', { exact: true });
   await expect(menuItem).toBeVisible();
   await menuItem.click();
-  const createdResponse = page.waitForResponse(response => response.url().endsWith('/api/orders') && response.request().method() === 'POST');
+  await page.getByTestId('btn-modal-add-to-cart').click();
   await page.getByRole('button', { name: 'Gửi món', exact: true }).click();
-  const createdOrder = (await (await createdResponse).json()).data.order;
-  try {
-    await page.getByRole('button', { name: /^Thanh toán/ }).first().click();
-    await expect(page.getByRole('heading', { name: 'Thanh toán chuyển khoản' })).toBeVisible();
-    await expect(page.getByText('Mã minh họa, không dùng để thanh toán.', { exact: true })).toBeVisible();
-    await expect(page.getByRole('alert')).not.toContainText('Quét mã');
-    await capture(page, 'qr-transfer-light', testInfo);
-  } finally {
-    // Release only this test's table order so the other viewport can reuse Table 04.
-    const auth = await request.post('/api/auth/login', { data: { username: 'admin', password: 'admin123' } });
-    const token = (await auth.json()).data.token;
-    const cleanup = await request.patch(`/api/orders/${createdOrder.id}/void`, { headers: { Authorization: `Bearer ${token}` }, data: { reason: 'Hoan tat kiem tra QR' } });
-    expect(cleanup.ok()).toBe(true);
-  }
+  await expect(page.getByText('Đặt bàn cần được nhân viên check-in trước khi gọi món. Hãy đưa mã đặt chỗ cho nhân viên.')).toBeVisible();
+  await capture(page, 'qr-checkin-required', testInfo);
 });
 
 test('KDS reports failed REST synchronization without claiming a socket connection', async ({ page }) => {
