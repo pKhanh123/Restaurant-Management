@@ -6,13 +6,13 @@
 - Kiểm thử báo cáo dòng tiền cuối ngày trên MySQL test: 31/31 bài qua sau khi thêm bản ghi chi nhánh `MAIN` mà migration chuẩn thường tạo.
 - `npm run typecheck`: backend và frontend đều qua.
 - Expo export Android tạo thành công Hermes bundle. Đây là kiểm tra build JavaScript, chưa phải chạy ứng dụng trên thiết bị Android.
+- Ngày 2026-11-13, `prisma migrate reset --force --skip-seed --skip-generate` chạy thành công trên riêng `crispy_bite_test`: đủ 36 migration từ database trống. `prisma migrate status` trên database dev cũng báo up to date. Hai migration cashbook tháng 9 bị merge trùng đã được loại theo xác nhận của chủ repository; hai migration bếp/bàn từng bị thiếu được khôi phục nguyên bản từ lịch sử Git.
+- Toàn bộ backend suite trên database test vừa tạo bằng migration chuẩn: 136/136 file và 1.136/1.136 ca qua. Vòng kiểm thử trước trên database test dựng bằng `db push` có một ca fail do bản ghi `MAIN` thiếu `isDefault=true`; lỗi này biến mất khi dùng migration chuẩn.
 
 ## Việc còn lại trước khi nghiệm thu toàn hệ thống
 
 1. Chạy ứng dụng trên máy Android hoặc emulator thật. Máy kiểm thử hiện tại không có Android SDK, `adb` hay emulator.
-2. Chạy toàn bộ backend suite. Bộ kiểm thử chạy tuần tự và chậm; lần này đã xác minh riêng 31 bài dòng tiền, chưa có kết quả trọn bộ.
-3. Sửa lịch sử Prisma migration trước khi khởi tạo database mới. Hai migration `20260923190000_cashbook_foundation` và `20260923200000_cashbook_purchase_links` tạo bảng/cột trùng với các migration cashbook tháng 10. `prisma migrate reset` trên database test riêng dừng tại lần tạo `FinancialAccount` thứ hai. Không chỉnh sửa hoặc xóa migration lịch sử khi chưa đối chiếu các môi trường đã triển khai, vì checksum và trạng thái áp dụng có thể khác nhau. Database test phục vụ E2E được tạo bằng `prisma db push` và seed riêng; database dev không bị reset.
-4. Kiểm tra luồng QR đặt món sau khi đặt bàn và check-in. Bài hiện tại xác nhận đúng việc chặn gửi món khi chưa có phiên đặt bàn hợp lệ; luồng thanh toán QR sau check-in chưa được E2E bao phủ.
+2. Kiểm tra luồng QR đặt món sau khi đặt bàn và check-in. Bài hiện tại xác nhận đúng việc chặn gửi món khi chưa có phiên đặt bàn hợp lệ; luồng thanh toán QR sau check-in chưa được E2E bao phủ.
 
 ## Cách chạy lại E2E
 
