@@ -1,8 +1,10 @@
 const { getDefaultConfig } = require('expo/metro-config');
 const path = require('path');
+const fs = require('fs');
 
 const projectRoot = __dirname;
 const monorepoRoot = path.resolve(projectRoot, '..');
+const sharedNodeModules = fs.realpathSync(path.resolve(monorepoRoot, 'node_modules'));
 
 const config = getDefaultConfig(projectRoot);
 
@@ -17,11 +19,11 @@ config.resolver = {
   sourceExts: [...config.resolver.sourceExts, 'svg'],
 };
 
-config.watchFolders = [...(config.watchFolders || []), monorepoRoot];
+config.watchFolders = [...(config.watchFolders || []), sharedNodeModules];
 
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
-  path.resolve(monorepoRoot, 'node_modules'),
+  sharedNodeModules,
 ];
 
 module.exports = config;

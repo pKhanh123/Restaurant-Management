@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {
   BarlowCondensed_600SemiBold,
   BarlowCondensed_700Bold,
@@ -20,7 +22,7 @@ import { RootNavigator } from './src/navigation/RootNavigator';
 import { WebPresentation } from './src/ui/WebPresentation';
 
 function AppContent() {
-  const { isDark, setRoleTheme } = useTheme();
+  const { isDark, setRoleTheme, theme } = useTheme();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -31,7 +33,13 @@ function AppContent() {
     <>
       <WebPresentation />
       <StatusBar style={isDark ? 'light' : 'dark'} />
-      <RootNavigator />
+      {Platform.OS === 'web' ? <RootNavigator /> : (
+        <SafeAreaProvider>
+          <SafeAreaView style={{ flex: 1, backgroundColor: theme.surfaceCanvas }} edges={['top', 'bottom']}>
+            <RootNavigator />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      )}
     </>
   );
 }

@@ -179,7 +179,7 @@ export class OrdersService {
           idempotencyKey: input.idempotencyKey
         }
       },
-      include: { items: true }
+      include: { items: { include: { menuItem: { select: { name: true } } } } }
     });
 
     // 2. Kiem tra tinh hop le cua ban an neu la DINE_IN
@@ -544,13 +544,13 @@ export class OrdersService {
     }
 
     if (transactionResult.isDuplicate) {
-      return { order: transactionResult.order, isDuplicate: true };
+      return { order: withMenuItemNames(transactionResult.order), isDuplicate: true };
     }
     emitMenuStockChanged(transactionResult.stockChanges);
     const createdOrder = formatOrderDto(transactionResult.order);
 
     if (transactionResult.awaitingPayment) {
-      return { order: transactionResult.order, isDuplicate: false, awaitingPayment: true };
+      return { order: withMenuItemNames(transactionResult.order), isDuplicate: false, awaitingPayment: true };
     }
 
     // Phat su kien don hang moi chi vao phong KDS bep va toan he thong
@@ -566,7 +566,7 @@ export class OrdersService {
       });
     }
 
-    return { order: transactionResult.order, isDuplicate: false };
+    return { order: withMenuItemNames(transactionResult.order), isDuplicate: false };
   }
 
   private static async availableReservationCredit(tx: any, reservationId: number) {
@@ -597,7 +597,7 @@ export class OrdersService {
   static async declareReservationOrderPayment(orderId: number, input: ReservationOrderPaymentDeclarationInput) {
     const result = await prisma.$transaction(async tx => {
       await tx.$queryRaw`SELECT id FROM \`Order\` WHERE id = ${orderId} FOR UPDATE`;
-      const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+      const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
       if (!current || !current.reservationId || !current.tableId) throw ApiError.notFound('Không tìm thấy order đặt bàn');
       const reservation = await ReservationsService.requireCheckedInToken(tx, input.reservationAccessToken, current.tableId);
       if (reservation.id !== current.reservationId) throw ApiError.notFound('Order không thuộc mã đặt bàn này');
@@ -614,7 +614,7 @@ export class OrdersService {
       const amountDue = amountReceivedAfterCredit(current.finalAmount, appliedDeposit);
       if (amountDue > 0) {
         await tx.orderPaymentTransaction.create({ data: { orderId, status: 'PENDING', amount: amountDue, paymentMethod: 'BANK_TRANSFER' } });
-        const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'WAITING_CONFIRMATION' }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+        const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'WAITING_CONFIRMATION' }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
         await AuditService.logInTransaction(tx, {
           action: 'RESERVATION_ORDER_PAYMENT_DECLARED', targetType: 'Order', targetId: orderId,
           metadata: { reservationId: reservation.id, amountDue }
@@ -630,7 +630,7 @@ export class OrdersService {
         await tx.reservation.update({ where: { id: reservation.id }, data: { depositStatus: 'APPLIED_TO_BILL' } });
       }
       const paidAt = new Date();
-      const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'PAID', paidAt }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+      const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'PAID', paidAt }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
       const stockChanges = await this.reserveOrderItems(tx, current.items);
       await tx.diningTable.update({ where: { id: current.tableId }, data: { currentOrderId: orderId, status: 'OCCUPIED' } });
       await AuditService.logInTransaction(tx, {
@@ -652,7 +652,7 @@ export class OrdersService {
     try {
       const result = await prisma.$transaction(async tx => {
         await tx.$queryRaw`SELECT id FROM \`Order\` WHERE id = ${orderId} FOR UPDATE`;
-        const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+        const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
         if (!current || !current.reservationId || !current.tableId) throw ApiError.notFound('Không tìm thấy order đặt bàn');
         await tx.$queryRaw`SELECT id FROM Reservation WHERE id = ${current.reservationId} FOR UPDATE`;
         const reservation = await tx.reservation.findUnique({ where: { id: current.reservationId } });
@@ -689,7 +689,7 @@ export class OrdersService {
         }, { id: actorId, name: actorName, role: actorRole });
         const order = await tx.order.update({ where: { id: orderId }, data: {
           paymentStatus: 'PAID', paymentMethod: 'BANK_TRANSFER', paidAt: now
-        }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+        }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
         const stockChanges = await this.reserveOrderItems(tx, current.items);
         await tx.diningTable.update({ where: { id: current.tableId }, data: { currentOrderId: orderId, status: 'OCCUPIED' } });
         await AuditService.logInTransaction(tx, {
@@ -736,7 +736,7 @@ export class OrdersService {
   static async authorizeReservationOrderPayLater(orderId: number, input: AuthorizeReservationOrderPayLaterInput, actorId: number, actorName: string) {
     const result = await prisma.$transaction(async tx => {
       await tx.$queryRaw`SELECT id FROM \`Order\` WHERE id = ${orderId} FOR UPDATE`;
-      const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+      const current = await tx.order.findUnique({ where: { id: orderId }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
       if (!current || !current.reservationId || !current.tableId) throw ApiError.notFound('Không tìm thấy order đặt bàn');
       if (current.status !== 'PENDING' || current.paymentStatus === 'PAID' || current.payLaterAuthorized) throw ApiError.conflict('Order hiện không thể được cấp quyền trả sau');
       await tx.$queryRaw`SELECT id FROM Reservation WHERE id = ${current.reservationId} FOR UPDATE`;
@@ -751,7 +751,7 @@ export class OrdersService {
           reason: `Được phép trả sau: ${input.reason}`, confirmedByUserId: actorId, confirmedAt: new Date()
         } });
       }
-      const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'UNPAID', payLaterAuthorized: true }, include: { items: true, table: { select: { id: true, tableNumber: true } } } });
+      const order = await tx.order.update({ where: { id: orderId }, data: { paymentStatus: 'UNPAID', payLaterAuthorized: true }, include: { items: { include: { menuItem: { select: { name: true } } } }, table: { select: { id: true, tableNumber: true } } } });
       const stockChanges = await this.reserveOrderItems(tx, current.items);
       await tx.diningTable.update({ where: { id: current.tableId }, data: { currentOrderId: orderId, status: 'OCCUPIED' } });
       await AuditService.logInTransaction(tx, {
@@ -772,7 +772,7 @@ export class OrdersService {
   static async payOrder(orderId: number, input: PayOrderInput, actorId?: number, actorName?: string, actorRole: 'ADMIN' | 'CASHIER' = 'CASHIER') {
     const existingOrder = await prisma.order.findUnique({
       where: { id: orderId },
-      include: { items: true }
+      include: { items: { include: { menuItem: { select: { name: true } } } } }
     });
 
     if (!existingOrder) {
@@ -799,7 +799,7 @@ export class OrdersService {
       const lockedOrder = await tx.order.findUnique({
         where: { id: orderId },
         include: {
-          items: true,
+          items: { include: { menuItem: { select: { name: true } } } },
           table: { select: { id: true, tableNumber: true } }
         }
       });
@@ -861,7 +861,7 @@ export class OrdersService {
           status: 'COMPLETED',
           completedAt: new Date()
         },
-        include: { items: true }
+        include: { items: { include: { menuItem: { select: { name: true } } } } }
       });
 
       // Tu dong tru kho nguyen lieu theo cong thuc dinh luong BOM (Atomic Transaction)
@@ -948,7 +948,7 @@ export class OrdersService {
       where,
       orderBy: { createdAt: 'asc' },
       include: {
-        items: true,
+        items: { include: { menuItem: { select: { name: true } } } },
         table: { select: { id: true, tableNumber: true } }
       }
     });
@@ -964,7 +964,7 @@ export class OrdersService {
       },
       orderBy: { updatedAt: 'asc' },
       include: {
-        items: true,
+        items: { include: { menuItem: { select: { name: true } } } },
         table: { select: { id: true, tableNumber: true } },
         customer: { select: { id: true, name: true, phone: true } },
         reservation: { select: { id: true, code: true, contactName: true, contactPhone: true } },
@@ -993,7 +993,7 @@ export class OrdersService {
       const order = await tx.order.findUnique({
         where: { id: orderId },
         include: {
-          items: true,
+          items: { include: { menuItem: { select: { name: true } } } },
           table: { select: { id: true, tableNumber: true } }
         }
       });
@@ -1038,7 +1038,7 @@ export class OrdersService {
         where: { id: orderId },
         data,
         include: {
-          items: true,
+          items: { include: { menuItem: { select: { name: true } } } },
           table: { select: { id: true, tableNumber: true } }
         }
       });
@@ -1070,7 +1070,7 @@ export class OrdersService {
       where: { id: orderId },
       include: {
         table: true,
-        items: true
+        items: { include: { menuItem: { select: { name: true } } } }
       }
     });
 
@@ -1127,7 +1127,7 @@ export class OrdersService {
           cancelledAt: now
         },
         include: {
-          items: true,
+          items: { include: { menuItem: { select: { name: true } } } },
           table: true
         }
       });
@@ -1287,7 +1287,7 @@ export class OrdersService {
               cancelledAt: now
             },
             include: {
-              items: true,
+              items: { include: { menuItem: { select: { name: true } } } },
               table: true
             }
           });
@@ -1393,6 +1393,17 @@ export class OrdersService {
   }
 }
 
+function withMenuItemNames(order: any) {
+  if (!Array.isArray(order.items)) return order;
+  return {
+    ...order,
+    items: order.items.map((item: any) => ({
+      ...item,
+      menuItemName: item.menuItem?.name ?? item.menuItemName ?? `Món #${item.menuItemId}`
+    }))
+  };
+}
+
 function formatOrderDto(order: any) {
   const orderItems = Array.isArray(order.items) ? order.items : [];
   let prepTimeSec: number | null = null;
@@ -1441,7 +1452,7 @@ function formatOrderDto(order: any) {
       id: item.id,
       orderId: item.orderId,
       menuItemId: item.menuItemId,
-      menuItemName: item.menuItemName,
+      menuItemName: item.menuItem?.name ?? item.menuItemName ?? `Món #${item.menuItemId}`,
       quantity: item.quantity,
       unitPrice: item.unitPrice,
       subtotal: item.subtotal,

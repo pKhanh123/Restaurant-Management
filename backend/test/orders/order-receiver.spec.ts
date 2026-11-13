@@ -60,12 +60,15 @@ describe('first order receiver', () => {
 
   it('assigns staff creation from the authenticated Employee link and keeps creator independent', async () => {
     const response = await createStaffOrder(firstUserId, { receivedByEmployeeId: secondEmployeeId, createdByUserId: secondUserId });
-    expect(response.status).toBe(201);
+    expect(response.status, JSON.stringify(response.body)).toBe(201);
+    expect(response.body.data.order.items[0].menuItemName).toBe('Receiver dish');
     const stored = await prismaTest.order.findUniqueOrThrow({ where: { id: response.body.data.order.id } });
     expect(stored.createdByUserId).toBe(firstUserId);
     expect(stored.receivedByEmployeeId).toBe(firstEmployeeId);
     const list = await request(app).get('/api/orders').set('Authorization', `Bearer ${token(firstUserId)}`);
-    expect(list.body.data.find((order: { id: number }) => order.id === stored.id).receivedByEmployeeId).toBe(firstEmployeeId);
+    const listedOrder = list.body.data.find((order: { id: number }) => order.id === stored.id);
+    expect(listedOrder.receivedByEmployeeId).toBe(firstEmployeeId);
+    expect(listedOrder.items[0].menuItemName).toBe('Receiver dish');
   });
 
   it('does not substitute actor-name text or commission Employee when the authenticated user has no Employee link', async () => {
@@ -79,6 +82,7 @@ describe('first order receiver', () => {
     const transitioned = await transition(stored.id, unlinkedUserId);
     expect(transitioned.status).toBe(200);
     expect(transitioned.body.data.receivedByEmployeeId).toBeNull();
+    expect(transitioned.body.data.items[0].menuItemName).toBe('Receiver dish');
   });
 
   it('leaves a QR guest receiver null until an authenticated lifecycle transition and never overwrites it', async () => {
